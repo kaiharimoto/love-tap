@@ -1,0 +1,66 @@
+{
+  "critic": "code",
+  "cycle": 3,
+  "score": 11.5,
+  "floor": 13,
+  "meets_floor": false,
+  "findings": [
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "major",
+      "subsystem": "capture staging / messenger states (app/lib/regions/chat/chat_region.dart:126-165)",
+      "what": "The artifact that should show delivery, read, edited, taken back and waiting shows one 'read' mark and a blank lined sheet; the three messages stageStates emits ('ok — leaving now', 'and the bread, if there is any', 'sending you the roster') are absent from the frame and from 13_messenger_states.text.json, and no edited or taken-back row exists at all.",
+      "root_cause": "stageStates fabricates the states instead of producing them: on the PWA, which bootstrap() makes the client (main.dart:37), it calls spine.append(..., hostAssign: true) (chat_region.dart:141) to mint a seq locally that only the host may assign, hand-builds the partner's read_marker with seq+1 (chat_region.dart:143-155), calls markInFlight by hand, and records a refusal with markRefused (chat_region.dart:162) that no host ever sent. The comment 'Nothing here draws a state that the app is not in' does not hold, and the scroll to the refused id is not reflected in the still. MANIFEST also marks this still stale, older than the capture run that lists it.",
+      "correction": "Stage the states across a real host and client over the local transport. Use the fault injector in transport/faults.dart to hold one push in flight and to make the host refuse one event through Spine.accept(refusals:). Emit a real message_edit and message_delete. Remove the hostAssign parameter from every client-side call site, and assert in Spine.append that hostAssign is only true when the transport role is host. Then recapture 13 and check its text.json for all five states."
+    },
+    {
+      "artifact": "12_search.png",
+      "severity": "major",
+      "subsystem": "event-type registry vs search/moments UI (app/lib/regions/chat/search_page.dart:60-69, 350-362; app/lib/regions/moments/moments_region.dart:85-91)",
+      "what": "The search filter tabs in the still are exactly the eight hardcoded in SearchPageState._facets. There is no tab for rituals, shelf, milestones or pings, although the search index covers all four types (a 'text when home · kept' ritual hit appears in the results). _kindWords has no entry for passed_on or ping. Moments hardcodes its own type sets: media = {photo, video, voice_note} and marks = {milestone, date_event, ritual_kept, feeling_authored}.",
+      "root_cause": "The registry declares SearchSpec.facets for every type (types.dart), but only the index reads them (search.dart:95). The UI keeps two more private copies of the per-type vocabulary, so 'one registry entry and one renderer' is false for any type that needs to be filterable. It is the same drift the header of renderers.dart says was fixed for the thread.",
+      "correction": "Put a facet table (id → label, order) next to kEventTypes. Build the search tabs, the kind words and the Moments view membership from SearchSpec.facets. Extend thread_types_test so every facet a type declares has a label and appears in some filter."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "minor",
+      "subsystem": "module registry (app/lib/modules/registry.dart, app/lib/modules/module.dart, app/lib/regions/us/us_region.dart)",
+      "what": "The brief is four shared-life modules. kModules holds five (Dates, Todos, Calendar, Rituals, Shelf), us_region.dart:32 still says 'Four things on one desk', and the still shows only Dates on screen.",
+      "root_cause": "Adding a module really is one line in registry.dart plus a directory, which is good. But Module.eventTypes is declared and never read anywhere, so nothing checks that a module's types exist or that it writes only through ctx.emit. Per-module layout is keyed by id in UsRegion._rowsFor (us_region.dart:63-68) rather than declared by the module. The Shelf module's passed_on type also lacks a search tab, a kind word and a Moments view.",
+      "correction": "Move rows-on-desk into the Module interface (e.g. `int get deskRows`). Add a test that asserts every Module.eventTypes entry is in kEventTypeById. Fix the stale 'four' comment, or state that five is intended."
+    },
+    {
+      "artifact": "reliability.json",
+      "severity": "minor",
+      "subsystem": "transport parity (app/lib/main.dart:55-70, app/lib/transport/tailscale/)",
+      "what": "reliability.json names transport 'local', and 05_settings.png reads 'teo · client · local'. The Tailscale transport is in the code, but no artifact exercises it.",
+      "root_cause": "The transport is chosen from Flags.transport, and every captured build used local. The codebase is single-path, but the Tailscale half has no evidence of running.",
+      "correction": "Run the reliability report once more with --transport=tailscale, where a tailnet is available, and record which transport each artifact came from in MANIFEST."
+    },
+    {
+      "artifact": "05_settings.png",
+      "severity": "minor",
+      "subsystem": "settings facts (app/lib/regions/settings/settings_region.dart:233-234)",
+      "what": "The still reads 'feelings: 36 to send, 2 made here', but the two authored feelings above it are 'pigeon by noor' and 'tuesday soup by teo'. Only one of them was made on this phone.",
+      "root_cause": "The 'authored' count covers every feeling_authored in the shared log, not the ones this device's person authored.",
+      "correction": "Count only authored feelings with author == scope.me, or change the label to 'made by you two'."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "persistence boundary test (app/test/persistence_boundary_test.dart)",
+      "what": "The boundary holds today. No file outside lib/spine/ imports sqlite3, idb_shim or indexed_db. But the test only matches a driver-package regex, and lib/media/local_uri_io.dart:22-28 writes blob bytes to files under getTemporaryDirectory() through dart:io.",
+      "root_cause": "The media file cache is a legitimate derived cache, because the spine blob store stays the truth. The test would still not catch a future File- or localStorage-based second store.",
+      "correction": "Allowlist the one cache file explicitly and extend the regex to cover path_provider, dart:io File writes and window.localStorage outside lib/spine/ and that allowlist."
+    }
+  ],
+  "what_is_working": [
+    "One event log: Spine (app/lib/spine/spine.dart) is the only writer to SpineStore. Every region reads spine.all, every module writes through ModuleContext.emit (module.dart:47), and persistence_boundary_test enforces that storage drivers are imported only under lib/spine/store/.",
+    "The event-type registry (spine/types.dart) is real and load-bearing. validate() runs on both append (spine.dart:243) and host accept (spine.dart:309). refKeys and blobKeys drive refs and blobs, rowInThread drives the thread projection, and notify drives notification defaults. thread_types_test ties the registry and renderers.dart to each other.",
+    "Authored feelings are events. FeelingRegistry (feelings/registry.dart) folds feeling_authored over the built-ins, so nothing downstream distinguishes a built-in from an authored feeling. That matches 05_settings.png showing 'pigeon' and 'tuesday soup' next to the built-ins.",
+    "One codebase for both platforms. Platform differences are confined to conditional imports for the store, media, ambient, setup facts and server. Regions, feelings and event types are shared, with no reduced PWA path.",
+    "The module registry (modules/registry.dart) is picked up generically by UsRegion. A new module is a directory plus one line, and it needs a registry entry only if it introduces a new event type.",
+    "Refusals, in-flight state and the outbox are modelled explicitly on the spine (retry, outbox, markRefused), with the reasoning written at each call site."
+  ],
+  "verdict": "The spine is honest: one log, one validated type registry, feelings and modules that write into that same log, and a tested persistence boundary. The UI still keeps private copies of the per-type vocabulary in search and Moments, and the messenger-states artifact is staged by a helper that mints host sequence numbers on the client and fakes a refusal, then fails to show the states it staged, so the extensibility claim and one hero-adjacent artifact are weaker than they look."
+}

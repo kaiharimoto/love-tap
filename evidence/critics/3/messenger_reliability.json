@@ -1,0 +1,82 @@
+{
+  "critic": "messenger_reliability",
+  "cycle": 3,
+  "score": 17,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "blocking",
+      "subsystem": "chat thread / message state rendering",
+      "what": "The still that should show delivered, read, edited, taken back and waiting shows only two 'read ✓✓' markers and a 'noor writing...' strip. At y≈2030-2270 (full-res) there is an empty ruled index card: straight edges, a flat drop shadow, no text, no time, no state. It is not listed in 13_messenger_states.surfaces.json.",
+      "root_cause": "A row, most likely the taken-back stub or the waiting/outbox row, renders through a fallback path that draws a blank card and no label. The staged edited, taken-back and waiting rows are either not produced by the 'stage' step or not drawn with any visible state. MANIFEST.json also reports that 'a rendered surface in the library has nothing in it', which fits this card.",
+      "correction": "Give every non-normal row a visible handwritten state label in the same line as its timestamp: 'sent', 'delivered', 'edited', 'taken back', 'waiting · tap to send again'. Replace the blank-card fallback with the torn-stub treatment and a label. Stage all five states inside the 13 frame and assert that each label appears in the text sidecar before the shot is taken."
+    },
+    {
+      "artifact": "reliability.json",
+      "severity": "major",
+      "subsystem": "transport / reliability harness",
+      "what": "The machine-run report names 'transport: local' (127.0.0.1:42771) for every capability check. Its only Tailscale crossing is dated 2026-09-05, eighteen days before this capture, and the 2026-09-23 re-check says 'pending, the nodes were not answering'.",
+      "root_cause": "The fault-injected messenger suite (offline queue, kill mid-send, reconnect ordering, dedupe) runs on the loopback transport. The Tailscale path was only smoke-tested once and cannot be exercised now.",
+      "correction": "Run the same capability suite, including the offline/online and lose-response faults, across the two userspace tailscaled nodes, and record transport 'tailscale' with a current timestamp. Until then, treat the reliability checks as proven on loopback only."
+    },
+    {
+      "artifact": "11_chat_scroll.mp4",
+      "severity": "major",
+      "subsystem": "scroll performance evidence",
+      "what": "The frames.json scroll record shows the 330 'frames' step took 530,609 ms, about 1.6 s per frame. The 60 fps clip is therefore a stepped screenshot sequence driven by scrollBy -11, not real-time rendering. My own diff of all 330 frames is smooth (6.9-11.7 per-frame change, one repeat), but that says nothing about real frame times. The emulator scroll is missing ('no Android device was up').",
+      "root_cause": "The capture drives the scroll one step per screenshot, so render cost is hidden. No per-frame build/raster timing is recorded for the dense thread.",
+      "correction": "Record a real-time scroll (a fling or a continuous rAF-driven scroll) with per-frame timestamps from the page, and report p50/p95/p99 frame time and dropped-frame count in frames.json next to the clip."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "chat thread / hero framing",
+      "what": "The hero 'conversation against a year-deep history' contains no written message from either person. It shows eight system state strips (went out, phone on silent/normal, got in), a 'goodnight' moon doodle with no time or read state, and a blank graph-paper card with a paper crane and no text or time, cut off by the composer. The top strip 'you are heads down Thu 23 Apr' is clipped under the search tab.",
+      "root_cause": "The anchor fraction 0.622 lands on a run of state-change events. The doodle/feeling cards carry no timestamp or delivery line, so they read as orphaned.",
+      "correction": "Frame the hero on a stretch with both people's written notes, replies and at least one photo. Give doodle and feeling cards the same time and delivery/read line that text notes carry."
+    },
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "major",
+      "subsystem": "capability coverage in the stills",
+      "what": "Across every still and clip strip I can find no quoted reply, no visible reaction, no video or voice-note row in the thread, no 'edited' mark and no 'delivered/sent' (as distinct from read) marker. Only read ✓✓, typing, search and a photo viewer are demonstrated visually.",
+      "root_cause": "These capabilities pass in reliability.json on loopback, but the seeded or staged thread never puts them on screen, so nothing in the evidence shows what a person would actually see.",
+      "correction": "Put a reply (with its quoted target), a reaction, a voice-note row with its duration, a video row with its poster, an edited note and a delivered-not-yet-read note in the 13 or 02 frame."
+    },
+    {
+      "artifact": "12_search.png",
+      "severity": "minor",
+      "subsystem": "search results rendering",
+      "what": "Under the first result ('its raining here too… Tue 4 Aug · 07:24') there are two lines of pale, pixel-smeared, unreadable glyph debris to the right of the timestamp (full-res x≈560-900, y≈1010-1110).",
+      "root_cause": "A result row's secondary line, possibly a clipped or downsampled bleed-through of the paper texture's printed matter or a mis-sized text layer, is drawn at the wrong scale and opacity.",
+      "correction": "Find the layer drawn at that rect in 12_search.surfaces.json and either render it as legible text (sender or context) or remove it."
+    },
+    {
+      "artifact": "14_media_viewer.png",
+      "severity": "minor",
+      "subsystem": "media viewer",
+      "what": "The full-screen photo shows horizontal scan-line banding across its whole area, strongest in the shadows and on the stacked shape (visible in a crop around x 300-1000, y 700-1300). The viewer shows the caption and 'PUT IT BACK' but no sender, date, or save/share action.",
+      "root_cause": "The viewer image is being upscaled from an interlaced or line-doubled decode (or a low-resolution poster) instead of the full-resolution blob that reliability.json says is hashed.",
+      "correction": "Display the full-resolution decoded blob at native scale in the viewer, and add who sent it and when."
+    },
+    {
+      "artifact": "11_chat_scroll.mp4",
+      "severity": "minor",
+      "subsystem": "seeded history",
+      "what": "The scrolled thread repeats identical state strips at identical times on different days (noor went out 06:35, your phone 07:09, noor's phone 07:55, you got in 08:30 on Wed 22 Apr in the scroll, and the same times on Fri 24/Sat 25 Apr in 02_chat), which reads as duplicated events.",
+      "root_cause": "The seeded state events come from a fixed daily template without jitter.",
+      "correction": "Jitter the seeded state-event times per day, or thin them out, so the history does not look like duplicates."
+    }
+  ],
+  "what_is_working": [
+    "Search: full-text 'rain' returns hits from both people across months (Aug, Jun, Apr), in the right order, with the matched word highlighted, and there are type/person/time filter chips.",
+    "Ordering in the scroll clip is consistent and monotonic: timestamps descend cleanly as the thread scrolls up through Wed 22 and Tue 21 Apr, with no gaps, jumps or repeated rows between frames.",
+    "Read markers ('read ✓✓') are legible, sit on the same line as the timestamp, and appear only on the viewer's own notes.",
+    "reliability.json on loopback: 176 events on each side, 0 duplicates, the same order on both sides, a gapless sequence after offline/online and lost-response faults, the draft surviving a restart, and a kill mid-send delivered once.",
+    "The typing indicator ('noor writing...') and the composer with voice and attach affordances are present and plain.",
+    "First run is honest and clear: an empty thread with a single 'first one's yours' card."
+  ],
+  "verdict": "The loopback reliability report is strong, and search and ordering hold up. But the states still that exists to prove delivered, edited, taken back and waiting shows only 'read' plus an empty blank card, and the hero thread shows no written conversation at all. Reply, reaction, voice, video and edit never appear on screen, and the transport and scroll smoothness are each unproven on the real path (loopback only; stepped screenshots), so this sits well below the floor."
+}

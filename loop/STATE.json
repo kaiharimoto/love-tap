@@ -2,16 +2,10 @@
  "v": 1,
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
- "stage": "DIAGNOSE",
- "firing": 56,
- "stage_entered_at_firing": 57,
- "lease": {
-  "session_id": "session_01DGCp5v5Sc3aYGhHhstuxdG",
-  "firing": 57,
-  "stage": "DIAGNOSE",
-  "started_at": "2026-09-23T18:54:23Z",
-  "expires_at": "2026-09-23T21:54:23Z"
- },
+ "stage": "ADDRESS",
+ "firing": 57,
+ "stage_entered_at_firing": 58,
+ "lease": null,
  "evidence_fresh_as_of": "firing 56: DIAGNOSE MAY SCORE ON WHAT IS COMMITTED. ONE FULL ./capture.sh 2026-09-23T16:05-17:45Z built from 0480996 (= firing 55's tip 856aed8 plus a STATE.json lease; no app change), 14 of 17, THEN 15_authored_feeling re-captured alone (./capture.sh --only=15_authored_feeling, 17:50-18:17Z, same code) and it passed: 15 OF 17, THE CONTAINER CEILING. `git diff --stat 0480996..HEAD -- app assets seed` is EMPTY (checked at firing 56's close), and so is the working tree against it. MANIFEST.json and frames.json are the single-scene run's: every artifact carries its own `written` time and `from_this_run`, so the 14 from the full run and the one clip from the retry are distinguishable. DIFF.json is the FULL RUN's, against a baseline seeded from firing 54's committed artifacts (15 changed, 2 absent) -- the retry's DIFF compared the capture with itself and was discarded.",
  "evidence_note": "firing 56. Missing: 09_two_devices.png and 16_setup_android.png (no /dev/kvm, measured reason in MANIFEST). `surfaces` booked missing on folds/unfold_thirds (median L_std 6.319 < 8.0), BYTE-IDENTICAL to firing 54's -- the fenced fold re-render, not a regression. 15_authored_feeling was refused in the full run on `pageerror: PlaywrightError -- at b4x (main.dart.js:6585)`; b4x is dart2js's Error.throwWithStackTrace, so a Dart error was rethrown with its message lost. It passed on one retry. Firings 51 and 54 had the same refusal on 13_messenger_states, which passed here. Three scenes, one intermittent unnamed throw: that is a using-it defect DIAGNOSE should file, not a flake. THE FULL RUN'S `handwriting` MISSING ENTRY WAS THE CONTAINER, NOT THE FONTS: uharfbuzz was not installed, hands_selftest.py died on the import, and capture.sh's `hands.py ... || true` left every *.hands.json as firing 54's. Installed, re-run by hand exactly as capture.sh runs it: hands_selftest ok, 0 failures over 202 runs, 105 avoidable; per-still hands logs regenerated from this capture's text sidecars. tools/apt-prereqs.sh now installs uharfbuzz. ffmpeg is distro 6.1.1, not the pinned binary. legibility.json and palette.json are the full run's.",
  "degradation": 0,
@@ -2294,24 +2288,63 @@
   }
  ],
  "last_score": {
-  "total": 75.0,
+  "total": 64,
   "of": 120,
-  "at_firing": 31,
+  "at_firing": 57,
   "cycle": 3,
-  "commit": "12a0dfa",
+  "commit": "0480996 (evidence captured from; app/ assets/ seed/ identical at the scoring tip)",
   "rows": {
-   "messenger_reliability": 21,
-   "material_truth": 15,
-   "emotional_transmission": 12,
-   "coherence": 11.0,
+   "messenger_reliability": 17,
+   "material_truth": 11,
+   "emotional_transmission": 11,
+   "coherence": 10,
+   "anti_goal": 5,
+   "visual_design": 10
+  },
+  "critics": {
+   "messenger_reliability": {
+    "messenger_reliability": 17
+   },
+   "material_truth": {
+    "material_truth": 11
+   },
+   "emotional_transmission": {
+    "emotional_transmission": 12
+   },
+   "coherence": {
+    "code": 11.5,
+    "coherence": 10
+   },
+   "anti_goal": {
+    "anti_goal": 5
+   },
+   "visual_design": {
+    "visual_design": 15
+   }
+  },
+  "builder": {
+   "messenger_reliability": 19,
+   "material_truth": 14,
+   "emotional_transmission": 11,
+   "coherence": 11,
    "anti_goal": 7,
-   "visual_design": 9
+   "visual_design": 10
   },
   "every_floor_met": false,
+  "floors_met": 0,
+  "reports": "evidence/critics/3/*.json; firing 31's moved to evidence/critics/3/at_firing_31/ unread; builder sheet committed at ffccaef before any critic launched",
   "previous": {
-   "total": 67,
-   "at_firing": 18,
-   "note": "measured against a build that no longer exists; replaced by this row"
+   "total": 75.0,
+   "at_firing": 31,
+   "rows": {
+    "messenger_reliability": 21,
+    "material_truth": 15,
+    "emotional_transmission": 12,
+    "coherence": 11.0,
+    "anti_goal": 7,
+    "visual_design": 9
+   },
+   "note": "firing 31's score, against a build that no longer exists. Not a like-for-like comparison: different critic contexts, and the critics this time were told to crop at full resolution."
   }
  },
  "history": [
@@ -2982,6 +3015,24 @@
    "harness": "tools/apt-prereqs.sh installs uharfbuzz (blocked rank 4's measurement in every fresh container).",
    "decision": "OBSERVE complete; next DIAGNOSE, builder sheet first.",
    "pushed": true
+  },
+  {
+   "firing": 57,
+   "stage": "DIAGNOSE",
+   "cycle": 3,
+   "at": "2026-09-23T19:45:00Z",
+   "what": "Verified evidence fresh (git diff 0480996..HEAD -- app assets seed empty). Moved firing 31's reports aside unread. Wrote builder.json (72/120) and pushed it before launching any critic. Ran seven critics as fresh contexts in parallel (six rows plus code). tools/score.py --cycle 3: 64/120, no problems, no floor met.",
+   "score": {
+    "messenger_reliability": 17,
+    "material_truth": 11,
+    "emotional_transmission": 11,
+    "coherence": 10,
+    "anti_goal": 5,
+    "visual_design": 10
+   },
+   "total": 64,
+   "decision": "DIAGNOSE complete; next ADDRESS.",
+   "pushed": true
   }
  ],
  "routine": {
@@ -3130,7 +3181,7 @@
    "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
   }
  },
- "stage_change_note": "Firing 56 ran OBSERVE and MOVES THE STAGE TO DIAGNOSE, cycle 3. The evidence is fresh against the tip: see evidence_fresh_as_of. DIAGNOSE: write evidence/critics/3/builder.json BEFORE reading any critic. Things this capture puts in front of DIAGNOSE: an intermittent unnamed Dart throw that has refused a scene in three of the last three captures (using-it); a row label written across a punch hole in the interrupt matrix; legibility 15/413 with a moved population.",
+ "stage_change_note": "Firing 57 ran DIAGNOSE and MOVES THE STAGE TO ADDRESS, cycle 3. Score 64/120 at 0480996, no floor met; see last_score and measured_at_firing_57.convergent_findings_for_ADDRESS. ADDRESS: re-rank against those findings under the owner's steer. The blank ruled card in the thread is flagged by five critics and is the fold placeholder already in the queue; ghost pseudo-text and doubled tear edges are new filings. DESIGN is frozen until cycle 6. The steer holds: no demo-content filings to lift a score.",
  "measured_at_firing_12": {
   "captured_at": "e7a3a5a",
   "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
@@ -3705,5 +3756,26 @@
   "legibility_declared": "15 of 413 below floor, against 23 of 422 at firing 54. POPULATION MOVED BY 9 RUNS; match runs before crediting the fall. 'a picture' still reads ink_core 3.81.",
   "brown_disc": "IDENTIFIED. It is the upper PUNCH HOLE of the loose-leaf stock assets/paper/looseleaf_04.webp, drawn as settings.notify's paper (fit cover, rect [35,-653,1523,3494]). The stock is an RGB webp with no alpha and the hole is PAINTED, opaque, in the render's background colour: rgb(171,141,114) in the asset against rgb(171,140,116) at the disc's centre on the glass (207,458). So it is not a hole -- the desk does not show through -- and it is not an undeclared widget: it is inside a declared stock surface. The queue item's 'undeclared' premise is refuted. What is true: the sheet's cover fit puts the punch margin inside the matrix's text column, and the row label 'a picture' is written across the hole. Present unchanged on this capture.",
   "diff": "15 changed / 2 absent against firing 54's committed artifacts."
+ },
+ "measured_at_firing_57": {
+  "score": "64 of 120 (was 75 at firing 31). Rows taken: MR 17 (critic 17, builder 19), MT 11 (11/14), ET 11 (critic 12, builder 11), coherence 10 (critic 10, code 11.5, builder 11), anti_goal 5 (5/7), visual_design 10 (critic 15, builder 10). No floor met.",
+  "convergent_findings_for_ADDRESS": [
+   "FIVE CRITICS, ONE DEFECT: a blank ruled card, straight-cut, with a hard offset drop shadow, sits in the live thread in 13_messenger_states (between 'noor needs a lot 17:27' and 'left the key under the pot') and in the 06 and 08 strips. anti_goal and messenger_reliability both call it BLOCKING; it is the brief's 'rectangle with a drop shadow' on the glass. It is the fold placeholder (open item the-unfolding-clip-shows-a-flat-rectangle...) standing in the thread, and it also hides whatever 13 was staged to show (code critic: stageStates emits three messages that never appear).",
+   "GHOST PSEUDO-TEXT: pixel-blocky grey 'text' patches on cards in 03_us (the second one), 04_moments ('41s','38s' slips) and 12_search (first result). material_truth BLOCKING; visual_design, coherence, messenger_reliability also. Reads as rendering garbage.",
+   "DOUBLED TEAR EDGES: every large torn card in 03_us and the moon card in 02 shows a second blurred stair-stepped copy of its tear line 30-60px inside. material_truth BLOCKING.",
+   "SETTINGS SAYS 'not paired yet / connecting' on a paired seeded build showing the partner's live state everywhere else. coherence BLOCKING; builder too.",
+   "FEELING PICKER IS TRANSLUCENT: the partner card reads through it in 07; its six family strips carry only names. emotional_transmission BLOCKING x2. Arriving objects park over partner state and captions (07, 08).",
+   "AUTHORED FEELINGS end 'waiting to send' in 15, and draw as flat scribbles beside rendered built-ins.",
+   "LEGIBILITY THAT IS REAL: 14_media_viewer caption, NoorHand thin italic over graph rules, ink_core 2.94. visual_design BLOCKING (the row cap). The critic judged 13 of legibility.json's other 15 to be instrument.",
+   "THE CHAT HERO shows no written message: eight identical state strips and a doodle. messenger_reliability and visual_design both. Chat reads as a device log.",
+   "PULSE: PLACE 'travelling' beside AT HOME 'yes' (coherence). US shows only Dates; To-do clipped off the bottom (coherence, anti_goal, code). 17_setup_pwa sits under a lit CHAT tab with a partner strip before any partner exists.",
+   "HARNESS, context only: 11_chat_scroll is a stepped screenshot sequence (530 s for 330 frames), so scroll jank is unproven; reliability.json is transport local, the tailscale crossing dated 2026-09-05."
+  ],
+  "disputed_not_restored": [
+   "material_truth says the handwriting is 'pixel-identical glyphs' (o's in 'noor', g's in 'goodnight'). hands.json on 02_chat measured 2 avoidable repeats. Both can be true: an unavoidable same-variant repeat is identical by design. ADDRESS should measure it at the critic's named words before filing; declining it here restores nothing.",
+   "coherence critic could not label DIFF.json (evidence/.previous is not in the tree) and wrote 'unjudged' per artifact in its own report. DIFF.json unchanged."
+  ],
+  "rendered_paper_finding_recorded_not_acted_on": "Bearing on the owner's open decision about visual direction, stated without recommending: the critics were split. visual_design (15/20) and coherence called the paper-and-ink world warm and one system, and visual_design would open it daily. material_truth (11/25) found the larger rendered cards give themselves away as simulated (doubled tears, ghost text, straight pad edges, inconsistent shadows), and the top defects of this cycle on four rows (blank card, ghost text, doubled tears, translucent picker) are all artifacts of the rendered-paper compositing pipeline rather than of the concept.",
+  "builder_critic_gap": "visual_design again: builder 10 against critic 15, the same deflation the queue item the-builder-sheet-has-no-anchor-points... names (5.5 at firings 18 and 31, 5 now). This sheet wrote its own anchors; they were set too low for this row. 5 points of score for zero points of diagnosis, a third time."
  }
 }

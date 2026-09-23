@@ -7517,3 +7517,41 @@ Then DIAGNOSE, with the builder sheet written first.
 ### Next
 
 **DIAGNOSE.** Write the builder sheet first.
+
+## Firing 57 — DIAGNOSE, cycle 3
+
+- Step 0 passed after a fast-forward of 42 commits. Took the lease and pushed it first.
+- `git diff --stat 0480996..HEAD -- app assets seed` is empty, so the evidence is fit to score.
+- Moved firing 31's reports to `evidence/critics/3/at_firing_31/` unread.
+- Looked at all 12 stills, the 5 clip strips, the 300% crops and dusk Pulse.
+- **Wrote `builder.json` first (72/120) and pushed it before launching any critic.**
+- Ran seven critics as fresh contexts in parallel: the six rows plus code.
+- `tools/score.py --cycle 3` gave **64 of 120**. No floor is met, and the arithmetic has no problems.
+
+| row | critic | builder | taken |
+|---|---:|---:|---:|
+| messenger_reliability | 17 | 19 | 17 |
+| material_truth | 11 | 14 | 11 |
+| emotional_transmission | 12 | 11 | 11 |
+| coherence | 10 (code 11.5) | 11 | 10 |
+| anti_goal | 5 | 7 | 5 |
+| visual_design | 15 | 10 | 10 |
+
+### What the critics converged on
+
+- **The blank ruled card with a hard drop shadow in the thread** (13, 06, 08). Five critics flagged it; it is blocking on anti_goal and messenger_reliability. It is the fold placeholder, and it also hides what 13 was staged to show.
+- **Ghost pseudo-text blocks** on cards in 03, 04 and 12.
+- **Doubled, stair-stepped tear edges** on the large cards.
+- **Settings says `not paired yet`** on a paired build.
+- **The feeling picker is translucent**, and its family strips are empty.
+- **Authored feelings** end on `waiting to send`.
+- **The media viewer caption** is really below floor, at 2.94.
+- **The Chat hero** shows no written message.
+
+`loop/STATE.json` `measured_at_firing_57` has the full list, two disputed findings, and the rendered-paper finding. That last one is recorded without a recommendation.
+
+**visual_design again cost 5 points of deflation.** The builder gave 10 against the critic's 15. My own anchors for that row were set too low.
+
+### Next
+
+**ADDRESS.**

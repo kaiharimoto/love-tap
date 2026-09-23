@@ -1,0 +1,106 @@
+{
+  "critic": "visual_design",
+  "cycle": 3,
+  "score": 15,
+  "floor": 17,
+  "meets_floor": false,
+  "measured": {
+    "artifacts_with_failing_text": 2,
+    "worst_ratio": 2.94,
+    "worst_ratio_where": "14_media_viewer.png, the photo caption 'three layers. it leans. i am not saying that as a criticism...' in the thin navy italic hand (NoorHand, 54px) set over blue-grey graph-paper rules; ink_core 2.94, ink_median 2.63 against a 4.5 floor"
+  },
+  "measured_notes": "legibility.json reports 15 runs below floor across 10 artifacts (ok:false). I looked at every flagged box at full resolution. 13 of them are measurement artifacts, not unreadable text: each has ground_lum 0.04-0.07 (the ring sampled the ink itself), ground_ring_clipped true and a ground_swing of 7-10, and on inspection 'WHAT WE SENT'/'WHAT HAPPENED' (04_moments), '21s'/'47s'/'38s' (04_moments), 'search' (02_chat, 10_first_run, 13_messenger_states), 'you got in' (02_chat), 'make one'/'FEELINGS YOU MADE' (05_settings) and 'write something' (13_messenger_states) are near-black ink on cream and plainly readable. '05_settings_interrupt.png' 'a picture' measures 3.81 because a brown translucent touch-dot sits on top of the word; that is an overlay, counted in findings, not as a type failure. Two are real: the 14_media_viewer caption (2.94, hairline strokes over a grid that runs through the letters) and the dusk_pulse header 'week one, and the room smells right again' at 4.92 against the 5.0 dusk floor (marginal, but below). Per the rule, two artifacts with text below floor cap this category at or below 17.",
+  "findings": [
+    {
+      "artifact": "14_media_viewer.png",
+      "severity": "blocking",
+      "subsystem": "type / the second person's hand",
+      "what": "The caption under the photograph is set in a hairline monoline italic in navy over graph paper whose blue-grey rules cross every letter, and it measures below the body floor; the same hand is used for every line the other person writes (12_search cards 1, 4, 5; 03_us titles; crops/dusk_pulse header).",
+      "measurement": "ink_core 2.94, ink_median 2.63, ground_swing 3.71 vs floor 4.5; dusk_pulse header in the same hand 4.92 vs dusk floor 5.0",
+      "root_cause": "The italic hand has roughly one-third the stroke weight of the upright hand at the same size, so its core never gets dark enough, and a patterned ground (grid, fibre) under it steals the remaining contrast.",
+      "correction": "Give the italic hand a heavier master (stroke at least ~60% of the upright hand's) or set it 10-15% larger, darken its navy toward #1f2640, and never place it on grid or ruled paper without knocking the rules back to <1.2:1 against the paper under the text box."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "major",
+      "subsystem": "paper surfaces / texture",
+      "what": "Card papers carry pixelated grey pseudo-text blocks (a mosaic of mojibake 'show-through') around real text: behind 'the second one' in 03_us, behind '41s' and '38s' in 04_moments, and on the first result card in 12_search.",
+      "measurement": null,
+      "root_cause": "A 'reused paper / writing on the back' texture baked at low resolution and upscaled, so it reads as rendering corruption or a redaction rather than as ink showing through.",
+      "correction": "Remove the ghost-text layer, or regenerate it at native resolution as soft blurred mirrored handwriting at <5% contrast, and keep it out of the text box's bounding rect plus 24px."
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "major",
+      "subsystem": "moments / media content",
+      "what": "The Moments grid, the most image-heavy screen, is filled with cold grey untextured 3D renders (spheres, bowls, blank walls, a grey room) that pull the whole screen toward slate and read as test scenes, not two people's year.",
+      "measurement": "04_moments grey_fraction 0.076 against ~0.001 on every other screen; figure band drops to 0.52 from ~0.82",
+      "root_cause": "Placeholder media rendered with neutral materials and cool light, dropped into warm paper mounts.",
+      "correction": "Until real photographs exist, warm-grade placeholder media (shift toward the paper's 70-90 degree hue, lift blacks to the wood's darkest value) or show fewer, larger tiles with the voice-note and date slips carrying more of the grid."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "major",
+      "subsystem": "palette / value structure",
+      "what": "Inside the wood frame every screen is cream card on cream paper on cream paper: the cards separate from the page only by torn edges and a soft shadow, with almost no middle value, so nothing comes forward except the ink.",
+      "measurement": "value_bands on 01_pulse ground 0.13 / mid 0.056 / figure 0.81; same shape on 02_chat, 03_us, 05_settings, 10_first_run (mid 0.03-0.06)",
+      "root_cause": "All paper stocks are drawn from one narrow lightness and hue band (hue centres 55-95 degrees); the only ground is the wood border.",
+      "correction": "Give the focal card on each screen one clear step of value (a darker kraft, a pinker index card, or a deeper shadow) and let the page paper drop a step so there is a real middle band of ~15-20% area."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "chat / system events",
+      "what": "In the populated chat eight identical full-width grey tape strips of status ('noor's phone is on normal', 'noor went out') stack down the page, so the conversation itself is outweighed by a log of phone states in one ink and one size.",
+      "measurement": null,
+      "root_cause": "Presence/state events are rendered at the same width, weight and ink as messages and are never collapsed.",
+      "correction": "Collapse consecutive state events into one short, narrower, lighter-ink line (e.g. 'noor: out, silent, normal - Fri') at ~70% the message size, and keep full-width paper for things a person wrote."
+    },
+    {
+      "artifact": "15_authored_feeling.mp4",
+      "severity": "minor",
+      "subsystem": "motion / transitions",
+      "what": "The first strip frame is a double exposure of Settings and Chat at partial opacity, all text overlapping; later frames show the drawn feeling stroke lying across the WARMTH/ACHE list rather than on its own card.",
+      "measurement": null,
+      "root_cause": "A plain cross-fade between regions rather than a paper-native move, and the authoring canvas has no ground of its own.",
+      "correction": "Replace the cross-fade with a slide or page-turn so two layouts are never superimposed, and give the drawing its own card behind the stroke."
+    },
+    {
+      "artifact": "05_settings_interrupt.png",
+      "severity": "minor",
+      "subsystem": "settings / touch feedback",
+      "what": "Two brown translucent discs sit over 'a picture' and 'wake me', obscuring the words.",
+      "measurement": "'a picture' ink_core 3.81 under the disc",
+      "root_cause": "Either a touch indicator left in the capture or a pressed-state blot that stays on screen; the same disc appears as a punched hole at the corner of cards in 01_pulse and 05_settings, where it is decoration.",
+      "correction": "If it is pressed feedback, keep it behind text and fade it within 300 ms; if it is capture instrumentation, remove it from the rig."
+    },
+    {
+      "artifact": "05_settings.png",
+      "severity": "minor",
+      "subsystem": "settings / pairing form",
+      "what": "'not paired yet. / show the address / their address / the six words / pair' is a bare list of same-weight lines on ruled paper with no visible affordance saying which are buttons and which are fields.",
+      "measurement": null,
+      "root_cause": "The paper idiom was applied as underline-only fields with no distinct treatment for actions.",
+      "correction": "Put 'pair' and 'show the address' on their own torn slips like 'make one', and label the underlined fields with the small stamp caps used elsewhere."
+    }
+  ],
+  "charming": [
+    "The status strip at the top of every screen, a torn slip reading 'week one, and the room smells right ...' with tally marks for NEED and ENERGY and a pressed leaf over its corner: it is a note left for one person, not a status bar.",
+    "Two distinct hands for two people (a round upright hand and a thin navy italic), so you know who wrote a line before you read it; the search results in 12_search become a stack of two people's torn notes with the word highlighted like a marker pen.",
+    "The small drawn things: the crescent moon above 'goodnight', the stick-drawn empty chair, the smiley scrap and the candle stub in the Pulse row, 'first one's yours. whatever it is. it only goes to one person.' on the empty chat."
+  ],
+  "drab": [
+    "The Moments grid of grey plastic-looking 3D renders, which looks like a render farm's test output rather than a shared year.",
+    "The chat's long ladder of identical grey tape strips announcing phone modes, which makes the conversation feel like a device log.",
+    "The pairing and 'the two of you' blocks in 05_settings ('14062 events, 1 waiting to send', 'teo . client . local') are institutional plumbing set in the same warm hand, which makes them look both precious and unreadable as controls."
+  ],
+  "would_open_it_daily": true,
+  "what_is_working": [
+    "One material world held across all regions: wood desk ground, ruled and index papers, torn edges, the red margin rule, the leaf; Pulse, Chat, Us, Moments, Settings and Search read as one build.",
+    "Ink colour and weight of the upright hand: near-black on cream measures 8-10:1 median everywhere and is readable at arm's length.",
+    "Three-tier type hierarchy: stamp caps for labels (MOOD, AHEAD, THE TWO PHONES), the upright hand for content, the italic hand for the other person, with size carrying emphasis in 13_messenger_states.",
+    "The tab bar of paper tabs with the active one lifted and underlined in rose.",
+    "Restraint with colour: the leaf is the only saturated accent, which makes the yellow highlight in search land."
+  ],
+  "verdict": "This is a warm, coherent paper-and-ink world that someone clearly made for one other person, and the main upright hand is dark and readable everywhere; but the second person's thin italic hand fails contrast over grid paper in 14_media_viewer and on the dusk Pulse, which caps the row below its floor. Beyond that the screens sit in one cream value band with no middle, the paper textures carry pixelated ghost-text that reads as corruption, and Moments is dragged grey by cold placeholder renders."
+}

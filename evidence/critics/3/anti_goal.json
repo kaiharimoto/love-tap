@@ -1,0 +1,71 @@
+{
+  "critic": "anti_goal",
+  "cycle": 3,
+  "score": 5,
+  "floor": 9,
+  "meets_floor": false,
+  "anti_goals": {
+    "engagement_machinery": {"status": "absent", "decided_on": "03_us.png, 05_settings.png, 05_settings_interrupt.png, 01_pulse.png", "note": "No badges, streaks, points, levels or guilt copy anywhere. The only numbers are sync plumbing in 05_settings.png ('14062 events, 1 waiting to send', '36 to send, 2 made here') and a date phrase inside a note in 03_us.png ('a month today'). Caveat: 03_us.png shows only the DATES module (AHEAD / BEEN), so the rituals surface where this would most likely hide does not appear in any artifact and could not be checked."},
+    "emoji_or_stock_illustration": {"status": "absent", "decided_on": "01_pulse.png, 07_feeling_landing.mp4 (frame at 3.0s), 05_settings.png", "note": "There are no system emoji glyphs. Feelings are ink marks (spiral, sun, crescent, zigzag, chair) on torn paper scraps, plus rendered objects (clay cylinder, beads, ring, tape, clover). The sun and the red dot-eyed smiley are the closest thing to generic icons, but they are hand-inked, not taken from an icon set."},
+    "product_marketing_voice": {"status": "absent", "decided_on": "10_first_run.png, 17_setup_pwa.png (16_setup_android.png missing)", "note": "Every string is lower-case and plain, with no exclamation marks, no 'Oops' and no self-naming: 'first one's yours.' / 'whatever it is. it only goes to one person.' / 'two phones, one wire between them, nobody else on it.'. The only vocabulary that slips is technical, 'teo · client · local' in 05_settings.png, which is jargon rather than marketing."},
+    "simulated_paper": {"status": "present", "decided_on": "13_messenger_states.png, 08_state_propagating.mp4", "note": "In the chat column there is a blank, straight-cut, slightly round-cornered pale peach ruled rectangle with a uniform hard offset drop shadow on its bottom and right edges. It has no tear, no content and no contact-shadow falloff. It appears in 13_messenger_states.png at about x60-1115, y2020-2290, and again in 08_state_propagating.mp4 at 7.5s under the taped cylinder note. It has no entry in 13_messenger_states.surfaces.json, so it is not drawn from the paper/tear library."}
+  },
+  "findings": [
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "blocking",
+      "subsystem": "chat message rendering: a message kind or state with no paper treatment (fallback bubble)",
+      "what": "Between 'noor needs a lot' and 'left the key under the pot' there is an empty pale ruled rectangle with square-cut, slightly rounded corners and a hard, uniform dark drop shadow on its bottom and right edges, which is the forbidden 'beige rounded rectangle with a drop shadow'.",
+      "root_cause": "Some message type or delivery state (probably taken back, waiting, or a media or feeling item whose asset did not resolve) falls through to a generic container. That container draws painted rule lines and a box shadow instead of going through the tear-mask and contact-shadow pipeline. Its absence from surfaces.json, and MANIFEST.json's 'a rendered surface in the library has nothing in it', both point that way.",
+      "correction": "Find the bubble branch that produces this container and route it through the same torn-scrap composer as every other note (tear mask + baked contact shadow + library paper). If the item really is empty (taken back), render it as a torn-off stub or a scored-out scrap with its state written in hand. Also add a capture-time check that fails when any on-screen card has no surfaces.json entry."
+    },
+    {
+      "artifact": "08_state_propagating.mp4",
+      "severity": "blocking",
+      "subsystem": "chat message rendering (same fallback bubble)",
+      "what": "The same blank straight-edged ruled rectangle with an offset hard drop shadow sits in the receiving chat at 7.5s, just below the taped 'hold' note, so this is a recurring component of the live thread and not a one-off.",
+      "root_cause": "Same fallback container as in 13_messenger_states.png, drawn for a state-change or feeling event in the thread.",
+      "correction": "Same fix as above. Then re-capture 08 and 13 and check that the rectangle is gone at 300% zoom."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "major",
+      "subsystem": "shared-life modules / evidence coverage",
+      "what": "03_us.png shows only the DATES module (AHEAD 'the second one', BEEN 'the boat to the island'), so the rituals surface, the place where counting, streaks and 'broken' language would appear, is not visible in any artifact.",
+      "root_cause": "The capture of 03 lands on one module rather than showing all four, or the other modules sit below the fold of a single tab.",
+      "correction": "Capture 03_us.png with all four modules visible, or add one still per module, so the rituals surface can be checked for anything that counts, ranks, resets or says 'broken'."
+    },
+    {
+      "artifact": "17_setup_pwa.png",
+      "severity": "minor",
+      "subsystem": "setup checklist",
+      "what": "The copy is clean. However, 16_setup_android.png is missing (MANIFEST: 'not captured this session'), so only one of the two setup surfaces that anti-goal 3 names could be read.",
+      "root_cause": "The artifact was not captured this session.",
+      "correction": "Capture 16_setup_android.png so its strings can be read. This critic has not scored the absence as a violation."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "minor",
+      "subsystem": "feeling tokens",
+      "what": "The red two-dot smiley on the grey scrap, and the radiating sun in the feeling picker in 07_feeling_landing.mp4, are the most icon-like of the feeling marks. The smiley in particular reads as a drawn emoji face.",
+      "root_cause": "The feeling marks were drawn as recognisable pictograms rather than as the private, specific gestures that surround them (the zigzag, the chair, the spiral).",
+      "correction": "Replace the smiley face with a mark that is not a face pictogram (a scribble, a pressed object, a word in hand), and keep the sun loose and uneven enough that it does not read as a weather icon."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "desk backdrop / tab bar",
+      "what": "In 02_chat_300_edge.png the wood desk is a regular vertical-stripe pattern with faint straight light hairlines across it. The nav tabs (PULSE / CHAT / US / MOMENTS / SETTINGS) are clean-cut rectangles with no tear and no visible contact shadow. Neither is the forbidden rounded-rect-with-shadow, but both read as drawn rather than photographed.",
+      "root_cause": "The desk is a stylised render and the tabs use library paper with a plain rectangular clip.",
+      "correction": "Give the tabs a cut or torn edge from the tear library with a baked contact shadow, and remove the stray horizontal hairlines from the desk."
+    }
+  ],
+  "what_is_working": [
+    "The copy voice everywhere: lower-case, specific and quiet. 'first one's yours.', 'two phones, one wire between them, nobody else on it.', 'PUT IT BACK', and the interrupt list's 'wake me / quietly / not at all'. Leave it alone.",
+    "The notification settings in 05_settings_interrupt.png give per-event control with no bait and no nagging.",
+    "Nearly every note is a torn scrap with an irregular fibrous edge over photographed paper stock. The 10_first_run.png background shows no measurable tile repeat (autocorrelation with the rule lines removed has no peak above grain scale).",
+    "Rendered objects (clay cylinder, beads, ring, tape, clover) carry shadows that fall consistently down and to the right.",
+    "There is no metric about the relationship itself anywhere. The only counts are sync plumbing, and the 'read ✓✓' ticks are delivery state, not engagement."
+  ],
+  "verdict": "Three of the four anti-goals are clearly absent: no engagement machinery, no emoji or stock illustration, and no product voice anywhere in first run or setup. However, a blank straight-cut ruled rectangle with a hard offset drop shadow sits in the live thread in both 13_messenger_states.png and 08_state_propagating.mp4, and has no entry in the surface library, which is the simulated-paper failure. That keeps this category below its floor until that fallback bubble goes through the tear-and-contact-shadow pipeline like everything else."
+}

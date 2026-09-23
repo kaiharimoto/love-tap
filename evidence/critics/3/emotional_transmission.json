@@ -1,0 +1,82 @@
+{
+  "critic": "emotional_transmission",
+  "cycle": 3,
+  "score": 12,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "artifact": "07_feeling_landing.mp4",
+      "severity": "blocking",
+      "subsystem": "feeling picker / corner sheet compositing",
+      "what": "When the corner sheet opens over Pulse, the partner card underneath shows through it: 'room smells right again', MOOD/HERE/PLACE, NEEDS/HAS LEFT/BATTERY, LAST UP/THEIR CLOCK and RINGER/MOVING/SIGNAL are all legible between and behind the WARMTH..SPARKLE strips (frame at ~4.5 s, and the whole of 0.3-6.0 s), so the picker reads as a tinted overlay on the page instead of a sheet of paper lying on it.",
+      "root_cause": "The sheet is a translucent darkening scrim plus separate strips, and the page beneath is not hidden or covered by an opaque paper ground; the fade-in/fade-out cross-dissolves both layers.",
+      "correction": "Give the corner sheet an opaque torn-paper backing the full height of the picker (or blur and drop the Pulse layer below ~15% opacity once open) so no text from the page beneath is readable while it is open; animate it as a sheet sliding over the page, not a cross-fade."
+    },
+    {
+      "artifact": "07_feeling_landing.mp4",
+      "severity": "blocking",
+      "subsystem": "feeling picker contents",
+      "what": "The six family strips (WARMTH, ACHE, SHELTER, MISCHIEF, STATIC, SPARKLE) are empty torn tabs with only the family name, and the only feelings visible are six tiles below them (a squeeze, forehead, warm palm, a leaf, thinking-of-you sun, goodnight moon) whose captions are faded almost to invisibility; no clip or still shows the thirty-odd feelings the haptics sidecar claims (34 in 6 families).",
+      "root_cause": "The family strips appear to be collapsed headers whose feeling rows never render (or render off-canvas), and the tile captions are drawn at low ink opacity under the scrim.",
+      "correction": "Render each family strip with its feelings laid on it as small paper objects (at least 5-6 per family), captions in full ink; capture a still of the open picker so the vocabulary width is demonstrable."
+    },
+    {
+      "artifact": "07_feeling_landing.mp4",
+      "severity": "major",
+      "subsystem": "landing choreography",
+      "what": "The 'landing' clip shows the sender's own picker: 'hold' is a large beige cylinder that descends onto the picker and sits over SHELTER-SPARKLE for ~2 s, then 'squeeze' is a crumpled tape strip that lands on top of the SPARKLE strip and the spiral/ring tiles; neither arrives on a receiving screen, and the cylinder's meaning (a cup? a candle?) is not legible.",
+      "root_cause": "The capture drives sendFeeling locally with the corner open, so it records send feedback rather than arrival; the objects are sized for a full-screen moment and land in picker space.",
+      "correction": "Show arrival on the receiver: the object drops onto the partner's current page from the top edge, settles with a contact shadow and a visible physical beat (a paper jolt, a crease pulse), then tucks into the recent-feelings row; make the 'hold' object unambiguous (two hands, a mug held in palms)."
+    },
+    {
+      "artifact": "08_state_propagating.mp4",
+      "severity": "major",
+      "subsystem": "chat thread rendering on the receiving device",
+      "what": "After the far device sends 'it is raining here too' (~5.5-8 s) the chat shows an empty ruled paper strip with no text, and the arriving 'squeeze' tape lands directly on the 'hold' caption so it reads 'h..d'; a third card below is blurred and half-covered by another tape object.",
+      "root_cause": "The incoming message card is laid out before its text is painted (or the text is clipped by the scroll drive), and feeling objects are placed on fixed offsets with no collision against existing thread items.",
+      "correction": "Ensure incoming message cards render their text before becoming visible; place landed feeling objects in their own thread slot or offset them away from captions so nothing already said is occluded."
+    },
+    {
+      "artifact": "08_state_propagating.mp4",
+      "severity": "major",
+      "subsystem": "Pulse layout under an arriving feeling",
+      "what": "The arriving 'hold' cylinder (with a smaller duplicate cylinder at its left) parks over the partner card at 1.2-3 s, hiding HAS LEFT and its value; partner state is the thing the screen exists to show, and the feeling hides it.",
+      "root_cause": "The landing target is the centre of the screen regardless of what is under it; the small second cylinder looks like a stray instance rather than a deliberate echo.",
+      "correction": "Land the object in the open space between the partner card and the YOURS card (or over the recent-feelings row), and remove or explain the duplicate cylinder."
+    },
+    {
+      "artifact": "15_authored_feeling.mp4",
+      "severity": "major",
+      "subsystem": "authored feelings",
+      "what": "The authored 'pigeon' and 'tuesday soup' are flat ink scribbles (a black W stroke, a brown squiggle) drawn over the picker, while built-ins are rendered paper and 3D objects with baked shadows; the pigeon ends in the thread as a scribble on a card captioned 'waiting to send', so it does not behave like a built-in in either look or delivery.",
+      "root_cause": "Authored feelings are stored as a stroke and drawn as a vector path with no material; the capture ends before delivery (or the device was unpaired, per 'waiting to send').",
+      "correction": "Print the authored stroke onto a torn paper tile (ink on paper, contact shadow, same drop physics and size as built-ins) and capture it delivered, landing on the partner's screen, not queued."
+    },
+    {
+      "artifact": "09_two_devices.png",
+      "severity": "major",
+      "subsystem": "evidence set",
+      "what": "Listed missing in MANIFEST.json ('not captured this session'); there is no frame of Android and the iOS PWA together, so I cannot judge whether the PWA's no-haptics substitute reads as deliberate or whether the PWA is a reduced edition.",
+      "root_cause": "Not captured.",
+      "correction": "Capture it. Scored once here, not again below."
+    },
+    {
+      "artifact": "17_setup_pwa.png",
+      "severity": "minor",
+      "subsystem": "PWA haptic substitute",
+      "what": "Nothing on the PWA setup sheet, nor in the WebKit-captured clips, shows a deliberate stand-in for haptics (no screen jolt, sound cue or paper shudder distinct from the object's drop); the arrival looks identical to what I'd expect with haptics simply removed. The top third of the sheet is an empty torn paper area.",
+      "root_cause": "No visual/audio substitute appears to be authored for the no-vibration platform.",
+      "correction": "Author a per-feeling visible 'felt' beat for the PWA (the whole page flexing/crinkling to the haptic's rhythm, a paper sound), and say so on the PWA setup sheet."
+    }
+  ],
+  "what_is_working": [
+    "Feelings are physical objects, not icons: tape strips, a rubber band, a spiral stamp, an origami crane in the thread, beads, a cylinder, all lit with contact shadows (01_pulse.png recent row, 02_chat.png crane).",
+    "State propagation is real and multi-screen: in 08_state_propagating.mp4 the far device's 'restless' reaches the header strip, the Pulse card and a 'noor is rest...' marker in Chat.",
+    "01_pulse.png partner state is rich and legible: mood, here, place, needs, has left, battery, last up, their clock, ringer, moving, signal, at home.",
+    "The curled bottom-right corner is present on every region (Pulse, Chat, Settings), giving one-gesture reach to the picker.",
+    "05_settings.png treats authored feelings as first-class ('feelings you made', attribution 'by noor' / 'by teo', 'make one').",
+    "Six named families exist in the picker (WARMTH, ACHE, SHELTER, MISCHIEF, STATIC, SPARKLE)."
+  ],
+  "verdict": "The material language is right - feelings arrive as lit paper objects and partner state visibly crosses to the other device's header, Pulse and thread - but the picker is a translucent scrim with the page bleeding through and empty family strips, arriving objects cover state and message text, and authored feelings are flat scribbles that end 'waiting to send'. With the two-device frame missing and no visible PWA haptic substitute, this is a promising sensation layer that still reads as unfinished, well below the floor."
+}

@@ -1,0 +1,96 @@
+{
+  "critic": "material_truth",
+  "cycle": 3,
+  "score": 11,
+  "floor": 22,
+  "meets_floor": false,
+  "findings": [
+    {
+      "artifact": "03_us.png",
+      "severity": "blocking",
+      "subsystem": "paper stock / card compositing",
+      "what": "The 'the second one' card is covered in pale, pixel-blocky ghost blotches shaped like garbled lines of text (around 'the second one' and below 'somebody else'), and a hard vertical seam runs through the card body at roughly x=700 where two texture pieces meet with different brightness.",
+      "root_cause": "The stock is being assembled from pieces, apparently tiled or stitched, and at least one source has text or low-resolution content baked into it that shows through at low opacity. So this is a stitched texture rather than a single photographed sheet.",
+      "correction": "Replace this card's stock with one continuous clean photographed sheet, big enough to cover the card without tiling or stitching. Remove any source with baked-in marks, and reject any composite with a luminance step across a vertical line."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "blocking",
+      "subsystem": "tear masks",
+      "what": "Every torn card edge ('the boat to the island' card top, the big card's bottom, the 'second one' card top and bottom) shows a dark fibrous outline plus a second, blurred, stair-stepped translucent copy of the same tear line 30-60 px inside it. The same tear therefore appears twice in one frame, and the inner copy has visible blocky aliasing.",
+      "root_cause": "A low-resolution tear mask is being upscaled and used twice, once as a hard outline and once as a blurred inner 'shadow' or deckle, with no anti-aliasing. It reads as a mask operation, not as torn fibre.",
+      "correction": "Author tear masks at output resolution (1440 wide or more). Drop the blurred inner echo entirely. Any lift or shadow should sit outside the edge and be offset in the scene's one light direction, not inset as a copy of the outline."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "tear masks",
+      "what": "The goodnight/moon card has the same ghosted inner echo under its top tear. The grid-paper crane card has stair-stepped, pixel-aliased left and top tear edges with a soft vignette inside them. The composer strip's torn left end and the 'you got in' strip's left end are horizontal streaks of stretched pixels rather than fibre.",
+      "root_cause": "The masks are sampled at too low a resolution, and the texture edges are clamp-stretched where the mask extends beyond the image data.",
+      "correction": "Use high-resolution tear masks with real fibre alpha. Make sure the stock image covers the full mask bounds so edge pixels are never clamped and stretched."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "base surfaces",
+      "what": "The main pad is a hard-edged rectangle with square corners, no tear or deckle, and no contact shadow on the wood. Its top edge has a one-step jog near x=1400. The five tab-bar tabs are plain straight-edged beige rectangles with no shadow at all.",
+      "root_cause": "The large structural surfaces are drawn as rectangles filled with a paper texture rather than as paper objects lit by the scene.",
+      "correction": "Give the pad and tabs cut or deckled edges from real masks, and a contact shadow baked from the same light that casts the crane's and candle's shadows. Fix the seam in the pad's top edge."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "lighting / shadows",
+      "what": "Contact shadows are inconsistent. The crane and the leaves cast crisp shadows down and to the right, while the moon card, the status strips, the pad and the tabs cast none; the strips have only a thin grey outline. In 01_pulse.png the candle casts a long soft shadow while the paper feeling tiles next to it are nearly flat.",
+      "root_cause": "Shadows are attached to individual 3D-rendered objects rather than baked for every surface from one scene light.",
+      "correction": "Choose one light direction (the down-right one the crane and candle already use) and bake a contact shadow for every paper layer to match, sized to how high each layer sits."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "handwriting",
+      "what": "All the 'handwriting' is a font. The two o's in 'noor', the o's across 'noor went out' and 'noor's phone', and the g's in 'goodnight' are pixel-identical glyphs on a perfectly straight baseline.",
+      "root_cause": "Text is set in a handwriting-style typeface with no per-glyph variation.",
+      "correction": "Use a handwriting system with alternates (at least three per letter, cycled by context), plus small per-glyph baseline, rotation and ink-weight jitter."
+    },
+    {
+      "artifact": "06_unfolding.mp4",
+      "severity": "major",
+      "subsystem": "fold animation",
+      "what": "In the frame strip the unfolding note shows up as a flat, straight-edged ruled rectangle that grows in size (frames 3-5), with no visible crease, no light gradient across its panels and no foreshortening. It reads as a flat image being scaled, not paper geometry catching light. No ffmpeg was available, so I judged this from the six-frame strip only.",
+      "root_cause": "Either the fold sequence is not being shown at a visible size, or the panels are drawn without shading.",
+      "correction": "Show the fold panels with per-panel shading from the scene light, a visible crease line and perspective foreshortening, big enough to read in the chat, and let the note's tear edge persist through the whole unfold."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "minor",
+      "subsystem": "feelings",
+      "what": "Most feelings are line drawings (moon, smiley, squiggle, chair) on small paper squares, which read as icons on tiles. Only the candle, the scattered beads and the crane in 02_chat.png are physical objects.",
+      "root_cause": "The feelings are split between two systems: 3D objects and drawn glyphs.",
+      "correction": "Make each feeling a physical object with its own shadow, or at least a cut-paper shape with thickness, rather than a pen drawing on a square."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "desk surface",
+      "what": "The wood is a flat, cartoon vertical-stripe pattern with stray one-pixel light horizontal lines across it (visible in crops/02_chat_300_edge.png). It reads as illustrated, not photographed.",
+      "root_cause": "The desk is a simple drawn texture, and the stray lines are probably layout guides or ruled lines leaking outside the pad.",
+      "correction": "Replace it with a photographed wood surface lit to match, and remove the stray lines."
+    },
+    {
+      "artifact": "MANIFEST.json",
+      "severity": "minor",
+      "subsystem": "evidence",
+      "what": "09_two_devices.png and 16_setup_android.png are listed as missing, and every still and clip is marked stale (from before this capture began).",
+      "root_cause": "The capture was not fully re-run.",
+      "correction": "Re-capture. The missing artifacts are not scored against material truth here."
+    }
+  ],
+  "what_is_working": [
+    "The paper stock on the status strips and the pad is a varied, non-repeating photographed-looking fibre. Autocorrelation on 02_chat.png shows no tiling period apart from the ruling.",
+    "The torn header strip and the leaves at the top of every screen are convincing layered paper, and the leaves have a coherent down-right shadow.",
+    "The origami crane and the candle are real 3D objects with cast shadows, which is the right direction for feelings.",
+    "Each status strip in 02_chat.png has a different torn end, so the same strip edge does not repeat across the thread."
+  ],
+  "verdict": "The small strips and the header are persuasive paper, but the larger cards give the system away: tear edges ghosted twice with blurred, stair-stepped copies, pixel-blocky phantom text and a stitch seam in the Us card, clamp-stretched torn ends, and a pad and tabs that are plain rectangles with no shadow. Add font handwriting with identical glyphs and shadows that exist only on the 3D objects, and this reads as simulated paper, well below the floor."
+}

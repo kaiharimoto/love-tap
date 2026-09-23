@@ -1,0 +1,117 @@
+{
+  "critic": "coherence",
+  "cycle": 3,
+  "score": 10,
+  "floor": 13,
+  "meets_floor": false,
+  "scope_note": "I am judging only the visible half of this category (what the artifacts show), scored out of the full 15; the code-reading half is not assessed. 09_two_devices.png and 16_setup_android.png are listed missing in MANIFEST.json, so the platform-parity criterion cannot be judged from this evidence. That absence is noted once here and not penalised again. Every artifact is WebKit/PWA. MANIFEST.json also marks 14 of the 15 present artifacts as stale (written before this capture began); I judged them as given.",
+  "findings": [
+    {
+      "artifact": "05_settings.png",
+      "severity": "blocking",
+      "subsystem": "pairing / link state shared across regions",
+      "what": "Settings says 'not paired yet.' with LINK 'connecting', while the same screen lists 'their phone noor' and '14062 events, 1 waiting to send'. The header strip on every region shows noor's live state (TRAVELLING, need, energy), 01_pulse.png says 'last up just now', and 13_messenger_states.png shows messages marked 'read' with double ticks.",
+      "root_cause": "The pairing panel reads a different source of truth (probably a fresh transport or handshake flag) from the one the event log, partner state and receipts are drawn from. The seeded or demo state is never reconciled with the link state.",
+      "correction": "Derive one link state from the same store that supplies partner state and receipts, and show it everywhere. If the link really is down, Pulse should say 'last up <time>', not 'just now', receipts should stop at 'sent', and the header should show the state as stale. If the phones are paired, Settings should say so and name the peer."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "major",
+      "subsystem": "partner state model",
+      "what": "The partner card shows PLACE 'travelling' next to AT HOME 'yes', two fields that contradict each other on the screen whose job is the partner's complete state.",
+      "root_cause": "The place and at-home fields are set independently: one comes from the person's chosen place and the other from a phone sensor. Neither is checked against the other, and there is no rule for which one wins.",
+      "correction": "Make one field depend on the other, or render the conflict honestly (for example 'says travelling · phone thinks home'). Do not show two flat values that disagree."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "major",
+      "subsystem": "Us modules / shared data",
+      "what": "The DATES tab header says 'next: the place by the bridge', but the AHEAD list under it holds only 'the second one, planned 9 Nov'. Only one of the four shared-life modules is on screen; a 'TO DO' label is clipped off the bottom (text sidecar clipped=1), and the page ends in an empty torn sheet with a bare strip above the nav.",
+      "root_cause": "The summary line and the list query different records, or the summary is stale seed text. The layout pages one module at a time, and the capture lands with the next module cut off.",
+      "correction": "Compute the 'next:' line from the first item in AHEAD. Lay out all four modules as a legible stack or a visible index so the region reads as four modules, and remove the empty trailing sheet."
+    },
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "major",
+      "subsystem": "Chat bubble rendering / folded note",
+      "what": "A plain ruled pink rectangle with no text, no tear and no fold sits between 'noor needs a lot 17:27' and 'left the key under the pot'. 06_unfolding.mp4's strip shows the same blank rectangle, which only becomes a written torn note ('two stops. put the kettle on...') in its last frame. Of the five states this still is meant to show, only 'read' and 'writing...' are visible; there is no 'edited', 'taken back' or 'waiting'.",
+      "root_cause": "The folded or unopened note has no folded rendering of its own. It falls back to an untextured, untorn placeholder rectangle, which is the one surface in the build that breaks the paper language.",
+      "correction": "Render the unopened note as the actual folded paper (the crease and flap geometry that 06 unfolds from), with the sender and time visible. Stage 13 so edited, taken-back and waiting messages are on screen."
+    },
+    {
+      "artifact": "17_setup_pwa.png",
+      "severity": "major",
+      "subsystem": "first-run shell / navigation",
+      "what": "The PWA setup checklist is drawn under a highlighted CHAT tab, with the full nav bar live and a header strip showing NEED/ENERGY bars for a partner who does not exist yet. The top ~40% of the setup sheet is empty ruled paper. 10_first_run.png shows the same partner NEED/ENERGY bars before any pairing.",
+      "root_cause": "The first-run and setup views are mounted inside the normal tab shell instead of replacing it, and the header strip renders its bars from default values when no partner exists.",
+      "correction": "Before pairing, hide the partner strip or replace it with an unpaired state ('no one yet'), and either hide the nav or show no tab as selected. Move the checklist up so it starts at the top of the sheet."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "event log -> chat projection",
+      "what": "The same kind of state event is phrased several ways across screens: 'noor · travelling' (13), 'noor needs a lot' (13), 'noor is rest...' (08 strip), 'noor's phone is on normal' (02). In 02 the partner's events are indented inconsistently: 'noor's phone is on normal' sits left on 24 Apr and right-indented on 25 Apr. The hero still holds eight phone and presence slips and not a single written message.",
+      "root_cause": "Each state-event type has its own ad-hoc template and alignment, with no shared grammar for 'who' and 'what' and no rule for which side an event sits on. Low-value phone-sensor events also go into the thread without being folded together.",
+      "correction": "Use one template for partner and self state events (subject, verb phrase, time) with fixed alignment by author. Collapse runs of consecutive sensor events into one slip so written messages dominate the thread."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "minor",
+      "subsystem": "navigation",
+      "what": "The PULSE tab carries a red underline on every screen (02, 03, 04, 05, 10, 13, 17), whichever tab is selected, so it reads neither as a selection mark nor as a clearly explained unread or partner-changed marker.",
+      "root_cause": "Probably a 'partner state changed' badge that is never cleared, or a selection mark left on after the selection moves.",
+      "correction": "If it is a change marker, clear it when Pulse is visited and give it a distinct mark (an ink dot, not the selection underline). If it is a selection mark, move it with the selection."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "minor",
+      "subsystem": "lighting / contact shadows",
+      "what": "In the feelings row the candle cylinder casts a long, heavy down-right shadow, while the moon, face, squiggle and chair cards beside it on the same sheet have almost no contact shadow.",
+      "root_cause": "The 3D object has a shadow baked from the render's light, but the flat paper cards use a different, much weaker shadow treatment.",
+      "correction": "Bake the card shadows from the same light at a height matched to their lift, so objects on one sheet share one shadow language."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "minor",
+      "subsystem": "paper show-through texture",
+      "what": "Cards in Us and the first result in 12_search.png have blurred, scrambled pseudo-text patches beside the real text; at phone size they read as rendering garbage rather than ink showing through from the back of the sheet.",
+      "root_cause": "The show-through layer is too opaque and too sharp, and it is placed in the same text band as the real ink.",
+      "correction": "Mirror it horizontally, cut its opacity by about half, blur it more, and keep it out of the lines the real text occupies."
+    },
+    {
+      "artifact": "DIFF.json",
+      "severity": "minor",
+      "subsystem": "diff labelling",
+      "what": "Every entry's label_basis says 'ssim X against 0.999 - at or above it, nothing a person would see has moved', even though every SSIM (0.66-0.99) is below 0.999 and the label is 'changed'. The basis text contradicts both the value and the label.",
+      "root_cause": "The template string for the at-or-above branch is used for both branches.",
+      "correction": "Emit a below-threshold basis string for changed entries. The recorded SSIM values and 'changed' labels themselves look correct."
+    }
+  ],
+  "what_is_working": [
+    "One visual language holds across all five regions plus search, media viewer, first run and setup: the same wood desk, the same ruled and graph stock with a red margin, torn edges, the leaf clip, the two hands (a handwriting face and a rounded print face) and a stamp face for labels. There is no rounded-rectangle UI anywhere.",
+    "Light direction is consistent: the candle on Pulse and the paper star in Chat both throw shadows down and to the right.",
+    "Partner state is legible on every in-app region through the persistent torn header strip (their line, TRAVELLING, need and energy marks) on Pulse, Chat, Us, Moments and Settings, not only on Pulse.",
+    "The same event recurs across regions: 'noor needs a lot' is in both Pulse's partner card and the Chat thread, the moon 'goodnight' and chair 'empty chair' feelings appear in Pulse's feelings row and in Chat, and 08's strip shows a partner state change landing on Pulse and then as a chat slip.",
+    "15_authored_feeling's strip shows an authored feeling ('pigeon', listed in Settings > feelings you made) sitting in the same picker as the built-ins and landing in Chat as a feeling note marked 'waiting to send', which agrees with Settings' '1 waiting to send'.",
+    "Moments filters (what we sent / what happened / what we felt, both / noor / teo) read as a view over one log rather than a separate store."
+  ],
+  "labels": {
+    "01_pulse.png": "unjudged",
+    "02_chat.png": "unjudged",
+    "03_us.png": "unjudged",
+    "04_moments.png": "unjudged",
+    "05_settings.png": "unjudged",
+    "06_unfolding.mp4": "unjudged",
+    "07_feeling_landing.mp4": "unjudged",
+    "08_state_propagating.mp4": "unjudged",
+    "10_first_run.png": "unjudged",
+    "11_chat_scroll.mp4": "unjudged",
+    "12_search.png": "unjudged",
+    "13_messenger_states.png": "unjudged",
+    "14_media_viewer.png": "unjudged",
+    "15_authored_feeling.mp4": "unjudged",
+    "17_setup_pwa.png": "unjudged"
+  },
+  "labels_note": "DIFF.json names evidence/.previous as the baseline, but that directory does not exist in evidence/, and no ffmpeg or other video decoder is available to extract frames. I cannot see any previous copy, so I will not invent an improved or regressed judgement. The recorded SSIM values put all 15 present artifacts below the 0.999 threshold, so none of them is 'unchanged'; I agree with DIFF.json's 'changed' label for all 15. The largest moves are 13_messenger_states.png (0.6575) and 08_state_propagating.mp4 (0.7144), and those two need a human or a critic with the baseline to judge direction. 09 and 16 are absent in both sessions.",
+  "verdict": "Visually this is plainly one system: one desk, one stock, two hands, one light, a partner strip on every region, and feelings and state events recurring consistently across Pulse, Chat and the picker. It is let down by state that contradicts itself across screens: Settings says unpaired and connecting beside live partner state and read receipts, Pulse has noor both travelling and at home, and Us's 'next' does not match its own list. Together with a blank placeholder note and first-run screens wearing the paired shell, that puts the visible half at 10/15, below the floor of 13."
+}

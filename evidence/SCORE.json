@@ -4,78 +4,78 @@
   "messenger_reliability": {
    "weight": 30,
    "floor": 26,
-   "critic": 21,
+   "critic": 17,
    "critics": {
-    "messenger_reliability": 21
+    "messenger_reliability": 17
    },
-   "builder": 21,
-   "builder_why": "Up from 20, and the reason it does not rise further is three defects I can see rather than a missing capability. WHAT CLOSED: 04_moments.png is populated \u2014 a photograph grid with dates, voice-note durations and the WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT filters in frame. The blank gallery that held the rubric row 01 disqualifier shut for three cycles is gone, and with it the 'strictly below the floor' clause. 13_messenger_states.png shows all five delivery states including the refusal in red with 'it would not go' and a '(retry) try again' beneath it, so a failed message now has a way out of it. reliability.json exercises send, ack, read, reply, react, edit, delete, voice_note, video, viewer and search, all ok. 11_chat_scroll.mp4 has 1 repeated frame in 330 \u2014 no scroll jank against the year. WHAT HOLDS IT AT THE FLOOR, and the brief is explicit that any one of these scores the row at or below 26: (1) A BLANK NOTE IN THE THREAD, on the hero messenger artifact. 13_messenger_states.png carries an empty card at y1075..1330 with zero text runs in the band and \u2014 measured against its own sidecar \u2014 zero assets/paper and zero assets/tears surfaces behind it, where all seven real notes have both. (2) ELEVEN SECONDS TO OPEN. cold_ms is 10884-12327 on all thirteen seeded scenes and 1259-1321 on the three fresh-install ones, same code, same flags, the only difference being --dart-define=SEED=year. A messenger that takes eleven seconds to show a conversation is a reason to open Instagram. (3) SEARCH IS UNUSABLE AS LAID OUT. 12_search.png spends about 65% of its height on thirteen filter chips stacked as full-width torn strips, leaving two results visible, the second clipped. Plus 02_chat shows 7 notes against the brief's floor of 8.",
-   "score": 21,
+   "builder": 19,
+   "builder_why": "reliability.json exercises all 19 capabilities with 0 duplicates and monotonic ordering, but transport local, and coldstart.json's tailscale run dates from 2026-09-05 with its later_check pending. On the glass: 05_settings in a seeded year of 14062 events reads 'not paired yet. / LINK connecting' and '1 waiting to send' -- the one screen that should show two linked devices says there are none; 15_authored_feeling ends on 'pigeon ... waiting to send'; 13_messenger_states, the artifact for delivery/read/edited/taken back/waiting, shows only 'read' and 'noor writing...' plus a BLANK lined sheet with a drop shadow where some event should be (same blank sheet in 06 and 08 strips). No photograph, voice note or video in the chat hero frame. An intermittent unnamed pageerror refused a scene in each of the last three captures. Media is the deprioritised-demo-content cap and is accepted, not scored around.",
+   "score": 17,
    "meets_floor": false
   },
   "material_truth": {
    "weight": 25,
    "floor": 22,
-   "critic": 15,
+   "critic": 11,
    "critics": {
-    "material_truth": 15
+    "material_truth": 11
    },
-   "builder": 18,
-   "builder_why": "The largest genuine gain in the set, and still capped below its floor of 22 by one clause the brief writes without qualification. WHAT CLOSED, all verified here rather than taken on trust: 06_unfolding.mp4 has 255 frames, repeated_frames 0, repeated_fraction 0.0, longest_still_run 0 \u2014 60 unique fold frames per second against the brief's floor of 30, and the fold placeholder is gone. tools/check/paper_tooth passes 250 of 432 windows against 117 before the library was re-rendered. texture_budget peaks at 28.0 MB against the 32 MB ceiling. No screen is a flat fill any more: dominant_share runs 0.0066-0.0229 against a 0.08 ceiling on all eleven stills, including the two fresh-install screens that were flat before firing 28. At 300% on the chat hero the stock has real mottled fibre, the ruled lines are soft and uneven, and the tear edges carry fibre wisps. WHAT CAPS IT: 'Any procedural noise overlay, tiled repeating texture, or beige rounded rectangle standing in for paper scores this category below its floor.' The blank card on 13_messenger_states.png is a beige rectangle with square corners and a drop shadow standing exactly where a note should be, and its own surfaces sidecar proves no paper asset is behind it. That is the clause, met literally. Also open: the tear edges are STEPPED at 300% \u2014 the alpha masks quantise into 6-8px axis-aligned stairs on both crops, which reads as a digital cut rather than a fibre boundary; and four paper families have no tooth at all (receipt 2/16 windows, sticky_blue 8/32, sticky_pink 8/32, sticky_yellow 8/32, median_std 3.6-4.9 against a floor of 8.0). 14_media_viewer.png letterboxes its photograph against a flat #2D2C2A slab measuring std 2.609 over 21 levels.",
-   "score": 15,
+   "builder": 14,
+   "builder_why": "Paper stocks read as scans; tear edges vary on 02_chat; handwriting repeats down to 2 avoidable on the hero; the tape is transmissive. Against: 06_unfolding's strip shows no fold at all -- a scroll, then a BLANK lined rectangle for the later frames (the clip that exists to expose a faked fold shows a flat card); that same blank card sits in 13 and 08; the 300% edge crop shows the strip's torn edge as a smeared fringe and a hard horizontal seam through the paper; looseleaf_04's punch hole is an opaque brown disc painted over 'a picture' on 05_settings_interrupt; the Pulse objects include a plain CG cylinder and untextured bead spheres; smeared ghost-print blocks sit on the 03_us date card and on 04's '41s' slips.",
+   "score": 11,
    "meets_floor": false
   },
   "emotional_transmission": {
    "weight": 20,
    "floor": 17,
-   "critic": 12.5,
+   "critic": 12,
    "critics": {
-    "emotional_transmission": 12.5
+    "emotional_transmission": 12
    },
-   "builder": 12,
-   "builder_why": "Up from 10. The vocabulary is genuinely there and genuinely distinct: 34 feelings across 6 named families, and haptics.py puts the closest of 561 pairs at 2.584 JND against a floor of 2.0 with nothing under it and no shared object \u2014 so the 'a feeling sharing its haptic sequence with another' failure condition is clear, measured. A feeling arrives as an object: 13_messenger_states.png shows 'empty chair' as a line drawing ON the sheet rather than as a word in a different colour, which is the distinction the row exists for. User-authored feelings are real and first-class \u2014 the seed authors 'pigeon' and 'soup' through feeling_authored events and 05_settings.png shows both sitting under FEELINGS YOU MADE beside the built-ins. WHAT HOLDS IT DOWN: the two clips that carry this row both stutter. 07_feeling_landing.mp4 has 39 repeated frames, 10.2%, with a 10-frame hold; 15_authored_feeling.mp4 has 39, 12.7%, with a 17-frame hold \u2014 283 ms of an arriving feeling not moving. A sensation that freezes is not a sensation. 08_state_propagating.mp4 opens with 23 identical frames before anything happens. And 01_pulse.png carries eleven partner-state readings (mood, status line, here, place, needs, has left, battery, last up, their clock, ringer, moving, signal, at home) where the brief asks for twelve as a floor \u2014 close, and I am not going to call it met from a screenshot.",
-   "score": 12,
+   "builder": 11,
+   "builder_why": "haptics.json: 34 feelings, 6 families, 561 pairs, closest 2.584 JND over a 2.0 floor, none under. 07 shows a sender sheet over Pulse and an object (candle) arriving, then Pulse again; 08 shows the change reaching Chat as an inline strip. Not shown: an off-app surface (08 begins on an empty 'nothing from them yet' sheet, not a lock screen or notification), the iOS non-haptic substitute, 09 (missing, hardware). 15's authored feeling ends 'waiting to send'. dusk_pulse is nearly indistinguishable from day.",
+   "score": 11,
    "meets_floor": false
   },
   "coherence": {
    "weight": 15,
    "floor": 13,
-   "critic": 11.0,
+   "critic": 10,
    "critics": {
-    "code": 13.5,
-    "coherence": 11.0
+    "code": 11.5,
+    "coherence": 10
    },
    "builder": 11,
-   "builder_why": "Up from 10, on structure I can actually check. One spine: app/lib/spine/ is the only place a store is touched, every region folds the same ordered event list, and renderers.dart is now the single per-type renderer table with a test asserting the registry and the renderer set match \u2014 the drift that let a type render correctly in the thread and as a bare id in search is closed by construction. The read_marker case in the thread projection returns before _add, so read markers are not rows, which is a named failure condition and is met. Partner state rides the same torn header strip on 01, 02, 03, 04, 05 and 13. DIFF.json is a real comparison for the first time in the build's history \u2014 8 unchanged, 7 changed, 0 new, 0 gone, 2 absent \u2014 because firing 30 seeded .previous from committed artifacts, so the numbers are finally comparable. WHAT IS OPEN: every judgement field in DIFF.json is null and the brief requires the coherence critic to assign them, so the row cannot be complete until it does. Partner state is NOT on every screen \u2014 12_search.png and 14_media_viewer.png carry none. And six of DIFF.json's ssim values are exactly 0.9995, which is a suspiciously round repeat for six different pictures and looks like a clamp rather than a measurement; it does not change any label, but a ruler whose readings pile on one value is not one I will score above 11 on.",
-   "score": 11.0,
+   "builder_why": "One paper language across all five regions; the partner strip is on every seeded screen; Chat, Us, Moments share stocks and tape. Against: 05_settings says 'not paired yet' while every other screen shows the partner's live state; 17_setup_pwa highlights CHAT in the nav on a setup screen; 16 missing (hardware). Code half left to the code critic.",
+   "score": 10,
    "meets_floor": false
   },
   "anti_goal": {
    "weight": 10,
    "floor": 9,
-   "critic": 9.2,
+   "critic": 5,
    "critics": {
-    "anti_goal": 9.2
+    "anti_goal": 5
    },
    "builder": 7,
-   "builder_why": "Three of the four forbidden interpretations are genuinely absent and I looked for them. No engagement machinery: no badge, no count, no points, no streak number anywhere in eleven stills \u2014 05_settings.png presents rituals and history as a plain record. No emoji soup: the feelings are drawn objects and hand strokes, and there is no system glyph in the set. No product-marketing voice: the strings read 'first one's yours. whatever it is. it only goes to one person.' and 'the other phone couldn't read it.' \u2014 no exclamation mark, no app name, no third person. THE FOURTH IS NOT ABSENT, and the brief deliberately charges it here as well as to material truth so that it costs twice: the blank beige rounded card with a drop shadow on 13_messenger_states.png is simulated paper standing in for a note, backed by no paper asset in its own sidecar. 14_media_viewer.png's flat neutral slab is a second instance of a surface that is not a photograph of anything. That keeps this row below its floor of 9.",
-   "score": 7,
+   "builder_why": "No emoji, no marketing voice, no count or streak word on the Rituals I can see, voice is the couple's own. Against: the blank lined rectangle with a drop shadow in 13_messenger_states (and 06/08) is, on the glass, exactly the 'rounded rectangle with a drop shadow standing in for paper' the brief names; a printed barcode sits on a Moments voice slip.",
+   "score": 5,
    "meets_floor": false
   },
   "visual_design": {
    "weight": 20,
    "floor": 17,
-   "critic": 14.5,
+   "critic": 15,
    "critics": {
-    "visual_design": 14.5
+    "visual_design": 15
    },
-   "builder": 9,
-   "builder_why": "Up from 8, and the gain is legibility rather than colour. LEGIBILITY IS ESSENTIALLY FIXED: 17 of 358 declared runs are below floor, 4.75%, and the tool's own qualifiers account for nearly all of it \u2014 on_moving_ground 16 and would_pass_on_ring_reading 15, so genuine sub-floor text is one or two runs. Three stills have none at all. The owner's 'the desk was giving me visibility issues with text' is answered. THE OTHER HALF OF THE OWNER'S COMPLAINT IS NOT. 'It doesn't evoke cuteness to me' is now a measurement rather than a feeling, and the measurement says the app has ONE colour. palette.json reports named_families 1 of a floor of 4, the five hue 'families' are bins at 55, 65, 75, 85 and 95 degrees \u2014 a forty-degree arc of the same paper yellow \u2014 and widest_hue_gap_deg is 320 against a ceiling of 150 on every single room and on the set, which is just the wrap-around of having no second hue. accent_fraction is 0.00058 against a floor of 0.01 and is EXACTLY 0.0 on 05_settings, 05_settings_interrupt and 17_setup_pwa: three screens with no accent colour at all. figure p99 chroma breaches on all eleven stills. mean_chroma is 0.0449 against a floor of 0.045 \u2014 it misses by one ten-thousandth. 44 breaches across the set. Add 12_search.png's layout, where thirteen filter strips eat two thirds of the screen. A build whose text is readable and whose palette has one hue and no accent is a 9.",
-   "score": 9,
+   "builder": 10,
+   "builder_why": "legibility.json 15 of 413 below floor, and all 15 'would pass on ring reading'; I checked the worst ('search' 1.09, 'WHAT WE SENT' 1.03) on the glass and both read clearly -- instrument, not defect. 'a picture' 3.81 under the punch hole is real. palette.json: two named families present (A_paper, D_green), accent 1.03% of area, 28 breaches of docs/COLOR.md. On the glass: every room is one yellow-beige band with dark ink, a single warm cluster; the clover is the only colour note. Charming: the Pulse object row, the couple's voice ('first one's yours'), the moon note. Drab: identical torn strips stacking state rows in Chat, the empty lower halves of 03_us / 05_settings_interrupt / 17_setup_pwa, the dark CG renders standing in the Moments grid.",
+   "score": 10,
    "meets_floor": false
   }
  },
- "total": 75.0,
+ "total": 64,
  "exit_threshold": 114,
  "every_floor_met": false,
  "at_exit": false,
