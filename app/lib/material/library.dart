@@ -257,6 +257,11 @@ class MaterialLibrary {
 /// Asset paths (all WebP after packing).
 String paperAsset(String id) => 'assets/paper/$id.webp';
 String tearAsset(String id) => 'assets/tears/$id.webp';
+
+/// The same mask at the resolution it was rendered at, packed beside [tearAsset]'s 1024 copy for a
+/// piece too big for that one. Takes either a tear id or its [tearAsset].
+String finerTearAsset(String idOrAsset) =>
+    'assets/tears/hi/${idOrAsset.replaceFirst('assets/tears/', '').replaceFirst('.webp', '')}.webp';
 String objectAsset(String id) => 'assets/objects/$id.webp';
 String bitAsset(String id) => 'assets/bits/$id.webp';
 String shellAsset(String id) => 'assets/shell/$id.webp';

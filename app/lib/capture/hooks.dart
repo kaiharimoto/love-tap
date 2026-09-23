@@ -308,7 +308,10 @@ class CaptureHooks {
     for (final view in RendererBinding.instance.renderViews) {
       walk(view);
     }
-    return waiting;
+    // And the masks still decoding. A piece whose mask has not landed is drawn whole, and a big
+    // sheet whose finer mask has not landed is cut by the coarse one, and neither is a
+    // `RenderImage` -- so until firing 54 the shutter could go on either and nothing said so.
+    return waiting + MaskCache.decoding;
   }
 
   /// Every rendered surface the app put on the glass, with the size of the render it came from
@@ -515,8 +518,11 @@ class CaptureHooks {
       if (painter is ContactShadowPainter && node.hasSize && !node.size.isEmpty) {
         final box = node.size;
         final img = painter.mask;
-        final composed = ContactShadows.composedAt[
-            ContactShadows.composedKey(painter.asset, box, painter.condition)];
+        // laid around the finer copy of the mask when the piece is big enough to draw one
+        final composed = ContactShadows.composedAt[ContactShadows.composedKey(
+                finerTearAsset(painter.asset), box, painter.condition)] ??
+            ContactShadows.composedAt[
+                ContactShadows.composedKey(painter.asset, box, painter.condition)];
         final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
         final spill = ContactShadowPainter.spill * dpr;
         out.add({
@@ -543,7 +549,9 @@ class CaptureHooks {
     // `composed` is the resolution the torn contour is actually defined at; `fixed` and `centre`
     // are the two magnifications multiplied together, in device pixels per source pixel.
     if (node is RenderShaderMask && names[node] != null && node.hasSize && !node.size.isEmpty) {
-      final asset = names[node]!;
+      // the mask that cut the paper, which for a big sheet is the finer copy of the one it asked for
+      final asset = SlicedMasks.drawnWith[SlicedMasks.composedKey(names[node]!, node.size)] ??
+          names[node]!;
       // the size and not the image: a mask the cache has let go of is still a piece on the glass
       final mask = MaskCache.sizeOf(asset);
       final composed = SlicedMasks.composedAt[SlicedMasks.composedKey(asset, node.size)];

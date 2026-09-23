@@ -86,19 +86,22 @@ def _edge_at_1x(tear, tmp):
 
 def residency(surfaces, index):
     sizes = {r["id"]: (r["w"], r["h"]) for r in index["tears"]}
+    # a big sheet is cut by its mask's finer copy (assets/tears/hi/, since firing 54)
+    sizes.update({"hi/" + r["id"]: (r["w"], r["h"]) for r in index.get("tears_hi", [])})
     masks, edges, composed = set(), set(), set()
     for s in surfaces:
         a = s["asset"]
         if not a.startswith("assets/tears/"):
             continue
-        tid = os.path.splitext(os.path.basename(a))[0]
+        tid = os.path.splitext(a[len("assets/tears/"):])[0]
         if s.get("fit") == "mask":
             masks.add(tid)
             if s.get("composed"):
                 composed.add((tid, tuple(s["composed"])))
     for s in surfaces:
         tid = os.path.splitext(os.path.basename(s["asset"]))[0]
-        if s.get("fit") == "nine" and tid.endswith("_edge") and tid[:-5] in masks:
+        if s.get("fit") == "nine" and tid.endswith("_edge") and (
+                tid[:-5] in masks or "hi/" + tid[:-5] in masks):
             edges.add(tid)
     b = lambda ids: sum(sizes[t][0] * sizes[t][1] * 4 for t in ids)
     return {

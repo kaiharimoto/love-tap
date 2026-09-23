@@ -25,6 +25,9 @@ Map<String, List<int>> _packed() {
   return {
     for (final r in (index['tears'] as List).cast<Map<String, dynamic>>())
       r['id'] as String: [r['w'] as int, r['h'] as int],
+    // a big sheet's finer mask, which a sidecar names as `assets/tears/hi/<id>.webp`
+    for (final r in ((index['tears_hi'] as List?) ?? const []).cast<Map<String, dynamic>>())
+      'hi/${r['id']}': [r['w'] as int, r['h'] as int],
   };
 }
 
@@ -72,7 +75,7 @@ void main() {
     final masks = <String>{};
     final composed = <String>{};
     for (final s in surfaces.where((s) => s['fit'] == 'mask')) {
-      final id = (s['asset'] as String).split('/').last.replaceAll('.webp', '');
+      final id = (s['asset'] as String).replaceFirst('assets/tears/', '').replaceAll('.webp', '');
       masks.add(id);
       final c = s['composed'] as List?;
       if (c != null) composed.add('$id ${c.join('x')}');
@@ -81,7 +84,8 @@ void main() {
     expect(masks.length, 27);
     int bytes(String id) => packed[id]![0] * packed[id]![1] * 4;
     final maskBytes = masks.fold<int>(0, (t, id) => t + bytes(id));
-    final edgeBytes = masks.fold<int>(0, (t, id) => t + bytes('${id}_edge'));
+    final edgeBytes =
+        masks.fold<int>(0, (t, id) => t + bytes('${id.replaceFirst('hi/', '')}_edge'));
     final composedBytes = composed.fold<int>(0, (t, k) {
       final wh = k.split(' ').last.split('x').map(int.parse).toList();
       return t + wh[0] * wh[1] * 4;

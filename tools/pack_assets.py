@@ -39,6 +39,9 @@ SIZES = {
 # soft light band that measured within 1.1/255 of the full-size one at 2x, and was the larger half
 # of a screen's decoded bytes at 1x.
 EDGE_DOWNSAMPLE = 2
+# The long side of the full-resolution masks in tears/hi/, which is the render's own: a mask is
+# rendered at 2048 square and its paper crops to at most that. See pack_family.
+FINER_TEARS = 2048
 QUALITY = {"paper": 88, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88}
 
 
@@ -168,6 +171,7 @@ def pack_family(name, index, verbose=True):
     if not os.path.isdir(src_dir):
         return
     out = []
+    finer = []
     boxes = {}
     safes = {}
     frame = render_frame() if name == "tears" else 1.0
@@ -206,7 +210,18 @@ def pack_family(name, index, verbose=True):
             sf = safes[stem]
             row["usable"] = round((1 - sf[0] - sf[2]) * (1 - sf[1] - sf[3]), 4)
         out.append(row)
+        if plain_mask:
+            # The same crop at the resolution it was rendered at, for a piece too big for the
+            # 1024 copy: past 1.6x its mask on an axis the slice has to give (SlicedMasks.sliceFor)
+            # and the torn contour of a big sheet is drawn at up to 13.9x. The app decodes this
+            # one only for such a piece, so it costs what the screen showing it costs.
+            hdst = os.path.join(DST, name, "hi", stem + ".webp")
+            hsize = convert(os.path.join(src_dir, fn), hdst, FINER_TEARS, QUALITY.get(name, 90),
+                            keep_alpha=True, luminance_to_alpha=True, crop=crop)
+            finer.append({"id": stem, "w": hsize[0], "h": hsize[1]})
     index[name] = out
+    if finer:
+        index[name + "_hi"] = finer
     if verbose:
         print(f"{name}: {len(out)} files")
 

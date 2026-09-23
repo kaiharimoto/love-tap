@@ -196,6 +196,10 @@ class MaskCache {
 
   static int _sum(Iterable<String> assets) => assets.fold(0, (t, a) => t + (_bytes[a] ?? 0));
 
+  /// Masks asked for and still decoding. A piece draws whole, or with its 1024 mask, until they
+  /// land, so the shutter counts them as pictures not yet on the glass.
+  static int get decoding => _loading.length;
+
   /// Decode a set of masks up front (capture mode does this so no frame waits on a decode).
   static Future<void> warm(Iterable<String> assets) async {
     for (final a in assets) {
@@ -265,6 +269,66 @@ mixin HoldsAMask<T extends StatefulWidget> on State<T> {
       // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
       askForAFrame();
     }, onError: (Object _) {}));
+  }
+}
+
+/// The full-resolution copy of a mask, held only while the piece drawing it is too big for the
+/// packed 1024 one.
+///
+/// Past 1.6x its mask on an axis, [SlicedMasks.sliceFor] has to give the fixed bands up to hold
+/// the centre at [SlicedMasks.cap], and at its [SlicedMasks.fibres] floor it cannot: the setup
+/// sheet's torn left and right edges were drawn at 13.9x, settings' at 9.2x (firing 54, off the
+/// committed sidecars). The pixels to draw them finer were in `assets/tears` all along and were
+/// thrown away by the packer. `tools/pack_assets.py` now keeps them in `assets/tears/hi/`, and a
+/// piece asks for its mask's copy there only when it is that big, so the 1.5-4x residency is
+/// spent on the few big sheets on the glass and never on a screenful of notes.
+///
+/// Which mask a big sheet draws is picked by a hash of its id, so this cannot be a list of five
+/// named masks: every mask has its finer copy, and size decides.
+class FinerMask {
+  FinerMask(this._arrived);
+
+  final void Function() _arrived;
+  ui.Image? _image;
+  String? _asset;
+
+  /// Bumped when the finer copy lands, so a painter built before it knows to repaint.
+  int get generation => _generation;
+  int _generation = 0;
+
+  /// The asset and image to compose a piece of [size] logical pixels from: [base]'s finer copy
+  /// when the piece is too big for [base] and the copy has decoded, and [base] otherwise.
+  (String, ui.Image) pick(String baseAsset, ui.Image base, Size size, double dpr) {
+    if (!SlicedMasks.wantsFiner(base, size, dpr)) return (baseAsset, base);
+    final finer = finerTearAsset(baseAsset);
+    if (_asset != finer) {
+      release();
+      _asset = finer;
+      final now = MaskCache.hold(finer);
+      if (now != null) {
+        _image = now;
+      } else {
+        unawaited(MaskCache.holdWhenLoaded(finer).then((img) {
+          if (_asset != finer || _image != null) {
+            MaskCache.release(finer, img);
+            return;
+          }
+          _image = img;
+          _generation++;
+          _arrived();
+        }, onError: (Object _) {}));
+      }
+    }
+    final img = _image;
+    return img == null ? (baseAsset, base) : (finer, img);
+  }
+
+  /// Give the finer copy back, if one is held. Call from `dispose`.
+  void release() {
+    final i = _image, a = _asset;
+    _image = null;
+    _asset = null;
+    if (i != null && a != null) MaskCache.release(a, i);
   }
 }
 
@@ -587,6 +651,17 @@ class _MaskedLayerState extends State<MaskedLayer> with HoldsAMask<MaskedLayer> 
   @override
   String get heldAsset => widget.maskAsset;
 
+  late final FinerMask _finer = FinerMask(() {
+    if (mounted) setState(() {});
+    askForAFrame();
+  });
+
+  @override
+  void dispose() {
+    _finer.release();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // a mask that is not decoded yet leaves the sheet whole rather than blank
@@ -600,7 +675,9 @@ class _MaskedLayerState extends State<MaskedLayer> with HoldsAMask<MaskedLayer> 
     return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (Rect rect) {
-        final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size, dpr);
+        final (asset, source) = _finer.pick(widget.maskAsset, mask, rect.size, dpr);
+        SlicedMasks.drawnWith[SlicedMasks.composedKey(widget.maskAsset, rect.size)] = asset;
+        final sliced = SlicedMasks.at(asset, source, rect.size, dpr);
         final m = Matrix4.identity()
           ..translateByDouble(rect.left, rect.top, 0, 1)
           ..scaleByDouble(rect.width / sliced.width, rect.height / sliced.height, 1, 1);
@@ -670,6 +747,18 @@ class SlicedMasks {
     final f = (cap * src - dst) / (2 * src * (cap - 1));
     return f.clamp(fibres, edge).toDouble();
   }
+
+  /// Whether a piece of [size] logical pixels is too big for [mask]: past the point on either axis
+  /// where [sliceFor] starts giving the fixed bands up, which is 1.6x. Below it the mask is sliced
+  /// exactly as it always was and nothing finer is decoded (see [FinerMask]).
+  static bool wantsFiner(ui.Image mask, Size size, double dpr) =>
+      sliceFor(mask.width.toDouble(), size.width * dpr) < edge ||
+      sliceFor(mask.height.toDouble(), size.height * dpr) < edge;
+
+  /// Which asset a piece's mask was actually composed from, keyed by the asset it asked for and
+  /// its box: `composedKey(tearAsset(id), box)` to `tearAsset(id)` or `finerTearAsset(id)`. So
+  /// `CaptureHooks.paperSurfaces` declares the mask that cut the paper, at its own size.
+  static final Map<String, String> drawnWith = {};
 
   static ui.Image at(String asset, ui.Image mask, Size size, double dpr) {
     // rounded, so a note whose height moves by a pixel while its text lays out does not compose a
@@ -838,6 +927,19 @@ class _ContactShadowState extends State<ContactShadow> with HoldsAMask<ContactSh
   @override
   String get heldAsset => tearAsset(widget.tearId);
 
+  // the same choice [MaskedLayer] makes for the same piece, so the outline the shadow is laid
+  // around is the outline the paper was cut to
+  late final FinerMask _finer = FinerMask(() {
+    if (mounted) setState(() {});
+    askForAFrame();
+  });
+
+  @override
+  void dispose() {
+    _finer.release();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // a mask that is not decoded yet draws no shadow rather than a black rectangle
@@ -850,6 +952,7 @@ class _ContactShadowState extends State<ContactShadow> with HoldsAMask<ContactSh
         condition: widget.condition,
         opacity: widget.opacity,
         dpr: MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
+        finer: _finer,
       ),
     );
   }
@@ -865,13 +968,21 @@ class _ContactShadowState extends State<ContactShadow> with HoldsAMask<ContactSh
 /// entirely — and this item's own clause (c) asserts the piece count does not fall, so the fix
 /// would have deleted the evidence that judges it. It says what it drew instead.
 class ContactShadowPainter extends CustomPainter {
-  const ContactShadowPainter({
+  ContactShadowPainter({
     required this.tearId,
     required this.mask,
     required this.condition,
     required this.opacity,
     required this.dpr,
-  });
+    this.finer,
+  }) : _generation = finer?.generation ?? 0;
+
+  /// Where a piece too big for its packed mask gets the finer one; see [FinerMask]. Null draws
+  /// from [mask] whatever the size.
+  final FinerMask? finer;
+
+  /// [FinerMask.generation] when this painter was built: the finer copy landing repaints.
+  final int _generation;
 
   /// The tear whose outline this shadow is laid around, e.g. `tear_004`.
   final String tearId;
@@ -900,7 +1011,8 @@ class ContactShadowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (size.isEmpty || opacity <= 0) return;
-    final composed = ContactShadows.at(asset, mask, size, dpr, condition, profile);
+    final (outline, source) = finer?.pick(asset, mask, size, dpr) ?? (asset, mask);
+    final composed = ContactShadows.at(outline, source, size, dpr, condition, profile);
     if (composed == null) return;
     final dst = Rect.fromLTWH(-spill, -spill, size.width + 2 * spill, size.height + 2 * spill);
     canvas.drawImageRect(
@@ -917,6 +1029,8 @@ class ContactShadowPainter extends CustomPainter {
   bool shouldRepaint(ContactShadowPainter old) =>
       old.tearId != tearId ||
       !identical(old.mask, mask) ||
+      !identical(old.finer, finer) ||
+      old._generation != _generation ||
       old.condition != condition ||
       old.opacity != opacity ||
       old.dpr != dpr;
