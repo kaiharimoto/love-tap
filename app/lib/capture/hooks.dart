@@ -543,9 +543,11 @@ class CaptureHooks {
       final composed = SlicedMasks.composedAt[SlicedMasks.composedKey(asset, node.size)];
       if (mask != null && composed != null) {
         final box = node.size;
-        const slice = SlicedMasks.edge;
-        final fx = _nineScale(mask.width.toDouble(), composed[0].toDouble(), slice);
-        final fy = _nineScale(mask.height.toDouble(), composed[1].toDouble(), slice);
+        // per axis since firing 51: the fixed band gives way on a piece much larger than its mask
+        final ex = SlicedMasks.sliceFor(mask.width.toDouble(), composed[0].toDouble());
+        final ey = SlicedMasks.sliceFor(mask.height.toDouble(), composed[1].toDouble());
+        final fx = _nineScale(mask.width.toDouble(), composed[0].toDouble(), ex);
+        final fy = _nineScale(mask.height.toDouble(), composed[1].toDouble(), ey);
         // and then the shader, which stretches the whole composition over the piece
         final sx = box.width * dpr / composed[0];
         final sy = box.height * dpr / composed[1];
@@ -558,7 +560,7 @@ class CaptureHooks {
           'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
           'scale': double.parse(scale.toStringAsFixed(3)),
           'fit': 'mask',
-          'slice': slice,
+          'slice': [ex, ey],
           'fixed': [
             double.parse((fx[0] * sx).toStringAsFixed(3)),
             double.parse((fy[0] * sy).toStringAsFixed(3)),

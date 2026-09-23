@@ -507,6 +507,32 @@ class SlicedMasks {
   /// is always solid, so four tenths is comfortably outside them.
   static const double edge = 0.4;
 
+  /// How thin the fixed band may get on a piece much larger than its mask. Measured at firing 51
+  /// over the 56 packed masks as the 99th-percentile depth, per column, at which the alpha first
+  /// holds solid: p50 0.05-0.12 by edge, and at most 0.227 on the five masks that back the big
+  /// sheets (tear_004, 020, 031, 036, 043). A quarter keeps every one of those fibres at the scale
+  /// it was rendered at.
+  static const double fibres = 0.25;
+
+  /// The centre-band magnification the slice tries to stay under, which is this item's own floor:
+  /// a torn left or right edge's treads are as long as the vertical magnification of the band they
+  /// fall in.
+  static const double cap = 4.0;
+
+  /// The slice fraction for one axis of a mask [src] source pixels long composed into [dst].
+  ///
+  /// At a fixed 0.4 every pixel of height past the two fixed bands is poured into the middle fifth
+  /// of the source, so the setup sheet's left and right contours were drawn at 19.5x -- four times
+  /// worse than not slicing at all (firing 44, off the sidecar). So the fixed bands give way as the
+  /// piece grows, just far enough to hold the centre at [cap], and never thinner than [fibres].
+  /// A piece up to 1.6x its mask on an axis is sliced exactly as before, which is 156 of the 172
+  /// torn pieces in the set.
+  static double sliceFor(double src, double dst) {
+    if (src <= 0) return edge;
+    final f = (cap * src - dst) / (2 * src * (cap - 1));
+    return f.clamp(fibres, edge).toDouble();
+  }
+
   static ui.Image at(String asset, ui.Image mask, Size size, double dpr) {
     // rounded, so a note whose height moves by a pixel while its text lays out does not compose a
     // new mask every frame; and never larger than the mask itself, because upsampling a render is
@@ -524,9 +550,10 @@ class SlicedMasks {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
     final mw = mask.width.toDouble(), mh = mask.height.toDouble();
+    final ex = sliceFor(mw, w.toDouble()), ey = sliceFor(mh, h.toDouble());
     canvas.drawImageNine(
       mask,
-      Rect.fromLTRB(mw * edge, mh * edge, mw * (1 - edge), mh * (1 - edge)),
+      Rect.fromLTRB(mw * ex, mh * ey, mw * (1 - ex), mh * (1 - ey)),
       Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble()),
       Paint()..filterQuality = FilterQuality.medium,
     );
