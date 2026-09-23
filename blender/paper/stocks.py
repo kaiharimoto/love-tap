@@ -261,6 +261,7 @@ def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEB
         scene.render.border_max_x, scene.render.border_max_y = border[2], border[3]
     if condition == "day":
         common.add_daylight(scene)
+        common.stop_down_for_day(scene)
     else:
         common.add_dusk(scene)
         # the same aperture everything lit at dusk uses; see blender/rig/common.py

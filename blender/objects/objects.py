@@ -566,6 +566,7 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
             common.render_settings(scene, res, res, samples=samples, transparent=True, file_format="PNG")
             if condition == "day":
                 common.add_daylight(scene)
+                common.stop_down_for_day(scene)
             else:
                 common.add_dusk(scene)
             suffix = {"object": "", "shadow": "_shadow" if condition == "day" else "_shadow_dusk"}[pass_kind]

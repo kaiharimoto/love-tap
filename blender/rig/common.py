@@ -227,6 +227,26 @@ def stop_down_for_dusk(scene):
     scene.view_settings.exposure = DUSK_STOPS
 
 
+# How far the camera stops down for the day condition. An exposure stop and nothing else: the
+# hue of the day lamp (DIRECTION.md, Light) and the irradiance illuminant.py holds it to are not
+# touched. It exists because the warmed lamp pins red at 255 on most of the library
+# (tools/check/headroom.py), and firing 50 authorised a probe to find the smallest stop that gives
+# the channel room back while no paper probe's OKLab L p50 moves by more than 0.03 -- the
+# tolerance the desk plate is declared to.
+#
+# Firing 51 ran it (receipt_01, looseleaf_01, obj_plaster, obj_crane at res 700, 10 samples) and NO
+# stop met both. At -0.15 the paper moved -0.024 and red was still pinned on 63-80% of pixels; at
+# -0.30 it moved -0.053, past the tolerance, and three of the four still failed (crane 35%). So
+# it stays at 0, as the rule says. A red channel that needs half a stop to come off 255 is asking
+# for a highlight roll-off in the view transform, not an aperture.
+DAY_STOPS = 0.0
+
+
+def stop_down_for_day(scene):
+    """Set the day aperture. Call after add_daylight, before rendering."""
+    scene.view_settings.exposure = DAY_STOPS
+
+
 def add_dusk(scene):
     """The dusk condition: low warm sun, cool sky, a desk lamp on the right."""
     sun_data = bpy.data.lights.new("dusk_sun", "SUN")
