@@ -11,6 +11,7 @@ import 'hands.dart';
 import 'library.dart';
 import 'light.dart';
 import 'marks.dart';
+import 'objects.dart';
 import 'palette.dart';
 import 'paper.dart';
 
@@ -121,7 +122,11 @@ class PartnerStrip extends StatelessWidget {
           // nothing that carries a word may be dimmed, and the status line is the part you still
           // need to read. Asleep is said by the stock `stockForMood` picks and by the pen's own
           // weight above, which is where it belonged, so there is no Opacity here at all now.
-          child: PaperPiece(
+          child: Stack(
+            clipBehavior: Clip.none,
+            fit: StackFit.expand,
+            children: [
+            PaperPiece(
               stockId: id,
               tearId: tear,
               liftMm: 0.5 + 0.4 * state.need,
@@ -157,13 +162,28 @@ class PartnerStrip extends StatelessWidget {
                       ],
                     ),
                   ),
+                  // the clover's room: the status line ellipsizes before it rather than under it
+                  const SizedBox(width: _cloverRoom),
                 ],
               ),
             ),
+            // Lying across the strip's right end and off it onto the desk, pressed flat. The strip
+            // is at the top of every region, so this is the one coloured thing on every screen
+            // that has it -- docs/COLOR.md §7 items 5 and 6. See [PressedClover].
+            const Positioned(right: -16, top: -10, child: PressedClover(size: cloverSize)),
+            ],
+          ),
           ),
         ),
     );
   }
+
+  /// The pressed clover's ink, in logical pixels: enough for 1% of a 480x1040 screen at 3x to be
+  /// family D over the 0.09 chroma floor. `test/a_pressed_clover_is_on_the_strip_test.dart`.
+  static const double cloverSize = 112;
+
+  /// How much of the strip's right end the status line leaves to the clover.
+  static const double _cloverRoom = 80;
 
   static String _fallbackLine(PersonState s, bool asleep, bool headsDown) {
     if (asleep) return 'asleep';

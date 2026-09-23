@@ -12,6 +12,7 @@ import '../../material/desk.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
 import '../../material/marks.dart';
+import '../../material/objects.dart';
 import '../../material/paper.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -46,6 +47,9 @@ class SearchPage extends StatefulWidget {
 }
 
 class SearchPageState extends State<SearchPage> {
+  static const double _clover = 80;
+  static const double _cloverRoom = 52;
+
   late final TextEditingController _ctl = TextEditingController(text: widget.initialQuery);
   List<SearchHit> _hits = const [];
   String? _typeFilter;
@@ -172,6 +176,7 @@ class SearchPageState extends State<SearchPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // what you are looking for, written down
+          Stack(clipBehavior: Clip.none, children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 6),
             child: Slip(
@@ -214,10 +219,17 @@ class SearchPageState extends State<SearchPage> {
                       child: Mark.cross(size: 15, seed: 12),
                     ),
                   ),
+                  // the clover's room, so the close mark is not under it
+                  const SizedBox(width: _cloverRoom),
                 ],
               ),
             ),
           ),
+            // This page covers the partner's strip, and with it the one coloured thing every other
+            // room carries (see `PartnerStrip`). Smaller here: the highlighter on the hits already
+            // carries its share of the screen's accent area, in family A.
+            const Positioned(right: -12, top: 2, child: PressedClover(size: _clover)),
+          ]),
 
           // the tabs down the side of a card index: what kind, and whose
           //

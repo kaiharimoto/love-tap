@@ -20,6 +20,63 @@ String bodyOf(String id, {required bool dusk}) {
   return MaterialLibrary.instance.hasObjectDuskBody(id) ? '${id}_dusk' : id;
 }
 
+/// A pressed clover: the one rendered thing in the library that is family D, and so the one thing
+/// that can carry a screen's accent area in a colour the paper and the ink do not already own.
+///
+/// docs/COLOR.md §7 item 6 asks every room still for an object outside family A with an accent
+/// patch of its own, and §4 says family D is "what came in from outside the stationery drawer --
+/// a pressed thing". Firing 49 measured that no other object in the library reaches the 0.09
+/// chroma floor outside family A; firing 51 re-rendered this one to 0.108 at 131 degrees. Firing 54
+/// put it on the glass: 97% of its opaque pixels are over the floor, but they are 4.4% of its
+/// frame, so [size] is the clover's own ink (the frame is scaled up by `inkScaleOf`, as a feeling
+/// object's is), and 1% of a 1440x3120 still needs about a hundred logical pixels of it.
+///
+/// Pressed means flat: a faint contact shadow and no lift. It is not a feeling and does nothing
+/// when touched -- it is a thing somebody kept.
+class PressedClover extends StatelessWidget {
+  const PressedClover({super.key, this.size = 104, this.tilt = -0.32});
+
+  /// The clover's own ink, in logical pixels, on its longer side.
+  final double size;
+  final double tilt;
+
+  static const id = 'obj_clover';
+
+  @override
+  Widget build(BuildContext context) {
+    final dusk = Light.of(context) == LightCondition.dusk;
+    final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(id) : 1.0;
+    Widget layer(String asset, {double opacity = 1.0}) => Transform.scale(
+          scale: ink,
+          child: Opacity(
+            opacity: opacity,
+            child: Image.asset(objectAsset(asset),
+                fit: BoxFit.contain,
+                gaplessPlayback: true,
+                filterQuality: FilterQuality.medium,
+                frameBuilder: paintWhenItArrives,
+                errorBuilder: PaperPiece.none),
+          ),
+        );
+    return IgnorePointer(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: Transform.rotate(
+          angle: tilt,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              layer('${id}_shadow${dusk ? '_dusk' : ''}', opacity: 0.45),
+              layer(bodyOf(id, dusk: dusk)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class FeelingObject extends StatelessWidget {
   const FeelingObject({
     super.key,
