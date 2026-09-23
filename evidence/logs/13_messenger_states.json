@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3217
+   "ms": 3646
   },
   {
    "do": "wait",
@@ -18,35 +18,35 @@
   },
   {
    "do": "scrollTo",
-   "ms": 6603
+   "ms": 4358
   },
   {
    "do": "wait",
-   "ms": 1302
+   "ms": 1303
   },
   {
    "do": "stage",
-   "ms": 4865
+   "ms": 3774
   },
   {
    "do": "wait",
-   "ms": 1604
+   "ms": 1602
   },
   {
    "do": "partnerTyping",
-   "ms": 1710
+   "ms": 1855
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1104
   },
   {
    "do": "shot",
-   "ms": 3862
+   "ms": 3789
   },
   {
    "do": "report",
-   "ms": 723
+   "ms": 714
   }
  ],
  "shots": [
@@ -54,7 +54,7 @@
    "out": "evidence/13_messenger_states.png",
    "clip": null,
    "text_runs": 29,
-   "surfaces": 82
+   "surfaces": 84
   }
  ],
  "reports": [
@@ -127,12 +127,12 @@
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 12700,
- "cold_ms": 1756,
+ "install_ms": 12580,
+ "cold_ms": 1808,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [
-  "pageerror: PlaywrightError — at b47 (http://127.0.0.1:8799/main.dart.js:6585:8)"
+  "pageerror: PlaywrightError — at b4u (http://127.0.0.1:8799/main.dart.js:6585:8)"
  ],
  "ok": false
 }

@@ -3,90 +3,95 @@
  "calt": true,
  "runs_read": 57,
  "pairs": 116,
- "pairs_repeating": 33,
+ "pairs_repeating": 30,
+ "pairs_avoidable": 30,
  "worst": [
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 5,
-   "distinct": 3,
+   "distinct": 2,
+   "avoidable": true,
    "run": "something they say about themselves"
   },
   {
    "family": "TeoHand",
-   "char": "o",
+   "char": "s",
    "instances": 4,
    "distinct": 2,
-   "run": "an answer to something of yours"
+   "avoidable": true,
+   "run": "something they say about themselves"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 4,
    "distinct": 2,
-   "run": "something they say about themselves"
+   "avoidable": true,
+   "run": "a note set to arrive later"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 4,
    "distinct": 2,
+   "avoidable": true,
+   "run": "a note set to arrive later"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "an answer to something of yours"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "something they say about themselves"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
    "run": "something their phone notices"
   },
   {
    "family": "TeoHand",
    "char": "a",
    "instances": 4,
-   "distinct": 2,
+   "distinct": 3,
+   "avoidable": true,
    "run": "a day that matters"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 4,
-   "distinct": 2,
-   "run": "a note set to arrive later"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 3,
-   "distinct": 1,
-   "run": "something to watch"
-  },
-  {
-   "family": "TeoHand",
-   "char": "s",
-   "instances": 3,
-   "distinct": 1,
-   "run": "an answer to something of yours"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 3,
-   "distinct": 1,
-   "run": "something their phone notices"
-  },
-  {
-   "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 4,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "s",
-   "instances": 4,
    "distinct": 3,
-   "run": "something they say about themselves"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 4,
-   "distinct": 3,
+   "avoidable": true,
    "run": "a day that matters"
   },
   {
@@ -94,13 +99,7 @@
    "char": "e",
    "instances": 4,
    "distinct": 3,
-   "run": "a note set to arrive later"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 4,
-   "distinct": 3,
+   "avoidable": true,
    "run": "a feeling one of you made"
   },
   {
@@ -108,13 +107,15 @@
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "n",
+   "char": "a",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
@@ -122,20 +123,23 @@
    "char": "t",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "something written"
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
-   "instances": 3,
-   "distinct": 2,
-   "run": "something they say about themselves"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
+   "run": "something their phone notices"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
    "run": "something their phone notices"
   },
   {
@@ -143,55 +147,79 @@
    "char": "h",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "something their phone notices"
-  },
-  {
-   "family": "TeoHand",
-   "char": "a",
-   "instances": 3,
-   "distinct": 2,
-   "run": "a note set to arrive later"
-  },
-  {
-   "family": "NoorHand",
-   "char": "h",
-   "instances": 2,
-   "distinct": 1,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "m",
-   "instances": 2,
-   "distinct": 1,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 2,
-   "distinct": 1,
-   "run": "something written"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 2,
-   "distinct": 1,
-   "run": "something to watch"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 2,
-   "distinct": 1,
-   "run": "their voice"
   },
   {
    "family": "TeoHand",
    "char": "i",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "something their phone notices"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "a note set to arrive later"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "a note set to arrive later"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "a feeling one of you made"
+  },
+  {
+   "family": "NoorHand",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "g",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "something to watch"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "something to watch"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
    "run": "their voice"
   },
   {
@@ -199,55 +227,30 @@
    "char": "e",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "an answer to something of yours"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 2,
-   "distinct": 1,
-   "run": "an answer to something of yours"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 2,
-   "distinct": 1,
-   "run": "something they say about themselves"
-  },
-  {
-   "family": "TeoHand",
-   "char": "m",
-   "instances": 2,
-   "distinct": 1,
-   "run": "something they say about themselves"
   },
   {
    "family": "TeoHand",
    "char": "s",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "something their phone notices"
   },
   {
    "family": "TeoHand",
-   "char": "a",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
-   "run": "a feeling one of you made"
+   "avoidable": true,
+   "run": "the list moving"
   }
  ],
  "glyphs": 585,
- "stalls": 34,
- "stalls_same_letter": 1,
- "stalled_words": [
-  {
-   "family": "NoorHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "week one, and the room smells right again"
-  }
- ],
+ "stalls": 8,
+ "stalls_same_letter": 0,
+ "stalled_words": [],
  "ok": false,
- "why": "33 of 116 repeated letters inside one declared run take an outline twice, and 1 of 585 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "30 of 116 repeated letters inside one declared run take fewer outlines than they could (30 repeat one at all), and 0 of 585 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

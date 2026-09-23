@@ -4,19 +4,38 @@
  "runs_read": 27,
  "pairs": 35,
  "pairs_repeating": 12,
+ "pairs_avoidable": 12,
  "worst": [
   {
    "family": "NoorHand",
    "char": "e",
    "instances": 5,
-   "distinct": 4,
+   "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
    "char": "e",
    "instances": 5,
-   "distinct": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
@@ -24,13 +43,15 @@
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "n",
+   "char": "a",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
@@ -38,75 +59,54 @@
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "n",
+   "char": "a",
    "instances": 3,
    "distinct": 2,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "s",
-   "instances": 3,
-   "distinct": 2,
-   "run": "restless"
-  },
-  {
-   "family": "NoorHand",
-   "char": "h",
-   "instances": 2,
-   "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "m",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "h",
+   "char": "g",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "m",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
-   "family": "TeoHand",
-   "char": "l",
+   "family": "NoorHand",
+   "char": "g",
    "instances": 2,
    "distinct": 1,
-   "run": "a little"
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
   }
  ],
  "glyphs": 194,
- "stalls": 13,
- "stalls_same_letter": 2,
- "stalled_words": [
-  {
-   "family": "NoorHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "week one, and the room smells right again"
-  }
- ],
+ "stalls": 2,
+ "stalls_same_letter": 0,
+ "stalled_words": [],
  "ok": false,
- "why": "12 of 35 repeated letters inside one declared run take an outline twice, and 2 of 194 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "12 of 35 repeated letters inside one declared run take fewer outlines than they could (12 repeat one at all), and 0 of 194 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

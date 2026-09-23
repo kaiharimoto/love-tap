@@ -3,38 +3,38 @@
  "frames": 384,
  "fps": 60.0,
  "seconds": 6.4,
- "mean_change_per_frame": 0.01428,
- "repeated_frames": 48,
- "repeated_fraction": 0.125,
+ "mean_change_per_frame": 0.01419,
+ "repeated_frames": 52,
+ "repeated_fraction": 0.136,
  "longest_still_run": 11,
  "repeated_at": [
-  0,
   2,
-  7,
+  8,
+  10,
   12,
-  15,
-  17,
-  24,
+  14,
+  16,
+  21,
+  23,
   27,
-  29,
   141,
   142,
   143
  ],
  "still_runs": [
   {
-   "from": 0,
-   "to": 0,
-   "len": 1
-  },
-  {
    "from": 2,
    "to": 2,
    "len": 1
   },
   {
-   "from": 7,
-   "to": 7,
+   "from": 8,
+   "to": 8,
+   "len": 1
+  },
+  {
+   "from": 10,
+   "to": 10,
    "len": 1
   },
   {
@@ -43,18 +43,23 @@
    "len": 1
   },
   {
-   "from": 15,
-   "to": 15,
+   "from": 14,
+   "to": 14,
    "len": 1
   },
   {
-   "from": 17,
-   "to": 17,
+   "from": 16,
+   "to": 16,
    "len": 1
   },
   {
-   "from": 24,
-   "to": 24,
+   "from": 21,
+   "to": 21,
+   "len": 1
+  },
+  {
+   "from": 23,
+   "to": 23,
    "len": 1
   },
   {
@@ -63,19 +68,9 @@
    "len": 1
   },
   {
-   "from": 29,
-   "to": 29,
-   "len": 1
-  },
-  {
    "from": 141,
    "to": 147,
    "len": 7
-  },
-  {
-   "from": 192,
-   "to": 192,
-   "len": 1
   },
   {
    "from": 275,
@@ -93,13 +88,38 @@
    "len": 7
   },
   {
-   "from": 362,
-   "to": 362,
+   "from": 355,
+   "to": 355,
+   "len": 1
+  },
+  {
+   "from": 358,
+   "to": 358,
+   "len": 1
+  },
+  {
+   "from": 361,
+   "to": 361,
+   "len": 1
+  },
+  {
+   "from": 363,
+   "to": 363,
+   "len": 1
+  },
+  {
+   "from": 365,
+   "to": 365,
    "len": 1
   },
   {
    "from": 369,
    "to": 369,
+   "len": 1
+  },
+  {
+   "from": 372,
+   "to": 372,
    "len": 1
   },
   {

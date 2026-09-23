@@ -3,41 +3,39 @@
  "calt": true,
  "runs_read": 12,
  "pairs": 70,
- "pairs_repeating": 57,
+ "pairs_repeating": 46,
+ "pairs_avoidable": 46,
  "worst": [
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 8,
-   "distinct": 3,
+   "distinct": 4,
+   "avoidable": true,
    "run": "monday. the bus has that smell it gets when it rains onto th"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 7,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "Rain. The first in a month and I walked the hill in it with "
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 7,
-   "distinct": 2,
+   "distinct": 3,
+   "avoidable": true,
    "run": "one of them asked if we could do a rain dance instead of the"
   },
   {
    "family": "TeoHand",
-   "char": "h",
-   "instances": 6,
-   "distinct": 2,
-   "run": "Rain. The first in a month and I walked the hill in it with "
-  },
-  {
-   "family": "TeoHand",
    "char": "i",
    "instances": 7,
    "distinct": 4,
-   "run": "Rain. The first in a month and I walked the hill in it with "
-  },
-  {
-   "family": "TeoHand",
-   "char": "i",
-   "instances": 7,
-   "distinct": 4,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
@@ -45,20 +43,7 @@
    "char": "n",
    "instances": 7,
    "distinct": 4,
-   "run": "the bin went out last night in horizontal rain and i would l"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 6,
-   "distinct": 3,
-   "run": "Rain. The first in a month and I walked the hill in it with "
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 6,
-   "distinct": 3,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
@@ -66,111 +51,95 @@
    "char": "h",
    "instances": 6,
    "distinct": 3,
-   "run": "monday. the bus has that smell it gets when it rains onto th"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 2,
-   "run": "its raining here too. the canal has gone all dimples"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 5,
-   "distinct": 2,
+   "avoidable": true,
    "run": "Rain. The first in a month and I walked the hill in it with "
   },
   {
    "family": "TeoHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 2,
-   "run": "rain the whole way down and i did not go round it"
-  },
-  {
-   "family": "TeoHand",
-   "char": "d",
-   "instances": 5,
-   "distinct": 2,
-   "run": "one of them asked if we could do a rain dance instead of the"
-  },
-  {
-   "family": "TeoHand",
-   "char": "a",
-   "instances": 5,
+   "char": "t",
+   "instances": 6,
    "distinct": 3,
-   "run": "its raining here too. the canal has gone all dimples"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 5,
-   "distinct": 3,
-   "run": "rain the whole way down and i did not go round it"
-  },
-  {
-   "family": "TeoHand",
-   "char": "d",
-   "instances": 5,
-   "distinct": 3,
-   "run": "rain the whole way down and i did not go round it"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 3,
-   "run": "one of them asked if we could do a rain dance instead of the"
-  },
-  {
-   "family": "TeoHand",
-   "char": "a",
-   "instances": 5,
-   "distinct": 3,
-   "run": "one of them asked if we could do a rain dance instead of the"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 3,
-   "run": "monday. the bus has that smell it gets when it rains onto th"
-  },
-  {
-   "family": "TeoHand",
-   "char": "i",
-   "instances": 4,
-   "distinct": 2,
-   "run": "its raining here too. the canal has gone all dimples"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 4,
-   "distinct": 2,
-   "run": "its raining here too. the canal has gone all dimples"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 4,
-   "distinct": 2,
-   "run": "Rain. The first in a month and I walked the hill in it with "
-  },
-  {
-   "family": "TeoHand",
-   "char": "l",
-   "instances": 4,
-   "distinct": 2,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
    "family": "TeoHand",
+   "char": "h",
+   "instances": 6,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "monday. the bus has that smell it gets when it rains onto th"
+  },
+  {
+   "family": "TeoHand",
+   "char": "d",
+   "instances": 5,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "rain the whole way down and i did not go round it"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 5,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "one of them asked if we could do a rain dance instead of the"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 6,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "Rain. The first in a month and I walked the hill in it with "
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "rain the whole way down and i did not go round it"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "one of them asked if we could do a rain dance instead of the"
+  },
+  {
+   "family": "TeoHand",
+   "char": "d",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "one of them asked if we could do a rain dance instead of the"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "monday. the bus has that smell it gets when it rains onto th"
+  },
+  {
+   "family": "TeoHand",
    "char": "a",
    "instances": 4,
    "distinct": 2,
+   "avoidable": true,
+   "run": "Rain. The first in a month and I walked the hill in it with "
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
@@ -178,27 +147,87 @@
    "char": "n",
    "instances": 4,
    "distinct": 2,
+   "avoidable": true,
    "run": "monday. the bus has that smell it gets when it rains onto th"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "monday. the bus has that smell it gets when it rains onto th"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "its raining here too. the canal has gone all dimples"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "its raining here too. the canal has gone all dimples"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "Rain. The first in a month and I walked the hill in it with "
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "rain the whole way down and i did not go round it"
   },
   {
    "family": "TeoHand",
    "char": "s",
    "instances": 5,
    "distinct": 4,
+   "avoidable": true,
    "run": "monday. the bus has that smell it gets when it rains onto th"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "its raining here too. the canal has gone all dimples"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "its raining here too. the canal has gone all dimples"
   },
   {
    "family": "TeoHand",
    "char": "l",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "its raining here too. the canal has gone all dimples"
   },
   {
    "family": "TeoHand",
-   "char": "a",
+   "char": "e",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "Rain. The first in a month and I walked the hill in it with "
   },
   {
@@ -206,6 +235,7 @@
    "char": "e",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "text when home \u00b7 kept"
   },
   {
@@ -213,6 +243,7 @@
    "char": "i",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "rain the whole way down and i did not go round it"
   },
   {
@@ -220,6 +251,7 @@
    "char": "n",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "one of them asked if we could do a rain dance instead of the"
   },
   {
@@ -227,13 +259,15 @@
    "char": "f",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "one of them asked if we could do a rain dance instead of the"
   },
   {
    "family": "TeoHand",
-   "char": "o",
+   "char": "l",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
@@ -241,13 +275,15 @@
    "char": "a",
    "instances": 4,
    "distinct": 3,
-   "run": "monday. the bus has that smell it gets when it rains onto th"
+   "avoidable": true,
+   "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "its raining here too. the canal has gone all dimples"
   },
   {
@@ -255,6 +291,7 @@
    "char": "s",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "its raining here too. the canal has gone all dimples"
   },
   {
@@ -262,20 +299,15 @@
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "its raining here too. the canal has gone all dimples"
-  },
-  {
-   "family": "TeoHand",
-   "char": "l",
-   "instances": 3,
-   "distinct": 2,
-   "run": "Rain. The first in a month and I walked the hill in it with "
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "text when home \u00b7 kept"
   },
   {
@@ -283,13 +315,7 @@
    "char": "a",
    "instances": 3,
    "distinct": 2,
-   "run": "rain the whole way down and i did not go round it"
-  },
-  {
-   "family": "TeoHand",
-   "char": "w",
-   "instances": 3,
-   "distinct": 2,
+   "avoidable": true,
    "run": "rain the whole way down and i did not go round it"
   },
   {
@@ -297,125 +323,62 @@
    "char": "t",
    "instances": 3,
    "distinct": 2,
-   "run": "one of them asked if we could do a rain dance instead of the"
+   "avoidable": true,
+   "run": "rain the whole way down and i did not go round it"
   },
   {
    "family": "TeoHand",
-   "char": "i",
+   "char": "w",
    "instances": 3,
    "distinct": 2,
-   "run": "one of them asked if we could do a rain dance instead of the"
+   "avoidable": true,
+   "run": "rain the whole way down and i did not go round it"
   },
   {
    "family": "TeoHand",
-   "char": "h",
+   "char": "t",
    "instances": 3,
    "distinct": 2,
-   "run": "the bin went out last night in horizontal rain and i would l"
+   "avoidable": true,
+   "run": "one of them asked if we could do a rain dance instead of the"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
    "family": "TeoHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "run": "monday. the bus has that smell it gets when it rains onto th"
-  },
-  {
-   "family": "TeoHand",
-   "char": "i",
-   "instances": 3,
-   "distinct": 2,
-   "run": "monday. the bus has that smell it gets when it rains onto th"
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 2,
-   "distinct": 1,
-   "run": "its raining here too. the canal has gone all dimples"
-  },
-  {
-   "family": "TeoHand",
-   "char": "w",
-   "instances": 2,
-   "distinct": 1,
-   "run": "Rain. The first in a month and I walked the hill in it with "
-  },
-  {
-   "family": "TeoHand",
    "char": "h",
    "instances": 2,
    "distinct": 1,
-   "run": "text when home \u00b7 kept"
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
-   "instances": 2,
-   "distinct": 1,
-   "run": "rain the whole way down and i did not go round it"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 2,
-   "distinct": 1,
-   "run": "rain the whole way down and i did not go round it"
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
-   "instances": 2,
-   "distinct": 1,
+   "avoidable": true,
    "run": "one of them asked if we could do a rain dance instead of the"
   },
   {
    "family": "TeoHand",
-   "char": "l",
+   "char": "s",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "one of them asked if we could do a rain dance instead of the"
-  },
-  {
-   "family": "TeoHand",
-   "char": "w",
-   "instances": 2,
-   "distinct": 1,
-   "run": "the bin went out last night in horizontal rain and i would l"
   },
   {
    "family": "TeoHand",
    "char": "u",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "the bin went out last night in horizontal rain and i would l"
-  },
-  {
-   "family": "TeoHand",
-   "char": "m",
-   "instances": 2,
-   "distinct": 1,
-   "run": "monday. the bus has that smell it gets when it rains onto th"
   }
  ],
  "glyphs": 452,
- "stalls": 51,
- "stalls_same_letter": 1,
- "stalled_words": [
-  {
-   "family": "TeoHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "its raining here too. the canal has gone all dimples"
-  }
- ],
+ "stalls": 17,
+ "stalls_same_letter": 0,
+ "stalled_words": [],
  "ok": false,
- "why": "57 of 70 repeated letters inside one declared run take an outline twice, and 1 of 452 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "46 of 70 repeated letters inside one declared run take fewer outlines than they could (46 repeat one at all), and 0 of 452 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

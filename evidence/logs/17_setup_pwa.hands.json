@@ -4,19 +4,22 @@
  "runs_read": 10,
  "pairs": 89,
  "pairs_repeating": 57,
+ "pairs_avoidable": 57,
  "worst": [
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 9,
-   "distinct": 3,
+   "distinct": 4,
+   "avoidable": true,
    "run": "two phones, one wire between them, nobody else on it."
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 9,
-   "distinct": 3,
+   "distinct": 4,
+   "avoidable": true,
    "run": "the same private network as the other phone, and nothing els"
   },
   {
@@ -24,132 +27,127 @@
    "char": "e",
    "instances": 8,
    "distinct": 3,
+   "avoidable": true,
    "run": "waiting to be opened from the home screen rather than from a"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 7,
-   "distinct": 2,
+   "distinct": 4,
+   "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 6,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "two phones, one wire between them, nobody else on it."
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 6,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 6,
-   "distinct": 2,
-   "run": "waiting to be opened from the home screen rather than from a"
+   "distinct": 3,
+   "avoidable": true,
+   "run": "the same private network as the other phone, and nothing els"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 6,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "open its address in Safari, take the profile, then trust it "
   },
   {
    "family": "TeoHand",
    "char": "i",
    "instances": 6,
-   "distinct": 2,
+   "distinct": 3,
+   "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
   },
   {
    "family": "TeoHand",
-   "char": "t",
-   "instances": 6,
-   "distinct": 3,
-   "run": "share, then add to home screen. it will not hold on to anyth"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 6,
-   "distinct": 3,
-   "run": "share, then add to home screen. it will not hold on to anyth"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 6,
-   "distinct": 3,
-   "run": "share, then add to home screen. it will not hold on to anyth"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 6,
-   "distinct": 3,
-   "run": "the same private network as the other phone, and nothing els"
-  },
-  {
-   "family": "TeoHand",
    "char": "e",
-   "instances": 6,
-   "distinct": 3,
-   "run": "install the profile the other phone is serving"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 6,
-   "distinct": 3,
-   "run": "open its address in Safari, take the profile, then trust it "
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
    "instances": 5,
    "distinct": 2,
-   "run": "two phones, one wire between them, nobody else on it."
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
   },
   {
    "family": "TeoHand",
-   "char": "o",
+   "char": "r",
    "instances": 5,
    "distinct": 2,
+   "avoidable": true,
    "run": "waiting to be opened from the home screen rather than from a"
   },
   {
    "family": "TeoHand",
-   "char": "h",
+   "char": "n",
    "instances": 5,
    "distinct": 2,
+   "avoidable": true,
    "run": "the same private network as the other phone, and nothing els"
   },
   {
    "family": "TeoHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 2,
-   "run": "the same private network as the other phone, and nothing els"
+   "char": "t",
+   "instances": 6,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 6,
    "distinct": 4,
-   "run": "two phones, one wire between them, nobody else on it."
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
   },
   {
    "family": "TeoHand",
-   "char": "h",
-   "instances": 5,
-   "distinct": 3,
-   "run": "share, then add to home screen. it will not hold on to anyth"
+   "char": "t",
+   "instances": 6,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "waiting to be opened from the home screen rather than from a"
   },
   {
    "family": "TeoHand",
    "char": "e",
+   "instances": 6,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "install the profile the other phone is serving"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
    "instances": 5,
    "distinct": 3,
-   "run": "share, then add to home screen. it will not hold on to anyth"
+   "avoidable": true,
+   "run": "two phones, one wire between them, nobody else on it."
   },
   {
    "family": "TeoHand",
    "char": "a",
    "instances": 5,
    "distinct": 3,
-   "run": "waiting to be opened from the home screen rather than from a"
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 5,
-   "distinct": 3,
+   "avoidable": true,
    "run": "waiting to be opened from the home screen rather than from a"
   },
   {
@@ -157,125 +155,127 @@
    "char": "t",
    "instances": 5,
    "distinct": 3,
+   "avoidable": true,
    "run": "put this phone on the tailnet"
   },
   {
    "family": "TeoHand",
-   "char": "n",
+   "char": "h",
    "instances": 5,
    "distinct": 3,
+   "avoidable": true,
    "run": "the same private network as the other phone, and nothing els"
   },
   {
    "family": "TeoHand",
-   "char": "a",
-   "instances": 4,
-   "distinct": 2,
+   "char": "o",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
    "run": "the same private network as the other phone, and nothing els"
-  },
-  {
-   "family": "TeoHand",
-   "char": "i",
-   "instances": 4,
-   "distinct": 2,
-   "run": "install the profile the other phone is serving"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 4,
-   "distinct": 2,
-   "run": "install the profile the other phone is serving"
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
-   "instances": 4,
-   "distinct": 2,
-   "run": "install the profile the other phone is serving"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 4,
-   "distinct": 2,
-   "run": "open its address in Safari, take the profile, then trust it "
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 4,
-   "distinct": 2,
-   "run": "open its address in Safari, take the profile, then trust it "
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
-   "instances": 4,
-   "distinct": 2,
-   "run": "read the six words off the other phone"
-  },
-  {
-   "family": "TeoHand",
-   "char": "i",
-   "instances": 3,
-   "distinct": 1,
-   "run": "share, then add to home screen. it will not hold on to anyth"
-  },
-  {
-   "family": "TeoHand",
-   "char": "l",
-   "instances": 3,
-   "distinct": 1,
-   "run": "share, then add to home screen. it will not hold on to anyth"
-  },
-  {
-   "family": "TeoHand",
-   "char": "m",
-   "instances": 3,
-   "distinct": 1,
-   "run": "waiting to be opened from the home screen rather than from a"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 5,
-   "distinct": 4,
-   "run": "read the six words off the other phone"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 4,
    "distinct": 3,
-   "run": "two phones, one wire between them, nobody else on it."
+   "avoidable": true,
+   "run": "read the six words off the other phone"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 4,
-   "distinct": 3,
+   "distinct": 2,
+   "avoidable": true,
    "run": "add it to the home screen"
   },
   {
    "family": "TeoHand",
    "char": "n",
    "instances": 4,
-   "distinct": 3,
+   "distinct": 2,
+   "avoidable": true,
    "run": "waiting to be opened from the home screen rather than from a"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "the same private network as the other phone, and nothing els"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "install the profile the other phone is serving"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "install the profile the other phone is serving"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "waiting to be opened from the home screen rather than from a"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "two phones, one wire between them, nobody else on it."
   },
   {
    "family": "TeoHand",
    "char": "h",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "waiting to be opened from the home screen rather than from a"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "install the profile the other phone is serving"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "open its address in Safari, take the profile, then trust it "
   },
   {
    "family": "TeoHand",
    "char": "s",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
   },
   {
@@ -283,83 +283,119 @@
    "char": "a",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "read the six words off the other phone"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "read the six words off the other phone"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 3,
-   "distinct": 2,
-   "run": "this one, the iphone"
-  },
-  {
-   "family": "TeoHand",
-   "char": "a",
-   "instances": 3,
-   "distinct": 2,
-   "run": "share, then add to home screen. it will not hold on to anyth"
-  },
-  {
-   "family": "TeoHand",
-   "char": "d",
-   "instances": 3,
-   "distinct": 2,
-   "run": "share, then add to home screen. it will not hold on to anyth"
   },
   {
    "family": "TeoHand",
    "char": "h",
    "instances": 3,
    "distinct": 2,
-   "run": "put this phone on the tailnet"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 2,
-   "run": "put this phone on the tailnet"
+   "avoidable": true,
+   "run": "this one, the iphone"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 3,
    "distinct": 2,
-   "run": "put this phone on the tailnet"
+   "avoidable": true,
+   "run": "this one, the iphone"
   },
   {
    "family": "TeoHand",
-   "char": "s",
+   "char": "w",
    "instances": 3,
    "distinct": 2,
-   "run": "the same private network as the other phone, and nothing els"
+   "avoidable": true,
+   "run": "two phones, one wire between them, nobody else on it."
   },
   {
    "family": "TeoHand",
-   "char": "s",
+   "char": "t",
    "instances": 3,
    "distinct": 2,
-   "run": "install the profile the other phone is serving"
+   "avoidable": true,
+   "run": "add it to the home screen"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
   },
   {
    "family": "TeoHand",
    "char": "l",
    "instances": 3,
    "distinct": 2,
-   "run": "install the profile the other phone is serving"
+   "avoidable": true,
+   "run": "share, then add to home screen. it will not hold on to anyth"
+  },
+  {
+   "family": "TeoHand",
+   "char": "m",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "waiting to be opened from the home screen rather than from a"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "put this phone on the tailnet"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "the same private network as the other phone, and nothing els"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "the same private network as the other phone, and nothing els"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "install the profile the other phone is serving"
   },
   {
@@ -367,6 +403,7 @@
    "char": "r",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "read the six words off the other phone"
   },
   {
@@ -374,6 +411,7 @@
    "char": "t",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "read the six words off the other phone"
   },
   {
@@ -381,47 +419,61 @@
    "char": "o",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "this one, the iphone"
   },
   {
    "family": "TeoHand",
-   "char": "n",
+   "char": "h",
    "instances": 2,
    "distinct": 1,
-   "run": "this one, the iphone"
+   "avoidable": true,
+   "run": "two phones, one wire between them, nobody else on it."
   },
   {
    "family": "TeoHand",
    "char": "s",
    "instances": 2,
    "distinct": 1,
-   "run": "share, then add to home screen. it will not hold on to anyth"
+   "avoidable": true,
+   "run": "two phones, one wire between them, nobody else on it."
   },
   {
    "family": "TeoHand",
    "char": "p",
    "instances": 2,
    "distinct": 1,
-   "run": "install the profile the other phone is serving"
-  }
- ],
- "glyphs": 457,
- "stalls": 44,
- "stalls_same_letter": 2,
- "stalled_words": [
-  {
-   "family": "TeoHand",
-   "letter": "l",
-   "variant": 4,
-   "run": "share, then add to home screen. it will not hold on to anyth"
+   "avoidable": true,
+   "run": "put this phone on the tailnet"
   },
   {
    "family": "TeoHand",
-   "letter": "l",
+   "char": "i",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "put this phone on the tailnet"
+  },
+  {
+   "family": "TeoHand",
+   "char": "p",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "the same private network as the other phone, and nothing els"
+  }
+ ],
+ "glyphs": 457,
+ "stalls": 18,
+ "stalls_same_letter": 1,
+ "stalled_words": [
+  {
+   "family": "TeoHand",
+   "letter": "e",
    "variant": 4,
-   "run": "install the profile the other phone is serving"
+   "run": "waiting to be opened from the home screen rather than from a"
   }
  ],
  "ok": false,
- "why": "57 of 89 repeated letters inside one declared run take an outline twice, and 2 of 457 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "57 of 89 repeated letters inside one declared run take fewer outlines than they could (57 repeat one at all), and 1 of 457 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

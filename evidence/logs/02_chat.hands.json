@@ -4,54 +4,78 @@
  "runs_read": 23,
  "pairs": 53,
  "pairs_repeating": 19,
+ "pairs_avoidable": 19,
  "worst": [
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 3,
-   "run": "noor's phone is on normal"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 3,
-   "run": "noor's phone is on normal"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 4,
-   "distinct": 2,
-   "run": "noor's phone is on silent"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 4,
-   "distinct": 2,
-   "run": "noor's phone is on normal"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 4,
-   "distinct": 2,
-   "run": "noor's phone is on normal"
-  },
   {
    "family": "NoorHand",
    "char": "e",
    "instances": 5,
-   "distinct": 4,
+   "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "noor's phone is on silent"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "noor's phone is on silent"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 4,
    "distinct": 3,
+   "avoidable": true,
    "run": "noor's phone is on silent"
   },
   {
@@ -59,97 +83,93 @@
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "n",
+   "char": "a",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "t",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "g",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "TeoHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 2,
-   "run": "your phone is on normal"
-  },
-  {
-   "family": "NoorHand",
-   "char": "h",
+   "char": "s",
    "instances": 2,
    "distinct": 1,
-   "run": "week one, and the room smells right again"
+   "avoidable": true,
+   "run": "noor's phone is on normal"
   },
   {
-   "family": "NoorHand",
-   "char": "m",
+   "family": "TeoHand",
+   "char": "s",
    "instances": 2,
    "distinct": 1,
-   "run": "week one, and the room smells right again"
+   "avoidable": true,
+   "run": "noor's phone is on normal"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 2,
    "distinct": 1,
-   "run": "you are heads down"
+   "avoidable": true,
+   "run": "you got in"
   },
   {
    "family": "TeoHand",
    "char": "i",
    "instances": 2,
    "distinct": 1,
-   "run": "noor's phone is on silent"
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 2,
-   "distinct": 1,
-   "run": "noor's phone is on normal"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 2,
-   "distinct": 1,
-   "run": "you are heads down"
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 2,
-   "distinct": 1,
-   "run": "your phone is on normal"
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 2,
-   "distinct": 1,
-   "run": "noor's phone is on normal"
+   "avoidable": true,
+   "run": "write something"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
+   "run": "write something"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
    "run": "write something"
   }
  ],
  "glyphs": 384,
- "stalls": 14,
+ "stalls": 23,
  "stalls_same_letter": 1,
  "stalled_words": [
   {
-   "family": "NoorHand",
-   "letter": "o",
+   "family": "TeoHand",
+   "letter": "five",
    "variant": 4,
-   "run": "week one, and the room smells right again"
+   "run": "Fri 24 Apr \u00b7 07:55"
   }
  ],
  "ok": false,
- "why": "19 of 53 repeated letters inside one declared run take an outline twice, and 1 of 384 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "19 of 53 repeated letters inside one declared run take fewer outlines than they could (19 repeat one at all), and 1 of 384 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

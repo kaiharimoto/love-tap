@@ -4,12 +4,14 @@
  "runs_read": 18,
  "pairs": 59,
  "pairs_repeating": 26,
+ "pairs_avoidable": 26,
  "worst": [
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 8,
-   "distinct": 3,
+   "distinct": 4,
+   "avoidable": true,
    "run": "everything either of you wrote is in one log on both phones."
   },
   {
@@ -17,20 +19,23 @@
    "char": "e",
    "instances": 7,
    "distinct": 4,
+   "avoidable": true,
    "run": "everything either of you wrote is in one log on both phones."
   },
   {
-   "family": "TeoHand",
-   "char": "n",
+   "family": "NoorHand",
+   "char": "e",
    "instances": 5,
    "distinct": 2,
-   "run": "everything either of you wrote is in one log on both phones."
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 5,
    "distinct": 3,
+   "avoidable": true,
    "run": "everything either of you wrote is in one log on both phones."
   },
   {
@@ -38,55 +43,63 @@
    "char": "h",
    "instances": 5,
    "distinct": 3,
+   "avoidable": true,
    "run": "everything either of you wrote is in one log on both phones."
   },
   {
    "family": "TeoHand",
-   "char": "t",
+   "char": "e",
    "instances": 4,
    "distinct": 2,
-   "run": "write the whole history out"
+   "avoidable": true,
+   "run": "36 to send, 2 made here"
   },
   {
    "family": "TeoHand",
    "char": "i",
    "instances": 4,
    "distinct": 2,
+   "avoidable": true,
    "run": "everything either of you wrote is in one log on both phones."
   },
   {
-   "family": "TeoHand",
-   "char": "e",
+   "family": "NoorHand",
+   "char": "n",
    "instances": 3,
    "distinct": 1,
-   "run": "write the whole history out"
-  },
-  {
-   "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 4,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "TeoHand",
-   "char": "e",
+   "char": "n",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
    "instances": 4,
    "distinct": 3,
-   "run": "36 to send, 2 made here"
+   "avoidable": true,
+   "run": "write the whole history out"
   },
   {
    "family": "NoorHand",
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "n",
+   "char": "a",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
@@ -94,27 +107,23 @@
    "char": "n",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "connecting"
   },
   {
    "family": "TeoHand",
-   "char": "s",
+   "char": "l",
    "instances": 3,
    "distinct": 2,
-   "run": "show the address"
+   "avoidable": true,
+   "run": "teo \u00b7 client \u00b7 local"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 3,
    "distinct": 2,
-   "run": "14062 events, 1 waiting to send"
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 2,
+   "avoidable": true,
    "run": "14062 events, 1 waiting to send"
   },
   {
@@ -122,89 +131,94 @@
    "char": "t",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "14062 events, 1 waiting to send"
   },
   {
    "family": "TeoHand",
-   "char": "h",
-   "instances": 3,
-   "distinct": 2,
-   "run": "write the whole history out"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "run": "write the whole history out"
-  },
-  {
-   "family": "NoorHand",
-   "char": "h",
-   "instances": 2,
-   "distinct": 1,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "m",
-   "instances": 2,
-   "distinct": 1,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
    "char": "e",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "NoorHand",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
-   "run": "not paired yet."
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "g",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "show the address"
   },
   {
    "family": "TeoHand",
    "char": "s",
    "instances": 2,
    "distinct": 1,
-   "run": "the six words"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 2,
-   "distinct": 1,
-   "run": "make one"
+   "avoidable": true,
+   "run": "tuesday soup"
   },
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 2,
    "distinct": 1,
-   "run": "by noor"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 2,
-   "distinct": 1,
+   "avoidable": true,
    "run": "teo \u00b7 client \u00b7 local"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "write the whole history out"
   }
  ],
  "glyphs": 302,
- "stalls": 27,
- "stalls_same_letter": 2,
- "stalled_words": [
-  {
-   "family": "NoorHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "by noor"
-  }
- ],
+ "stalls": 8,
+ "stalls_same_letter": 0,
+ "stalled_words": [],
  "ok": false,
- "why": "26 of 59 repeated letters inside one declared run take an outline twice, and 2 of 302 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "26 of 59 repeated letters inside one declared run take fewer outlines than they could (26 repeat one at all), and 0 of 302 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

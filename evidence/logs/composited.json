@@ -5,8 +5,17 @@
   1440,
   3120
  ],
- "frame_mean_diff": 29.349,
+ "frame_mean_diff": 29.286,
  "objects": [
+  {
+   "asset": "assets/objects/obj_clover_dusk.webp",
+   "rect": [
+    620,
+    -514,
+    1341,
+    1341
+   ]
+  },
   {
    "asset": "assets/objects/obj_candle_dusk.webp",
    "rect": [
@@ -16,8 +25,8 @@
     701
    ],
    "object_mean_diff": 50.865,
-   "around_mean_diff": 43.284,
-   "ratio_to_paper": 1.851,
+   "around_mean_diff": 42.955,
+   "ratio_to_paper": 1.875,
    "opaque_px": 38095
   },
   {
@@ -28,13 +37,13 @@
     637,
     637
    ],
-   "object_mean_diff": 53.38,
-   "around_mean_diff": 34.348,
-   "ratio_to_paper": 1.943,
+   "object_mean_diff": 53.379,
+   "around_mean_diff": 34.1,
+   "ratio_to_paper": 1.968,
    "opaque_px": 11513
   }
  ],
- "paper_mean_diff": 27.478,
+ "paper_mean_diff": 27.124,
  "declared": [
   {
    "object": "obj_candle",
@@ -48,6 +57,20 @@
    "pass": "shadow",
    "day": "assets/objects/obj_candle_shadow.webp",
    "dusk": "assets/objects/obj_candle_shadow_dusk.webp",
+   "relit": true
+  },
+  {
+   "object": "obj_clover",
+   "pass": "body",
+   "day": "assets/objects/obj_clover.webp",
+   "dusk": "assets/objects/obj_clover_dusk.webp",
+   "relit": true
+  },
+  {
+   "object": "obj_clover",
+   "pass": "shadow",
+   "day": "assets/objects/obj_clover_shadow.webp",
+   "dusk": "assets/objects/obj_clover_shadow_dusk.webp",
    "relit": true
   },
   {
@@ -65,7 +88,7 @@
    "relit": true
   }
  ],
- "bodies_relit": 2,
- "bodies": 2,
+ "bodies_relit": 3,
+ "bodies": 3,
  "ok": true
 }

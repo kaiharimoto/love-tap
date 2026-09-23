@@ -3,83 +3,62 @@
  "calt": true,
  "runs_read": 5,
  "pairs": 13,
- "pairs_repeating": 10,
+ "pairs_repeating": 6,
+ "pairs_avoidable": 6,
  "worst": [
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 5,
-   "distinct": 2,
-   "run": "whatever it is. it only goes to one person."
-  },
-  {
-   "family": "NoorHand",
-   "char": "s",
-   "instances": 3,
-   "distinct": 1,
-   "run": "first one's yours."
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 4,
+   "distinct": 3,
+   "avoidable": true,
    "run": "whatever it is. it only goes to one person."
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 4,
-   "distinct": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "whatever it is. it only goes to one person."
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 4,
+   "avoidable": true,
    "run": "whatever it is. it only goes to one person."
   },
   {
    "family": "TeoHand",
    "char": "i",
-   "instances": 3,
-   "distinct": 2,
-   "run": "whatever it is. it only goes to one person."
-  },
-  {
-   "family": "TeoHand",
-   "char": "s",
-   "instances": 3,
-   "distinct": 2,
-   "run": "whatever it is. it only goes to one person."
-  },
-  {
-   "family": "TeoHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 2,
-   "run": "whatever it is. it only goes to one person."
-  },
-  {
-   "family": "NoorHand",
-   "char": "r",
    "instances": 2,
    "distinct": 1,
-   "run": "first one's yours."
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 2,
-   "distinct": 1,
-   "run": "whatever it is. it only goes to one person."
+   "avoidable": true,
+   "run": "write something"
   },
   {
    "family": "TeoHand",
    "char": "t",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
+   "run": "write something"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
    "run": "write something"
   }
  ],
  "glyphs": 81,
- "stalls": 6,
+ "stalls": 2,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "10 of 13 repeated letters inside one declared run take an outline twice, and 0 of 81 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 13 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 81 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

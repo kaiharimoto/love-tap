@@ -102,19 +102,20 @@
  {
   "asset": "assets/tears/tear_049_edge.webp",
   "src": [
-   1024,
-   508
+   512,
+   254
   ],
   "drawn": [
    1380,
    258
   ],
-  "scale": 1.685,
+  "scale": 3.369,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   1.685,
-   0.635
+   3.369,
+   1.27
   ],
   "centre": [
    0,
@@ -125,6 +126,44 @@
    14,
    1382,
    266
+  ]
+ },
+ {
+  "asset": "assets/objects/obj_clover_shadow.webp",
+  "src": [
+   420,
+   420
+  ],
+  "drawn": [
+   336,
+   336
+  ],
+  "scale": 0.8,
+  "fit": "contain",
+  "rect": [
+   620,
+   -514,
+   1341,
+   1341
+  ]
+ },
+ {
+  "asset": "assets/objects/obj_clover.webp",
+  "src": [
+   420,
+   420
+  ],
+  "drawn": [
+   336,
+   336
+  ],
+  "scale": 0.8,
+  "fit": "contain",
+  "rect": [
+   620,
+   -514,
+   1341,
+   1341
   ]
  },
  {
@@ -174,11 +213,11 @@
    714
   ],
   "composed": [
-   480,
+   482,
    113
   ],
   "drawn": [
-   453,
+   454,
    86
   ],
   "scale": 1,
@@ -190,7 +229,7 @@
   "rect": [
    71,
    309,
-   453,
+   454,
    86
   ],
   "piece": "moments-tab-media"
@@ -202,21 +241,21 @@
    714
   ],
   "composed": [
-   453,
+   454,
    86
   ],
   "drawn": [
-   453,
+   454,
    86
   ],
-  "scale": 1,
+  "scale": 1.001,
   "fit": "mask",
   "slice": [
    0.4,
    0.4
   ],
   "fixed": [
-   0.553,
+   0.554,
    0.15
   ],
   "centre": [
@@ -226,7 +265,7 @@
   "rect": [
    71,
    309,
-   453,
+   454,
    86
   ],
   "piece": "moments-tab-media"
@@ -238,15 +277,15 @@
    933
   ],
   "drawn": [
-   453,
+   454,
    86
   ],
-  "scale": 0.302,
+  "scale": 0.303,
   "fit": "cover",
   "rect": [
-   39,
+   38,
    300,
-   544,
+   545,
    104
   ],
   "piece": "moments-tab-media"
@@ -254,19 +293,20 @@
  {
   "asset": "assets/tears/tear_008_edge.webp",
   "src": [
-   1024,
-   713
+   512,
+   357
   ],
   "drawn": [
-   453,
+   454,
    86
   ],
-  "scale": 0.553,
+  "scale": 1.109,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.553,
-   0.15
+   1.109,
+   0.3
   ],
   "centre": [
    0,
@@ -275,7 +315,7 @@
   "rect": [
    71,
    309,
-   453,
+   454,
    86
   ],
   "piece": "moments-tab-media"
@@ -287,11 +327,11 @@
    528
   ],
   "composed": [
-   439,
+   438,
    119
   ],
   "drawn": [
-   412,
+   411,
    92
   ],
   "scale": 1,
@@ -301,9 +341,9 @@
   "condition": "day",
   "render": "tear_029_shadow",
   "rect": [
-   548,
+   549,
    306,
-   412,
+   411,
    92
   ],
   "piece": "moments-tab-milestones"
@@ -315,11 +355,11 @@
    528
   ],
   "composed": [
-   412,
+   411,
    92
   ],
   "drawn": [
-   412,
+   411,
    92
   ],
   "scale": 1.001,
@@ -337,9 +377,9 @@
    0
   ],
   "rect": [
-   548,
+   549,
    306,
-   412,
+   411,
    92
   ],
   "piece": "moments-tab-milestones"
@@ -351,15 +391,15 @@
    933
   ],
   "drawn": [
-   412,
+   411,
    92
   ],
   "scale": 0.274,
   "fit": "cover",
   "rect": [
-   543,
+   544,
    303,
-   494,
+   493,
    111
   ],
   "piece": "moments-tab-milestones"
@@ -367,28 +407,29 @@
  {
   "asset": "assets/tears/tear_029_edge.webp",
   "src": [
-   1024,
-   528
+   512,
+   264
   ],
   "drawn": [
-   412,
+   411,
    92
   ],
-  "scale": 0.502,
+  "scale": 1.004,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.502,
-   0.218
+   1.004,
+   0.436
   ],
   "centre": [
    0,
    0
   ],
   "rect": [
-   548,
+   549,
    306,
-   412,
+   411,
    92
   ],
   "piece": "moments-tab-milestones"
@@ -480,19 +521,20 @@
  {
   "asset": "assets/tears/tear_050_edge.webp",
   "src": [
-   1024,
-   749
+   512,
+   374
   ],
   "drawn": [
    361,
    72
   ],
-  "scale": 0.44,
+  "scale": 0.881,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.44,
-   0.12
+   0.881,
+   0.241
   ],
   "centre": [
    0,
@@ -519,7 +561,7 @@
   "scale": 0.117,
   "fit": "cover",
   "rect": [
-   57,
+   56,
    411,
    198,
    116
@@ -559,7 +601,7 @@
   "scale": 0.11,
   "fit": "cover",
   "rect": [
-   446,
+   445,
    421,
    164,
    115
@@ -573,16 +615,16 @@
    933
   ],
   "drawn": [
-   259,
+   252,
    102
   ],
-  "scale": 0.173,
+  "scale": 0.168,
   "fit": "cover",
   "rect": [
-   637,
+   638,
    422,
-   291,
-   117
+   283,
+   116
   ],
   "piece": "moments.all year"
  },
@@ -712,19 +754,20 @@
  {
   "asset": "assets/tears/tear_032_edge.webp",
   "src": [
-   1024,
-   594
+   512,
+   297
   ],
   "drawn": [
    450,
    161
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.338
+   1.099,
+   0.676
   ],
   "centre": [
    0,
@@ -941,19 +984,20 @@
  {
   "asset": "assets/tears/tear_013_edge.webp",
   "src": [
-   988,
-   723
+   512,
+   375
   ],
   "drawn": [
    450,
    155
   ],
-  "scale": 0.569,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.569,
-   0.268
+   1.099,
+   0.517
   ],
   "centre": [
    0,
@@ -1014,19 +1058,20 @@
  {
   "asset": "assets/tears/tear_055_edge.webp",
   "src": [
-   1024,
-   766
+   512,
+   383
   ],
   "drawn": [
    450,
    132
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.215
+   1.099,
+   0.43
   ],
   "centre": [
    0,
@@ -1127,19 +1172,20 @@
  {
   "asset": "assets/tears/tear_020_edge.webp",
   "src": [
-   1024,
-   626
+   512,
+   313
   ],
   "drawn": [
    450,
    159
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.318
+   1.099,
+   0.636
   ],
   "centre": [
    0,
@@ -1279,19 +1325,20 @@
  {
   "asset": "assets/tears/tear_048_edge.webp",
   "src": [
-   1024,
-   752
+   512,
+   376
   ],
   "drawn": [
    450,
    142
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.236
+   1.099,
+   0.472
   ],
   "centre": [
    0,
@@ -1431,19 +1478,20 @@
  {
   "asset": "assets/tears/tear_019_edge.webp",
   "src": [
-   1024,
-   859
+   512,
+   430
   ],
   "drawn": [
    450,
    141
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.206
+   1.099,
+   0.411
   ],
   "centre": [
    0,
@@ -1739,19 +1787,20 @@
  {
   "asset": "assets/tears/tear_026_edge.webp",
   "src": [
-   1024,
-   932
+   512,
+   466
   ],
   "drawn": [
    450,
    132
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.178
+   1.099,
+   0.355
   ],
   "centre": [
    0,
@@ -1969,19 +2018,20 @@
  {
   "asset": "assets/tears/tear_047_edge.webp",
   "src": [
-   1024,
-   829
+   512,
+   415
   ],
   "drawn": [
    450,
    129
   ],
-  "scale": 0.549,
+  "scale": 1.099,
   "fit": "nine",
   "slice": 0.4,
+  "downsample": 2,
   "fixed": [
-   0.549,
-   0.195
+   1.099,
+   0.39
   ],
   "centre": [
    0,

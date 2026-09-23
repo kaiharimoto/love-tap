@@ -3,13 +3,23 @@
  "calt": true,
  "runs_read": 22,
  "pairs": 15,
- "pairs_repeating": 5,
+ "pairs_repeating": 6,
+ "pairs_avoidable": 6,
  "worst": [
   {
    "family": "NoorHand",
    "char": "e",
    "instances": 5,
-   "distinct": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
@@ -17,41 +27,38 @@
    "char": "o",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "n",
+   "char": "a",
    "instances": 3,
    "distinct": 2,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "h",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "NoorHand",
-   "char": "m",
+   "char": "g",
    "instances": 2,
    "distinct": 1,
+   "avoidable": true,
    "run": "week one, and the room smells right again"
   }
  ],
  "glyphs": 150,
- "stalls": 4,
- "stalls_same_letter": 1,
- "stalled_words": [
-  {
-   "family": "NoorHand",
-   "letter": "o",
-   "variant": 4,
-   "run": "week one, and the room smells right again"
-  }
- ],
+ "stalls": 1,
+ "stalls_same_letter": 0,
+ "stalled_words": [],
  "ok": false,
- "why": "5 of 15 repeated letters inside one declared run take an outline twice, and 1 of 150 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 15 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 150 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

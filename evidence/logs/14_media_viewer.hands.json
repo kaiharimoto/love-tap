@@ -3,27 +3,31 @@
  "calt": true,
  "runs_read": 1,
  "pairs": 12,
- "pairs_repeating": 8,
+ "pairs_repeating": 6,
+ "pairs_avoidable": 6,
  "worst": [
   {
    "family": "NoorHand",
    "char": "a",
    "instances": 7,
-   "distinct": 3,
+   "distinct": 4,
+   "avoidable": true,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
    "family": "NoorHand",
    "char": "i",
    "instances": 7,
-   "distinct": 3,
+   "distinct": 4,
+   "avoidable": true,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
    "family": "NoorHand",
    "char": "t",
    "instances": 6,
-   "distinct": 2,
+   "distinct": 3,
+   "avoidable": true,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
@@ -31,13 +35,15 @@
    "char": "s",
    "instances": 5,
    "distinct": 3,
+   "avoidable": true,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
    "family": "NoorHand",
    "char": "e",
    "instances": 4,
-   "distinct": 3,
+   "distinct": 2,
+   "avoidable": true,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
@@ -45,27 +51,14 @@
    "char": "n",
    "instances": 3,
    "distinct": 2,
-   "run": "three layers. it leans. i am not saying that as a criticism,"
-  },
-  {
-   "family": "NoorHand",
-   "char": "h",
-   "instances": 2,
-   "distinct": 1,
-   "run": "three layers. it leans. i am not saying that as a criticism,"
-  },
-  {
-   "family": "NoorHand",
-   "char": "y",
-   "instances": 2,
-   "distinct": 1,
+   "avoidable": true,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   }
  ],
  "glyphs": 63,
- "stalls": 4,
+ "stalls": 3,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "8 of 12 repeated letters inside one declared run take an outline twice, and 0 of 63 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 12 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 63 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

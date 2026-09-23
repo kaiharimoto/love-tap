@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 11150
+   "ms": 3072
   },
   {
    "do": "wait",
-   "ms": 1902
+   "ms": 1904
   },
   {
    "do": "openViewer",
-   "ms": 5627
+   "ms": 7595
   },
   {
    "do": "wait",
-   "ms": 2504
+   "ms": 2505
   },
   {
    "do": "shot",
-   "ms": 2568
+   "ms": 2442
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 718
   }
  ],
  "shots": [
@@ -38,7 +38,7 @@
    "out": "evidence/14_media_viewer.png",
    "clip": null,
    "text_runs": 2,
-   "surfaces": 109
+   "surfaces": 111
   }
  ],
  "reports": [
@@ -97,13 +97,13 @@
  "blob_waits": [
   {
    "at": "14_media_viewer.png",
-   "waited_ms": 12,
+   "waited_ms": 15,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 9802,
- "cold_ms": 1795,
+ "install_ms": 12733,
+ "cold_ms": 1867,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

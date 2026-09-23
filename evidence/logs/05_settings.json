@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5422
+   "ms": 3254
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2302
   },
   {
    "do": "shot",
-   "ms": 6770
+   "ms": 5647
   },
   {
    "do": "report",
@@ -26,7 +26,7 @@
   },
   {
    "do": "scrollSettings",
-   "ms": 2195
+   "ms": 2520
   },
   {
    "do": "wait",
@@ -34,11 +34,11 @@
   },
   {
    "do": "shot",
-   "ms": 2662
+   "ms": 2605
   },
   {
    "do": "report",
-   "ms": 718
+   "ms": 709
   }
  ],
  "shots": [
@@ -46,13 +46,13 @@
    "out": "evidence/05_settings.png",
    "clip": null,
    "text_runs": 35,
-   "surfaces": 45
+   "surfaces": 47
   },
   {
    "out": "evidence/05_settings_interrupt.png",
    "clip": null,
    "text_runs": 65,
-   "surfaces": 16
+   "surfaces": 18
   }
  ],
  "reports": [
@@ -174,19 +174,19 @@
  "blob_waits": [
   {
    "at": "05_settings.png",
-   "waited_ms": 3504,
+   "waited_ms": 2123,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   },
   {
    "at": "05_settings_interrupt.png",
-   "waited_ms": 10,
+   "waited_ms": 7,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 12428,
- "cold_ms": 1776,
+ "install_ms": 12584,
+ "cold_ms": 1844,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

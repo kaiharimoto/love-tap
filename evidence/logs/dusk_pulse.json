@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5386
+   "ms": 3247
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2306
   },
   {
    "do": "shot",
-   "ms": 8118
+   "ms": 9355
   },
   {
    "do": "report",
-   "ms": 728
+   "ms": 712
   }
  ],
  "shots": [
@@ -30,7 +30,7 @@
    "out": "evidence/crops/dusk_pulse.png",
    "clip": null,
    "text_runs": 53,
-   "surfaces": 40
+   "surfaces": 42
   }
  ],
  "reports": [
@@ -95,13 +95,13 @@
  "blob_waits": [
   {
    "at": "dusk_pulse.png",
-   "waited_ms": 4083,
+   "waited_ms": 5554,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 12729,
- "cold_ms": 1767,
+ "install_ms": 12489,
+ "cold_ms": 1779,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],
