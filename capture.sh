@@ -40,6 +40,11 @@ mkdir -p evidence/crops evidence/frames "$LOG" "$SCRATCH"
 MISSING="$SCRATCH/missing.txt"
 : > "$MISSING"
 note_missing() { echo "$1|$2" >> "$MISSING"; echo "  ✗ $1 — $2"; }
+# A check that ran on an artifact that is there, and failed. Not a missing artifact: it lands in
+# MANIFEST.json under `failed_checks`, and the still stays in `artifacts` to be looked at.
+FAILED="$SCRATCH/failed.txt"
+: > "$FAILED"
+note_failed() { echo "$1|$2" >> "$FAILED"; echo "  ✗ $1 (check failed) — $2"; }
 
 wants() { [ -z "$ONLY" ] || [ "$ONLY" = "$1" ]; }
 
@@ -364,13 +369,26 @@ if [ -f evidence/02_chat.png ]; then
   # The gate was narrower than the clause it enforces (docs/BRIEF.md 09, rubric row 02: no visible
   # repeat on a single screen), which is how it survived four captures.
   #
-  # Not folded into `ok` yet, and `--frame-fatal` is the one flag that will do it. A failed `ok`
-  # here becomes note_missing, and booking a still as MISSING because its chrome repeats a mask
-  # throws the artifact away instead of measuring it. This prints and records; the queue item owns
-  # getting every line to frame_ok true, and then the flag goes on.
+  # `--frame-fatal` is ON since firing 52. It was held off because a failed `ok` used to become
+  # note_missing, and booking a still as MISSING because its chrome repeats a mask throws the
+  # artifact away instead of measuring it. A failure here is now note_failed: the still stays in
+  # MANIFEST.json's `artifacts` and the reason goes under `failed_checks`, where a reader expects
+  # a failed measurement and not an absent screenshot. Firing 51's capture read frame_repeats
+  # empty on all eleven stills, so this is on because it passes, not so that it can.
   for R in "$LOG"/*.report.json; do
     [ -f "$R" ] || continue
-    python3 tools/check/tears.py "$R" --out "${R%.report.json}.tears.json" >/dev/null 2>&1 || true
+    T="${R%.report.json}.tears.json"
+    A="$(basename "${R%.report.json}")"
+    # Only a still has a surfaces sidecar, so only a still has a frame to read. The four clips and
+    # the dusk crop are read for their notes alone, as before, and are not failed for having no
+    # frame: that would be booking "not looked at" as "looked at and wrong".
+    if [ -f "evidence/$A.surfaces.json" ]; then
+      if ! python3 tools/check/tears.py "$R" --frame-fatal --min-notes 0 --out "$T" >/dev/null 2>&1; then
+        note_failed "$A.png" "tears.py --frame-fatal: $(python3 -c "import json,sys;print(json.load(open(sys.argv[1])).get('why','it wrote no verdict'))" "$T" 2>/dev/null || echo 'it wrote no verdict')"
+      fi
+    else
+      python3 tools/check/tears.py "$R" --out "$T" >/dev/null 2>&1 || true
+    fi
     python3 tools/check/tears_line.py "$R" "${R%.report.json}.tears.json" || true
   done
 fi
@@ -447,7 +465,7 @@ python3 tools/check/diff.py --rotate || true
 # strip in evidence/crops are what anybody looks at, so the frames go once they are folded in
 [ "${KEEP_FRAMES:-no}" = "yes" ] || rm -rf evidence/frames
 
-python3 tools/capture/collect.py --stamp "$STAMP" --missing "$MISSING" --browser "$BROWSER"
+python3 tools/capture/collect.py --stamp "$STAMP" --missing "$MISSING" --failed "$FAILED" --browser "$BROWSER"
 
 echo
 if [ -s "$MISSING" ]; then

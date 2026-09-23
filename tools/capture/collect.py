@@ -98,6 +98,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stamp", required=True)
     ap.add_argument("--missing", default="")
+    ap.add_argument("--failed", default="",
+                    help="`name|why` lines for checks that ran on an artifact that IS present and "
+                         "failed. They go under `failed_checks`, never under `missing`: a still "
+                         "whose chrome repeats a tear is a still that was measured and failed, not "
+                         "a still that is not there.")
     ap.add_argument("--browser", default="webkit")
     ap.add_argument("--evidence", default=str(EVIDENCE),
                     help="where the artifacts are and where MANIFEST.json is written. Only the "
@@ -237,6 +242,14 @@ def main():
         if name not in said and name not in manifest["missing"]:
             manifest["missing"][name] = why
 
+    failed = {}
+    if args.failed and pathlib.Path(args.failed).exists():
+        for line in pathlib.Path(args.failed).read_text().splitlines():
+            if "|" in line:
+                name, why = line.split("|", 1)
+                failed[name.strip()] = why.strip()
+    manifest["failed_checks"] = failed
+
     (evidence / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
     (evidence / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
@@ -244,6 +257,10 @@ def main():
     print(f"· {have} of {len(STILLS) + len(CLIPS)} artifacts present")
     for name, why in sorted(manifest["missing"].items()):
         print(f"    {name}: {why}")
+    if failed:
+        print(f"· {len(failed)} check(s) failed on artifacts that are present")
+        for name, why in sorted(failed.items()):
+            print(f"    {name}: {why}")
 
 
 if __name__ == "__main__":
