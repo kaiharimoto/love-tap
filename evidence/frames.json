@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-23T10:35:42Z",
+ "captured_at": "2026-09-23T16:05:47Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -7,12 +7,20 @@
    "frames": 255,
    "fps": 60.0,
    "seconds": 4.25,
-   "mean_change_per_frame": 0.00372,
-   "repeated_frames": 0,
-   "repeated_fraction": 0.0,
-   "longest_still_run": 0,
-   "repeated_at": [],
-   "still_runs": [],
+   "mean_change_per_frame": 0.00374,
+   "repeated_frames": 1,
+   "repeated_fraction": 0.004,
+   "longest_still_run": 1,
+   "repeated_at": [
+    240
+   ],
+   "still_runs": [
+    {
+     "from": 240,
+     "to": 240,
+     "len": 1
+    }
+   ],
    "brightness_jumps": 0,
    "ok": true,
    "strip": "evidence/crops/06_unfolding_strip.png",
@@ -30,68 +38,43 @@
    "frames": 384,
    "fps": 60.0,
    "seconds": 6.4,
-   "mean_change_per_frame": 0.01419,
-   "repeated_frames": 52,
-   "repeated_fraction": 0.136,
+   "mean_change_per_frame": 0.0142,
+   "repeated_frames": 44,
+   "repeated_fraction": 0.115,
    "longest_still_run": 11,
    "repeated_at": [
-    2,
-    8,
-    10,
-    12,
-    14,
-    16,
-    21,
-    23,
-    27,
+    3,
+    13,
+    17,
+    29,
     141,
     142,
-    143
+    143,
+    144,
+    145,
+    146,
+    147,
+    275
    ],
    "still_runs": [
     {
-     "from": 2,
-     "to": 2,
+     "from": 3,
+     "to": 3,
      "len": 1
     },
     {
-     "from": 8,
-     "to": 8,
+     "from": 13,
+     "to": 13,
      "len": 1
     },
     {
-     "from": 10,
-     "to": 10,
+     "from": 17,
+     "to": 17,
      "len": 1
     },
     {
-     "from": 12,
-     "to": 12,
-     "len": 1
-    },
-    {
-     "from": 14,
-     "to": 14,
-     "len": 1
-    },
-    {
-     "from": 16,
-     "to": 16,
-     "len": 1
-    },
-    {
-     "from": 21,
-     "to": 21,
-     "len": 1
-    },
-    {
-     "from": 23,
-     "to": 23,
-     "len": 1
-    },
-    {
-     "from": 27,
-     "to": 27,
+     "from": 29,
+     "to": 29,
      "len": 1
     },
     {
@@ -115,13 +98,18 @@
      "len": 7
     },
     {
-     "from": 355,
-     "to": 355,
+     "from": 354,
+     "to": 354,
      "len": 1
     },
     {
-     "from": 358,
-     "to": 358,
+     "from": 356,
+     "to": 356,
+     "len": 1
+    },
+    {
+     "from": 359,
+     "to": 359,
      "len": 1
     },
     {
@@ -130,28 +118,8 @@
      "len": 1
     },
     {
-     "from": 363,
-     "to": 363,
-     "len": 1
-    },
-    {
-     "from": 365,
-     "to": 365,
-     "len": 1
-    },
-    {
-     "from": 369,
-     "to": 369,
-     "len": 1
-    },
-    {
-     "from": 372,
-     "to": 372,
-     "len": 1
-    },
-    {
-     "from": 375,
-     "to": 375,
+     "from": 378,
+     "to": 378,
      "len": 1
     },
     {
@@ -177,12 +145,11 @@
    "frames": 488,
    "fps": 60.0,
    "seconds": 8.13,
-   "mean_change_per_frame": 0.01223,
-   "repeated_frames": 120,
-   "repeated_fraction": 0.246,
-   "longest_still_run": 23,
+   "mean_change_per_frame": 0.01266,
+   "repeated_frames": 101,
+   "repeated_fraction": 0.207,
+   "longest_still_run": 22,
    "repeated_at": [
-    0,
     1,
     2,
     3,
@@ -193,17 +160,18 @@
     8,
     9,
     10,
-    11
+    11,
+    12
    ],
    "still_runs": [
     {
-     "from": 0,
+     "from": 1,
      "to": 22,
-     "len": 23
+     "len": 22
     },
     {
-     "from": 24,
-     "to": 24,
+     "from": 35,
+     "to": 35,
      "len": 1
     },
     {
@@ -212,33 +180,43 @@
      "len": 2
     },
     {
-     "from": 49,
-     "to": 49,
+     "from": 51,
+     "to": 51,
      "len": 1
     },
     {
-     "from": 63,
-     "to": 63,
+     "from": 60,
+     "to": 60,
      "len": 1
     },
     {
-     "from": 67,
-     "to": 67,
+     "from": 68,
+     "to": 68,
      "len": 1
     },
     {
-     "from": 128,
-     "to": 128,
+     "from": 77,
+     "to": 77,
      "len": 1
     },
     {
-     "from": 150,
-     "to": 150,
+     "from": 91,
+     "to": 91,
      "len": 1
     },
     {
-     "from": 162,
-     "to": 162,
+     "from": 102,
+     "to": 102,
+     "len": 1
+    },
+    {
+     "from": 109,
+     "to": 109,
+     "len": 1
+    },
+    {
+     "from": 123,
+     "to": 123,
      "len": 1
     },
     {
@@ -247,18 +225,8 @@
      "len": 2
     },
     {
-     "from": 168,
-     "to": 168,
-     "len": 1
-    },
-    {
-     "from": 196,
-     "to": 196,
-     "len": 1
-    },
-    {
-     "from": 205,
-     "to": 205,
+     "from": 180,
+     "to": 180,
      "len": 1
     },
     {
@@ -267,89 +235,89 @@
      "len": 1
     },
     {
-     "from": 238,
-     "to": 238,
+     "from": 227,
+     "to": 227,
      "len": 1
     },
     {
-     "from": 246,
-     "to": 246,
+     "from": 253,
+     "to": 253,
      "len": 1
     },
     {
-     "from": 255,
-     "to": 255,
+     "from": 264,
+     "to": 264,
      "len": 1
     },
     {
-     "from": 261,
-     "to": 261,
+     "from": 267,
+     "to": 272,
+     "len": 6
+    },
+    {
+     "from": 278,
+     "to": 280,
+     "len": 3
+    },
+    {
+     "from": 282,
+     "to": 282,
      "len": 1
     },
     {
-     "from": 265,
-     "to": 265,
+     "from": 284,
+     "to": 284,
      "len": 1
-    },
-    {
-     "from": 271,
-     "to": 271,
-     "len": 1
-    },
-    {
-     "from": 274,
-     "to": 274,
-     "len": 1
-    },
-    {
-     "from": 281,
-     "to": 289,
-     "len": 9
     },
     {
      "from": 292,
-     "to": 300,
-     "len": 9
-    },
-    {
-     "from": 304,
-     "to": 305,
+     "to": 293,
      "len": 2
     },
     {
-     "from": 308,
-     "to": 308,
+     "from": 296,
+     "to": 298,
+     "len": 3
+    },
+    {
+     "from": 301,
+     "to": 306,
+     "len": 6
+    },
+    {
+     "from": 311,
+     "to": 311,
      "len": 1
     },
     {
-     "from": 312,
-     "to": 320,
-     "len": 9
+     "from": 316,
+     "to": 316,
+     "len": 1
     },
     {
-     "from": 324,
+     "from": 322,
      "to": 324,
-     "len": 1
+     "len": 3
     },
     {
      "from": 327,
-     "to": 327,
-     "len": 1
+     "to": 328,
+     "len": 2
     },
     {
-     "from": 330,
+     "from": 333,
      "to": 334,
-     "len": 5
+     "len": 2
     },
     {
      "from": 338,
-     "to": 338,
-     "len": 1
+     "to": 343,
+     "len": 6
     },
     {
-     "from": 341,
-     "to": 343,
-     "len": 3
+     "from": 346,
+     "to": 346,
+     "len": 1
     },
     {
      "from": 349,
@@ -357,63 +325,23 @@
      "len": 1
     },
     {
-     "from": 352,
-     "to": 352,
-     "len": 1
-    },
-    {
-     "from": 356,
-     "to": 357,
+     "from": 355,
+     "to": 356,
      "len": 2
     },
     {
-     "from": 360,
+     "from": 361,
+     "to": 361,
+     "len": 1
+    },
+    {
+     "from": 363,
      "to": 363,
-     "len": 4
-    },
-    {
-     "from": 369,
-     "to": 369,
      "len": 1
     },
     {
-     "from": 383,
-     "to": 383,
-     "len": 1
-    },
-    {
-     "from": 395,
-     "to": 395,
-     "len": 1
-    },
-    {
-     "from": 409,
-     "to": 409,
-     "len": 1
-    },
-    {
-     "from": 411,
-     "to": 411,
-     "len": 1
-    },
-    {
-     "from": 436,
-     "to": 436,
-     "len": 1
-    },
-    {
-     "from": 438,
-     "to": 438,
-     "len": 1
-    },
-    {
-     "from": 444,
-     "to": 444,
-     "len": 1
-    },
-    {
-     "from": 450,
-     "to": 450,
+     "from": 367,
+     "to": 367,
      "len": 1
     },
     {
@@ -444,12 +372,20 @@
    "frames": 330,
    "fps": 60.0,
    "seconds": 5.5,
-   "mean_change_per_frame": 0.03601,
-   "repeated_frames": 0,
-   "repeated_fraction": 0.0,
-   "longest_still_run": 0,
-   "repeated_at": [],
-   "still_runs": [],
+   "mean_change_per_frame": 0.03595,
+   "repeated_frames": 1,
+   "repeated_fraction": 0.003,
+   "longest_still_run": 1,
+   "repeated_at": [
+    0
+   ],
+   "still_runs": [
+    {
+     "from": 0,
+     "to": 0,
+     "len": 1
+    }
+   ],
    "brightness_jumps": 0,
    "ok": true,
    "strip": "evidence/crops/11_chat_scroll_strip.png",
@@ -467,53 +403,38 @@
    "frames": 308,
    "fps": 60.0,
    "seconds": 5.13,
-   "mean_change_per_frame": 0.0125,
-   "repeated_frames": 38,
-   "repeated_fraction": 0.124,
+   "mean_change_per_frame": 0.01249,
+   "repeated_frames": 37,
+   "repeated_fraction": 0.121,
    "longest_still_run": 17,
    "repeated_at": [
-    2,
-    7,
-    15,
-    25,
-    29,
-    32,
+    3,
+    13,
+    19,
     83,
     121,
     122,
     123,
     124,
-    178
+    126,
+    178,
+    179,
+    180
    ],
    "still_runs": [
     {
-     "from": 2,
-     "to": 2,
+     "from": 3,
+     "to": 3,
      "len": 1
     },
     {
-     "from": 7,
-     "to": 7,
+     "from": 13,
+     "to": 13,
      "len": 1
     },
     {
-     "from": 15,
-     "to": 15,
-     "len": 1
-    },
-    {
-     "from": 25,
-     "to": 25,
-     "len": 1
-    },
-    {
-     "from": 29,
-     "to": 29,
-     "len": 1
-    },
-    {
-     "from": 32,
-     "to": 32,
+     "from": 19,
+     "to": 19,
      "len": 1
     },
     {
@@ -525,6 +446,11 @@
      "from": 121,
      "to": 124,
      "len": 4
+    },
+    {
+     "from": 126,
+     "to": 126,
+     "len": 1
     },
     {
      "from": 178,
@@ -542,13 +468,18 @@
      "len": 1
     },
     {
-     "from": 284,
-     "to": 284,
+     "from": 289,
+     "to": 289,
      "len": 1
     },
     {
-     "from": 290,
-     "to": 290,
+     "from": 292,
+     "to": 292,
+     "len": 1
+    },
+    {
+     "from": 298,
+     "to": 298,
      "len": 1
     },
     {
@@ -577,27 +508,27 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 1636,
+  "cold_ms": 1980,
   "steps": [
    {
     "do": "goTo",
-    "ms": 2657
+    "ms": 2629
    },
    {
     "do": "wait",
-    "ms": 2004
+    "ms": 2003
    },
    {
     "do": "scrollTo",
-    "ms": 3932
+    "ms": 4453
    },
    {
     "do": "wait",
-    "ms": 1102
+    "ms": 1104
    },
    {
     "do": "frames",
-    "ms": 494097
+    "ms": 530609
    }
   ]
  },

@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3072
+   "ms": 4509
   },
   {
    "do": "wait",
@@ -18,19 +18,19 @@
   },
   {
    "do": "openViewer",
-   "ms": 7595
+   "ms": 10445
   },
   {
    "do": "wait",
-   "ms": 2505
+   "ms": 2503
   },
   {
    "do": "shot",
-   "ms": 2442
+   "ms": 2850
   },
   {
    "do": "report",
-   "ms": 718
+   "ms": 719
   }
  ],
  "shots": [
@@ -102,8 +102,8 @@
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 12733,
- "cold_ms": 1867,
+ "install_ms": 15810,
+ "cold_ms": 2290,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

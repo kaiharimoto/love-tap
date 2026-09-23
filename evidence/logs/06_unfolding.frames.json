@@ -3,12 +3,20 @@
  "frames": 255,
  "fps": 60.0,
  "seconds": 4.25,
- "mean_change_per_frame": 0.00372,
- "repeated_frames": 0,
- "repeated_fraction": 0.0,
- "longest_still_run": 0,
- "repeated_at": [],
- "still_runs": [],
+ "mean_change_per_frame": 0.00374,
+ "repeated_frames": 1,
+ "repeated_fraction": 0.004,
+ "longest_still_run": 1,
+ "repeated_at": [
+  240
+ ],
+ "still_runs": [
+  {
+   "from": 240,
+   "to": 240,
+   "len": 1
+  }
+ ],
  "brightness_jumps": 0,
  "ok": true,
  "strip": "evidence/crops/06_unfolding_strip.png",

@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3612
+   "ms": 4147
   },
   {
    "do": "wait",
@@ -18,7 +18,7 @@
   },
   {
    "do": "scrollTo",
-   "ms": 9024
+   "ms": 8513
   },
   {
    "do": "wait",
@@ -26,11 +26,11 @@
   },
   {
    "do": "shot",
-   "ms": 3445
+   "ms": 4222
   },
   {
    "do": "report",
-   "ms": 722
+   "ms": 713
   }
  ],
  "shots": [
@@ -38,7 +38,7 @@
    "out": "evidence/02_chat.png",
    "clip": null,
    "text_runs": 31,
-   "surfaces": 152
+   "surfaces": 153
   }
  ],
  "reports": [
@@ -118,13 +118,13 @@
  "blob_waits": [
   {
    "at": "02_chat.png",
-   "waited_ms": 12,
+   "waited_ms": 10,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 13261,
- "cold_ms": 2780,
+ "install_ms": 17272,
+ "cold_ms": 2264,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

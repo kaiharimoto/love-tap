@@ -3,12 +3,20 @@
  "frames": 330,
  "fps": 60.0,
  "seconds": 5.5,
- "mean_change_per_frame": 0.03601,
- "repeated_frames": 0,
- "repeated_fraction": 0.0,
- "longest_still_run": 0,
- "repeated_at": [],
- "still_runs": [],
+ "mean_change_per_frame": 0.03595,
+ "repeated_frames": 1,
+ "repeated_fraction": 0.003,
+ "longest_still_run": 1,
+ "repeated_at": [
+  0
+ ],
+ "still_runs": [
+  {
+   "from": 0,
+   "to": 0,
+   "len": 1
+  }
+ ],
  "brightness_jumps": 0,
  "ok": true,
  "strip": "evidence/crops/11_chat_scroll_strip.png",

@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3808
+   "ms": 3201
   },
   {
    "do": "wait",
-   "ms": 1801
+   "ms": 1803
   },
   {
    "do": "goTo",
-   "ms": 3791
+   "ms": 5267
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1302
   },
   {
    "do": "openCorner",
-   "ms": 1301
+   "ms": 2804
   },
   {
    "do": "frames",
-   "ms": 61567
+   "ms": 68303
   },
   {
    "do": "sendFeeling",
-   "ms": 1724
+   "ms": 1925
   },
   {
    "do": "frames",
-   "ms": 132733
+   "ms": 144525
   },
   {
    "do": "sendFeeling",
-   "ms": 1442
+   "ms": 1837
   },
   {
    "do": "frames",
-   "ms": 211903
+   "ms": 239849
   },
   {
    "do": "openCorner",
-   "ms": 846
+   "ms": 957
   },
   {
    "do": "frames",
-   "ms": 54696
+   "ms": 61816
   },
   {
    "do": "report",
-   "ms": 417
+   "ms": 430
   }
  ],
  "shots": [
@@ -181,20 +181,20 @@
    "visible": [
     "01M1M4ZQQ0H0PPVTKMMQEE268D",
     "01M1M59VY0YA13H9M86HTA6XNP",
-    "01M1MCJ1M02CDNKZD17AYTKFKH",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ"
+    "01M1MCJ1M02CDNKZD17AYTKFKK",
+    "01M1MCJ1M02CDNKZD17AYTKFKM"
    ],
    "tears": {
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
-    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043"
+    "01M1MCJ1M02CDNKZD17AYTKFKK": "tear_020",
+    "01M1MCJ1M02CDNKZD17AYTKFKM": "tear_043"
    },
    "stocks": {
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
     "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
-    "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01"
+    "01M1MCJ1M02CDNKZD17AYTKFKK": "lined_01",
+    "01M1MCJ1M02CDNKZD17AYTKFKM": "legal_02"
    },
    "scroll": {
     "first": 8385,
@@ -247,10 +247,12 @@
   }
  ],
  "blob_waits": [],
- "install_ms": 13070,
- "cold_ms": 1699,
+ "install_ms": 19374,
+ "cold_ms": 2029,
  "reopened": true,
  "events_at_open": 14061,
- "problems": [],
- "ok": true
+ "problems": [
+  "pageerror: PlaywrightError — at b4x (http://127.0.0.1:8799/main.dart.js:6585:8)"
+ ],
+ "ok": false
 }
