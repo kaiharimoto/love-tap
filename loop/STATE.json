@@ -3,15 +3,9 @@
   "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
   "cycle": 3,
   "stage": "IMPLEMENT",
-  "firing": 50,
+  "firing": 51,
   "stage_entered_at_firing": 50,
-  "lease": {
-    "session_id": "session_011heVj7fzS6DLY7yhxb1Yz9",
-    "started_at": "2026-09-23T00:54:00Z",
-    "expires_at": "2026-09-23T04:54:00Z",
-    "firing": 51,
-    "stage": "IMPLEMENT"
-  },
+  "lease": null,
   "evidence_fresh_as_of": "firing 51, 2026-09-23T02:03Z-03:13Z: ONE FULL ./capture.sh after render legs 1-4, 14 of 17 present, seeded with evidence/.previous from firing 47's committed set so DIFF.json compares against it. Missing: 09 and 16 (no /dev/kvm, the hardware fact), and 13_messenger_states BOOKED missing on a page error after a good shot -- the still and its sidecars are on disk and are this capture's, and a 360x780 side-by-side with firing 47's is the same screen (see the-manifest-books-...'s second_occurrence_at_firing_51). THEN 12_search ALONE was re-captured (./capture.sh --only=12_search, 03:14-03:29Z) from the build that declares cut runs, and MANIFEST.json, frames.json and DIFF.json were restored to the full run's. So 12_search.* is from a build one commit later than the rest of the set, differing only in what the capture hooks declare and in the photograph's tape choice. evidence/logs/*.tears.json were NOT rewritten by this capture (21:53 stamps) and are stale; read tears.py on the reports. ffmpeg is the distro 6.1.1, not the pinned static binary.",
   "evidence_note": "15 of 17, the ceiling in this container. 09_two_devices.png and 16_setup_android.png are booked missing WITH the measured /dev/kvm reason this time, not 'not captured this session' -- firing 37's MANIFEST lost that text because its second leg ran --only=02_chat; this run was whole so the sentence is there. `surfaces` is booked missing on the rendered surface with nothing in it, which is rank 6 and unchanged. THE CLIPS IN THIS CAPTURE WERE ENCODED BY A DIFFERENT BINARY THAN THE ONES BEFORE THEM: the pinned johnvansickle.com ffmpeg tarball now sits behind a JS interstitial that returns 7.3 KB of HTML with a 200, tar fails on it, and bootstrap.sh is `set -e` so it dies at that line and never reaches tailscale or Playwright WebKit -- which is no capture at all, not a missing clip. The distro ffmpeg 6.1.1 is symlinked into toolchain/ffmpeg. All five clips assembled and every frame check passed. Do not read mp4 SSIM across this boundary as content movement without checking that first.",
   "degradation": 0,
@@ -2771,6 +2765,15 @@
         "the-bead-spheres-have-no-surface-and-nyeh-is-an-emoji"
       ],
       "pushed": true
+    },
+    {
+      "firing": 51,
+      "stage": "IMPLEMENT",
+      "cycle": 3,
+      "at": "2026-09-23T03:36:00Z",
+      "what": "IMPLEMENT, ranks 1-5 in order, and the post-legs capture that ranks 5-8 were waiting on. RANK 1 (tears): the residency measurement came first and it REFUSED the packer route. MaskCache never evicts, so 12_search holds 181 MB of decoded masks and edges, and alpha-only packing saves no residency, because a ui.Image is RGBA8888. The residency-free half landed: a per-axis slice that thins from 0.4 to a measured fibre depth of 0.25. Vertical centre band 19.54 -> 8.55 (setup) and 19.75 -> 8.64 (settings). Filed the-mask-cache-never-lets-go-of-a-mask (using-it). RANK 2 (lamp): leg 1 probed and NO stop met both conditions. -0.15 keeps paper L but red stays pinned on 63-80% of pixels; -0.30 moves L 0.053. DAY_STOPS = 0. The shell leg did not run and the paper leg's condition is not met. RANK 3 (tape) CLOSED: the solidify was the cause. Tape is now one sheet at transmission 0.55 with transparent glass, frosted, and the rules read through it. RANK 4 (bits): all 44 rendered (3m44s). Glue lost its square skirt, and the dusk aperture was added to the bits. The capture then showed the photograph's tape picker indexing all 44 bit files (pins, shadows); it is fixed to the four tapes, and the last clause waits on a capture that shows a photograph. RANK 5 (sprites) CLOSED: 25 dusk bodies, and the app asks for them. composited.py read 4/4 ok on a still it had not compared, because it did not know a _dusk body; after the fix it reads 0/2 at 0.499/0.601 before and 2/2 at 1.851/1.943 after. Also found and fixed: objects.py seeded geometry from Python's per-process hash, drawn once across passes, so pinch, crown, gold_star and clover were different objects in body, shadow and dusk (crown silhouette 8.25% between runs; 0 after). RANK 6: the day objects were already under the lamp (15 of 24 pixel-identical). palette unchanged at 0.0448; ADDRESS should re-scope it. The clover is family D (C 0.108 at 131 deg). RANK 7 CLOSED: the sidecar could never declare a clipped run. The hooks declare it now and legibility keeps cut runs out of below_floor; earned on the same screen, 1 -> 0 with runs 45 = 45. The delta gate passes. RANK 8: firing 48's prediction holds, with no frame repeats on 11 of 11 stills; it stays open only on --frame-fatal. Full capture 14/17. 13_messenger_states was booked missing after a good shot, the manifest anomaly's second occurrence. 242 green.",
+      "open_ui_plus_using_points": 34.5,
+      "gate": "pack_assets --seed=year exit 0 at start and end; flutter analyze clean; flutter test 242 green (231 + 11 new)"
     }
   ],
   "routine": {
@@ -2918,7 +2921,7 @@
       "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
     }
   },
-  "stage_change_note": "Firing 50 ran ADDRESS in place of the IMPLEMENT that STATE named, recorded as firings 29, 32, 35 and 43 recorded theirs: the dispatcher sent it there because seven open ranks were reported as needing renders. ADDRESS wrote no code and touched nothing under assets/ or evidence/. It DECIDED THE RENDER QUESTION (render_decision_at_firing_50): minutes-scale non-fold renders are authorised for IMPLEMENT in five legs (the day aperture probe, the tape fix, bits, objects day+dusk with the clover's albedo, and the shell), and day paper is authorised only on a stated probe condition. The folds re-render stays fenced and is not bundled in. Photos, tears and new objects are refused. It RE-RANKED 1..56 contiguous. The stage is back to IMPLEMENT: the next firing takes RANK 1, the-tears-are-overlays-painted-on-whole-paper, which needs no render and starts with a residency measurement. Then ranks 2-5 are the render legs in order.",
+  "stage_change_note": "Firing 51 ran IMPLEMENT and stays in IMPLEMENT. Render legs 1-4 are done, and leg 5 and the paper leg are void by leg 1's result. Next is rank 8's --frame-fatal clause or rank 9 onward. Rank 9's font experiment and a capture that shows a photograph (rank 4's last clause) are the obvious next measurements. For ADDRESS when it next runs: re-scope rank 6 (lamp half exhausted), cost the-mask-cache-never-lets-go-of-a-mask (it gates rank 1's resolution half), and fix fold.py's seed before any fold render (see assets-folds-is-now-behind-its-renderer).",
   "measured_at_firing_12": {
     "captured_at": "e7a3a5a",
     "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",

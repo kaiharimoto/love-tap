@@ -7152,3 +7152,46 @@ stops bootstrap after Flutter, so apply CONTINUE §5's fix before relying on `.d
 
 2026-09-23T00:54Z. Push pre-flight passed (fast-forward of two commits, dry run up to date).
 Lease taken for four hours. Rank 1 first: the residency measurement before any packer change.
+
+### Firing 51 — what happened
+
+**Rank 1, the tears.** The residency measurement came first, as ordered, and it refused the route
+it was meant to unlock. `MaskCache` is a plain static map that never evicts, not the evicting
+image cache the item assumed. So `12_search` alone keeps 181 MB of decoded masks, edges and
+composed slices at today's 1024 packing, and the masks alone would be 244 MB at 2048. The
+fallback, alpha-only packing, saves bundle bytes and no residency, because a `ui.Image` is
+RGBA8888 whatever the file is. I did not make the packer change. The slice half costs no
+residency, so it landed: the fixed band thins from 0.4 toward a fibre depth of 0.25, which I
+measured on the big-sheet masks (at most 0.227). The worst centre band goes 19.75 → 8.64. The 4 px
+floor still needs resolution, and that needs the cache bounded first, now filed as a using-it item.
+
+**Rank 2, the lamp.** No aperture meets both conditions. The arithmetic predicted it before the
+probe did. DAY_STOPS stays 0, so the shell leg and the paper leg are void.
+
+**Ranks 3 and 4, tape and bits.** The tape was black because of the solidified slab itself. It is
+now one frosted sheet at transmission 0.55. All 44 bit files render. Once they were visible, the
+glue turned out to be a square plate, and the capture showed a photograph being taped down with a
+pin's shadow. Both are fixed.
+
+**Rank 5, the sprites.** It closed, but only after its ruler was fixed. composited.py passed a
+still it had not compared (4/4, ok) because it did not know a `_dusk` body. Fixed and earned on
+the known pair, it reads 0/2 at 0.499/0.601 before and 2/2 at 1.851/1.943 after. The re-render
+also found that four objects were never the same object twice: their seed was Python's salted
+string hash, drawn once across four passes.
+
+**Rank 7** closed. It turned out to be a sidecar that could never declare a cut line. **Rank 8**'s
+prediction held on 11 of 11 stills.
+
+### Gate
+
+`pack_assets --seed=year` exit 0 at start and end. `flutter analyze` clean. `flutter test` 242
+green: 231 plus 11 new tests in four new files and one extended. Each new test was re-broken
+and failed.
+
+### What the next firing should expect
+
+IMPLEMENT continues. Rank 8 needs only its `--frame-fatal` clause, which in turn needs capture.sh
+to book a failed check as something other than a missing artifact. After that, rank 9's font
+experiment. Two things for ADDRESS: re-scope rank 6, and cost the mask cache before rank 1 can
+finish. The 13_messenger_states page error is the manifest item's second occurrence, and it is
+worth fixing before the next full capture books another good still missing.
