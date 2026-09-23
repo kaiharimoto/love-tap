@@ -118,7 +118,12 @@ def read(day_png, dusk_png):
                 continue
             stem = pathlib.PurePosixPath(a).stem
             kind = 'shadow' if '_shadow' in stem else 'body'
+            # `obj_candle_dusk` is obj_candle's dusk body (firing 51), not an object of its own:
+            # left unstripped, each light's body paired with nothing, read `relit` against None,
+            # and the ruler passed a still on which no body had been compared at all
             base = stem.split('_shadow')[0]
+            if base.endswith('_dusk'):
+                base = base[:-len('_dusk')]
             by_stem.setdefault((base, kind), {})[tag] = a
     for (base, kind), got in sorted(by_stem.items()):
         out['declared'].append({'object': base, 'pass': kind,
