@@ -1,9 +1,9 @@
 11 artifacts read -> evidence/palette.json
-  mean chroma 0.0448  ·  grey 2%  ·  hue families 4-5  ·  lightness drift 0.5499
+  mean chroma 0.0448  ·  grey 2%  ·  hue families 4-5  ·  lightness drift 0.5747
 palette: 45 breaches of docs/COLOR.md across 11 artifacts
   §4                  01_pulse.png             widest_hue_gap_deg = 320.0, requires <= 200.0
-  §5 floor / 7 item 2 01_pulse.png             chroma_by_band.figure.p99_chroma = 0.0748, requires >= 0.1
-  §7 item 5           01_pulse.png             chroma.accent_fraction = 0.00046, requires >= 0.01
+  §5 floor / 7 item 2 01_pulse.png             chroma_by_band.figure.p99_chroma = 0.0773, requires >= 0.1
+  §7 item 5           01_pulse.png             chroma.accent_fraction = 0.00071, requires >= 0.01
   §2                  02_chat.png              value_bands.mid = 0.0366, requires >= 0.04
   §4                  02_chat.png              widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 02_chat.png              chroma_by_band.figure.p99_chroma = 0.0762, requires >= 0.1
@@ -23,24 +23,24 @@ palette: 45 breaches of docs/COLOR.md across 11 artifacts
   §5 floor            05_settings_interrupt.png chroma_by_band.mid.mean_chroma = 0.0298, requires >= 0.03
   §5 floor / 7 item 2 05_settings_interrupt.png chroma_by_band.figure.p99_chroma = 0.0707, requires >= 0.1
   §7 item 5           05_settings_interrupt.png chroma.accent_fraction = 0.0, requires >= 0.01
-  §2                  10_first_run.png         value_bands.mid = 0.0163, requires >= 0.04
+  §2                  10_first_run.png         value_bands.mid = 0.0174, requires >= 0.04
   §4                  10_first_run.png         widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 10_first_run.png         chroma_by_band.figure.p99_chroma = 0.0773, requires >= 0.1
   §7 item 5           10_first_run.png         chroma.accent_fraction = 0.00058, requires >= 0.01
   §4                  12_search.png            widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor            12_search.png            chroma_by_band.mid.mean_chroma = 0.0294, requires >= 0.03
   §7 item 5           12_search.png            chroma.accent_fraction = 0.00999, requires >= 0.01
-  §2                  13_messenger_states.png  value_bands.mid = 0.033, requires >= 0.04
+  §2                  13_messenger_states.png  value_bands.mid = 0.0327, requires >= 0.04
   §4                  13_messenger_states.png  widest_hue_gap_deg = 320.0, requires <= 200.0
-  §5 floor / 7 item 2 13_messenger_states.png  chroma_by_band.figure.p99_chroma = 0.0776, requires >= 0.1
-  §7 item 5           13_messenger_states.png  chroma.accent_fraction = 0.00166, requires >= 0.01
+  §5 floor / 7 item 2 13_messenger_states.png  chroma_by_band.figure.p99_chroma = 0.0775, requires >= 0.1
+  §7 item 5           13_messenger_states.png  chroma.accent_fraction = 0.00165, requires >= 0.01
   §4                  14_media_viewer.png      widest_hue_gap_deg = 320.0, requires <= 200.0
-  §5 floor            14_media_viewer.png      chroma_by_band.ground.mean_chroma = 0.0234, requires >= 0.03
-  §5 floor / 7 item 2 14_media_viewer.png      chroma_by_band.figure.p99_chroma = 0.0699, requires >= 0.1
+  §5 floor            14_media_viewer.png      chroma_by_band.ground.mean_chroma = 0.0231, requires >= 0.03
+  §5 floor / 7 item 2 14_media_viewer.png      chroma_by_band.figure.p99_chroma = 0.0702, requires >= 0.1
   §5 floor            14_media_viewer.png      chroma.grey_fraction = 0.1378, requires <= 0.08
-  §2                  17_setup_pwa.png         value_bands.mid = 0.0384, requires >= 0.04
+  §2                  17_setup_pwa.png         value_bands.mid = 0.0379, requires >= 0.04
   §4                  17_setup_pwa.png         widest_hue_gap_deg = 330.0, requires <= 200.0
-  §5 floor            17_setup_pwa.png         chroma_by_band.mid.mean_chroma = 0.027, requires >= 0.03
+  §5 floor            17_setup_pwa.png         chroma_by_band.mid.mean_chroma = 0.0269, requires >= 0.03
   §5 floor / 7 item 2 17_setup_pwa.png         chroma_by_band.figure.p99_chroma = 0.0453, requires >= 0.1
   §7 item 5           17_setup_pwa.png         chroma.accent_fraction = 0.0, requires >= 0.01
   §5 floor / 7 item 1 <the set>                across_the_set.mean_chroma = 0.0448, requires >= 0.045

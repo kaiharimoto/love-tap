@@ -1,10 +1,10 @@
 {
- "captured_at": "2026-09-22T13:33:44Z",
+ "captured_at": "2026-09-23T02:02:43Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 5470853,
-   "written": "2026-09-22T13:46:54Z",
+   "bytes": 5312842,
+   "written": "2026-09-23T02:16:46Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -17,8 +17,8 @@
    ]
   },
   "02_chat.png": {
-   "bytes": 5176245,
-   "written": "2026-09-22T13:47:25Z",
+   "bytes": 5175107,
+   "written": "2026-09-23T02:17:20Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -31,8 +31,8 @@
    ]
   },
   "03_us.png": {
-   "bytes": 4916473,
-   "written": "2026-09-22T13:47:50Z",
+   "bytes": 4915929,
+   "written": "2026-09-23T02:17:52Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -46,7 +46,7 @@
   },
   "04_moments.png": {
    "bytes": 5200271,
-   "written": "2026-09-22T13:48:13Z",
+   "written": "2026-09-23T02:18:23Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -60,7 +60,7 @@
   },
   "05_settings.png": {
    "bytes": 5124342,
-   "written": "2026-09-22T13:48:38Z",
+   "written": "2026-09-23T02:18:53Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -73,8 +73,8 @@
    ]
   },
   "10_first_run.png": {
-   "bytes": 4635735,
-   "written": "2026-09-22T13:50:29Z",
+   "bytes": 4598886,
+   "written": "2026-09-23T02:21:03Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -87,22 +87,8 @@
    ]
   },
   "12_search.png": {
-   "bytes": 4604260,
-   "written": "2026-09-22T13:49:12Z",
-   "from_this_run": true,
-   "size": [
-    1440,
-    3120
-   ],
-   "meets_minimum": true,
-   "minimum": [
-    1440,
-    3120
-   ]
-  },
-  "13_messenger_states.png": {
-   "bytes": 5257888,
-   "written": "2026-09-22T13:49:46Z",
+   "bytes": 4608328,
+   "written": "2026-09-23T02:19:34Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -115,8 +101,8 @@
    ]
   },
   "14_media_viewer.png": {
-   "bytes": 2755844,
-   "written": "2026-09-22T13:50:19Z",
+   "bytes": 2693243,
+   "written": "2026-09-23T02:20:53Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -129,8 +115,8 @@
    ]
   },
   "17_setup_pwa.png": {
-   "bytes": 3613439,
-   "written": "2026-09-22T13:50:37Z",
+   "bytes": 3621767,
+   "written": "2026-09-23T02:21:11Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -143,8 +129,8 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 3361897,
-   "written": "2026-09-22T14:22:50Z",
+   "bytes": 3344309,
+   "written": "2026-09-23T02:55:07Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -162,8 +148,8 @@
    "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 7901081,
-   "written": "2026-09-22T14:23:49Z",
+   "bytes": 7985068,
+   "written": "2026-09-23T02:56:07Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -181,8 +167,8 @@
    "long_enough": true
   },
   "08_state_propagating.mp4": {
-   "bytes": 7823208,
-   "written": "2026-09-22T14:38:34Z",
+   "bytes": 8000405,
+   "written": "2026-09-23T03:11:14Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -200,8 +186,8 @@
    "long_enough": true
   },
   "11_chat_scroll.mp4": {
-   "bytes": 9194138,
-   "written": "2026-09-22T14:25:00Z",
+   "bytes": 9198790,
+   "written": "2026-09-23T02:57:16Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -219,8 +205,8 @@
    "long_enough": true
   },
   "15_authored_feeling.mp4": {
-   "bytes": 6328010,
-   "written": "2026-09-22T14:26:04Z",
+   "bytes": 6458075,
+   "written": "2026-09-23T02:58:18Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -240,8 +226,8 @@
  },
  "missing": {
   "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
+  "13_messenger_states.png": "13_messenger_states refused: pageerror: PlaywrightError \u2014 at b47 (http://127.0.0.1:8799/main.dart.js:6585:8) (this session wrote 13_messenger_states.png at 2026-09-23T02:20:16Z and then refused it, so the file on disk is this run's and is still not counted)",
   "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "surfaces": "a rendered surface in the library has nothing in it; see evidence/logs/surfaces.json",
-  "dusk_pulse": "dusk_pulse refused: pageerror: Fetch API cannot load http: /127.0.0.1:8797/assets/assets/shell/desk_dusk.webp due to access control checks. \u2014 at bf9 (http://127.0.0.1:8797/main.d"
+  "surfaces": "a rendered surface in the library has nothing in it; see evidence/logs/surfaces.json"
  }
 }

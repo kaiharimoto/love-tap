@@ -10,47 +10,47 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2711
+   "ms": 4104
   },
   {
    "do": "wait",
-   "ms": 1802
+   "ms": 1804
   },
   {
    "do": "openCorner",
-   "ms": 2402
+   "ms": 2673
   },
   {
    "do": "frames",
-   "ms": 54496
+   "ms": 58402
   },
   {
    "do": "sendFeeling",
-   "ms": 1609
+   "ms": 2063
   },
   {
    "do": "frames",
-   "ms": 207434
+   "ms": 217292
   },
   {
    "do": "sendFeeling",
-   "ms": 785
+   "ms": 941
   },
   {
    "do": "frames",
-   "ms": 220857
+   "ms": 234417
   },
   {
    "do": "openCorner",
-   "ms": 761
+   "ms": 902
   },
   {
    "do": "frames",
-   "ms": 53201
+   "ms": 55007
   },
   {
    "do": "report",
-   "ms": 424
+   "ms": 418
   }
  ],
  "shots": [
@@ -239,8 +239,8 @@
   }
  ],
  "blob_waits": [],
- "install_ms": 10676,
- "cold_ms": 1577,
+ "install_ms": 12080,
+ "cold_ms": 1589,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

@@ -7,7 +7,7 @@
  "dpr": 3,
  "declared": 25,
  "offscreen": 0,
- "clipped": 0,
+ "clipped": 1,
  "runs": [
   {
    "rect": [
@@ -708,7 +708,8 @@
    "role": "hand",
    "ink": "dd000000",
    "text": "monday. the bus has that smell it gets when it rains onto the h…",
-   "chars": 92
+   "chars": 92,
+   "clipped": true
   }
  ]
 }

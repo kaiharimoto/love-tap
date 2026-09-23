@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3904
+   "ms": 4146
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2103
   },
   {
    "do": "shot",
-   "ms": 5821
+   "ms": 11080
   },
   {
    "do": "report",
-   "ms": 710
+   "ms": 719
   }
  ],
  "shots": [
@@ -95,13 +95,13 @@
  "blob_waits": [
   {
    "at": "03_us.png",
-   "waited_ms": 2772,
+   "waited_ms": 7710,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 10365,
- "cold_ms": 1491,
+ "install_ms": 11480,
+ "cold_ms": 1705,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

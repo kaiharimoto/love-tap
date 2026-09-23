@@ -5,43 +5,43 @@
   1440,
   3120
  ],
- "frame_mean_diff": 28.846,
+ "frame_mean_diff": 29.349,
  "objects": [
   {
-   "asset": "assets/objects/obj_candle.webp",
+   "asset": "assets/objects/obj_candle_dusk.webp",
    "rect": [
     205,
-    1253,
+    918,
     701,
     701
    ],
-   "object_mean_diff": 13.721,
-   "around_mean_diff": 41.798,
-   "ratio_to_paper": 0.499,
+   "object_mean_diff": 50.865,
+   "around_mean_diff": 43.284,
+   "ratio_to_paper": 1.851,
    "opaque_px": 38095
   },
   {
-   "asset": "assets/objects/obj_confetti.webp",
+   "asset": "assets/objects/obj_confetti_dusk.webp",
    "rect": [
     446,
-    1285,
+    950,
     637,
     637
    ],
-   "object_mean_diff": 16.546,
-   "around_mean_diff": 30.604,
-   "ratio_to_paper": 0.601,
+   "object_mean_diff": 53.38,
+   "around_mean_diff": 34.348,
+   "ratio_to_paper": 1.943,
    "opaque_px": 11513
   }
  ],
- "paper_mean_diff": 27.515,
+ "paper_mean_diff": 27.478,
  "declared": [
   {
    "object": "obj_candle",
    "pass": "body",
    "day": "assets/objects/obj_candle.webp",
-   "dusk": "assets/objects/obj_candle.webp",
-   "relit": false
+   "dusk": "assets/objects/obj_candle_dusk.webp",
+   "relit": true
   },
   {
    "object": "obj_candle",
@@ -54,8 +54,8 @@
    "object": "obj_confetti",
    "pass": "body",
    "day": "assets/objects/obj_confetti.webp",
-   "dusk": "assets/objects/obj_confetti.webp",
-   "relit": false
+   "dusk": "assets/objects/obj_confetti_dusk.webp",
+   "relit": true
   },
   {
    "object": "obj_confetti",
@@ -65,8 +65,7 @@
    "relit": true
   }
  ],
- "bodies_relit": 0,
+ "bodies_relit": 2,
  "bodies": 2,
- "ok": false,
- "why": "2 of 2 feeling objects draw the SAME asset in both lights while the paper under them is re-rendered; ratios to paper [0.499, 0.601]"
+ "ok": true
 }

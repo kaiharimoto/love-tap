@@ -288,12 +288,22 @@
   },
   "objects/obj_blanket_fold.webp": {
    "family": "objects",
-   "patch_std": 14.217,
+   "patch_std": 14.185,
+   "floor": 2.0
+  },
+  "objects/obj_blanket_fold_dusk.webp": {
+   "family": "objects",
+   "patch_std": 24.641,
    "floor": 2.0
   },
   "objects/obj_boat.webp": {
    "family": "objects",
-   "patch_std": 30.33,
+   "patch_std": 30.177,
+   "floor": 2.0
+  },
+  "objects/obj_boat_dusk.webp": {
+   "family": "objects",
+   "patch_std": 61.571,
    "floor": 2.0
   },
   "objects/obj_candle.webp": {
@@ -301,19 +311,39 @@
    "patch_std": 31.749,
    "floor": 2.0
   },
+  "objects/obj_candle_dusk.webp": {
+   "family": "objects",
+   "patch_std": 61.95,
+   "floor": 2.0
+  },
   "objects/obj_clover.webp": {
    "family": "objects",
-   "patch_std": 18.37,
+   "patch_std": 17.643,
+   "floor": 2.0
+  },
+  "objects/obj_clover_dusk.webp": {
+   "family": "objects",
+   "patch_std": 43.288,
    "floor": 2.0
   },
   "objects/obj_coffee_ring.webp": {
    "family": "objects",
-   "patch_std": 27.323,
+   "patch_std": 27.291,
+   "floor": 2.0
+  },
+  "objects/obj_coffee_ring_dusk.webp": {
+   "family": "objects",
+   "patch_std": 45.684,
    "floor": 2.0
   },
   "objects/obj_confetti.webp": {
    "family": "objects",
-   "patch_std": 27.746,
+   "patch_std": 27.744,
+   "floor": 2.0
+  },
+  "objects/obj_confetti_dusk.webp": {
+   "family": "objects",
+   "patch_std": 67.639,
    "floor": 2.0
   },
   "objects/obj_crane.webp": {
@@ -321,9 +351,19 @@
    "patch_std": 27.507,
    "floor": 2.0
   },
+  "objects/obj_crane_dusk.webp": {
+   "family": "objects",
+   "patch_std": 61.628,
+   "floor": 2.0
+  },
   "objects/obj_crown.webp": {
    "family": "objects",
-   "patch_std": 33.724,
+   "patch_std": 29.416,
+   "floor": 2.0
+  },
+  "objects/obj_crown_dusk.webp": {
+   "family": "objects",
+   "patch_std": 98.594,
    "floor": 2.0
   },
   "objects/obj_crumple_ball.webp": {
@@ -331,14 +371,29 @@
    "patch_std": 32.502,
    "floor": 2.0
   },
+  "objects/obj_crumple_ball_dusk.webp": {
+   "family": "objects",
+   "patch_std": 74.263,
+   "floor": 2.0
+  },
   "objects/obj_fortune_teller.webp": {
    "family": "objects",
-   "patch_std": 28.462,
+   "patch_std": 28.463,
+   "floor": 2.0
+  },
+  "objects/obj_fortune_teller_dusk.webp": {
+   "family": "objects",
+   "patch_std": 56.093,
    "floor": 2.0
   },
   "objects/obj_gold_star.webp": {
    "family": "objects",
-   "patch_std": 28.549,
+   "patch_std": 30.109,
+   "floor": 2.0
+  },
+  "objects/obj_gold_star_dusk.webp": {
+   "family": "objects",
+   "patch_std": 79.72,
    "floor": 2.0
   },
   "objects/obj_knot.webp": {
@@ -346,34 +401,69 @@
    "patch_std": 26.333,
    "floor": 2.0
   },
+  "objects/obj_knot_dusk.webp": {
+   "family": "objects",
+   "patch_std": 65.168,
+   "floor": 2.0
+  },
   "objects/obj_mug.webp": {
    "family": "objects",
    "patch_std": 37.377,
    "floor": 2.0
   },
+  "objects/obj_mug_dusk.webp": {
+   "family": "objects",
+   "patch_std": 64.602,
+   "floor": 2.0
+  },
   "objects/obj_pinch.webp": {
    "family": "objects",
-   "patch_std": 28.128,
+   "patch_std": 28.666,
+   "floor": 2.0
+  },
+  "objects/obj_pinch_dusk.webp": {
+   "family": "objects",
+   "patch_std": 84.205,
    "floor": 2.0
   },
   "objects/obj_plane.webp": {
    "family": "objects",
-   "patch_std": 41.931,
+   "patch_std": 41.977,
+   "floor": 2.0
+  },
+  "objects/obj_plane_dusk.webp": {
+   "family": "objects",
+   "patch_std": 15.1,
    "floor": 2.0
   },
   "objects/obj_plaster.webp": {
    "family": "objects",
-   "patch_std": 20.953,
+   "patch_std": 20.952,
+   "floor": 2.0
+  },
+  "objects/obj_plaster_dusk.webp": {
+   "family": "objects",
+   "patch_std": 32.63,
    "floor": 2.0
   },
   "objects/obj_ribbon.webp": {
    "family": "objects",
-   "patch_std": 32.993,
+   "patch_std": 33.001,
+   "floor": 2.0
+  },
+  "objects/obj_ribbon_dusk.webp": {
+   "family": "objects",
+   "patch_std": 75.719,
    "floor": 2.0
   },
   "objects/obj_rubber_band.webp": {
    "family": "objects",
-   "patch_std": 28.322,
+   "patch_std": 28.321,
+   "floor": 2.0
+  },
+  "objects/obj_rubber_band_dusk.webp": {
+   "family": "objects",
+   "patch_std": 22.679,
    "floor": 2.0
   },
   "objects/obj_snapped_pencil.webp": {
@@ -381,19 +471,39 @@
    "patch_std": 33.191,
    "floor": 2.0
   },
+  "objects/obj_snapped_pencil_dusk.webp": {
+   "family": "objects",
+   "patch_std": 24.662,
+   "floor": 2.0
+  },
   "objects/obj_stone.webp": {
    "family": "objects",
    "patch_std": 19.378,
    "floor": 2.0
   },
+  "objects/obj_stone_dusk.webp": {
+   "family": "objects",
+   "patch_std": 43.147,
+   "floor": 2.0
+  },
   "objects/obj_ticket.webp": {
    "family": "objects",
-   "patch_std": 9.686,
+   "patch_std": 9.668,
+   "floor": 2.0
+  },
+  "objects/obj_ticket_dusk.webp": {
+   "family": "objects",
+   "patch_std": 27.648,
    "floor": 2.0
   },
   "objects/obj_torn_corner.webp": {
    "family": "objects",
-   "patch_std": 3.843,
+   "patch_std": 3.819,
+   "floor": 2.0
+  },
+  "objects/obj_torn_corner_dusk.webp": {
+   "family": "objects",
+   "patch_std": 9.217,
    "floor": 2.0
   }
  },
@@ -428,7 +538,7 @@
    "ok": false
   }
  },
- "read": 79,
+ "read": 101,
  "enough_read": true,
  "ok": false
 }

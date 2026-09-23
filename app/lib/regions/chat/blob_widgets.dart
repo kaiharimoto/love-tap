@@ -17,6 +17,7 @@ import '../../material/library.dart';
 import '../../material/hands.dart';
 import '../../material/assignment.dart';
 import '../../material/marks.dart';
+import '../../material/light.dart';
 
 /// Process-wide cache of decoded blob bytes so scrolling never re-reads the store, and the only
 /// place that decides how many of those reads the store is asked for at once.
@@ -335,8 +336,11 @@ class Print extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-    final bits = lib?.bits ?? const [];
-    final tape = bits.isEmpty ? null : bits[hashOf(item.id) % bits.length].id;
+    final tapes = lib?.tapeIds ?? const <String>[];
+    final tape = tapes.isEmpty
+        ? null
+        : lib!.bitUnder(tapes[hashOf(item.id) % tapes.length],
+            dusk: Light.of(context) == LightCondition.dusk);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,

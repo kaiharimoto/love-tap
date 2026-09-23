@@ -21,7 +21,7 @@
    ],
    "dominant": {
     "rgb": "#373739",
-    "share": 0.00987,
+    "share": 0.00985,
     "constant": null
    },
    "pad_box": [
@@ -39,47 +39,47 @@
    },
    "windows": {
     "declared": 8,
-    "passing": 8,
-    "median_std": 36.34,
+    "passing": 7,
+    "median_std": 22.838,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 36.34,
-      "levels": 194
+      "std": 7.31,
+      "levels": 70
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 35.353,
-      "levels": 197
+      "std": 22.838,
+      "levels": 182
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 15.144,
-      "levels": 122
+      "std": 45.406,
+      "levels": 233
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 31.595,
-      "levels": 243
+      "std": 30.33,
+      "levels": 185
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 37.441,
+      "std": 50.283,
       "levels": 199
      },
      {
@@ -87,29 +87,31 @@
        845,
        678
       ],
-      "std": 19.919,
-      "levels": 176
+      "std": 20.187,
+      "levels": 152
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 54.838,
-      "levels": 199
+      "std": 14.063,
+      "levels": 111
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 38.01,
-      "levels": 216
+      "std": 15.322,
+      "levels": 97
      }
     ]
    },
-   "problems": [],
-   "ok": true
+   "problems": [
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of legal_02"
+   ],
+   "ok": false
   },
   {
    "of": "02_chat.png",
@@ -236,7 +238,7 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 15.777,
+    "median_std": 15.524,
     "each": [
      {
       "at": [
@@ -291,8 +293,8 @@
        5,
        2172
       ],
-      "std": 15.777,
-      "levels": 130
+      "std": 15.524,
+      "levels": 125
      },
      {
       "at": [
@@ -613,7 +615,7 @@
    ],
    "dominant": {
     "rgb": "#FCE4B1",
-    "share": 0.00672,
+    "share": 0.00681,
     "constant": null
    },
    "pad_box": [
@@ -631,8 +633,8 @@
    },
    "windows": {
     "declared": 8,
-    "passing": 6,
-    "median_std": 9.743,
+    "passing": 5,
+    "median_std": 9.02,
     "each": [
      {
       "at": [
@@ -655,8 +657,8 @@
        750,
        1376
       ],
-      "std": 13.115,
-      "levels": 105
+      "std": 7.574,
+      "levels": 74
      },
      {
       "at": [
@@ -695,13 +697,13 @@
        794,
        1189
       ],
-      "std": 30.573,
-      "levels": 189
+      "std": 30.213,
+      "levels": 188
      }
     ]
    },
    "problems": [
-    "2 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of legal_02"
+    "3 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of legal_02"
    ],
    "ok": false
   },
@@ -830,71 +832,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 31.067,
+    "median_std": 31.068,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 11.267,
-      "levels": 104
+      "std": 9.332,
+      "levels": 93
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 31.067,
-      "levels": 192
+      "std": 31.068,
+      "levels": 189
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 29.474,
-      "levels": 191
+      "std": 27.039,
+      "levels": 192
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 51.04,
-      "levels": 196
+      "std": 52.228,
+      "levels": 195
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 41.456,
-      "levels": 126
+      "std": 41.13,
+      "levels": 127
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 19.733,
-      "levels": 178
+      "std": 20.153,
+      "levels": 177
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 35.49,
-      "levels": 189
+      "std": 38.053,
+      "levels": 190
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 24.249,
-      "levels": 180
+      "std": 26.014,
+      "levels": 185
      }
     ]
    },
@@ -909,7 +911,7 @@
    ],
    "dominant": {
     "rgb": "#2D2C2A",
-    "share": 0.01374,
+    "share": 0.01358,
     "constant": null
    },
    "pad_box": [
@@ -928,71 +930,71 @@
    "windows": {
     "declared": 8,
     "passing": 7,
-    "median_std": 39.781,
+    "median_std": 36.344,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 39.781,
-      "levels": 223
+      "std": 20.218,
+      "levels": 207
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 56.257,
-      "levels": 209
+      "std": 63.533,
+      "levels": 141
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 3.372,
-      "levels": 90
+      "std": 2.687,
+      "levels": 14
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 33.06,
-      "levels": 183
+      "std": 36.344,
+      "levels": 171
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 28.791,
-      "levels": 99
+      "std": 18.839,
+      "levels": 92
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 9.472,
-      "levels": 96
+      "std": 16.685,
+      "levels": 97
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 57.642,
-      "levels": 212
+      "std": 64.551,
+      "levels": 216
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 49.527,
-      "levels": 159
+      "std": 62.038,
+      "levels": 177
      }
     ]
    },
@@ -1067,7 +1069,7 @@
        290,
        132
       ],
-      "std": 73.79,
+      "std": 73.621,
       "levels": 213
      },
      {
@@ -1083,8 +1085,8 @@
        5,
        2172
       ],
-      "std": 64.381,
-      "levels": 203
+      "std": 64.364,
+      "levels": 205
      },
      {
       "at": [

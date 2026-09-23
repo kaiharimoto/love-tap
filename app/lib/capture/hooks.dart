@@ -722,6 +722,13 @@ class CaptureHooks {
 
     final whole = box(Offset.zero & p.size);
     if (whole == null) return;
+    // Whether a clip took part of it. `scene.js` counted a run as clipped when its rect changed
+    // under the frame clamp, but every rect is already cut to its clips HERE, so that comparison
+    // could never fire: 12_search's last hit was declared at 34 px of a 68 px second line, ending
+    // on the frame's last row, in a sidecar that said `clipped: 0` (firing 51). A cut run is not a
+    // run that was drawn too faint, and only this line knows the difference.
+    final drawn = MatrixUtils.transformRect(toView, Offset.zero & p.size);
+    final cut = whole.height < drawn.height - 1 || whole.width < drawn.width - 1;
 
     List<Rect> lines = const [];
     try {
@@ -756,6 +763,7 @@ class CaptureHooks {
       // which is what firing 9 had to do to establish that the extra runs were fibre.
       'text': visible.length > 64 ? '${visible.substring(0, 63)}…' : visible,
       'chars': visible.length,
+      if (cut) 'clipped': true,
     });
   }
 

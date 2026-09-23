@@ -231,6 +231,21 @@ class MaterialLibrary {
     return (1.0 / fill).clamp(1.0, 3.4);
   }
 
+  /// The tapes a photograph can be stuck down with: the day render of each `tape_NN`, and nothing
+  /// else in the family. The print used to index the whole of [bits] -- 44 files, of which 11 are
+  /// bodies, 22 are shadows and 11 of those bodies are clips, pins, staples and glue -- so a
+  /// photograph was taped down with a pin's dusk shadow as often as with tape. Nobody could see it
+  /// while every bit rendered empty; firing 51 rendered them.
+  List<String> get tapeIds => bits
+      .map((e) => e.id)
+      .where((id) => id.startsWith('tape_') && !id.contains('_shadow') && !id.endsWith('_dusk'))
+      .toList()
+    ..sort();
+
+  /// The render of bit [id] under the given light: its `_dusk` twin where the library has one.
+  String bitUnder(String id, {required bool dusk}) =>
+      dusk && bits.any((e) => e.id == '${id}_dusk') ? '${id}_dusk' : id;
+
   /// Whether the library carries [id] rendered under the dusk rig. Before firing 51 no object had
   /// one, and the day render was drawn under the lamp, which is a sprite lit by a sun that had set.
   bool hasObjectDuskBody(String id) => objects.any((e) => e.id == '${id}_dusk');

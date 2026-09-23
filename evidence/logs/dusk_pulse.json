@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3747
+   "ms": 5386
   },
   {
    "do": "wait",
-   "ms": 2302
+   "ms": 2304
   },
   {
    "do": "shot",
-   "ms": 6316
+   "ms": 8118
   },
   {
    "do": "report",
-   "ms": 711
+   "ms": 728
   }
  ],
  "shots": [
@@ -95,21 +95,15 @@
  "blob_waits": [
   {
    "at": "dusk_pulse.png",
-   "waited_ms": 2590,
+   "waited_ms": 4083,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 10454,
- "cold_ms": 1526,
+ "install_ms": 12729,
+ "cold_ms": 1767,
  "reopened": true,
  "events_at_open": 14061,
- "problems": [
-  "pageerror: Fetch API cannot load http: /127.0.0.1:8797/assets/assets/shell/desk_dusk.webp due to access control checks. — at bf9 (http://127.0.0.1:8797/main.dart.js:777:36)",
-  "pageerror: Fetch API cannot load http: /127.0.0.1:8797/assets/assets/paper/legal_01_dusk.webp due to access control checks. — at bf9 (http://127.0.0.1:8797/main.dart.js:777:36)",
-  "pageerror: Fetch API cannot load http: /127.0.0.1:8797/assets/assets/paper/index_01.webp due to access control checks. — at bf9 (http://127.0.0.1:8797/main.dart.js:777:36)",
-  "pageerror: Fetch API cannot load http: /127.0.0.1:8797/assets/assets/paper/index_02.webp due to access control checks. — at bf9 (http://127.0.0.1:8797/main.dart.js:777:36)",
-  "pageerror: Fetch API cannot load http: /127.0.0.1:8797/assets/assets/paper/looseleaf_01_dusk.webp due to access control checks. — at bf9 (http://127.0.0.1:8797/main.dart.js:777:36)"
- ],
- "ok": false
+ "problems": [],
+ "ok": true
 }

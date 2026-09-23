@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3192
+   "ms": 3217
   },
   {
    "do": "wait",
@@ -18,15 +18,15 @@
   },
   {
    "do": "scrollTo",
-   "ms": 3971
+   "ms": 6603
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1302
   },
   {
    "do": "stage",
-   "ms": 3196
+   "ms": 4865
   },
   {
    "do": "wait",
@@ -34,27 +34,27 @@
   },
   {
    "do": "partnerTyping",
-   "ms": 1481
+   "ms": 1710
   },
   {
    "do": "wait",
-   "ms": 1104
+   "ms": 1103
   },
   {
    "do": "shot",
-   "ms": 3246
+   "ms": 3862
   },
   {
    "do": "report",
-   "ms": 716
+   "ms": 723
   }
  ],
  "shots": [
   {
    "out": "evidence/13_messenger_states.png",
    "clip": null,
-   "text_runs": 30,
-   "surfaces": 83
+   "text_runs": 29,
+   "surfaces": 82
   }
  ],
  "reports": [
@@ -89,7 +89,7 @@
    },
    "scroll": {
     "first": 8384,
-    "last": 8390,
+    "last": 8391,
     "of": 8391
    },
    "now": "2026-09-03T19:40:00.000Z",
@@ -122,15 +122,17 @@
  "blob_waits": [
   {
    "at": "13_messenger_states.png",
-   "waited_ms": 16,
+   "waited_ms": 10,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 10393,
- "cold_ms": 1504,
+ "install_ms": 12700,
+ "cold_ms": 1756,
  "reopened": true,
  "events_at_open": 14061,
- "problems": [],
- "ok": true
+ "problems": [
+  "pageerror: PlaywrightError — at b47 (http://127.0.0.1:8799/main.dart.js:6585:8)"
+ ],
+ "ok": false
 }

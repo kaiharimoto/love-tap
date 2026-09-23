@@ -821,6 +821,11 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None,
                 entry["family"] = decl.get("family", "")
                 entry["hand"] = decl.get("role", "")
                 entry["ink"] = decl.get("ink", "")
+                # The app says a clip took part of this paragraph -- a list scrolled past the end
+                # of the frame, as the last hit on 12_search is. A cut run is read and reported, and
+                # it is not a failure of contrast: what is missing is the rest of the line, not ink.
+                if decl.get("clipped"):
+                    entry["cut"] = True
             out.append(entry)
     result = {"runs": out, "glyphs": seen, "size": [W, H]}
     if lines is not None:
@@ -987,12 +992,16 @@ def main():
         # quiet reason a number improved.
         gauged = [r for r in runs if not r.get("unmeasurable")]
         unmeasurable = [r for r in runs if r.get("unmeasurable")]
-        bad = [r for r in runs if r["ink_core"] < r["floor"]]
+        # A run the app declared cut by a clip is excluded from `bad` and counted beside it as
+        # `cut_below_floor`, so the exclusion can never be the quiet reason a number improved: the
+        # denominator `runs` keeps it. Firing 51, `the-last-search-hit-is-cut-by-the-frame-edge`.
+        cut = [r for r in runs if r.get("cut")]
+        bad = [r for r in runs if r["ink_core"] < r["floor"] and not r.get("cut")]
         # The same tally taken over the clipped ring, reported beside the one the floors gate
         # on. The population clause of this item turns on being able to see whether the clip
         # moved the READING or moved the DENOMINATOR: `runs` is the denominator and must not
         # move at all, and these two are the numerator either way.
-        bad_clipped = [r for r in gauged if r["ink_core_clipped"] < r["floor"]]
+        bad_clipped = [r for r in gauged if r["ink_core_clipped"] < r["floor"] and not r.get("cut")]
         worst = min((r["ink_core"] for r in runs), default=None)
         report["artifacts"][name] = {
             "runs": len(runs),
@@ -1000,6 +1009,8 @@ def main():
             # Both tallies, always. See the note where `bad_unclipped` is built.
             "below_floor_clipped": len(bad_clipped),
             "unmeasurable": len(unmeasurable),
+            "cut": len(cut),
+            "cut_below_floor": sum(1 for r in cut if r["ink_core"] < r["floor"]),
             "ground_ring_clipped": sum(1 for r in runs if r.get("ground_ring_clipped")),
             # Which instrument read this artifact. A number taken one way and compared against a
             # number taken the other is not a comparison, and the whole of firing 9 was spent
@@ -1049,6 +1060,8 @@ def main():
     report["total_ground_ring_clipped"] = sum(
         a["ground_ring_clipped"] for a in report["artifacts"].values())
     report["total_unmeasurable"] = sum(a["unmeasurable"] for a in report["artifacts"].values())
+    report["total_cut"] = sum(a["cut"] for a in report["artifacts"].values())
+    report["total_cut_below_floor"] = sum(a["cut_below_floor"] for a in report["artifacts"].values())
     report["total_below_floor_clipped"] = sum(
         a["below_floor_clipped"] for a in report["artifacts"].values())
     report["without_surfaces"] = sorted(missing_surfaces)

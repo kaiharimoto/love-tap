@@ -358,7 +358,12 @@ function ensure(p) {
       // not a fifty-eight pixel message and it is not offscreen either; it is cut, and the number
       // that says so should be in the sidecar rather than worked out by subtracting rects by hand.
       const whole = run.rect;
-      if (rect[2] !== whole[2] || rect[3] !== whole[3]) clipped++;
+      // The app cuts every rect to its clips before it gets here, so the comparison below only
+      // catches the frame edge the app did not know about; `run.clipped` is the app saying a
+      // clip it does know about took part of the paragraph (firing 51).
+      const cutHere = rect[2] !== whole[2] || rect[3] !== whole[3];
+      if (cutHere || run.clipped === true) clipped++;
+      if (cutHere) run.clipped = true;
       const lines = (run.lines || []).map(shift).filter(Boolean);
       kept.push(Object.assign({}, run, { rect, lines: lines.length ? lines : [rect] }));
     }

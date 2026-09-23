@@ -18,14 +18,9 @@
  ],
  "frame_surfaces": "evidence/01_pulse.surfaces.json",
  "frame_tear_draws": 21,
- "frame_distinct_tears": 18,
- "frame_repeats": {
-  "assets/tears/tear_049_shadow.webp": 2,
-  "assets/tears/tear_049.webp": 2,
-  "assets/tears/tear_049_edge.webp": 2
- },
- "frame_ok": false,
- "frame_why": "a tear is used twice in the frame: assets/tears/tear_049.webp x2, assets/tears/tear_049_edge.webp x2, assets/tears/tear_049_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "frame_distinct_tears": 21,
+ "frame_repeats": {},
+ "frame_ok": true,
  "ok": false,
  "why": "only 6 notes on screen"
 }
