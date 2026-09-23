@@ -7147,3 +7147,8 @@ IMPLEMENT, rank 1: measure what `SlicedMasks` keeps resident before changing `pa
 If the budget allows, go on to leg 1 (the aperture probe) and follow the legs in order, committing
 each family as it lands. Blender is in `bootstrap.sh --profile=web`. The pinned ffmpeg URL still
 stops bootstrap after Flutter, so apply CONTINUE §5's fix before relying on `.done/`.
+
+## Firing 51 — IMPLEMENT, lease taken
+
+2026-09-23T00:54Z. Push pre-flight passed (fast-forward of two commits, dry run up to date).
+Lease taken for four hours. Rank 1 first: the residency measurement before any packer change.
