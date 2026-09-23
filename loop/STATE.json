@@ -2,16 +2,10 @@
  "v": 1,
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
- "stage": "ADDRESS",
- "firing": 57,
- "stage_entered_at_firing": 58,
- "lease": {
-  "session_id": "session_015PBxvv8hpp9sHmAcPN8A8K",
-  "started_at": "2026-09-23T21:55:00Z",
-  "expires_at": "2026-09-23T23:55:00Z",
-  "stage": "ADDRESS",
-  "firing": 58
- },
+ "stage": "IMPLEMENT",
+ "firing": 58,
+ "stage_entered_at_firing": 59,
+ "lease": null,
  "evidence_fresh_as_of": "firing 56: DIAGNOSE MAY SCORE ON WHAT IS COMMITTED. ONE FULL ./capture.sh 2026-09-23T16:05-17:45Z built from 0480996 (= firing 55's tip 856aed8 plus a STATE.json lease; no app change), 14 of 17, THEN 15_authored_feeling re-captured alone (./capture.sh --only=15_authored_feeling, 17:50-18:17Z, same code) and it passed: 15 OF 17, THE CONTAINER CEILING. `git diff --stat 0480996..HEAD -- app assets seed` is EMPTY (checked at firing 56's close), and so is the working tree against it. MANIFEST.json and frames.json are the single-scene run's: every artifact carries its own `written` time and `from_this_run`, so the 14 from the full run and the one clip from the retry are distinguishable. DIFF.json is the FULL RUN's, against a baseline seeded from firing 54's committed artifacts (15 changed, 2 absent) -- the retry's DIFF compared the capture with itself and was discarded.",
  "evidence_note": "firing 56. Missing: 09_two_devices.png and 16_setup_android.png (no /dev/kvm, measured reason in MANIFEST). `surfaces` booked missing on folds/unfold_thirds (median L_std 6.319 < 8.0), BYTE-IDENTICAL to firing 54's -- the fenced fold re-render, not a regression. 15_authored_feeling was refused in the full run on `pageerror: PlaywrightError -- at b4x (main.dart.js:6585)`; b4x is dart2js's Error.throwWithStackTrace, so a Dart error was rethrown with its message lost. It passed on one retry. Firings 51 and 54 had the same refusal on 13_messenger_states, which passed here. Three scenes, one intermittent unnamed throw: that is a using-it defect DIAGNOSE should file, not a flake. THE FULL RUN'S `handwriting` MISSING ENTRY WAS THE CONTAINER, NOT THE FONTS: uharfbuzz was not installed, hands_selftest.py died on the import, and capture.sh's `hands.py ... || true` left every *.hands.json as firing 54's. Installed, re-run by hand exactly as capture.sh runs it: hands_selftest ok, 0 failures over 202 runs, 105 avoidable; per-still hands logs regenerated from this capture's text sidecars. tools/apt-prereqs.sh now installs uharfbuzz. ffmpeg is distro 6.1.1, not the pinned binary. legibility.json and palette.json are the full run's.",
  "degradation": 0,
@@ -49,13 +43,13 @@
   {
    "id": "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames",
    "row": "material_truth + anti_goal + emotional_transmission + coherence + visual_design",
-   "points": 6,
+   "points": 3,
    "why": "THE CAP ON material_truth, AND THE SINGLE HIGHEST-VALUE ITEM IN THE BUILD. What the app draws for most of 06_unfolding, and freezes into 13_messenger_states.png, is a flat beige rectangle with square corners and a hard drop shadow. That is the literal archetype docs/BRIEF.md names as a failure of the entire visual concept -- 'any procedural noise overlay, tiled repeating texture, or beige rounded rectangle standing in for paper scores this category below its floor' -- so while it ships, material_truth cannot reach 22 no matter what else is repaired, and anti_goal is charged for the same object a second time by the brief's own double-count.\n\nFIVE OF SEVEN CRITICS NAMED THIS ONE OBJECT INDEPENDENTLY, all from the pixels: anti_goal blocking (1035x235 at x65-1099 y1281-1515, fill (253,227,200), radius 2-3px, interior std 1.35 / 168 colours / hf_mean 0.640 against 35.79 / 2182 / 6.853 for real note paper 200px below it in the same frame); material_truth blocking (a flat untextured square-cornered rectangle for at least frames 64-255 of 320, about 3.2s of the 5.33s clip, with no paper stock, no ruled lines, no tear edge, no crease and no fold seam; a 300x120 sample at (200,1350) measures mean L 230.8, L_std 1.310, HF_std 0.446 and 11 distinct luminance levels); coherence serious (std 1.4 against 52.4 for a real note body in the same screenshot); emotional_transmission (a feeling arriving as an empty box); visual_design minor (five of six sampled strip frames flat, text only in the last). It is also a stated failure condition -- 'a fold or crumple sequence playing fewer than 30 unique frames per second' -- and evidence/frames.json gives 06_unfolding repeated_fraction 0.163 with longest_still_run 23.\n\nTHE ROOT CAUSE IS NOT YET ESTABLISHED, AND ONE PLAUSIBLE READING HAS ALREADY BEEN RULED OUT AT FIRING 18. logs/06_unfolding.report.json reads fold {sequence: unfold_thirds, length: 240, decoded: 13, decoding: 0, playhead: 239, held_from: 227, held_to: 239}, and it is tempting to read 'decoded: 13' as a decoder that stopped at thirteen of two hundred and forty. It is not. FoldFrames.window in app/lib/material/fold.dart:35 is 36, _held is a ROLLING window, and the report is a snapshot taken at playhead 239 -- the last frame of the sequence -- where frames 227 to 239 are the only ones left ahead. Thirteen held at the end of a 240-frame sequence is the window working correctly. All 240 PNGs are present at assets/folds/unfold_thirds/. So the report does not explain the flat rectangle and the pixels are the only evidence that does. The two candidates IMPLEMENT should separate, in this order:\n  (a) DECODE CANNOT KEEP AHEAD. fold.dart:72-90 frameAt returns 'the frame at i if it is decoded, and otherwise the last one before it that is', and the comment at :77 records a past bug of exactly this shape -- 'the note sat on frame zero for the whole take and then jumped open'. If decoding falls behind, every late frame serves a stale one, which is both the held runs in frames.json and, if it falls behind from frame zero, a long flat opening. The capture took 962ms of wall clock per frame, so the decoder is being asked to keep ahead of a clock that is driven, not real.\n  (b) A SEPARATE PLACEHOLDER SURFACE is drawn when nothing has decoded yet, and it is that surface -- not a fold frame -- that is measured at std 1.31. Its square 2-3px corners and uniform drop shadow do not look like any frame of a rendered fold.\nEstablish which before changing anything; they have different fixes and the item has five rows riding on it.\n\nCONSTRAINT THAT MUST BE HONOURED, or closing this breaches another failure condition: 'a fold or crumple sequence ... exceeding the WebKit texture budget recorded in TASK_STATE.md'. That budget is 32 MB peak decoded per sequence; the 36-frame window peaks at 21.2 MB; the whole sequence held at once is about 141 MB. So the fix is NOT to decode the sequence. tools/check/texture_budget.py exists now and enforces this -- run it.",
    "measurement": "SETTLED AT FIRING 32. This item has been measured five different ways in five firings and two of its definitions were parked for ADDRESS at firing 29. Both are decided here and neither goes back.\n\nDEFINITION ONE -- L_std, AND WHICH FLOOR. The 30/150 pair is RETIRED. It was never a floor this build enforces anywhere; it was a comparison against a neighbouring note at a different magnification (42.677 and 36.351 for the two real notes beside the card), and carrying a second paper floor that only one item uses is how the item came to be readable two ways. A fold frame is paper drawn on a screen and takes the SAME floor as every other paper surface, which docs/COLOR.md 5a now declares per stock class: unfold_thirds is folded from a written stock, so its floor is L_std >= 8.0 (the >= 60 distinct luminance levels half is STRUCK at firing 35 -- see the-60-level-clause-of-5a-does-not-discriminate). It measures 5.650 / 87 at frame 0000 as of firing 31.\nAND THE PLACEMENT IS SETTLED WITH IT, because a single placement is what let the ruler walk off the defect: sample frame 0000 of assets/folds/unfold_thirds AT ITS SHIPPED DISPLAY SIZE INSIDE THE FoldedNote's OWN DECLARED BOUNDS, tiling the window across those bounds at a fixed stride, and report the MEDIAN L_std over every placement with the pass fraction beside it. Not a box at (200,1350). Firing 29 measured 26.962 at one pixel and 31.421 at the median of a 7x13 grid of the same object; firing 31 measured 24.854 in a box that had slid onto assets/paper/looseleaf_03 while the object itself read 7.061. The median with its pass fraction is stable under both.\n\nDEFINITION TWO -- HF_std IS STRUCK FROM THIS ITEM ENTIRELY. It appeared in four of the item's five clauses from firing 18 with no committed tool defining it. Firing 29 committed the definition and it reads the firing 17 strip -- taken when the fold sheet WAS the blank square-cornered rectangle -- at 14.609-15.635 against today's repaired 14.317-15.088. It scores the defect above the repair, and WORKER_PROMPT 3d disqualifies such a ruler rather than merely doubting it. NOTHING IN THIS ITEM'S MEASUREMENT MAY CITE HF_std until hf-std-on-a-strip-frame-does-not-measure-the-sheet closes with its discrimination selftest green. That item is no longer a blocker on this one; it is an instrument item in its own right.\n\nSO THE ITEM CLOSES ON FOUR CLAUSES, ALL ANCHORED:\n(a) frame 0000 of unfold_thirds, sampled as above inside the FoldedNote's declared bounds, reports median L_std >= 8.0 with at least half the placements clearing it, against 5.647 over 52 placements today (firing 33, and 5.686 measuring the packed frame itself, which is what says the app draws the asset faithfully);\n(b) CaptureHooks.paperSurfaces records CustomPaint-painted fold frames, so <artifact>.surfaces.json names assets/folds/unfold_thirds where a FoldedNote is on screen -- this is what makes (a) readable from the sidecar at all, and its absence today is the instrument being blind to CustomPaint rather than the app painting a bare rectangle (the code critic traced the card to FoldedNote drawing frame 0000 at app/lib/material/fold.dart:339-369; three of seven critics and the builder's own first reading called it a code-painted fill and it is not);\n(c) evidence/06_unfolding.report.json records a playhead below 20 at the first captured frame and above 220 at the last, so the clip contains the fold rather than its aftermath -- that clause's own item is the-fold-clip-is-captured-after-the-fold-has-already-finished, which CLOSED at firing 33, so this clause is no longer waiting on anything;\n(d) tools/check/texture_budget.py still passes, and by then capture.sh runs it (texture-budget-passes-and-nothing-in-the-capture-runs-it).\nRe-break by restoring today's frame 0000 and watching (a) fall back to single figures at every placement.\n\nON attempts: this item stands at 4 and was sent to the back at firing 29 under the attempts >= 3 rule with 'blocked on ADDRESS for two definitions' as the stated unblock condition. The condition is met. The attempts were not four failed implementations; they were four firings measuring a moving object with a ruler nobody had settled. Returning it to the front was the rule working, not a breach of it. At firing 35 it sits at 6 rather than 1, and that is scheduling and not a demotion: it is still the highest-point item in the build. Ranks 1-5 are one firing with one ./capture.sh in it, and 6-7 are the next with Blender in it and no capture; splitting them that way is what stops a 45-minute capture being spent on one item and a four-hour render being started with nothing else to do.",
    "state": "open",
    "attempts": 2,
    "closed_by": null,
-   "rank": 45,
+   "rank": 51,
    "note_at_firing_18": "Filed with a wrong root cause and corrected within the same stage, before it reached IMPLEMENT. The original text read 'the fold frames are rendered and not decoded -- 240 on disk, 13 decoded'. fold.dart:35 and the report's held_from/held_to show 13 is the rolling window at the end of the sequence and is correct behaviour. The symptom the five critics measured is unchanged and stands on the pixels alone.",
    "root_cause_established_at_firing_19": "ESTABLISHED, AND IT IS NEITHER OF THE TWO CANDIDATES THIS ITEM LISTED. It is not decode falling behind (a) and it is not a separate placeholder surface (b). THE RENDER IS THE RECTANGLE. blender/folds/fold.py:217 builds the fold sheet's material with common.paper_material(f\"{name}_paper\", (0.94,0.91,0.85), tooth=1.05, yellowing=0.25, sheen=0.24, fibre_scale=1100.0) and PASSES NO rules_image. blender/paper/stocks.py:225 passes rules_image=rules_img for every stock in the library; the fold is the one piece of paper in this build rendered without the printed rules of the stock it is meant to be made of, and the sheet is modelled square-cut, so it has no tear edge either. Every one of the 240 frames is therefore a blank, unruled, square-cornered sheet with a procedural tooth on it. That is what three critics measured and it is what the app faithfully draws.\nTHE PROOF, four measurements that agree and one picture. (1) COLOUR: the flat rect in 13_messenger_states.png has median RGB (252,226,198) over x70-1095 y1285-1512; the opaque median of assets/folds/unfold_thirds/*.png is (252,226,198) exactly. No Paper.forStock constant is near it -- Paper.lined is (241,236,223) -- so the ColoredBox fallback in paper.dart:132 is ruled out as the source. (2) GEOMETRY: the object spans rows 1274-1533 and columns 62-1116, 1055x260 including its shadow. Frame 18's band (1186x304 after _fold_band's union-column crop) drawn at width 1055 is 270 tall, which is the nearest frame in the sequence and is 10px off; no non-fold surface in the build has that shape. (3) PICTURE: frame 18 cropped as pack_assets.py crops it, scaled to 1055 wide and composited over the pad colour, is the artifact region -- same flat fill, same square corners, same hard drop shadow down and right, the artifact only softer. (4) GENERATOR: fold.py:217 against stocks.py:225, above.\nSO THE ASSEMBLY IS INNOCENT AND FIRING 9 WAS NOT WRONG. All 240 PNGs are on disk and all 240 carry something -- tools/check/surfaces.py reads patch_std 1.918 to 2.075 on them against its folds floor of 1.2, and passes. Both statements are true at once because THE FLOOR IS TOO LOW FOR WHAT THE ROW ASKS. A blank sheet with a procedural tooth clears 1.2; ruled stock in the same artifact measures L_std 36.9 and hf_std 14.0 over a 300x120 patch at (200,1600), against the fold's 1.32 and 0.49 at (200,1350). THAT IS A THIRD GATE READING GREEN OVER A REAL DEFECT, alongside the two the firing 18 triage named, and it is filed as its own item (the-folds-floor-passes-a-blank-sheet).\nA SECOND, SMALLER CAUSE, MEASURED AND NOT THE MAIN ONE. tools/pack_assets.py:34 sets SIZES[\"folds\"] = 540 while SIZES[\"paper\"] = 1500. The band is packed to a 540px long side and the app then draws it at about 1035 device px on a 1440-wide capture, a 1.92x upscale through FilterQuality.medium. fold.py's own comment table already records the cost -- source 2.047, packed 1.489 -- and the upscale takes it the rest of the way to the 0.49 hf_std measured in the artifact. This makes a flat sheet flatter; it did not make the sheet flat. FIXING THE PACK SIZE ALONE WOULD NOT CLOSE THIS ITEM, and raising it is constrained: at 1035x604 RGBA a 36-frame window is 88 MB against the 32 MB in TASK_STATE.md, so any pack-size rise has to be paid for out of FoldFrames.window (app/lib/material/fold.dart:35) and checked with tools/check/texture_budget.py. 12 frames is what 32 MB buys at 1035 wide, and _ahead is 24, so the window cannot simply be halved without re-deriving the lookahead.\nWHAT THE FIX IS. Re-render unfold_thirds with rules_image wired through fold.py the way stocks.py does it, so the sheet carries the stock it is made of, and give the modelled sheet a torn edge or say in writing why a folded note is cut square. That IS a Blender job and it is now pointed at the right cause; no Blender is installed in this container (`which blender` is empty and there is no ./toolchain), so it needs a firing that has bootstrapped one. Do NOT re-render for exposure, samples or fibre scale: fold.py lines 260-300 record those three sweeps already measured and none of them is this.",
    "probe_at_firing_19": "THE FIX IS WRITTEN AND PROVED ON A PROBE, AND THE RE-RENDER IS THE ONLY THING LEFT. blender/folds/fold.py now asks blender/paper/rules.py for the lined stock's printed rules the same way blender/paper/stocks.py:203 does -- under the system python, because Blender's has numpy and no Pillow -- and passes them to common.paper_material. common.paper_material gains rules_uv_scale and rules_uv_offset, defaulting to the identity so no existing caller changes, because the rules image is sampled by RAW UV and every sheet's UV is 0..1 over its own size: a 148x210 lined sheet's 8 mm feint rules stretched onto a 148x105 A6 note would print at 4 mm. The note samples 105/210 of the image in v and takes it from the middle of the stock, because the top of a lined sheet is its header margin and a note torn from the middle of a pad is what the thread is made of.\nMEASURED ON TWO PROBE FRAMES rendered to a scratch directory at 1440/16, the committed settings, and NOT into assets/: frame 0's 300x120 interior patch goes L_std 1.795 -> 6.550 and 16 luminance levels -> 52; whole-frame hf_std 1.217 -> 2.316. The rules are there and they are at the right pitch: the column profile through the sheet has dark dips every 62 rows, the frame is 1440 px across 185 mm so 62 px is 7.97 mm, against the stock's declared 8.0 mm. That is the measurement this item needed and it is 0.4% off, which is the rules image's own registration jitter.\nCOST: 38.7 s a frame on this container's four cores, so 240 frames is about two hours forty. It is rendered in chunks of forty so each chunk records its own manifest entries -- which is what fold.py's own comment at line 243 says chunking is for -- and each chunk is committed and pushed as it lands.",
@@ -84,7 +78,10 @@
    "rank_before_firing_43": 6,
    "rank_before_firing_50": 48,
    "parked_at_firing_53": "PARKED BAND: fenced. The 240-frame folds re-render is outside every authorisation (render_decision_at_firing_50, re-affirmed at firing 53). Ranked below every workable item so IMPLEMENT does not reach it. The points are real and not re-costed.",
-   "rank_before_firing_53": 53
+   "rank_before_firing_53": 53,
+   "points_before_firing_58": 6,
+   "split_at_firing_58": "The thread half -- the resting face of an unopened note, which is what 13_messenger_states and 08 show -- is split out as a-folded-note-at-rest-is-frame-zero-of-the-fenced-render with 3 of the 6 points, because it needs no render (fold.dart _face) and is not fenced. What stays here is the clip: the sequence itself, fenced as before.",
+   "rank_before_firing_58": 45
   },
   {
    "id": "the-fold-clip-is-captured-after-the-fold-has-already-finished",
@@ -293,7 +290,7 @@
    "state": "open",
    "attempts": 1,
    "closed_by": null,
-   "rank": 13,
+   "rank": 22,
    "owner_priority": "using-it",
    "owner_priority_before_firing_31": "deprioritised-demo-content",
    "firing_notes": {
@@ -308,7 +305,8 @@
    "ranked_for_observe_at_firing_43": "RANKED FOR OBSERVE, NOT FOR IMPLEMENT, AND THAT IS THE WHOLE OF WHY IT MOVED. Firing 42 fixed this at its cause and the fix is on the branch: tools/capture/scene.js opens the page twice in the context it has already made, writes the install down as install_ms, times cold_ms on the reopen and records events_at_open beside them. 01_pulse.png came back BYTE-IDENTICAL to firing 41's, which is the proof that the extra load changes nothing that is photographed.\nNOTHING AN IMPLEMENT FIRING CAN DO ADVANCES IT. The only remaining step is the next WHOLE capture reading the other thirteen seeded scenes, and a capture is OBSERVE's. It sits in the band of items the next capture closes rather than at the head of an IMPLEMENT queue, where it would spend a firing discovering it has nothing to do. THE OBSERVE THAT TAKES THE NEXT FULL SET MUST read cold_ms, install_ms and events_at_open for all fourteen seeded scenes out of evidence/logs/*.json and close or reopen this on them -- that instruction is the `rank it so that happens` this firing was asked for, and a rank alone would not have carried it.",
    "rank_before_firing_43": 10,
    "rank_before_firing_50": 17,
-   "rank_before_firing_53": 20
+   "rank_before_firing_53": 20,
+   "rank_before_firing_58": 13
   },
   {
    "id": "unselected-is-drawn-as-alpha-and-that-is-two-thirds-of-the-vocabulary",
@@ -410,7 +408,7 @@
    "state": "open",
    "attempts": 4,
    "closed_by": null,
-   "rank": 2,
+   "rank": 13,
    "owner_priority": "the-ui",
    "measured_at_firing_29": "READ ON FIRING 28'S CAPTURE, WHICH IS NOT THE EVIDENCE THIS ITEM WAS FILED ON, AND THE HEADLINE IS THAT THE DEFECT IS STILL THERE AND THE STATED MECHANISM IS WRONG. No code was changed for it this firing; this is reconnaissance, to save a successor the firing firing 18 lost on rank 1 by filing a wrong cause.\n\n(1) THE ITEM'S FILED EVIDENCE WAS TAKEN ON A FLAT FILL. It names 17_setup_pwa.png, and firing 28 established that that still was 47.98% ONE EXACT RGB for five firings -- two flat fills, one on the other, and not a pixel of any render. So '26 flat treads of 8px or more, a longest tread of 89px, discontinuities of -141px at x=888 and +117/-117/+118px at x=943-947' are numbers off an image that largely did not exist. They must not be quoted again as a before.\n\n(2) THE DEFECT SURVIVES THE FLAT-FILL FIX, MEASURED TODAY. Contour traced as: the first row (or column) from which paper runs unbroken for 400 px, paper being L above the midpoint of the 5th and 98th percentiles -- stated because, like HF_std, NO COMMITTED TOOL DEFINES 'the traced contour' and this item's measurement asks for one. On 17_setup_pwa.png today the TOP edge over 860 columns gives 431 treads, longest 109 px, 9 of them >= 8 px; the LEFT edge over 1346 rows gives 341 treads, longest 39 px, 48 of them >= 8 px. Against this item's `<= 4px on every still`. So the item is real, it is worth its 2 points, and it now has a number taken on a capture that is a capture.\n\n(3) THE STATED MECHANISM IS CONTRADICTED BY THE CODE, and this is the part that would have cost a firing. The item says the through-running rules 'can only happen if the tear is a translucent overlay on unbroken paper'. It is not an overlay. app/lib/material/paper.dart's MaskedLayer applies the mask with BlendMode.dstIn against its alpha channel -- it cuts. And RegionPad (slip.dart) is `torn: false` by construction, so on any screen whose backing is a pad there is no tear on the pad at all and the rules that run on are the PAD's own, seen where a piece above it ends. 17_setup_pwa is not a pad: setup_region.dart builds one PaperPiece with tearId set, at screenWidth - 36, so that screen is the clean case to reason on.\n\n(4) ONE CANDIDATE RAISED AND NOT CONFIRMED -- recorded as ruled out rather than left for a successor to have the same idea. SlicedMasks.at draws the mask with drawImageNine at edge = 0.4, so the centre slices are stretched. On the setup sheet the arithmetic is: mask packed 1024 (tools/pack_assets.py SIZES['tears']), w clamped to 1024 so the horizontal centre band is 1.00x, h about 2500 so the VERTICAL centre band is about 8.2x. That predicts the left and right contours carrying treads about 8x the top's. MEASURED: mean tread 3.95 px on the left against 2.00 px on the top, a ratio of 1.98 and not 8.2. The nine-slice stretch is therefore NOT established as the cause. The vertical contour is twice as stepped as the horizontal one, which is a real asymmetry and worth explaining, but it is not this.\n\n(5) WHAT A SUCCESSOR SHOULD LOOK AT NEXT. The stepped boundary is VISIBLE in a 1040x740 crop of 17_setup_pwa at (200,380) and it is an INNER boundary, not the outer one: the outer edge against the wood is fibrous, fine and convincing, and a second, softer, unmistakably square-stepped boundary runs across the sheet below it and down its left side. That is consistent with one of the two layers that are nine-sliced SEPARATELY from the mask -- the lit edge (NineSliced, paper.dart:213) and the baked shadow (_bakedShadow, paper.dart:173, framed by assets/tears/relief.json at 1680 source) -- rather than with the mask itself, whose own outer contour is the fine one. Establish which layer before changing anything; the mask, the edge and the shadow have three different geometries and three different fixes.",
    "rank_before_firing_33": 18,
@@ -432,7 +430,8 @@
    "measurement_note_at_firing_54": "The longest-tread clause is impossible as written (see worked_at_firing_54 (4)); the mean-tread restatement is ADDRESS's to make.",
    "captured_at_firing_54": "On the capture the sidecars declare the finer mask (assets/tears/hi/...) on seven big pieces and the centres read exactly as predicted: 17_setup_pwa 6.962, settings.notify 4.894, us.body.dates 4.0, 14_media_viewer 3.711, us.body.todos 2.126, 13 tear_014 1.983, 01_pulse 1.896. OPEN QUESTION: 12_search's 1094x876 tear_014 piece is still declared on the 1024 mask (centre 3.998) with nothing pending at the shot; the likeliest reading is that it is a chat piece under the opaque search route, declared from an earlier paint -- not verified. The traced-contour tread was not re-measured on the stills.",
    "measurement_before_firing_55": "A gate beside tools/check/ that samples the ruled-line raster across every tear contour and reports zero lines continuing across the torn side, AND the traced contour's longest axis-aligned tread is <= 4px on every still. Masks authored or resampled at >= 2x the widest sheet they can be stretched to. Re-break by restoring the current mask scale and watching the 89px tread and the through-running rules return.",
-   "worked_at_firing_55": "THE EDGE-BAND FLOOR FIRING 54 LEFT, SCOPED AND TAKEN; NOT CLOSED. (1) CHEAPEST REFUTATION FIRST (3e): the stated cause was 'held over 4x by SlicedMasks.fibres = 0.25'. Measured every mask's four edges on the render-resolution crop (per column over the middle 80% of the edge, first depth at which alpha >= 0.85 holds for 1/100 of the crop, p99): tear_032 [L,T,R,B] = [0.298, 0.186, 0.042, 0.066], so settings.notify's bottom band was held at 0.25 to protect fibres ending at 0.066. CAUSE SURVIVED. The same measurement found the uniform floor TOO SHALLOW on some edges (tear_014 bottom 0.282, tear_040 top 0.246 at p99, tear_005 top reads 0.345 with corner columns in and 0.095 without), so a single constant was wrong in both directions. (2) THE CHANGE: tools/pack_assets.py fibre_depths() writes `fibres` [l,t,r,b] on every tear mask row of INDEX.json; LibraryEntry.fibres; SlicedMasks.bandsFor(src,dst,near,far) gives the fixed bands way exactly as sliceFor does but per edge, as evenly as each edge's own floor allows, never thinner than it (and never thicker than 0.4); SlicedMasks.slicesFor is used by both SlicedMasks.at and CaptureHooks, so the sidecar's centre is the slice that was drawn; the mask entry now declares `slice` [left, top] and `slice_far` [right, bottom]. sliceFor and the 0.25 constant are unchanged and remain the fallback for a mask with no measurement. (3) PREDICTED BEFORE THE TEST, off the committed sidecars in Python (/tmp script, same arithmetic): settings.notify 4.89 -> 4.00 (the slice reaches the cap it aims at; it does not overshoot, because sliceFor keeps the band as thick as the cap allows), 17_setup_pwa tear_001 6.96 -> 6.51, the other six big pieces unchanged. Over the 4x floor: 2 -> 1. NO piece got worse. test/a_big_sheet_is_sliced_at_its_own_fibres_test.dart reproduced all eight to the printed digit. RE-BROKEN: fibresOf returning the uniform floor -> two tests fail (count stays 2 -> 2). A first run caught a floating-point band 1e-17 under its floor (0.214 - 0.21399999999999997); fixed in bandsFor with max(), not in the test. (4) THE SETUP SHEET IS IMPOSSIBLE BY THIS ROUTE, AND IT IS ARITHMETIC: drawn 4594 px against a 1154-px finer mask is D = 3.98; centre = (D - S)/(1 - S) <= 4 needs S <= (4 - D)/3 = 0.0067 of the mask in both fixed bands together, and tear_001's own fibres are 0.245 + 0.214. Only more source height gets it under (a mask rendered taller than 2048, which is a new render and FENCED by render_decision_at_firing_50), or a sheet that is not 4594 px tall (a layout decision, not this item's). (5) NOT DONE: the ruled-lines-through-the-tear clause has no ruler and was not measured; the mean-tread clause (a) was not re-traced on a capture. The lit edge (NineSliced, fixed 0.4) is still sliced differently from the mask on a big sheet -- recorded for rank 7, which is about that edge, and not changed here."
+   "worked_at_firing_55": "THE EDGE-BAND FLOOR FIRING 54 LEFT, SCOPED AND TAKEN; NOT CLOSED. (1) CHEAPEST REFUTATION FIRST (3e): the stated cause was 'held over 4x by SlicedMasks.fibres = 0.25'. Measured every mask's four edges on the render-resolution crop (per column over the middle 80% of the edge, first depth at which alpha >= 0.85 holds for 1/100 of the crop, p99): tear_032 [L,T,R,B] = [0.298, 0.186, 0.042, 0.066], so settings.notify's bottom band was held at 0.25 to protect fibres ending at 0.066. CAUSE SURVIVED. The same measurement found the uniform floor TOO SHALLOW on some edges (tear_014 bottom 0.282, tear_040 top 0.246 at p99, tear_005 top reads 0.345 with corner columns in and 0.095 without), so a single constant was wrong in both directions. (2) THE CHANGE: tools/pack_assets.py fibre_depths() writes `fibres` [l,t,r,b] on every tear mask row of INDEX.json; LibraryEntry.fibres; SlicedMasks.bandsFor(src,dst,near,far) gives the fixed bands way exactly as sliceFor does but per edge, as evenly as each edge's own floor allows, never thinner than it (and never thicker than 0.4); SlicedMasks.slicesFor is used by both SlicedMasks.at and CaptureHooks, so the sidecar's centre is the slice that was drawn; the mask entry now declares `slice` [left, top] and `slice_far` [right, bottom]. sliceFor and the 0.25 constant are unchanged and remain the fallback for a mask with no measurement. (3) PREDICTED BEFORE THE TEST, off the committed sidecars in Python (/tmp script, same arithmetic): settings.notify 4.89 -> 4.00 (the slice reaches the cap it aims at; it does not overshoot, because sliceFor keeps the band as thick as the cap allows), 17_setup_pwa tear_001 6.96 -> 6.51, the other six big pieces unchanged. Over the 4x floor: 2 -> 1. NO piece got worse. test/a_big_sheet_is_sliced_at_its_own_fibres_test.dart reproduced all eight to the printed digit. RE-BROKEN: fibresOf returning the uniform floor -> two tests fail (count stays 2 -> 2). A first run caught a floating-point band 1e-17 under its floor (0.214 - 0.21399999999999997); fixed in bandsFor with max(), not in the test. (4) THE SETUP SHEET IS IMPOSSIBLE BY THIS ROUTE, AND IT IS ARITHMETIC: drawn 4594 px against a 1154-px finer mask is D = 3.98; centre = (D - S)/(1 - S) <= 4 needs S <= (4 - D)/3 = 0.0067 of the mask in both fixed bands together, and tear_001's own fibres are 0.245 + 0.214. Only more source height gets it under (a mask rendered taller than 2048, which is a new render and FENCED by render_decision_at_firing_50), or a sheet that is not 4594 px tall (a layout decision, not this item's). (5) NOT DONE: the ruled-lines-through-the-tear clause has no ruler and was not measured; the mean-tread clause (a) was not re-traced on a capture. The lit edge (NineSliced, fixed 0.4) is still sliced differently from the mask on a big sheet -- recorded for rank 7, which is about that edge, and not changed here.",
+   "rank_before_firing_58": 2
   },
   {
    "id": "a-barcode-of-vertical-bars-is-painted-across-the-paper-on-four-artifacts",
@@ -443,7 +442,7 @@
    "state": "open",
    "attempts": 1,
    "closed_by": null,
-   "rank": 37,
+   "rank": 44,
    "owner_priority": "harness-that-unblocks-seeing",
    "looked-at_at_firing_21": "NOT FIXED, BUT LOOKED AT DIRECTLY AND NARROWED, SO THE NEXT FIRING DOES NOT START FROM THE PROSE. Cropping 13_messenger_states.png at y 1250-1620 and enlarging it shows what the column profile was reading: the bars are not laid ACROSS the paper, they HANG BELOW one particular note -- the flat tan rectangle with the hard dark right and bottom edge -- like fibres pulled off its bottom edge, tapering downward, all starting at exactly the sheet's bottom and ending at varying depths. That is the shape of a baked edge or shadow asset magnified until its own detail becomes bands, and the sheet it hangs from is the SAME flat unrendered rectangle this capture shows for the-backing-surface-of-three-screens-is-one-rgb-value. TWO CONSEQUENCES. (1) It is most likely the same family as no-surface-in-this-app-is-drawn-at-its-own-resolution and should be read with the __deskPaperSurfaces declaration beside the still rather than from the pixels alone -- that handle exists now and writes <artifact>.surfaces.json. (2) THE STILLS IT WAS MEASURED ON PREDATE FIRING 20'S hashOf FIX, which changed every paper, tear and patch assignment on the PWA. Chasing this on the committed stills is chasing an artifact of a bug that is already closed. Re-measure on a fresh capture first: if the comb is still there, the surfaces sidecar will name the asset and its magnification in one read.",
    "worked_at_firing_29": "BOTH DRAWING SITES REPLACED, BOTH CLAUSES MEASURED AT THE WIDGET, AND THE ITEM STAYS OPEN BECAUSE ITS MEASUREMENT IS A CAPTURE. The cause was already established -- firing 28's journal named it and this firing did not re-derive it. Two widgets drew with Canvas.drawRect: _WavePainter in regions/chat/blob_widgets.dart, filling with Theme.of(context).colorScheme.onSurface -- the last Material scheme colour in an app that has none anywhere else -- and _Dial in material/desk.dart, four flat Containers under a docstring that already said 'drawn as tally strokes rather than as a progress bar'. The dial is on the partner strip at the top of EVERY screen, which is why one defect was measured on six artifacts.\nTHE FIX IS THE FILE'S OWN PRIMITIVE. marks.dart has had _Hand since it was written -- a stroke that wobbles, leans and swells -- and every other affordance in the app is one. `Tally` is a row of them: one stroke per bar, four points each so the middle segment carries the swell (three points gives two segments and both of them are an end, so a three-point stroke has one pressure all the way down), and two pressures rather than one ink at two opacities, because alpha standing in for a distinction is rank 11's item and a voice that has been played is not a faint voice.\nMEASURED AT THE WIDGET, over a 160x28 box with a twelve-sample waveform, reading the painted pixels:\n  distinct ink values   bars 9   ->  strokes 184   (the item: 'bar interiors perfectly constant')\n  distinct stroke tops  bars 9   ->  strokes 14    (the item: 'all beginning and ending at exactly the same y' -- 9 is one per distinct height, which is what centred rects give)\n  inked columns of 160  bars 96  ->  strokes 24    (60% -> 15%; the item measured the artifact barcode at 670 px, 47% of frame width)\nThe dial at its own size reads 4 distinct tops and 83 ink values across 8 inked columns.\nTHE RE-BREAK IS KEPT STANDING RATHER THAN DONE ONCE AND DESCRIBED. app/test/a_voice_is_drawn_by_a_hand_test.dart carries five tests, two of which hold a verbatim _BarPainter -- the old code -- and assert that it FAILS both clauses. If anything ever makes Tally draw bars again those two go green and say so.\nGATES: flutter analyze 0 errors; 179 tests pass, up from 174, with the year packed at 84 MB.\nWHY IT STAYS OPEN: the item's measurement is 'a column-profile check over every still reports <= 8 mean-crossings in any 30-row band of a paper region, against today's 21-68'. That is pixels of a capture, and a capture is OBSERVE's. The widget numbers above are necessary and are not that measurement. THE NEXT CAPTURE CLOSES THIS OR REOPENS IT -- and note that no committed tool computes mean-crossings either, which is the third measurement this firing found stated only in prose.",
@@ -455,7 +454,9 @@
    "struck_at_firing_43": "STRUCK: `<= 8 mean-crossings in any 30-row band inside that rect` and `zero bar interiors of perfectly constant value`. The first is disqualified by its own earning (it does not move across a known repair) and the second is satisfied by any glyph stem, which is writing and not a bar. Both are replaced above rather than deleted.",
    "rank_before_firing_43": 15,
    "rank_before_firing_50": 39,
-   "rank_before_firing_53": 45
+   "rank_before_firing_53": 45,
+   "note_at_firing_58": "The receipt_01 stock carries a rendered barcode at roughly 36-42% of its height (seen off the stock at firing 58), and every artifact this item names draws receipt_01 somewhere (13_messenger_states.report.json declares two visible rows on it). the-receipt-stock-carries-its-printout-and-three-screens-write-on-it will probably close this item's defect; this item stays open until its own band-range ruler reads the pair.",
+   "rank_before_firing_58": 37
   },
   {
    "id": "one-variant-per-glyph-and-zero-pressure-variance",
@@ -466,7 +467,7 @@
    "state": "open",
    "attempts": 2,
    "closed_by": null,
-   "rank": 4,
+   "rank": 14,
    "owner_priority": "the-ui",
    "rank_before_firing_33": 20,
    "rank_before_firing_35": 17,
@@ -483,7 +484,9 @@
    "decided_at_firing_53": "THREE ROUTES FIRING 52 SENT TO DESIGN, DECIDED ONE AT A TIME. (1) CLAUSE 3 AS WRITTEN IS IMPOSSIBLE, NOT EXHAUSTED, and the reason is arithmetic, not the route. DIRECTION.md:15 and :93 fix five variants per glyph. The committed evidence/logs/*.hands.json have declared runs with up to 9 instances of one character: 03_us 9, 17_setup_pwa 9, 05_settings 8, 12_search 8, 14_media_viewer 7. On 5 of 11 stills two instances MUST share an outline, at any effort, by any shaping. So the clause is re-scoped to the avoidable form (distinct >= min(instances, 5)). The same sidecars read every repeating pair as avoidable today (distinct < min(instances, 5) in all 275 listed; these sidecars predate firing 52's buckets). (2) A LONGER calt CONTEXT IS IMPLEMENT'S, UNDER CURRENT LAW. DIRECTION.md:95 names the mechanism: variants cycle `through calt`. A chaining-contextual rule with a backtrack longer than one glyph is still calt, so no law moves. Costed only as rule count. (3) APP-SIDE SHAPING IS STRUCK AS A ROUTE. It replaces the mechanism DIRECTION.md:95 names, so it would be a DESIGN amendment. It is not needed while (2) is uncosted, and it is not sent to cycle 6. (4) VARIANTS BUILT BY CONSTRUCTION ARE IMPLEMENT'S, UNDER CURRENT LAW. DIRECTION.md:93 already says the variants come `from authored stroke skeletons`. Making the five differ in construction (entry and exit strokes, onestroke/fast alternates in hands.json) keeps five variants and the same build, so it is authoring inside the law, not a design decision. The cost firing 48 recorded stands: the geometry build is not byte-reproducible, so a rebuild re-rolls every outline, and the hero must be re-read after it. RANK 4: 2 points of material_truth judged at 300% on the Chat hero, and every route is now open to IMPLEMENT. Suggested order: clause 3 first (GSUB only, cheap, and --features-only already exists), then clause 1.",
    "rank_before_firing_53": 9,
    "worked_at_firing_54": "THE HARNESS HALF ONLY, WHICH THE ITEM NAMES AS BLOCKING ITS OWN MEASUREMENT. tools/check/hands.py now counts pairs_avoidable (a character repeating inside one declared run with fewer distinct outlines than min(instances, variants), variants read per face from tools/handwriting/hands.json) beside pairs_repeating, and its floor is the re-scoped clause 3: pairs_avoidable == 0 and stalls_same_letter == 0. READ ON THE COMMITTED SIDECARS, shipped vs --no-calt: 02_chat 19/53 avoidable (27 no-calt), same-letter stalls 1 (8); 03_us 26/54 (36), 0 (5); 17_setup_pwa 57/89 (60), 1 (4). Every repeating pair today is avoidable, which reproduces firing 53's reading of the logs. NOT EARNED on a case where avoidable < repeating, because no font state produces one yet; the first calt that reaches a perfect cycle on a 9-instance run is that case. THE LONGER-CONTEXT calt, COSTED AND NOT STARTED: GSUB chain rules are applied left to right and backtrack sees substituted glyphs, so 'the nearest earlier instance of this letter took v_k, so take v_(k+1)' is expressible as one rule per (letter, k, distance d) with @ANY at the d-1 positions between, ordered by d so the nearest match wins. The distance a same-run repeat spans is the cost: letters ~60 x 5 variants x D. At D = 40 (a hero line) that is ~12,000 chain rules per face, against today's eight subtables; the web renderer's GSUB size and shaping time on a 13-month thread are unmeasured and are the thing to measure FIRST, on a scratch --features-only build, before any rule is written into build.py. Not started because it is a multi-hour font change and this firing's lease was spent on ranks 1-3 and the capture that measures them.",
-   "worked_at_firing_55": "CLAUSE 3's LONGER CONTEXT, COSTED FIRST AND THEN SHIPPED AT THE DEPTH THE COSTING ALLOWED; NOT CLOSED. (1) THE MEASUREMENT THAT COULD REFUSE THE ROUTE CAME FIRST (firing 54: 'GSUB size and shaping time ... are the thing to measure FIRST, on a scratch --features-only build'). Scratch fonts off the shipped TTFs, shaped with HarfBuzz over the seeded year's 4,251 messages (274,394 characters) and counted by tools/check/hands.py over all 206 declared runs. Depth 0 rebuilt the shipped fonts BYTE-IDENTICALLY, which is what made the harness trustworthy. (2) THE MECHANISM, still `calt` (DIRECTION.md:95), so no law moves: a third pass in which a letter looks back 1..D glyphs, nearest first, for its own nearest earlier instance, and in variant k takes k+1. Successive instances within D of each other therefore walk all five outlines before one returns, and a same-letter neighbour can never repeat. Cost is letters x 5 x D chain rules (109 letters). (3) WHAT THE COSTING SAID: one lookup for all letters at D=8 shaped at 6.1 us/char against 0.2 (HarfBuzz tries every subtable at every glyph) -- REFUSED; one lookup per letter at D=8: 2.3 us/char, same result. Per depth (avoidable repeats over the declared runs / us per char / bytes per face): 0: 256 / 0.2 / -; 8: 166 / 2.3 / +162 KB; 12: 107 / 3.5 / +275 KB; 14: 88 / 4.6. D=16 and D=32 DO NOT PACK: GSUB's 16-bit offsets overflow on the chain rules' shared coverage tables even as extension lookups, and hb.repack fails too. So the route is bounded at about 14 by the table format, not by effort; that is 'exhausted past 14 on this packing', not impossible (splitting @ANY per lookup or a newer repacker might pack deeper, unmeasured). (4) SHIPPED AT D=12 (build.CALT_MEMORY): assets/fonts rebuilt with --features-only (outlines untouched, only GSUB and head differ from the scratch, OS/2 usMaxContext 2 -> 13, set by hand because fontTools' calculator does not descend into extension lookups and read 1). MEASURED on the committed sidecars: pairs_avoidable 256 -> 105, same-letter stalls 2 -> 0, 02_chat 19 -> 2 (the two left are NoorHand `n` and `t` in the hero, 23+ glyphs apart, past the memory); pairs 567 and runs 206 unchanged (population). Neither hand has a `·`, so .notdef is in @ANY and the memory crosses it in one-face shaping; on the glass a missing glyph falls back to another font and splits the run, so there it cannot. (5) THE GUARD: tools/check/hands_selftest.py holds the exact property (every letter inside the memory takes the variant after its predecessor) over every declared run plus the hero, and names both o's of `room` (o.v4, o). Shipped fonts: 0 failures over 208 runs. RE-BROKEN on the fonts from before this firing: 668 failures, avoidable 256. Wired into capture.sh beside hands.py. (6) WHAT IS LEFT: clause 3 (pairs_avoidable == 0) needs D past the table limit or a different encoding; clause 1 (MAD >= 15 between outlines) and clause 2 are the variants' SHAPES, untouched here. Bundle 86.3 -> 86.9 MB."
+   "worked_at_firing_55": "CLAUSE 3's LONGER CONTEXT, COSTED FIRST AND THEN SHIPPED AT THE DEPTH THE COSTING ALLOWED; NOT CLOSED. (1) THE MEASUREMENT THAT COULD REFUSE THE ROUTE CAME FIRST (firing 54: 'GSUB size and shaping time ... are the thing to measure FIRST, on a scratch --features-only build'). Scratch fonts off the shipped TTFs, shaped with HarfBuzz over the seeded year's 4,251 messages (274,394 characters) and counted by tools/check/hands.py over all 206 declared runs. Depth 0 rebuilt the shipped fonts BYTE-IDENTICALLY, which is what made the harness trustworthy. (2) THE MECHANISM, still `calt` (DIRECTION.md:95), so no law moves: a third pass in which a letter looks back 1..D glyphs, nearest first, for its own nearest earlier instance, and in variant k takes k+1. Successive instances within D of each other therefore walk all five outlines before one returns, and a same-letter neighbour can never repeat. Cost is letters x 5 x D chain rules (109 letters). (3) WHAT THE COSTING SAID: one lookup for all letters at D=8 shaped at 6.1 us/char against 0.2 (HarfBuzz tries every subtable at every glyph) -- REFUSED; one lookup per letter at D=8: 2.3 us/char, same result. Per depth (avoidable repeats over the declared runs / us per char / bytes per face): 0: 256 / 0.2 / -; 8: 166 / 2.3 / +162 KB; 12: 107 / 3.5 / +275 KB; 14: 88 / 4.6. D=16 and D=32 DO NOT PACK: GSUB's 16-bit offsets overflow on the chain rules' shared coverage tables even as extension lookups, and hb.repack fails too. So the route is bounded at about 14 by the table format, not by effort; that is 'exhausted past 14 on this packing', not impossible (splitting @ANY per lookup or a newer repacker might pack deeper, unmeasured). (4) SHIPPED AT D=12 (build.CALT_MEMORY): assets/fonts rebuilt with --features-only (outlines untouched, only GSUB and head differ from the scratch, OS/2 usMaxContext 2 -> 13, set by hand because fontTools' calculator does not descend into extension lookups and read 1). MEASURED on the committed sidecars: pairs_avoidable 256 -> 105, same-letter stalls 2 -> 0, 02_chat 19 -> 2 (the two left are NoorHand `n` and `t` in the hero, 23+ glyphs apart, past the memory); pairs 567 and runs 206 unchanged (population). Neither hand has a `·`, so .notdef is in @ANY and the memory crosses it in one-face shaping; on the glass a missing glyph falls back to another font and splits the run, so there it cannot. (5) THE GUARD: tools/check/hands_selftest.py holds the exact property (every letter inside the memory takes the variant after its predecessor) over every declared run plus the hero, and names both o's of `room` (o.v4, o). Shipped fonts: 0 failures over 208 runs. RE-BROKEN on the fonts from before this firing: 668 failures, avoidable 256. Wired into capture.sh beside hands.py. (6) WHAT IS LEFT: clause 3 (pairs_avoidable == 0) needs D past the table limit or a different encoding; clause 1 (MAD >= 15 between outlines) and clause 2 are the variants' SHAPES, untouched here. Bundle 86.3 -> 86.9 MB.",
+   "note_at_firing_58": "DISPUTED FINDING MEASURED, as DIAGNOSE asked. material_truth says the o's in 'noor' and the g's in 'goodnight' on 02_chat are pixel-identical. evidence/logs/02_chat.hands.json: 23 runs read, 53 pairs, 2 repeating, both avoidable and both in 'week one, and the room smells right again' -- none in the named words. So the shaper picks different variants there. Both readings hold only if the variants differ too little to see, which is exactly this item's `variants built by construction` route: the measurement to add is a pixel difference between the variants of one letter as drawn, not glyph-id identity.",
+   "rank_before_firing_58": 4
   },
   {
    "id": "the-feeling-objects-are-sprites-composited-over-the-scene",
@@ -561,7 +564,7 @@
    "what_would_unblock": "One decision, and it is docs/COLOR.md's: whether the section 5 ground and mid chroma floors apply unchanged to a screen with no desk in it (17_setup_pwa) and to the viewer (14_media_viewer). Answer that and this item closes on the measurement above -- every ceiling holds, the per-band floors pass on every screen the lamp actually lights, and across_the_set.mean_chroma is owed by one-coloured-thing-per-screen and families-b-c-and-d-reach-the-glass rather than by the rig.",
    "row": "visual_design + material_truth",
    "points": 0.5,
-   "rank": 48,
+   "rank": 54,
    "owner_priority": "the-ui",
    "measured_at_firing_23": "REMEASURED AT FIRING 23: the set-level clause is MET for the first time. across_the_set.mean_chroma is 0.0452 against the item's `>= 0.045` (it was 0.0375 at firing 16). The per-still floors are what is left: chroma_by_band.ground.mean_chroma breaches on 04_moments (0.0213), 14_media_viewer (0.023) and 17_setup_pwa (0.0256), and mid.mean_chroma breaches on 17_setup_pwa (0.0113). No section 5 CEILING is breached anywhere, and the legibility clause is satisfied in the sense that matters -- the matched-run rate did not rise materially (0.2331 -> 0.2358). Three stills and one band, not a library-wide re-render.",
    "closed_note": "PARTLY DONE ALREADY, which no entry said until firing 26 checked: all 27 day stocks under assets/paper have changed since the rig fix a6f46fd, so the paper half of this re-render is complete. What is still owed is 38 files in other families -- objects 21 of 75, bits 16 of 44, shell 1 of 2 -- and tools/render_queue6.sh is the resumable harness for them. The 27 dusk paper files are untouched by design; the dusk rig was never the fault.",
@@ -578,7 +581,8 @@
    "points_before_firing_53": 1.5,
    "needs_stage": "DESIGN (cycle 6)",
    "decided_at_firing_53": "SETTLED: WHAT IT IS ACTUALLY ABOUT. The item was three clauses under one title, and they have come apart. (A) THE LAMP HALF IS DONE. There is nothing left to render under the corrected lamp. All 27 day paper stocks changed after the rig fix (closed_note, firing 26). desk.png was relit at firing 5. 15 of 24 day object bodies re-rendered pixel-identical and the rest within noise or seed (firing 51). The bits are rendered. The aperture is exhausted (the lamp item's exhausted_at_firing_52). So this half is closed here, on firing 51's measurement and firing 52's agreement. (B) THE SET-MEAN CLAUSE (across_the_set.mean_chroma >= 0.045, 0.0448 on evidence/palette.json as committed) MOVES TO one-coloured-thing-per-screen, WITH 1.0 OF THIS ITEM'S 1.5 POINTS. A mean 0.0002 short is owed by accent area, and firing 5's lamp-only prediction (about 0.0435) said so before any leg ran. (C) THE PER-STILL GROUND AND MID FLOORS STAY HERE, WITH 0.5. They are ground-band chroma: paper and desk. Accents do not move them. Paper renders are unauthorised, and pushing the illuminant further is refused (COLOR.md 7, per ranked_at_firing_50). So they have no IMPLEMENT route, and the COLOR.md question this item has carried since firing 23 is DESIGN's. The item goes to the parked band.",
-   "rank_before_firing_53": 6
+   "rank_before_firing_53": 6,
+   "rank_before_firing_58": 48
   },
   {
    "id": "one-coloured-thing-per-screen",
@@ -617,7 +621,7 @@
    "attempts": 0,
    "state": "open",
    "closed_by": null,
-   "rank": 49,
+   "rank": 55,
    "owner_priority": "the-ui",
    "rank_before_firing_33": 26,
    "rank_before_firing_35": 23,
@@ -627,7 +631,8 @@
    "rank_before_firing_50": 12,
    "needs_stage": "DESIGN (cycle 6), after one-coloured-thing-per-screen lands",
    "decided_at_firing_53": "PARKED. Its family-D half is carried by the clover that one-coloured-thing-per-screen will place, so re-read widest_hue_gap_deg and accent_fraction_by_family on the capture after that lands. Families B and C need paper renders or new objects. The paper leg was conditional on the aperture probe, and the lamp item's proof shows no stop ever meets the condition, so the leg is unauthorised under the current rig for good. New objects are refused (render_decision_at_firing_50). Beyond the clover, nothing on this item is IMPLEMENT's until DESIGN at cycle 6.",
-   "rank_before_firing_53": 11
+   "rank_before_firing_53": 11,
+   "rank_before_firing_58": 49
   },
   {
    "id": "paper-is-the-median-pixel",
@@ -641,7 +646,7 @@
    "what_would_unblock": "A decision about what on a room screen is allowed to be mid-toned over several per cent of the frame, which is docs/COLOR.md's and DIRECTION.md's to make, not an IMPLEMENT firing's. Firing 14 measured that the asset route cannot do it: the cut-edge shadow and the cut-edge light together move 10_first_run's value_bands.mid 0.0212 -> 0.0240 against a floor of 0.04, and no reach or sheet count gets past 0.0281. A flat rim ten device px wide at the midpoint between desk and paper reads 0.0540, so an AREA at a middle lightness closes it and an edge does not. Everything else this item asked for is done and measured: the p50, the ground band and the drift all pass, and 10_first_run's mid band is the whole of what is left.",
    "row": "visual_design + material_truth",
    "points": 1,
-   "rank": 6,
+   "rank": 18,
    "owner_priority": "the-ui",
    "measured_at_firing_23": "REMEASURED AT FIRING 23 AND MOST OF IT IS DONE. lightness.p50 now passes on all three stills this item names -- 02_chat was 0.575, 04_moments 0.495, 10_first_run 0.495, and none of them breaches now. The only p50 breach left in the set is 12_search at 0.6488, which this item did not name. value_bands.mid still breaches on 10_first_run (0.0211) and 12_search (0.0385) but no longer on 04_moments. lightness_drift_room is 0.2929 against 0.452 and a ceiling of 0.20.",
    "rank_before_firing_33": 27,
@@ -650,7 +655,8 @@
    "measured_at_firing_49": "THREE OF FOUR CLAUSES NOW HOLD, off firing 47's committed set: lightness.p50 in [0.78, 0.95] on every room (04_moments lowest at 0.7935), value_bands.ground <= 0.50 everywhere, lightness_drift_room 0.1366 against 0.20. ONLY value_bands.mid >= 0.04 FAILS, on 02_chat 0.0366, 05_settings 0.0348, 10_first_run 0.0163, 13_messenger_states 0.033 and 17_setup_pwa 0.0384. FOUR OF THOSE FIVE CROSSED BETWEEN FIRING 39's CAPTURE (b9130b1) AND FIRING 47's: 02 0.048 -> 0.0366, 05 0.0431 -> 0.0348, 13 0.0446 -> 0.033, 17 0.0516 -> 0.0384. The cheap hypothesis was that firings 44-46's contact shadow took the mid tones away. IT COULD NOT BE CONFIRMED, BECAUSE THE RULER SAMPLES SOMETHING ELSE: palette.py downsamples every still to a 700 px long edge, bilinear, before banding, and at that scale ink strokes and printed rules blur into the middle third. At full resolution 02_chat's mid band RISES 0.0251 -> 0.0303 across the same pair while the 700 px reading falls. So on this ruler the mid clause is measuring stroke density as much as `depth`, and no law about shadows may be derived from it until someone establishes what the 700 px mid band is made of. palette.py was not changed.",
    "rank_before_firing_50": 13,
    "rank_before_firing_53": 13,
-   "measured_at_firing_55": "READ OFF FIRING 54's COMMITTED SET, NO CAPTURE. THE ITEM HAS MOVED FURTHER THAN ITS LAST NOTE SAYS. evidence/palette.json floors: of this item's four clauses only TWO breaches remain in the whole set -- 04_moments lightness.p50 0.7787 (floor 0.78) and 10_first_run value_bands.mid 0.0278 (floor 0.04). lightness_drift_room 0.151 (<= 0.20); ground <= 0.50 everywhere; value_bands.mid now >= 0.04 on EIGHT of nine room stills (01 0.0556, 02 0.0468, 03 0.0578, 04 0.1456, 05 0.0455, 12 0.0682, 13 0.0424, 17 0.0489), where firing 49 had five failing. (1) 04_moments' p50 IS THE PHOTOGRAPHS, AND THEY ARE DEMO CONTENT. The 17 cover surfaces with no paper/shell asset in 04_moments.surfaces.json are the seeded photographs; they are 40.1% of the frame and dark renders. p50 without them: 0.9206 at palette.py's 700 px, 0.9222 at full resolution. With them at FULL resolution it is 0.8071 and PASSES: the breach is 0.0013 under the floor and exists only at the 700 px sample. Paper IS the median pixel of everything that is not a seeded photograph. The owner's steer deprioritises the photographs; this clause is not moved by working on it. (2) WHAT THE 700 px MID BAND IS MADE OF, which firing 49 said must be established before any law is derived from it. For every 700 px pixel in the mid third, the full-resolution block under it was read with the same L thresholds: where >= half the block is itself mid it is TRUE AREA, otherwise it is a BLUR of darker and lighter things (ink, printed rules, torn edges) averaged into the middle. Per room still, mid = area + blur: 01 0.0278+0.0278, 02 0.0231+0.0237, 03 0.0348+0.0230, 04 0.1192+0.0264, 05 0.0179+0.0275, 10 0.0162+0.0117, 12 0.0263+0.0419, 13 0.0187+0.0237, 17 0.0197+0.0292. So 30-60% of every reading is stroke and edge density, and on NO room still except 04_moments does true mid AREA reach 0.04. The eight passes are passes of writing density as much as of depth; 10_first_run fails because it is the emptiest screen in the set (one sheet, one note), not because it is flatter than the others. WHAT FOLLOWS: the value_bands.mid clause cannot tell depth from word count at the sample it is read at, which is WORKER_PROMPT 3d's 'check what a ruler samples'. It should be re-judged in DIAGNOSE (read at full resolution, or with ink and rules masked by the text sidecar's declared rects) before any firing puts area on 10_first_run to lift it. Left OPEN with that recommendation; not re-filed as a harness item because it blocks no ranked item (3b)."
+   "measured_at_firing_55": "READ OFF FIRING 54's COMMITTED SET, NO CAPTURE. THE ITEM HAS MOVED FURTHER THAN ITS LAST NOTE SAYS. evidence/palette.json floors: of this item's four clauses only TWO breaches remain in the whole set -- 04_moments lightness.p50 0.7787 (floor 0.78) and 10_first_run value_bands.mid 0.0278 (floor 0.04). lightness_drift_room 0.151 (<= 0.20); ground <= 0.50 everywhere; value_bands.mid now >= 0.04 on EIGHT of nine room stills (01 0.0556, 02 0.0468, 03 0.0578, 04 0.1456, 05 0.0455, 12 0.0682, 13 0.0424, 17 0.0489), where firing 49 had five failing. (1) 04_moments' p50 IS THE PHOTOGRAPHS, AND THEY ARE DEMO CONTENT. The 17 cover surfaces with no paper/shell asset in 04_moments.surfaces.json are the seeded photographs; they are 40.1% of the frame and dark renders. p50 without them: 0.9206 at palette.py's 700 px, 0.9222 at full resolution. With them at FULL resolution it is 0.8071 and PASSES: the breach is 0.0013 under the floor and exists only at the 700 px sample. Paper IS the median pixel of everything that is not a seeded photograph. The owner's steer deprioritises the photographs; this clause is not moved by working on it. (2) WHAT THE 700 px MID BAND IS MADE OF, which firing 49 said must be established before any law is derived from it. For every 700 px pixel in the mid third, the full-resolution block under it was read with the same L thresholds: where >= half the block is itself mid it is TRUE AREA, otherwise it is a BLUR of darker and lighter things (ink, printed rules, torn edges) averaged into the middle. Per room still, mid = area + blur: 01 0.0278+0.0278, 02 0.0231+0.0237, 03 0.0348+0.0230, 04 0.1192+0.0264, 05 0.0179+0.0275, 10 0.0162+0.0117, 12 0.0263+0.0419, 13 0.0187+0.0237, 17 0.0197+0.0292. So 30-60% of every reading is stroke and edge density, and on NO room still except 04_moments does true mid AREA reach 0.04. The eight passes are passes of writing density as much as of depth; 10_first_run fails because it is the emptiest screen in the set (one sheet, one note), not because it is flatter than the others. WHAT FOLLOWS: the value_bands.mid clause cannot tell depth from word count at the sample it is read at, which is WORKER_PROMPT 3d's 'check what a ruler samples'. It should be re-judged in DIAGNOSE (read at full resolution, or with ink and rules masked by the text sidecar's declared rects) before any firing puts area on 10_first_run to lift it. Left OPEN with that recommendation; not re-filed as a harness item because it blocks no ranked item (3b).",
+   "rank_before_firing_58": 6
   },
   {
    "id": "the-corrected-lamp-pins-the-red-channel",
@@ -662,7 +668,7 @@
    "note": "FILED, NOT ACTED ON, and deliberately. Whatever fixes this is a rig-level change and re-renders every day asset in assets/ -- the four firings and the whole library that answered the owner's warmth complaint. That is not an IMPLEMENT firing's call to make on the side of another item, so it is in the queue for ADDRESS to rank, per loop/WORKER_PROMPT.md 3b. TWO THINGS TO WEIGH WHEN IT IS RANKED. First, a clipped channel carries no hue and no tooth, which is the same argument that made the tears' un-clipping worth 3.44x their chroma at firing 6 -- so this may be taking back part of what the relight bought, and the chroma numbers in evidence/palette.json were measured WITH it. Second, it is a candidate mechanism for the legibility half: ink contrast against a ground whose red is pinned loses the red component of that contrast, and legibility went 25.28% -> 30.70% across this same relight. Firing 9 showed 47 of those 54 extra runs were the detector and 7 were real text. Whether those 7 are this is UNTESTED and is stated here as a hypothesis with a way to test it, not as a finding. DO NOT fix this by moving DAY_COLOR back. The colour is the owner's own complaint answered and docs/COLOR.md 5 and 6 were written to be satisfiable together. The quantity with no gate on it is the exposure, not the temperature.",
    "row": "visual_design + material_truth",
    "points": 0.5,
-   "rank": 47,
+   "rank": 53,
    "owner_priority": "the-ui",
    "rank_before_firing_33": 28,
    "rank_before_firing_35": 25,
@@ -675,7 +681,8 @@
    "measurement_before_firing_53": "a gate beside tools/check/illuminant.py that fails on per-channel headroom, not just on colour temperature: no day asset with more than 1% of its opaque pixels at 255 in any single channel. It must fail on the library as committed today (38 files breach) and pass after whatever fixes it. A probe render of fold frame 0000 at a -0.30 stop cleared the clipping entirely (R=255 on 0.9564 of pixels -> 0.0000) and raised its surfaces.py patch_std 0.831 -> 1.027, so an aperture is one route and it is measured, not assumed.",
    "needs_stage": "DESIGN (cycle 6), and the folds fence",
    "decided_at_firing_53": "PARKED FOR DESIGN AT CYCLE 6. NOT CLOSED, NOT STRUCK. The defect is real (38 files pin a channel) and the clause is reachable. The aperture cannot reach it: firing 52's proof shows both conditions fall as the stop falls, and the ranges never meet. The roll-off route is not IMPLEMENT's under current law, and two blockers were checked under 3e, one grep each, rather than believed. (1) blender/rig/common.py:164 sets `view_transform = \"Standard\"` with the comment `a scan, not a filmic photograph`. That is a stated design intent, and a roll-off (AgX or Filmic) reverses it. (2) blender/folds/fold.py:326 calls the same common.render_settings, so a roll-off changes the fenced folds too. Paper that is rolled off would no longer match a fold that is not, and the folds re-render is fenced and outside every authorisation. So the item goes to the parked band, where IMPLEMENT does not reach it. It must not be re-proved: no stop between -0.18 and -0.30 is worth another probe. What DESIGN would need is on the item already: firing 51's four-file probe table and the two conditions.",
-   "rank_before_firing_53": 2
+   "rank_before_firing_53": 2,
+   "rank_before_firing_58": 47
   },
   {
    "id": "the-relit-tear-edge-is-a-dark-band",
@@ -734,7 +741,7 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 23,
+   "rank": 30,
    "owner_priority": "harness",
    "firing_notes": {
     "firing_31": "A SECOND INSTANCE, AND THE SAME 5.5. At firing 31 the builder sheet scored visual_design 9 against a critic's 14.5 -- a gap of 5.5 again, and since score.py takes the lower, the sheet cost the build 5.5 points it had earned. THE CAUSE IS NAMEABLE THIS TIME: the sheet leaned on legibility.json's headline of 17 below-floor runs in 358. The critic cropped all 17 at 300% and found 15 of them to be instrument artifacts -- the adversarial-ground window samples the glyphs' own strokes as ground (ground_lum 0.07 against ground_lum_ring 0.85). The builder then made the same crop itself, on 01_pulse's word 'open', reported at 1.09:1: it is near-black ink on pale cream and is one of the boldest words on the screen. The builder had the means to distrust the number and trusted it anyway. anti_goal shows the same shape at a smaller size: builder 7, critic 9.2. SO THE ANCHOR THE ITEM ASKS FOR SHOULD BE A RULE, not a table of past scores: where a tool's headline and a 300 percent crop disagree, the sheet cites the crop. Note the rule cuts one way only -- a sheet may not be revised upward after a critic is read, which is why firing 31 left its 9 standing and wrote this instead."
@@ -743,7 +750,8 @@
    "rank_before_firing_35": 28,
    "rank_before_firing_43": 27,
    "rank_before_firing_50": 19,
-   "rank_before_firing_53": 31
+   "rank_before_firing_53": 31,
+   "rank_before_firing_58": 23
   },
   {
    "id": "partner-state-is-a-label-and-value-table-and-signals-md-describes-something-else",
@@ -754,13 +762,14 @@
    "measurement": "01_pulse.png renders at least six of the twelve signals through the material treatment docs/SIGNALS.md names for them rather than as a label-value pair, verified by 01_pulse.surfaces.json carrying a distinct asset per treated signal. Re-break by returning one to a text row and watching its asset leave the sidecar.",
    "state": "open",
    "attempts": 0,
-   "rank": 15,
+   "rank": 24,
    "filed_at_firing": 31,
    "rank_before_firing_33": 32,
    "rank_before_firing_35": 29,
    "rank_before_firing_43": 28,
    "rank_before_firing_50": 20,
-   "rank_before_firing_53": 22
+   "rank_before_firing_53": 22,
+   "rank_before_firing_58": 15
   },
   {
    "id": "three-of-the-four-modules-are-below-the-fold-in-the-artifact-that-must-show-four",
@@ -771,13 +780,14 @@
    "measurement": "03_us.text.json carries a module stamp for all four modules -- the dates, the list, the calendar and the rituals -- with at least one populated row under each, in a single frame. Re-break by restoring the DATES-only top of the region and watching three stamps leave the file.",
    "state": "open",
    "attempts": 0,
-   "rank": 16,
+   "rank": 12,
    "filed_at_firing": 31,
    "rank_before_firing_33": 33,
    "rank_before_firing_35": 30,
    "rank_before_firing_43": 29,
    "rank_before_firing_50": 21,
-   "rank_before_firing_53": 23
+   "rank_before_firing_53": 23,
+   "rank_before_firing_58": 16
   },
   {
    "id": "an-event-kind-reaches-the-glass-as-its-own-registry-id",
@@ -788,13 +798,14 @@
    "measurement": "A test asserts every id in the registry has a case in notifications.dart's _said, in moments_region's type sets and in search_page's map -- the same shape as the existing thread_types_test -- and 05_settings_interrupt.text.json contains no run equal to a registry id with underscores replaced. Re-break by removing one case and watching the test and the artifact go red together.",
    "state": "open",
    "attempts": 0,
-   "rank": 17,
+   "rank": 25,
    "filed_at_firing": 31,
    "rank_before_firing_33": 34,
    "rank_before_firing_35": 31,
    "rank_before_firing_43": 30,
    "rank_before_firing_50": 22,
-   "rank_before_firing_53": 24
+   "rank_before_firing_53": 24,
+   "rank_before_firing_58": 17
   },
   {
    "id": "the-tailscale-transport-binds-loopback-in-the-only-mode-that-is-ever-used",
@@ -805,14 +816,15 @@
    "state": "open",
    "attempts": 1,
    "closed_by": null,
-   "rank": 24,
+   "rank": 31,
    "owner_priority": "harness",
    "worked_at_firing_22": "THE HOLE WAS REAL BUT IT WAS NOT THE ONE THIS ITEM NAMES, AND HALF THE STATED MEASUREMENT IS NOT IMPLEMENTABLE. Both halves are now measured rather than argued.\nWHAT WAS ALREADY SAFE. hostBind calls addressToServeOn FIRST and unconditionally, in both modes: a declared address that is not in 100.64.0.0/10 or fd7a:115c:a1e0::/48 is refused, and a node with no tailnet address refuses to serve at all rather than falling back to something that happens to work. tailnet_test.dart already pinned that for the TUN branch. So the app was never one edit away from serving the conversation on a public address, which is what the brief's failure condition is protecting.\nWHAT WAS NOT SAFE, AND IS THE THING WORTH HAVING FIXED. The userspace branch had NO TEST AT ALL -- and userspace is the only mode any measured run in this repository uses, because a container cannot have a TUN device, which is precisely this item's observation. The whole of that mode turned on one ternary, `boundTo = isUserspace ? '127.0.0.1' : address`, that nothing could see. Changing that literal to '0.0.0.0' would have put the conversation on every interface of the phone AND LEFT THE SUITE GREEN. Three tests now cover it: that userspace binds loopback and nothing wider while reachableAt stays a tailnet address; that a declared bad address is refused in userspace exactly as with a TUN, so userspace is not a hole shaped like the whole rule; and one property over BOTH branches at once -- the bound address is a tailnet address or loopback and nothing else, and reachableAt is always a tailnet address. RE-BROKEN: with the ternary set to '0.0.0.0', two of the three fail; restored, 167 pass and flutter analyze is clean.\nWHY THE ITEM IS NOT CLOSED. Its measurement opens 'the bound address is the tailnet address in BOTH modes'. That is not implementable in userspace and no firing should try. A userspace tailscaled has no TUN, so the 100.x address is not assigned to any local interface and bind() on it fails with 'cannot assign requested address' -- it is not a policy choice that can be reversed, it is what userspace networking is. tailscaled accepts the inbound connection itself and hands it to loopback on the same port, which is why the transport's own doc comment calls loopback NARROWER than the tailnet address rather than wider. The second half of the measurement -- 'a test asserts the host refuses to bind anything outside 100.64.0.0/10 or a MagicDNS name' -- is done. ADDRESS should restate the first half as what it is actually protecting: the host binds its tailnet address where it has one, and loopback behind a userspace tailscaled, and NEVER a wildcard or a LAN address -- which is now the property the third test holds. One caveat to keep honest: loopback is reachable by any other process on the same machine, so the doc comment's 'nothing but tailscaled can reach it' is true on a phone and not true in a shared container. That is a development-mode exposure, not a shipped one.",
    "rank_before_firing_33": 35,
    "rank_before_firing_35": 32,
    "rank_before_firing_43": 31,
    "rank_before_firing_50": 26,
-   "rank_before_firing_53": 32
+   "rank_before_firing_53": 32,
+   "rank_before_firing_58": 24
   },
   {
    "id": "the-clips-hold-frames-and-one-of-them-is-static-for-two-and-a-half-seconds",
@@ -823,7 +835,7 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 25,
+   "rank": 32,
    "owner_priority": "harness",
    "measured_at_firing_23": "REMEASURED AT FIRING 23: 15_authored_feeling went repeated_fraction 0.319 -> 0.094 and longest_still_run 36 -> 17, the largest single improvement in the set, without anyone working this item. 07_feeling_landing is unmoved at 0.070 / 10 and 08_state_propagating at 0.099 / 22. Still short of the <= 0.02 / <= 1 this item asks for, on all of them.",
    "note_at_firing_24": "THE 06_unfolding HALF OF THIS IS CLOSED by rank 1: repeated_fraction 0.157 -> 0.0 and longest_still_run 23 -> 0. The 07, 08 and 15 halves are untouched and are NOT the same fault, which is worth knowing before anyone spends a firing assuming they are. 06's scene stepped the clock 16 ms against a 60 fps clip; 07 and 15 step it EIGHT, and 08 steps 16 and 8 in different takes. Eight is deliberate -- those clips are slow motion, the app played at half speed into a 60 fps assembly. But slow motion done by stepping a clock slower shows every frame-indexed animation twice by construction, and `any frame pixel-identical to its predecessor` does not admit it. Their measured repeated_fraction is only 0.070 and 0.094 because other things on screen move between the repeats and break byte-identity, not because the frames are unique. So the fix for those three is not the fix that closed 06: either the takes run at the clip's own rate and the clip is assembled at the slower one, or the slowness comes from the animation rather than from the clock. 11_chat_scroll reads 0.0 / 0 already and pins `ms: 16` explicitly; it is continuous motion so the 4 percent costs it no repeats, but the pin should come out when someone is measuring that clip. scene.js now derives the step from the clip's frame rate whenever a scene does not pin `ms`, so only the pinned scenes are left.",
@@ -834,7 +846,8 @@
    "rank_before_firing_35": 33,
    "rank_before_firing_43": 32,
    "rank_before_firing_50": 27,
-   "rank_before_firing_53": 33
+   "rank_before_firing_53": 33,
+   "rank_before_firing_58": 25
   },
   {
    "id": "none-of-the-three-ambient-presence-surfaces-appears-anywhere-in-the-set",
@@ -845,13 +858,14 @@
    "measurement": "At least three ambient presence surfaces are visible across the evidence set, each in a named artifact, with the PWA standing notification among them captured in WebKit. Re-break by removing one and watching the count fall below three.",
    "state": "open",
    "attempts": 0,
-   "rank": 21,
+   "rank": 28,
    "filed_at_firing": 31,
    "rank_before_firing_33": 37,
    "rank_before_firing_35": 34,
    "rank_before_firing_43": 33,
    "rank_before_firing_50": 28,
-   "rank_before_firing_53": 28
+   "rank_before_firing_53": 28,
+   "rank_before_firing_58": 21
   },
   {
    "id": "no-artifact-shows-a-state-change-perceptible-without-opening-the-app",
@@ -862,13 +876,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 26,
+   "rank": 33,
    "owner_priority": "harness",
    "rank_before_firing_33": 38,
    "rank_before_firing_35": 35,
    "rank_before_firing_43": 34,
    "rank_before_firing_50": 29,
-   "rank_before_firing_53": 34
+   "rank_before_firing_53": 34,
+   "rank_before_firing_58": 26
   },
   {
    "id": "the-media-viewer-photo-is-the-softest-thing-in-its-own-frame",
@@ -879,13 +894,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 22,
+   "rank": 29,
    "owner_priority": "the-ui",
    "rank_before_firing_33": 39,
    "rank_before_firing_35": 36,
    "rank_before_firing_43": 35,
    "rank_before_firing_50": 30,
-   "rank_before_firing_53": 29
+   "rank_before_firing_53": 29,
+   "rank_before_firing_58": 22
   },
   {
    "id": "two-surfaces-keep-a-private-list-of-the-event-types-the-registry-exists-to-abolish",
@@ -896,13 +912,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 27,
+   "rank": 34,
    "owner_priority": "harness",
    "rank_before_firing_33": 40,
    "rank_before_firing_35": 37,
    "rank_before_firing_43": 36,
    "rank_before_firing_50": 31,
-   "rank_before_firing_53": 35
+   "rank_before_firing_53": 35,
+   "rank_before_firing_58": 27
   },
   {
    "id": "the-projector-that-runs-every-frame-of-the-hero-screen-cites-a-test-that-does-not-exist",
@@ -913,13 +930,14 @@
    "measurement": "thread_incremental_test exists and fails when line 341 compares a length instead of membership; and no test file returns green on a missing asset without reporting that it skipped. Re-break by putting the length comparison back and watching the new test go red.",
    "state": "open",
    "attempts": 0,
-   "rank": 28,
+   "rank": 35,
    "filed_at_firing": 31,
    "rank_before_firing_33": 41,
    "rank_before_firing_35": 38,
    "rank_before_firing_43": 37,
    "rank_before_firing_50": 32,
-   "rank_before_firing_53": 36
+   "rank_before_firing_53": 36,
+   "rank_before_firing_58": 28
   },
   {
    "id": "nothing-runs-app-test-at-all",
@@ -930,7 +948,7 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 29,
+   "rank": 36,
    "measured_at_firing_19": "THE SUITE WAS RUN FOR THE FIRST TIME IN THIS BUILD'S HISTORY, AND IT IS GREEN. 123 tests, all passed, exit 0, in 31 seconds once the bundle was built. flutter analyze: 0 errors, 32 warnings and infos, all of them unused imports and one unused private element in the test files. Flutter 3.47.2 out of ./bootstrap.sh --profile=web.\nSO THE STANDING WORRY IN loop/WORKER_PROMPT.md IS CLEARED: app/test/legible_on_what_it_is_on_test.dart -- rewritten by a container with no toolchain and never once compiled, and named there as the file that gates every code commit -- compiles and passes. Its only analyzer complaints are an unused import of material/hands.dart at :55 and an unused _desk declaration at :114.\nONE PREREQUISITE THAT IS NOT WRITTEN DOWN ANYWHERE AND COST A RUN: flutter test FAILS OUTRIGHT on a fresh container with 'unable to find directory entry in pubspec.yaml: app/assets/paper/' and eleven more like it, because app/assets is derived and gitignored. tools/pack_assets.py must run first, and for the seed directories it must run as tools/pack_assets.py --seed=year -- a bare pack prints 'seed absent' and the bundle still will not build. That is what this item should wire, and the order is: pack with the seed, then analyze, then test.\nTHIS ITEM IS STILL OPEN. Nothing has been wired into bootstrap.sh, run.sh or capture.sh; the suite was run by hand once. The measurement it names is unchanged.",
    "owner_priority": "harness",
    "precondition_fixed_at_firing_22": "A PRECONDITION FOR THIS ITEM WAS RED AND NOBODY HAD NOTICED. loop/WORKER_PROMPT.md says 'Before any commit that touches code: cd app && flutter analyze && flutter test'. On a fresh container at firing 22 that conjunction could not pass: `flutter test` was 164 passing at exit 0, but `flutter analyze` reported 27 issues and exited 1, so the gate as written had been failing for every firing that ran it as a conjunction. None were errors -- 21 info-level flutter_lints findings, 18 of them unnecessary imports, plus 6 pre-existing unused-import and unused-element warnings -- which is exactly why it survived: the suite is green and the analyzer's exit code is the only thing that says otherwise.\nTHIS MATTERS TO THIS ITEM SPECIFICALLY. Wiring `flutter analyze && flutter test` into capture.sh and run.sh, which is what this item asks for, would have failed EVERY capture on a lint, and the failure would have looked like the app rather than like the imports. Whoever closes this item should now find the gate green and should keep it that way.\nFIXED AND RE-BROKEN AT FIRING 22: all 27 cleared, `flutter analyze` now reports 'No issues found!' at exit 0 and `flutter test` still reports 164 passing at exit 0 -- the same count, so nothing removed was load-bearing. Re-broken by putting one unnecessary import back into test/spine_test.dart and watching analyze return 1 issue and exit 1, then restoring it. One removal was not a lint and is worth knowing about: `_desk = DeskColour.day` in legible_on_what_it_is_on_test.dart was declared and never used, because no ink of any colour is legible on the plank and so no ink/desk pair can be declared. The reason is left in the file where the constant was, pointing at no_word_is_written_on_the_desk_test.dart, which is the test that actually enforces it.",
@@ -938,7 +956,8 @@
    "rank_before_firing_35": 39,
    "rank_before_firing_43": 38,
    "rank_before_firing_50": 33,
-   "rank_before_firing_53": 37
+   "rank_before_firing_53": 37,
+   "rank_before_firing_58": 29
   },
   {
    "id": "nine-thread-renderings-are-one-function-aliased-nine-times",
@@ -949,13 +968,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 30,
+   "rank": 37,
    "owner_priority": "harness",
    "rank_before_firing_33": 43,
    "rank_before_firing_35": 40,
    "rank_before_firing_43": 39,
    "rank_before_firing_50": 34,
-   "rank_before_firing_53": 38
+   "rank_before_firing_53": 38,
+   "rank_before_firing_58": 30
   },
   {
    "id": "the-ios-non-haptic-substitute-has-no-evidence-anywhere",
@@ -966,13 +986,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 31,
+   "rank": 38,
    "owner_priority": "harness",
    "rank_before_firing_33": 44,
    "rank_before_firing_35": 41,
    "rank_before_firing_43": 40,
    "rank_before_firing_50": 35,
-   "rank_before_firing_53": 39
+   "rank_before_firing_53": 39,
+   "rank_before_firing_58": 31
   },
   {
    "id": "texture-budget-passes-and-nothing-in-the-capture-runs-it",
@@ -983,13 +1004,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 38,
+   "rank": 45,
    "owner_priority": "harness",
    "rank_before_firing_33": 45,
    "rank_before_firing_35": 42,
    "rank_before_firing_43": 41,
    "rank_before_firing_50": 40,
-   "rank_before_firing_53": 46
+   "rank_before_firing_53": 46,
+   "rank_before_firing_58": 38
   },
   {
    "id": "an-unhandled-async-throw-loses-a-hero-artifact-about-once-a-capture",
@@ -997,16 +1019,20 @@
    "points": 0,
    "why": "FILED AT FIRING 30, NOT RANKED -- ADDRESS RANKS IT. Separately from the ruler item above, the app really does throw. At firing 30 13_messenger_states' scene exited non-zero on an unhandled async Dart exception; the dart2js stack is A.aRF -> A.b3z, the unhandled-async-error rethrow, so something escapes a Future or a zone. The PNG is complete and correct, so the cost today is bookkeeping rather than pixels -- but a capture that loses one hero artifact per run loses a different one each time. MEASURED RATE, not assumed: it reproduced on the first of nine identical Playwright probe runs against the same seeded build, arriving after __deskStage, and not on the other eight. 13_messenger_states is the only scene that uses stage, and firing 28's empty failure was 15_authored_feeling, which passed cleanly here -- so do NOT assume one cause for both. cold_ms does not correlate: 11282 against a seeded range of 10884-12327.",
    "measurement": "Ten consecutive runs of 13_messenger_states' scene against the seeded build with zero pageerrors, and the throw identified by name from a non-minified build rather than from a minified frame. This item cannot be read at all until the ruler item above lands, because the reason is currently discarded.",
-   "state": "open",
+   "state": "superseded",
    "attempts": 0,
    "closed_by": null,
-   "rank": 40,
+   "rank": null,
    "owner_priority": "harness",
    "rank_before_firing_33": 46,
    "rank_before_firing_35": 43,
    "rank_before_firing_43": 42,
    "rank_before_firing_50": 41,
-   "rank_before_firing_53": 48
+   "rank_before_firing_53": 48,
+   "superseded_by": "the-states-artifact-staged-six-events-at-firing-54-and-three-at-56",
+   "superseded_at_firing": 58,
+   "superseded_note": "Firing 58 ADDRESS: folded into the-states-artifact-staged-six-events-at-firing-54-and-three-at-56, which carries its measurement as a clause.",
+   "rank_before_firing_58": 40
   },
   {
    "id": "a-only-capture-rewrites-the-manifest-for-the-whole-set",
@@ -1019,12 +1045,13 @@
    "owner_priority": "harness",
    "filed_by": "firing 24",
    "note": "harness, so §3c's `fix a ruler when you cannot see without it` applies: this is only worth a firing if a later one needs to measure one scene and cannot afford the full forty-five minutes. Firing 24 could afford it.",
-   "rank": 41,
+   "rank": 47,
    "rank_before_firing_33": 47,
    "rank_before_firing_35": 44,
    "rank_before_firing_43": 43,
    "rank_before_firing_50": 42,
-   "rank_before_firing_53": 49
+   "rank_before_firing_53": 49,
+   "rank_before_firing_58": 41
   },
   {
    "id": "hf-std-on-a-strip-frame-does-not-measure-the-sheet",
@@ -1054,13 +1081,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 43,
+   "rank": 49,
    "owner_priority": "harness",
    "rank_before_firing_33": 49,
    "rank_before_firing_35": 46,
    "rank_before_firing_43": 45,
    "rank_before_firing_50": 45,
-   "rank_before_firing_53": 51
+   "rank_before_firing_53": 51,
+   "rank_before_firing_58": 43
   },
   {
    "id": "the-gallery-has-no-photographs-because-sixteen-of-them-are-not-on-disk",
@@ -1071,7 +1099,7 @@
    "state": "open",
    "attempts": 1,
    "closed_by": null,
-   "rank": 51,
+   "rank": 58,
    "correction_at_firing_19": "THIS ITEM'S ROOT CAUSE IS HALF REFUTED, AND THE HALF THAT SURVIVES IS A DIFFERENT JOB. DO NOT SPEND A FIRING RENDERING PHOTOGRAPHS THAT ARE ALREADY ON DISK.\nTHE FOUR SEED PHOTOS ARE PRESENT. seed/photos/2025-09_bread_loaf.jpg, _canal_grey, _classroom_display and _marker_drawer are all on disk, as are all 128 files in seed/photos/. They were listed under entries_without_a_file because tools/check/manifest.py resolved every manifest key under assets/ and these keys are recorded relative to the repository root. That is a defect in the gate, fixed at firing 19 and written up under the-manifest-gate-reports-ok-with-twenty-entries-that-have-no-file. The item's sentence 'the root cause is not a load race... it is that the files do not exist' is therefore WRONG FOR THE PHOTOGRAPHS, and so is the inference that four missing seed photos maps to the six tiles reading 'still fetching the picture.' -- whatever produces that string, it is not an absent file.\nTHE THIRTEEN POSTERS ARE GENUINELY ABSENT, AND THE REASON IS NOT THAT THEY WERE NEVER MADE. They are recorded at scratch/posters/*.jpg, and .gitignore line 42 excludes /scratch/ outright, so they are build products that no clone has ever had and no capture in a fresh container can have. One dusk stock, scratch/dusk/lined_01_dusk.webp, is in the same position. That is fourteen entries, they are what evidence/logs/manifest.json now reads ok false over, and the question they raise is a design one rather than a rendering one: either the posters belong in the committed library and the generator should write them there, or they are scratch and assets/MANIFEST.json should not be claiming them. Deleting the entries would hide it, so firing 19 deliberately did not.\nWHAT IS STILL TRUE AND UNEXPLAINED: 04_moments.png shows tiles reading 'still fetching the picture.' and cards carrying only a duration stub, and three critics called it blocking. The cap on messenger_reliability is real. Its cause has to be re-established from the app rather than from the manifest -- the first place to look is how seed/photos is reached at runtime, since the files exist and the screen does not show them, and the second is item 21's hard-coded type list, which this item already names as the other half. The measurement in this item still stands as written; only the diagnosis behind it is withdrawn.",
    "re_diagnosis_at_firing_19": "THE CAUSE IS THE READINESS SIGNAL, AND THE PHOTOGRAPHS ARE ALL ON DISK AND ALL IN THE BLOB STORE.\nWHAT THE ARTIFACT ACTUALLY SHOWS, looked at rather than inferred from the manifest: ONE photograph tile IS rendered, top left of the grid, a desk with a keyboard on it. Six tiles read 'still fetching the picture.' Five cards carry a duration stub and no poster (41s, 38s, 63s, 21s, 47s). A photograph that renders is a blob that was written, found and decoded, so the seed load, the blob store and the decode path all work; what fails is that the rest had not arrived when the shutter went.\nTHE MECHANISM, and it is already written out in app/lib/regions/chat/blob_widgets.dart's own class comment. On the web the blob store is IndexedDB, which is one lane. BlobCache holds reads at inFlightLimit = 4 and queues the rest. BlobImage draws S.fetching whenever its future has not completed. Firing 3 established, and the comment records, that A TWELVE-SECOND WAIT BRINGS EVERY PRINT BACK -- which is what makes this a queue and not a decode failure.\nAND THE CAPTURE DOES NOT WAIT TWELVE SECONDS. app/lib/main.dart:25-28 calls markReady() from the SECOND post-frame callback after the first frame: the material library is loaded, the spine is open, one frame is painted, and `window.__deskReady` goes true. It says nothing about whether the region on screen has the media it has asked for. tools/capture/scene.js:78 waits on exactly that flag and then on a fixed settle. evidence/logs/04_moments.json times the run: goTo 4771ms (boot and ready), wait 2305ms, shot 2828ms -- so the grid had between 2.3 and 5.1 seconds after ready to drain a queue that takes about twelve. One print made it because four reads are in flight at once and one of them finished. THE GATE THAT SAYS 'ready' MEANS 'the app has painted', AND IT IS BEING READ AS 'the screen is what it will be'. Same shape as the three gates this cycle has already found.\nSO THERE ARE TWO FAULTS HERE AND THEY MUST NOT BE CONFLATED. (1) THE EVIDENCE IS AMBIGUOUS: a screenshot taken before the content arrives cannot be told from a screenshot of content that never arrives, and three critics read it as the second. (2) THE APP IS GENUINELY TOO SLOW: twelve seconds of blank grid IS the row's own disqualifier -- a reason to open Instagram -- so simply making the capture wait longer would photograph a lie and would NOT close this item. It is the same twelve seconds as twelve-seconds-of-cold-start-on-every-seeded-scene, and the two items should be worked together.\nWHAT THE REMEDY LOOKS LIKE, for the firing that has a toolchain. The app half is the real one: the visible tiles' blobs have to be served in the time a person will wait, which means the thumbnails a grid needs are not the full-size photographs the viewer needs (cacheWidth already decodes small, but the READ is still the whole file through one IndexedDB lane), and inFlightLimit = 4 is tuned for protecting an urgent read rather than for filling a grid. The capture half is a second signal -- the visible region has no outstanding blob reads -- for scene.js to wait on IN ADDITION to a budget, so that a scene that takes too long is recorded as taking too long rather than photographed blank. And one cheap honesty fix while in there: S.fetching is drawn both when a blob is loading and when it is absent, so the string cannot tell a reader which, and it told this build's own triage the wrong one.\nNOT MEASURED HERE: whether the five video cards are the same queue or item 26's hard-coded type list. The posters are all present -- seed/videos holds 14 mp4s and 14 matching *.poster.jpg -- so the 'thirteen missing posters' in the original text is withdrawn along with the four seed photos.\nTHIS ITEM'S MEASUREMENT IS UNCHANGED AND STILL RIGHT except for its first clause, which is now satisfied: every path in entries_without_a_file resolves, because the gate was fixed at firing 19 and the count is zero. The remaining clauses -- no 'still fetching the picture.' run in 04_moments.text.json and >= 14 tiles carrying image content -- are what closes it.",
    "worked_at_firing_20": "TWO OF THE THREE HALVES OF THE REMEDY ARE IN; THE ITEM STAYS OPEN BECAUSE ITS MEASUREMENT IS PIXELS AND THIS WAS IMPLEMENT. (1) THE APP HALF, AND IT WAS NOT WHAT THE RE-DIAGNOSIS GUESSED. BlobImage has carried a paragraph since it was written saying a print in the gallery is a third of the screen wide and must not be decoded at the photograph's own resolution, and the guard was `cacheWidth: width == null ? null : ...` -- and NO CALL SITE IN THE APP EVER PASSED A WIDTH. All five put the picture inside something that constrains it (AspectRatio in the gallery and the thread, Center in the viewer) and gave it none, so the branch was dead for the life of the build and every photograph was decoded whole. Measured off the decoded pixel width of the RawImage the framework paints: a 1200x1600 photograph in the gallery, fifteen prints, widest 375 px against 375 drawn; with the old guard put back, 1200 -- 10.2x the pixels in each direction and 104x the bytes, eighteen tiles to a screen. The width was never unknown; it is in the widget's own constraints. The viewer keeps the whole photograph under a named `full` flag because it is inside an InteractiveViewer at maxScale 6. app/test/a_print_is_decoded_at_the_size_it_is_drawn_test.dart, re-broken and watched to fail. (2) THE CAPTURE HALF. BlobCache.outstanding, report()['blobs_pending'] and __deskBlobsPending; scene.js waits on it before every shot on a 12 s budget (blobs_budget_ms per scene) and writes blob_waits into the log either way, so a scene that outruns the budget is RECORDED as having outrun it rather than photographed blank. Confirmed live: a real WebKit against a real build reported 13 pictures still outstanding ~4 s after ready, which is the defect, now a number. app/test/the_shutter_waits_for_the_pictures_test.dart, re-broken twice. (3) THE HONESTY FIX: S.fetching was drawn both while a read was outstanding and when it came back empty; the second now says S.pictureNotHere. WHAT IS LEFT: the item's remaining clauses are 04_moments.text.json and the tile content in 04_moments.png, which need a capture -- this was IMPLEMENT, and docs/LOOP.md puts ./capture.sh in stage 0. ALSO LEFT AND DELIBERATELY NOT GUESSED AT: inFlightLimit = 4. The re-diagnosis says it is tuned for protecting an urgent read rather than for filling a grid, and that is a trade against scroll_cost_test.dart's guarantee that a tapped photograph is never more than inFlightLimit reads deep. Raising it weakens a measured promise to buy an unmeasured one; it wants a measurement first, not a firing's opinion.",
@@ -1083,7 +1111,9 @@
    "rank_before_firing_35": 47,
    "rank_before_firing_43": 48,
    "rank_before_firing_50": 50,
-   "rank_before_firing_53": 55
+   "rank_before_firing_53": 55,
+   "note_at_firing_58": "visual_design major at cycle 3: 'the Moments grid is filled with cold grey untextured 3D renders that read as test scenes, not two people's year'. Those renders are the seeded photographs' stand-ins. Under the owner's steer this stays deprioritised-demo-content and is NOT re-promoted to lift a row.",
+   "rank_before_firing_58": 51
   },
   {
    "id": "the-committed-stills-predate-a-library-wide-change-of-paper",
@@ -1094,13 +1124,14 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 52,
+   "rank": 59,
    "owner_priority": "deprioritised-demo-content",
    "rank_before_firing_33": 51,
    "rank_before_firing_35": 48,
    "rank_before_firing_43": 49,
    "rank_before_firing_50": 51,
-   "rank_before_firing_53": 56
+   "rank_before_firing_53": 56,
+   "rank_before_firing_58": 52
   },
   {
    "id": "a-failed-message-offers-no-way-to-retry",
@@ -1689,7 +1720,7 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 46,
+   "rank": 52,
    "why": "FILED AT FIRING 33, BY THAT FIRING, AGAINST ITSELF. df6d0b9 gave blender/folds/fold.py the stock's albedo_tooth and did NOT re-render the 240 frames under assets/folds/unfold_thirds, so the committed library no longer matches the renderer that claims to produce it. That is deliberate -- a re-render is about four hours at the measured 1m08s a frame, and committing the one frame rendered there would have left 239 stale behind it, which is exactly what bf5ac29 did when it re-rendered 'the first four frames' with rules and left 236 without them.\n\nBut a library behind its renderer is a state this build has been in before without knowing it, and it is how a sequence comes to be half one render and half another. IT MUST NOT BE RE-RENDERED UNTIL SIZES['folds'] IS SETTLED (see rank 1's firing 33 note: the flat-fill floor wants 900 and the WebKit texture budget allows 540), or the 240 frames get rendered twice.",
    "measurement": "Either assets/folds/unfold_thirds is re-rendered whole at the settled pack size and tools/check/surfaces.py passes the sequence at its 8.0 written floor, or a check asserts that every fold frame's provenance matches the current renderer and fails while it does not. assets/ATTRIBUTION or the per-asset maker record is the anchor -- every file in assets/ already has to name what made it (349dacc). Re-break by reverting fold.py's albedo_tooth and watching the mismatch clear.",
    "rank_before_firing_35": null,
@@ -1701,7 +1732,8 @@
    "fence_held_at_firing_50": "FENCE HELD AT FIRING 50, and NOT bundled into the render authorisation (render_decision_at_firing_50). One fact added: if leg 1 sets a non-zero DAY_STOPS, the fold renderer gains a rig constant the committed 240 frames were not rendered under. That widens this item's provenance gap and changes nothing about its value. Record it here rather than re-rendering. WHAT WOULD REOPEN IT is unchanged from fence_held_at_firing_43.",
    "note_at_firing_51": "A FACT FOR WHOEVER IS EVER AUTHORISED TO RE-RENDER THE FOLDS, recorded and not acted on (the fold render is fenced): blender/folds/fold.py:256 seeds its sheet with np.random.default_rng(20260903 + abs(hash(name)) % 1000), and Python salts str hashes per process, so two runs of the same sequence build a different sheet. objects.py had the same line and firing 51 measured it (obj_crown's silhouette moved on 8.25% of the frame between two runs) and fixed it with zlib.crc32. Fix fold.py the same way BEFORE any fold re-render, or frames rendered in two sittings will not be of the same sheet. Also: DAY_STOPS now exists (0.0) and fold.py does not call stop_down_for_day; at 0 that changes nothing.",
    "parked_at_firing_53": "PARKED BAND: fenced. The 240-frame folds re-render is outside every authorisation (render_decision_at_firing_50, re-affirmed at firing 53). Ranked below every workable item so IMPLEMENT does not reach it. The points are real and not re-costed.",
-   "rank_before_firing_53": 54
+   "rank_before_firing_53": 54,
+   "rank_before_firing_58": 46
   },
   {
    "id": "the-dusk-screen-fails-31-of-its-54-runs",
@@ -1713,7 +1745,7 @@
    "state": "closed",
    "closed_by": "firing 54",
    "attempts": 3,
-   "rank": 5,
+   "rank": null,
    "filed_at_firing": 34,
    "rank_before_firing_35": null,
    "capture_cluster_at_firing_35": "THE CAPTURE CLUSTER, DECIDED AT FIRING 35. Ranks 3, 4 and 5 all close on numbers that only ./capture.sh can produce -- rank 3 reads evidence/legibility.json for crops/dusk_pulse.png, rank 4 measures 12_search.surfaces.json, rank 5 reads `visible` out of 02_chat.report.json -- and ONE capture produces all three. They are ranked contiguously for that reason and a firing that runs a capture for any of them must take the other two in the same firing. The `before` half of each re-break pair is already committed from firing 30, so no extra capture is owed. The evidence set is STALE as of firing 33 in any case, so this capture is owed to the loop regardless of these three. A fresh container needs `bash tools/apt-prereqs.sh` before Playwright's WebKit will launch at all, then ./bootstrap.sh --profile=web at about four minutes, then `python3 -m pip install numpy pillow` before any tools/check/*.py will run.",
@@ -1726,7 +1758,8 @@
    "rank_before_firing_50": 6,
    "rank_before_firing_53": 10,
    "closed_at_firing": 54,
-   "closed_at_firing_54": "MEASURED, MET: crops/dusk_pulse.png below_floor 4 -> 2 of 54 (<= 3), runs unchanged at 54; the day twin 01_pulse 3 -> 2 of 54 (<= 3). Same legibility.py, the before read from the committed legibility.json before the capture overwrote it. What cleared: RINGER 2.19, a little 2.97 and HAS LEFT 4.94 on the pulse card's left column. What is left: the status line 4.58 and TRAVELLING 4.84, BOTH on the partner strip's own printed margin rule (legal_01_dusk, x 276-283 on the committed crop) -- a-word-is-written-across-the-printed-margin-rule, whose code landed after this capture was built. Not claimed: why the card column cleared; this capture also moved the pad under it and the card's stock framing is unchanged, so it is recorded as observed, not caused."
+   "closed_at_firing_54": "MEASURED, MET: crops/dusk_pulse.png below_floor 4 -> 2 of 54 (<= 3), runs unchanged at 54; the day twin 01_pulse 3 -> 2 of 54 (<= 3). Same legibility.py, the before read from the committed legibility.json before the capture overwrote it. What cleared: RINGER 2.19, a little 2.97 and HAS LEFT 4.94 on the pulse card's left column. What is left: the status line 4.58 and TRAVELLING 4.84, BOTH on the partner strip's own printed margin rule (legal_01_dusk, x 276-283 on the committed crop) -- a-word-is-written-across-the-printed-margin-rule, whose code landed after this capture was built. Not claimed: why the card column cleared; this capture also moved the pad under it and the card's stock framing is unchanged, so it is recorded as observed, not caused.",
+   "rank_before_firing_58": 5
   },
   {
    "id": "is-ground-swing-1-2-the-right-clause-to-hold-a-failure-to",
@@ -1755,12 +1788,13 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 44,
+   "rank": 50,
    "filed_at_firing": 34,
    "rank_before_firing_35": null,
    "rank_before_firing_43": 46,
    "rank_before_firing_50": 46,
-   "rank_before_firing_53": 52
+   "rank_before_firing_53": 52,
+   "rank_before_firing_58": 44
   },
   {
    "id": "claude-md-names-two-dead-ends-and-one-of-them-is-alive",
@@ -1802,13 +1836,14 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 34,
+   "rank": 41,
    "filed_at_firing": 36,
    "filed_by": "firing 36",
    "note": "NEEDS A CAPTURE TO VERIFY and touches tools/capture/scene.js, so it is not a pure-tools item. Filed unranked because WORKER_PROMPT 3b says ADDRESS ranks. It blocks nothing: the clip is reported today and the floors read what they have always read, so no number in the build is waiting on it.",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 36,
-   "rank_before_firing_53": 42
+   "rank_before_firing_53": 42,
+   "rank_before_firing_58": 34
   },
   {
    "id": "the-ink-ceiling-is-derived-from-a-stock-that-is-not-in-the-library",
@@ -1837,14 +1872,15 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 35,
+   "rank": 42,
    "filed_at_firing": 36,
    "filed_by": "firing 36",
    "from": "the-dusk-screen-fails-31-of-its-54-runs",
    "note": "ADDRESS should also amend rank 3's own measurement, which today can be closed without the app changing. Filed unranked per 3b. It does not block rank 3: the ink defect filed beside it is real whatever this one turns out to be worth.",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 37,
-   "rank_before_firing_53": 43
+   "rank_before_firing_53": 43,
+   "rank_before_firing_58": 35
   },
   {
    "id": "the-family-tabs-in-the-feeling-corner-are-stacked-sheets-too",
@@ -1853,16 +1889,20 @@
    "owner_priority": "the-ui",
    "why": "THE SAME DEFECT AS THE SEARCH FILTERS, IN THE SECOND AND LAST PLACE IT OCCURS, AND THE FIX IS ONE WORD. app/lib/feelings/corner.dart:277 lays `Slip(id: 'family_<name>', stock: 'index')` inside a `Wrap`, exactly as search_page.dart did. A `Wrap` hands each child its own maxWidth rather than an unbounded one, and `PaperPiece` reads a bounded width as an instruction to fill it, so every family tab comes out the full width of the line and the `Wrap` fits one to a row. On the search screen that was twelve full-width torn strips down 63% of the frame; here it is one per `Family` value down the feeling corner.\n\nNOT TAKEN AT FIRING 37, DELIBERATELY. WORKER_PROMPT 3b says work that is not in the queue is added to the queue rather than done, and this is a different screen from the item firing 37 was given. `PaperPiece.hug` already exists and is already tested; `hug: true` on that slip is the whole of the change. Nothing regressed by leaving it: without the flag the corner draws exactly as it drew before.",
    "measurement": "A widget test at 1440x3120 with the real hands loaded (see app/test/the_hero_of_the_set_fits_eight_notes_test.dart for why the test font cannot be used for a layout measurement) pumps the feeling corner and reads the `PaperPiece`s whose id starts `family_`: their rects must fall on at least two rows -- more than one distinct `top` -- and the union of them must take no more than 25% of the 1040-logical frame. ANCHORED (3d): the pieces are found by the id the app gives them, not by a box on the frame, and the same ids reach `<artifact>.surfaces.json` as `piece` since firing 37. Re-break by taking `hug: true` off again and watching every tab share one column and the band pass 50%.",
-   "state": "open",
+   "state": "superseded",
    "closed_by": null,
    "attempts": 0,
-   "rank": 18,
+   "rank": null,
    "filed_at_firing": 37,
    "filed_by": "firing 37",
    "note": "Cheap: one line in corner.dart plus the test. Filed unranked because ADDRESS ranks.",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 23,
-   "rank_before_firing_53": 25
+   "rank_before_firing_53": 25,
+   "superseded_by": "the-feeling-picker-is-a-dark-scrim-and-five-of-its-six-families-show-only-a-name",
+   "superseded_at_firing": 58,
+   "superseded_note": "Firing 58 ADDRESS: folded into the-feeling-picker-is-a-dark-scrim-and-five-of-its-six-families-show-only-a-name, which carries its measurement as a clause.",
+   "rank_before_firing_58": 18
   },
   {
    "id": "a-search-result-is-a-sixth-of-the-screen-tall-and-five-do-not-fit",
@@ -1908,14 +1948,15 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 19,
+   "rank": 26,
    "filed_at_firing": 38,
    "filed_by": "firing 38",
    "from": "the-ink-ceiling-is-derived-from-a-stock-that-is-not-in-the-library",
    "note": "Filed unranked; ADDRESS ranks. Not taken at firing 38 on purpose: the ink ceiling item's fix was available inside the law's own ceiling and this one is not, and the owner's steer puts 'a surface that is flat when it should be paper' above a contrast figure on a refusal row. It is also the last ink in the palette that misses a floor, so the queue should know it is the last one.",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 24,
-   "rank_before_firing_53": 26
+   "rank_before_firing_53": 26,
+   "rank_before_firing_58": 19
   },
   {
    "id": "a-test-that-models-the-browser-cannot-see-the-browser-change",
@@ -1927,14 +1968,15 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 36,
+   "rank": 43,
    "filed_at_firing": 38,
    "filed_by": "firing 38",
    "from": "a-seeded-event-id-is-not-the-same-string-in-a-test-as-in-the-app",
    "note": "Filed unranked; ADDRESS ranks. Tagged harness-that-unblocks-seeing and it earns the tag rather than taking it: it is the only rig on which a two-phone defect is visible at all, and two such defects have now been found, both the expensive way -- hashOf across three review cycles of reading pixels, and the ULID at the cost of a 45-minute capture.",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 38,
-   "rank_before_firing_53": 44
+   "rank_before_firing_53": 44,
+   "rank_before_firing_58": 36
   },
   {
    "id": "the-seeded-id-repair-re-rolled-the-paper-and-three-notes-landed-on-darker-stock",
@@ -1944,7 +1986,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 20,
+   "rank": 27,
    "filed_at_firing": 39,
    "filed_by": "the capture, measured on 13_messenger_states with one instrument over both readings",
    "why": "THE COST SIDE OF FIRING 38'S REPAIR, AND IT IS REAL RATHER THAN A DIFF ARTEFACT. Fixing `UlidFactory.next` changed all 14,061 seeded event ids, and `hashOf(e.id)` chooses the stock a note is torn from, its variant, its tear, its tilt and its lift. So the assignment was re-rolled across the whole seeded library. On 13_messenger_states, measured with one legibility.py over the committed artifact and this capture's, ELEVEN OF TWENTY matched runs are now on a different stock. The roll is not neutral. It fixed two runs and broke three. FIXED: `empty chair` legal_01 -> lined_02, 1.19:1 -> 7.20:1, and `waiting to send` 3.29:1 -> above floor. BROKE, all three against the DAY body floor of 4.5, and all three on runs that were comfortably clear before: `and the bread, if there is any` 9.01 -> 4.28 (ink ff3a3a3c unchanged, stock still lined_01 but its ground_lum fell 0.8504 -> 0.3464, so it is the variant/lift/tilt re-roll rather than the stock family); `left the key under the pot` 9.59 -> 4.47 (looseleaf_03 -> lined_04, ground_lum 0.6561 -> 0.3632); `try again` 8.93 -> 4.38 (looseleaf_02 -> legal_02) -- and that last one is Pen.red on the refused row, the one row in the app whose whole job is to be read when something has gone wrong, which is the same surface `the-red-pen-is-three-to-one-on-the-darkest-paper-it-can-land-on` is about. WHY NO TEST CAUGHT IT: legible_on_what_it_is_on_test.dart walks (ink, stock) pairs from the source and asks whether an ink clears its floor on a stock. It cannot see WHICH stock a given note actually draws on, because that is a hash of a runtime id. The assignment is a free variable the law never constrained, and until firing 38 it happened to sit on a roll where these three cleared. A re-roll for any other reason would do this again. THIS IS NOT AN ARGUMENT FOR REVERTING ANYTHING. The ULID repair is correct and the two phones now draw the same thread, which is the build's premise. The defect is that legibility is being left to a hash.",
@@ -1952,7 +1994,8 @@
    "note_at_firing_39": "A FIX WORTH CONSIDERING IS CHEAP AND IS NOT PROPOSED HERE AS DONE: the stocks a note can be torn from could be filtered to those on which the inks that row actually draws clear their floor, so the hash chooses among legible grounds instead of among all of them. That keeps the material variety the brief asks for and takes legibility off the hash. It is a DESIGN call against DIRECTION.md and docs/COLOR.md and belongs to ADDRESS.",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 25,
-   "rank_before_firing_53": 27
+   "rank_before_firing_53": 27,
+   "rank_before_firing_58": 20
   },
   {
    "id": "a-targeted-capture-leg-loses-the-measured-reason-the-two-phone-artifacts-are-missing",
@@ -1965,9 +2008,10 @@
    "attempts": 0,
    "filed_at_firing": 41,
    "rank_before_firing_43": null,
-   "rank": 42,
+   "rank": 48,
    "rank_before_firing_50": 43,
-   "rank_before_firing_53": 50
+   "rank_before_firing_53": 50,
+   "rank_before_firing_58": 42
   },
   {
    "id": "the-nine-sliced-layers-of-a-tear-do-not-declare-themselves",
@@ -1997,18 +2041,19 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 14,
+   "rank": 23,
    "filed_at_firing": 42,
    "filed_by": "firing 42, carrying forward firing 40's route (1) for the cold-start item",
    "rank_before_firing_43": null,
    "rank_before_firing_50": 18,
-   "rank_before_firing_53": 21
+   "rank_before_firing_53": 21,
+   "rank_before_firing_58": 14
   },
   {
    "id": "the-texture-budget-does-not-look-at-the-largest-texture-family",
    "row": "coherence + harness",
    "points": 0.5,
-   "rank": 39,
+   "rank": 46,
    "owner_priority": "harness",
    "state": "open",
    "attempts": 0,
@@ -2017,7 +2062,8 @@
    "measurement": "texture_budget.py reports a per-artifact resident-texture total for the tear family as well as the folds, anchored to the asset ids in <artifact>.surfaces.json rather than to a directory listing, and the figure it reports for the busiest artifact is under the ceiling TASK_STATE.md declares. Paired population, because this is a count that falls when a thing leaves the screen: the number of distinct tear assets it counts per artifact must not fall against the committed sidecars -- 12_search 32, 02_chat 29, 14_media_viewer 24, 13_messenger_states 21. Re-break by restoring the RGBA packing and watching the busiest artifact go back over the ceiling.",
    "rank_before_firing_50": 52,
    "note_at_firing_51": "Now measured rather than estimated: 181 MB decoded on 12_search alone (masks + edges + composed), and MaskCache never evicts, so it is a session total, not a per-screen one. See the-mask-cache-never-lets-go-of-a-mask.",
-   "rank_before_firing_53": 47
+   "rank_before_firing_53": 47,
+   "rank_before_firing_58": 39
   },
   {
    "id": "a-word-is-written-across-the-printed-margin-rule",
@@ -2029,12 +2075,13 @@
    "state": "closed",
    "closed_by": "firing 54",
    "attempts": 1,
-   "rank": 11,
+   "rank": null,
    "filed_at_firing": 47,
    "rank_before_firing_50": null,
    "rank_before_firing_53": 18,
    "closed_at_firing": 54,
-   "closed_at_firing_54": "ROUTE (2), WRITE BESIDE IT, taken in its cheapest form: tools/pack_assets.py declares every ruled stock's margin in INDEX.json paper_margin (20 stocks, read by dusk_ground.printed_rules so the app and the ruler agree), and PaperPiece.besideTheMargin draws the stock from its right edge just large enough (1.06/(1-m)) that the rule falls off the piece. The partner strip (every screen) and the pulse's their-card ask for it; nothing else is framed differently. MEASURED on ./capture.sh --only=dusk_pulse and --only=01_pulse from the margin build: the strip's rule maps to x -62..-53 and the card's to -57..-48, both off their pieces (were 276-283 and 352-358). crops/dusk_pulse.png below_floor 2 -> 1 of 54, and the one left (the status line, 4.92 against 5.0) is on the horizontal ruling, not a margin column: NO run below floor reaches a margin column. The day twin 01_pulse 2 -> 0 of 54. Runs unchanged at 54 on both. In the rendered strip (a_pressed_clover_is_on_the_strip_test) the rule's pixels inside the status line's box went 65 -> 0. RE-BROKEN: stockFraming returning its inputs puts the 65 back and fails a_word_is_written_beside_the_margin_test for every ruled stock. NOT DONE: every other piece on a ruled stock still shows its rule wherever it falls; the recon script counted pad-rule crossings under opaque cards as false positives, and a general occlusion-aware count is not written."
+   "closed_at_firing_54": "ROUTE (2), WRITE BESIDE IT, taken in its cheapest form: tools/pack_assets.py declares every ruled stock's margin in INDEX.json paper_margin (20 stocks, read by dusk_ground.printed_rules so the app and the ruler agree), and PaperPiece.besideTheMargin draws the stock from its right edge just large enough (1.06/(1-m)) that the rule falls off the piece. The partner strip (every screen) and the pulse's their-card ask for it; nothing else is framed differently. MEASURED on ./capture.sh --only=dusk_pulse and --only=01_pulse from the margin build: the strip's rule maps to x -62..-53 and the card's to -57..-48, both off their pieces (were 276-283 and 352-358). crops/dusk_pulse.png below_floor 2 -> 1 of 54, and the one left (the status line, 4.92 against 5.0) is on the horizontal ruling, not a margin column: NO run below floor reaches a margin column. The day twin 01_pulse 2 -> 0 of 54. Runs unchanged at 54 on both. In the rendered strip (a_pressed_clover_is_on_the_strip_test) the rule's pixels inside the status line's box went 65 -> 0. RE-BROKEN: stockFraming returning its inputs puts the 65 back and fails a_word_is_written_beside_the_margin_test for every ruled stock. NOT DONE: every other piece on a ruled stock still shows its rule wherever it falls; the recon script counted pad-rule crossings under opaque cards as false positives, and a general occlusion-aware count is not written.",
+   "rank_before_firing_58": 11
   },
   {
    "id": "the-alpha-a-word-may-composite-at-does-not-clear-the-floor-the-same-law-sets",
@@ -2046,10 +2093,11 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 12,
+   "rank": 21,
    "filed_at_firing": 47,
    "rank_before_firing_50": null,
-   "rank_before_firing_53": 19
+   "rank_before_firing_53": 19,
+   "rank_before_firing_58": 12
   },
   {
    "id": "a-run-reads-the-line-above-it-as-its-own-ground",
@@ -2061,10 +2109,11 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 32,
+   "rank": 39,
    "filed_at_firing": 47,
    "rank_before_firing_50": null,
-   "rank_before_firing_53": 40
+   "rank_before_firing_53": 40,
+   "rank_before_firing_58": 32
   },
   {
    "id": "the-manifest-books-an-artifact-missing-that-every-ruler-in-the-run-reads",
@@ -2076,11 +2125,12 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "rank": 33,
+   "rank": 40,
    "filed_at_firing": 47,
    "rank_before_firing_50": null,
    "second_occurrence_at_firing_51": "SAME SHAPE, SECOND ARTIFACT: firing 51's full capture booked 13_messenger_states MISSING -- `refused: pageerror: PlaywrightError -- at b47 (main.dart.js:6585:8)` -- after all ten scene steps ran and the shot was written with its sidecars (29 text runs, 82 surfaces). Side by side with firing 47's committed still at 360x780 it is the same screen, note for note. Every ruler in the run read it. So the anomaly is not dusk_pulse's alone: a page error raised after a good shot books a good still missing. What decides the fix is whether the error is before or after the shot, and scene.js logs no timestamp against it.",
-   "rank_before_firing_53": 41
+   "rank_before_firing_53": 41,
+   "rank_before_firing_58": 33
   },
   {
    "id": "a-feeling-object-picks-its-scrap-by-a-hash-where-a-row-goes",
@@ -2094,8 +2144,9 @@
    "filed_at_firing": 48,
    "note": "THE FIX IS A ROW, AND THE COST IS ELEVEN CALL SITES. A feeling object is always in a list -- the day's traffic, the vocabulary sheet, a note's reactions, the gallery -- so the row is its position in that list, exactly as every other lane works. `FeelingObject` takes no row today; adding one touches landing.dart, corner.dart, renderers.dart, note.dart, chat_region.dart, settings_region.dart, authoring.dart, pulse_region.dart and moments_region.dart (three sites there). The scrap pool is its own index space, so it needs a lane over the scrap pool rather than a window in the writable one -- there is no room in the writable one.",
    "rank_before_firing_50": null,
-   "rank": 9,
-   "rank_before_firing_53": 16
+   "rank": 19,
+   "rank_before_firing_53": 16,
+   "rank_before_firing_58": 9
   },
   {
    "id": "the-chrome-lane-is-one-row-short-and-two-pieces-share-by-judgement",
@@ -2109,8 +2160,9 @@
    "filed_at_firing": 48,
    "note": "THE ROW BUDGET IS EXACTLY FULL AND THAT IS MEASURED, NOT ASSUMED: 0-27 for the list lanes, 28-40 for `tabs` (12_search draws thirteen facets and uses rows 0-12 of it), 41-46 for `chrome`, against 47 writable masks. Firing 48 already took the only two slack rows -- `pads`, which reserved one for a `RegionPad` that passes `torn: false` and draws no mask at all, and `composer`, which is a piece of chrome and is a row now.\nTWO ROUTES, BOTH COSTED, NEITHER STARTED. (a) RENUMBER: shift `tabs` to 27-39 and `chrome` to 40-46, which costs `moments` one row (28->27, 04_moments draws 10 in frame), `margins` one (14->13, 02_chat draws 9 in frame) and `sections` one (6->5) -- and `sections` must be looked at first, because `us_region` gives module i its card at row i and its body at row i+1, so module i's body and module i+1's card already ask for the same row. (b) GROW THE POOL: nine masks in `assets/tears` are excluded from `writableTears` by `usable < 0.5` and are used by NOTHING, with their edge and shadow renders already baked -- tear_006 0.256, tear_017 0.487, tear_022 0.442, tear_025 0.478, tear_028 0.439, tear_030 0.373, tear_038 0.199, tear_041 0.386, tear_046 0.224. A furniture pool over those nine would give the chrome lane nine rows and no overlap with any list lane, AT NO RENDER COST. What has to be checked first is whether a piece that carries a sentence fits their safe boxes: tear_017's is 92% of the width and 53% of the height, tear_038's is 47% by 42%. That check is a widget test, not a capture.",
    "rank_before_firing_50": null,
-   "rank": 10,
-   "rank_before_firing_53": 17
+   "rank": 20,
+   "rank_before_firing_53": 17,
+   "rank_before_firing_58": 10
   },
   {
    "state": "closed",
@@ -2194,9 +2246,10 @@
    "closed_by": null,
    "needs_stage": "DESIGN",
    "rank_before_firing_50": null,
-   "rank": 50,
+   "rank": 56,
    "parked_at_firing_53": "PARKED BAND: needs_stage DESIGN, unchanged since firing 50. DESIGN is frozen until cycle 6, and this is cycle 3.",
-   "rank_before_firing_53": 30
+   "rank_before_firing_53": 30,
+   "rank_before_firing_58": 50
   },
   {
    "id": "the-mask-cache-never-lets-go-of-a-mask",
@@ -2207,7 +2260,7 @@
    "state": "closed",
    "attempts": 1,
    "closed_by": "firing 54",
-   "rank": 1,
+   "rank": null,
    "owner_priority": "using-it",
    "filed_at_firing_51": "Filed by rank 1's residency measurement. Route sketch, uncosted: MaskCache hands out ui.Image.clone()s that holders dispose, keeps its own handles in an LRU under a byte budget, and the edges (the second 78 MB) are either composed once per size like the masks or drawn from a lower-resolution copy -- they are a soft light band, not a cut.",
    "worked_at_firing_52": "WORKED, AND MEASURED ON A WALK OF TORN PIECES RATHER THAN OF THE APP'S SCREENS -- which is the one clause short of the item's measurement, stated so nobody reads this as closed. THE CHANGE (app/lib/material/paper.dart): MaskCache is an LRU under MaskCache.budget = 48 MB of decoded bytes that NOBODY IS DRAWING. A piece that draws a mask holds a ui.Image.clone() (shares the pixels) through the new HoldsAMask mixin, which MaskedLayer, NineSliced and ContactShadow all use in place of three hand-written copies of peek/load/setState; it releases on dispose and on an asset change. Eviction disposes only the cache's handle and never touches an asset some piece holds, so what is resident is what is on the glass plus at most 48 MB of what was. SlicedMasks' 64-IMAGE count became a 48 MB byte budget (one composition can be 13.5 MB, so the count bounded nothing). CaptureHooks reads the mask's size from MaskCache.sizeOf, remembered past eviction, so an evicted-while-idle mask cannot drop a surface from the sidecar. MEASURED (test/a_session_does_not_keep_every_mask_it_saw_test.dart, read from the caches themselves): 23 screens of two torn pieces each, every writable tear, decode 265 MB in total; idle bytes <= 48 MB after every screen, peak resident 57 MB, composed 18 MB; POPULATION: every piece on every screen still holds its mask (peek non-null, heldBytes > 0). A piece kept on the glass through all 45 other tears keeps its mask and throws nothing. RE-BROKEN: _evict returning at once fails at screen 10 with 61 MB idle, and the second walk ends at 273 MB idle. WHAT IS LEFT, AND IT IS NOT THE CACHE: (1) the item's measurement says `walking every screen`, and this walks pieces; a walk of the real screens needs the seeded year pumped through each region in a widget test, which nothing in test/ does yet. (2) The cache bounds HISTORY, not a single screen: 12_search still holds its own ~158 MB of masks and edges while it is on the glass, because every one of them is being drawn. That is the edges' half of the filed route (compose the edge once per size, or draw it from a smaller copy -- it is a soft light band) and it is the next residency lever, uncosted. (3) With history bounded, rank 1's hi-res variants for the five masks behind the big sheets (tear_004/020/031/036/043) cost what the screen showing them costs, not what the session has seen: at a 2048 crop about 13.5 MB each against 3.4 MB now.",
@@ -2216,7 +2269,8 @@
    "rank_before_firing_53": 57,
    "closed_at_firing": 54,
    "worked_at_firing_54": "CLOSED, WITH ONE CLAUSE MISSED BY 0.48 MB AND SAID SO. PREDICTED OFF COMMITTED FILES FIRST: 12_search.surfaces.json declares 27 masked pieces; against the packed INDEX.json that is masks 79.90 MB + edges 77.99 MB + SlicedMasks compositions 22.82 MB = 180.71 MB, firing 51's 181 exactly, and 158 of it masks and edges. ORDERED THE REFUSING MEASUREMENT FIRST: before any code, every one of the still's 41 declared edges was drawn at its declared geometry (drawn/fixed/centre/slice) over paper from a 1x edge and from an Nx-smaller copy. 2x: at most 0.26/255 over a piece, 1.1/255 over the band itself (median 0.74). 3x: 2.06/255 on the band, over the item's 2/255 -- so 2x, and the cheaper-further hypothesis (3x or 4x) is refuted and recorded. THE CHANGE: tools/pack_assets.py packs *_edge at half the tears' long side (EDGE_DOWNSAMPLE = 2); app/lib/material/paper.dart kEdgeDownsample = 2, and NinePainter scales its canvas by it so drawImageNine lays the slices, and the shrink-to-fit, exactly where the full-size render's did. CaptureHooks declares `downsample` and reports `fixed`/`centre` per decoded pixel. MEASURED AFTER (tools/check/edge_residency.py, and test/the_lit_edge_is_packed_at_half_test.dart): edges 19.98 MB (was 77.99), total 122.69 MB (was 180.71; target <= 125 MET). Population: the same 27 masked pieces. Band: 1.108/255 max over 41 declared edges; in-app, NinePainter at 2x vs 1x reads 1.81/255 on the band in both a stretching and a shrinking box. THE MISSED CLAUSE: the target said edges <= 19.5 MB, a literal quarter of 78.0. The edges are rendered at 1400 px, not 2048 like the masks, so at 1x some crops were already under 1024; at half they are all a quarter of their MASK (19.98 = 79.90/4.0), which is 25.6% of what the edges were. Not chased: shaving 0.5 MB would mean a per-asset downsample, which the app would then have to be told edge by edge. RE-BROKEN, three ways: (1) the painter without canvas.scale -> band 11.4/255 in the stretching box, test fails; (2) kEdgeDownsample = 1 against the half pack -> 'tear_001_edge is 512x289 against its mask 1024x578', fails; (3) the 1x pack (before this firing) -> the ruler reads 77.99 MB and the residency test's 21 MB line fails. The ruler was earned on a known pair: at --downsample 1 it reads 0.0, at 3 it refuses. INCIDENTAL, NOT CLAIMED: because the edge lattice is now laid out at 2x its decoded size, which is the mask's size, and before it was laid out at whatever its 1400-px render cropped to, the edge's slices now match the mask's on the few pieces whose box is taller than both slices (centre>0: one on 03_us, 05_settings, 17_setup_pwa, two on 14_media_viewer). Unmeasured on the glass until the next capture. WHAT THIS BUYS RANK 2: 58 MB of per-screen headroom on the worst screen, against the ~13.5 MB each 2048 mask for tear_004/020/031/036/043 would cost.",
-   "captured_at_firing_54": "On the capture: 12_search.surfaces.json declares the same 27 masked pieces; edge_residency.py reads edges 19.98 MB, total 122.7 MB, as predicted."
+   "captured_at_firing_54": "On the capture: 12_search.surfaces.json declares the same 27 masked pieces; edge_residency.py reads edges 19.98 MB, total 122.7 MB, as predicted.",
+   "rank_before_firing_58": 1
   },
   {
    "id": "the-lightest-third-has-nothing-coloured-in-it",
@@ -2228,11 +2282,12 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": null,
+   "rank": 57,
    "filed_at_firing": 55,
    "blocked_on": "the day paper re-render: the law's opaque carrier is the sticky note (DIRECTION.md Palette, COLOR.md §5), and sticky_yellow renders at median C 0.081 against its declared 0.1085. Day paper is unauthorised (render_decision_at_firing_50) and parked for cycle 6 with the lamp route. Not the highlighter: DIRECTION.md makes it a supporting voice.",
    "needs_stage": "DESIGN (cycle 6, with the day paper)",
-   "measured_at_firing_55": "Needs ~37,000 device px per room still that are light (L >= ~0.75) and C >= 0.10; 01_pulse has 7. Measured candidates: no packed object or stock supplies any; the 70% multiplied yellow highlighter does (C 0.120-0.134 at L 0.85-0.88 over four stocks)."
+   "measured_at_firing_55": "Needs ~37,000 device px per room still that are light (L >= ~0.75) and C >= 0.10; 01_pulse has 7. Measured candidates: no packed object or stock supplies any; the 70% multiplied yellow highlighter does (C 0.120-0.134 at L 0.85-0.88 over four stocks).",
+   "rank_before_firing_58": null
   },
   {
    "id": "a-round-mark-sits-on-a-picture-in-the-interrupt-matrix",
@@ -2244,9 +2299,214 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": null,
+   "rank": 16,
    "filed_at_firing": 55,
-   "measured_at_firing_56": "IDENTIFIED. It is the upper PUNCH HOLE of the loose-leaf stock assets/paper/looseleaf_04.webp, drawn as settings.notify's paper (fit cover, rect [35,-653,1523,3494]). The stock is an RGB webp with no alpha and the hole is PAINTED, opaque, in the render's background colour: rgb(171,141,114) in the asset against rgb(171,140,116) at the disc's centre on the glass (207,458). So it is not a hole -- the desk does not show through -- and it is not an undeclared widget: it is inside a declared stock surface. The queue item's 'undeclared' premise is refuted. What is true: the sheet's cover fit puts the punch margin inside the matrix's text column, and the row label 'a picture' is written across the hole. Present unchanged on this capture. The measurement's 'FIRST identify the widget' step is done; its 'declared in the surfaces sidecar' clause is already met by the stock entry. Left open for ADDRESS to restate: text over a punch hole, and a hole that is paint rather than absence."
+   "measured_at_firing_56": "IDENTIFIED. It is the upper PUNCH HOLE of the loose-leaf stock assets/paper/looseleaf_04.webp, drawn as settings.notify's paper (fit cover, rect [35,-653,1523,3494]). The stock is an RGB webp with no alpha and the hole is PAINTED, opaque, in the render's background colour: rgb(171,141,114) in the asset against rgb(171,140,116) at the disc's centre on the glass (207,458). So it is not a hole -- the desk does not show through -- and it is not an undeclared widget: it is inside a declared stock surface. The queue item's 'undeclared' premise is refuted. What is true: the sheet's cover fit puts the punch margin inside the matrix's text column, and the row label 'a picture' is written across the hole. Present unchanged on this capture. The measurement's 'FIRST identify the widget' step is done; its 'declared in the surfaces sidecar' clause is already met by the stock entry. Left open for ADDRESS to restate: text over a punch hole, and a hole that is paint rather than absence.",
+   "note_at_firing_58": "Firing 56 identified the disc: looseleaf_04's punch hole, painted opaque into the stock. So the route is a stock choice or framing for the two interrupt-matrix pieces, app-side, like the receipt item. visual_design minor at cycle 3 ('two brown translucent discs sit over a picture and wake me').",
+   "rank_before_firing_58": null
+  },
+  {
+   "id": "a-folded-note-at-rest-is-frame-zero-of-the-fenced-render",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 3,
+   "row": "anti_goal + material_truth + messenger_reliability + coherence",
+   "kind_of_finding": "ALWAYS THERE, NOW NAMED BY FIVE CRITICS (bucket 2). Present in firing 30's committed 13_messenger_states.png (2fbfde5), and in every capture since.",
+   "why": "THE FLAT CARD IN THE LIVE THREAD, found blocking by anti_goal and messenger_reliability and major by coherence, material_truth and emotional_transmission at cycle 3: 'an empty pale ruled rectangle with square-cut corners and a hard, uniform dark drop shadow', with no entry in the surfaces sidecar. It is row 01M1M59VY0YA13H9M86HTA6XNP of the seeded thread (13_messenger_states.report.json `visible`, declared stock graph_02, tear_001), an unopened FoldedNote. MEASURED AT FIRING 58 OFF THE SOURCE: FoldedNote._face at rest (app/lib/material/fold.dart, the last return of _face) returns `Unfolding(seq, width, autoplay: false)`, which paints frame 0 of assets/folds/unfold_thirds through _FramePainter, a CustomPaint that CaptureHooks.paperSurfaces never declares. Frame 0 of the fenced sequence IS the flat rectangle. So the object the brief names as the anti-goal is not the render standing in a clip -- it is what every unread folded note looks like in a person's thread, which is using-it before it is material.",
+   "blocker_refutation_attempted_at_firing_58": "3e's second half. The blocker this object has carried since firing 32 is `it needs the fenced 240-frame re-render` (rank 45). REFUTED FOR THE THREAD'S RESTING FACE: what an unopened note draws while it lies in the thread is an app choice (fold.dart `_face`), not a property of the render. The fence covers the render and the clip; it does not cover the resting face. Exhausted, not impossible, for the clip itself, which stays fenced on rank 45.",
+   "measurement": "(a) ANCHORED to the report and the sidecar: on 13_messenger_states, EVERY id in logs/13_messenger_states.report.json `visible` has at least one surfaces.json entry whose `piece` is that id (or whose rect lies inside that row) with an asset under assets/paper/ AND a tear mask entry, and no visible row draws through _FramePainter at rest. POPULATION: the count of `visible` ids is unchanged by the fix and every one of them is matched -- a row that leaves the screen does not pass. (b) A widget test pumps a thread row that is an unopened FoldedNote and finds a PaperPiece descendant with a non-null tearId and a library stock, and no Unfolding descendant until the note is tapped. Re-break by restoring `Unfolding(autoplay: false)` as the resting face and watch (b) fail. (c) The read-marker predicate is untouched: app/regions/chat/note.dart's predicate test still passes, and an unopened note still does not advance the read marker. (d) 06_unfolding and 08_state_propagating re-captured show the same resting face.",
+   "routes": "Route 1 (preferred, keeps `arrives folded`): the resting face is the note's own PaperPiece -- its stock, its tear, its contact shadow -- at a folded-third height with its writing withheld, and the tap plays the sequence as now. The cut from that face to frame 0 on a tap is a known seam until rank 45's render is unfenced; it happens on a touch, not on a resting screen. Route 2: FoldedNote.available also asks that the shipped sequence pass the paper floor the capture already books it missing on (median L_std 6.319 < 8.0 on folds/unfold_thirds), and a failing sequence leaves the note lying flat -- the code's own `honest` fallback -- with onOpened fired on first show so the receipt rule holds. Either route uses only assets already on disk. No new object, no re-render.",
+   "split_from": "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames (3 of its 6 points: the thread half. The clip half stays there, fenced.)",
+   "rank_before_firing_58": null,
+   "rank": 1
+  },
+  {
+   "id": "the-states-artifact-staged-six-events-at-firing-54-and-three-at-56",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 3,
+   "row": "messenger_reliability + coherence",
+   "kind_of_finding": "A CHANGE IN THE ARTIFACT THE LOOP DID NOT CAUSE IN CODE (bucket 1, with the loop cleared). The states were on the glass at firings 30, 51 and 54 and are absent at 56; no commit touched app/lib/regions/chat, app/lib/spine or app/lib/scope.dart between the firing-54 capture (7db492f) and the firing-56 build (0480996).",
+   "why": "messenger_reliability BLOCKING and code major: the still that exists to prove delivered, read, edited, taken back and waiting shows one `read` and the blank card. MEASURED AT FIRING 58 OFF THE COMMITTED LOGS: evidence/logs/13_messenger_states.json has events_at_open 14061 at firings 51, 54 and 56 alike; the report's `events` was 14067 at 51 and 54 and is 14064 at 56; `scroll.of` 8391 vs 8388; `visible` at 54 ends ...FKH, FKJ, FKK, FKM (the four staged rows: 'left the key under the pot', 'ok -- leaving now' going, 'and the bread, if there is any' waiting to send, 'sending you the roster' it would not go / try again) and at 56 ends at FKH. The `stage` hook returned 'ok' at 56 with no pageerror; at 51 and 54 it staged fully AND raised the unnamed pageerror (b47/b4u = Error.throwWithStackTrace) that refused the scene. Two failure shapes of one path, alternating, on unchanged code: sometimes the emits after the read marker never reach the log, sometimes they do and something throws afterwards. A person's messages silently not reaching the log is the using-it reading, and it must be refuted or confirmed before this is called staging-only.",
+   "cause_hypothesis_for_3e": "Cheapest experiment first, before any fix: print the ids stageStates creates. The read marker's id is `UlidFactory.seeded(Flags.captureSeed).next(scope.clock.now())` -- a FRESH seeded factory at a frozen clock -- which can mint the same id the scope's own seeded factory mints next, and a spine keyed by id drops or rejects a duplicate. If the ids collide, the cause is the staging; if they do not, the emit path loses writes and this is a using-it defect of the app itself.",
+   "measurement": "(a) ANCHORED to the report and the text sidecar: in TEN consecutive runs of the 13_messenger_states scene, the report's `visible` contains the ids of every row stageStates creates, 13_messenger_states.text.json carries runs saying 'going', 'waiting to send', 'it would not go' and 'read', and logs `events` minus `events_at_open` equals the number of events stageStates appends, with zero pageerrors. POPULATION: events_at_open unchanged (14061 on the seeded year). (b) The staging stops faking the host: no `hostAssign: true` and no `markRefused` on the client in CaptureBus.stageStates; the read marker and the refusal arrive from the far host (tools/capture/scene.js already has a `far` step driving app/tool/host_daemon.dart). Re-break (a) by reverting whichever cause (a)'s experiment names. (c) The brief's five states: an edited row and a taken-back row are staged the same way and each carries its word on its own line.",
+   "absorbs": "an-unhandled-async-throw-loses-a-hero-artifact-about-once-a-capture (harness, rank 40): its pageerror is one of the two shapes above, and it arrives after __deskStage. Closed into this item.",
+   "rank_before_firing_58": null,
+   "rank": 2
+  },
+  {
+   "id": "settings-says-not-paired-yet-on-a-build-with-a-partner-and-a-year-of-log",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 2,
+   "row": "coherence + messenger_reliability + emotional_transmission",
+   "kind_of_finding": "ALWAYS THERE (bucket 2): firing 30's 05_settings.text.json (2fbfde5) says exactly the same three things.",
+   "why": "coherence BLOCKING: 05_settings says 'not paired yet.' and link 'connecting' beside 'their phone noor', '14062 events, 1 waiting to send', read receipts in 13 and live partner state in every header. MEASURED AT FIRING 58 OFF THE SOURCE: settings_region.dart (the pairing panel) reads `transport.pairing`, which the seeded build never has (report `link: connecting`, `transport: local`), and sync.dart:62 returns before syncing when pairing is null -- so on the seeded build the outbox can never drain, which is also why 15_authored_feeling ends 'waiting to send'. And on a REAL pair the same code draws last-known partner state as if live whenever the link is down: the header and Pulse have no notion of when they last heard.",
+   "measurement": "(a) ANCHORED to text sidecars: whenever the scene's report has a partner and events > 0, 05_settings.text.json carries no run saying 'not paired yet.' and does carry the paired block ('two phones, linked ...'); 15_authored_feeling's last report has the authored feeling's id out of the outbox. Route for (a): the scenes that show the paired app pair the two phones through scene.js's real `pair` step, or the seed records the pairing its year implies -- never a flag that makes Settings say paired. (b) When the link state is not `up`, the partner strip and the Pulse card each carry a run saying when they last heard (widget test, anchored to the partner's last event ts in the spine; re-break by removing the age and watch it fail). POPULATION: 05_settings total_runs within +-2 of 35 (firing 56's 05_settings.text.json, counted at firing 58).",
+   "rank_before_firing_58": null,
+   "rank": 3
+  },
+  {
+   "id": "the-feeling-picker-is-a-dark-scrim-and-five-of-its-six-families-show-only-a-name",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "the-ui",
+   "points": 2.5,
+   "row": "emotional_transmission + visual_design",
+   "kind_of_finding": "ALWAYS THERE (bucket 2): the gradient scrim dates from d9df399, 2026-09-04.",
+   "why": "emotional_transmission BLOCKING twice: in 07_feeling_landing the partner card ('room smells right again', MOOD/HERE/PLACE, NEEDS/HAS LEFT...) reads through the open picker, and the six family strips are empty torn tabs carrying only the family name. MEASURED AT FIRING 58 OFF THE SOURCE: app/lib/feelings/corner.dart _Fan's ground is a LinearGradient of Color(0x2E120D08) -> 0x8A -> 0xD6 over the page (18% to 84% black), not a sheet; only `registry.family(family)` -- the selected family -- is drawn below the tabs. The front door of the emotional layer is a tinted overlay on the page, which DIRECTION.md's `nothing is drawn as alpha` law also forbids.",
+   "measurement": "(a) A widget test pumps the corner open over Pulse and finds the fan lying on an opaque PaperPiece (library stock, tear) whose rect covers every rect of the Pulse partner card's text runs -- anchored by the runs' `says`, not by coordinates; re-break by restoring the gradient and watch it fail. (b) Every `family_<name>` piece has at least one FeelingObject laid on or beside it while the corner is open, or every feeling in the registry is reachable with one tap from the open sheet -- counted against FeelingRegistry (34 at firing 57's haptics sidecar), so a family that empties does not pass. (c) On the next capture, a frame of 07 with the corner open has no declared text run of the region underneath it (07's frame report). POPULATION: the registry's count is read, not assumed.",
+   "absorbs": "the-family-tabs-in-the-feeling-corner-are-stacked-sheets-too (rank 18, 0 points): its one-word `hug: true` is clause (d) of this item and its test stands.",
+   "rank_before_firing_58": null,
+   "rank": 4
+  },
+  {
+   "id": "the-lit-edge-is-sliced-at-a-different-scale-from-the-mask-it-lights",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "the-ui",
+   "points": 2,
+   "row": "material_truth + visual_design",
+   "kind_of_finding": "ALWAYS THERE IN CODE, RESHAPED BY THE LOOP INTO A SECOND COPY (bucket 2, with a named loop contribution). The mismatch dates from 4ac6461 (2026-09-04, the mask composed at device pixels) against 42a7336 (the edge nine-sliced in logical pixels). At firing 30's capture (2fbfde5) the lit edge showed as one large stair-stepped blur with no crisp outline; from the 24277eb capture on (after b73582f laid the contact shadow around the outline, firing 42-43) the real cut reads as a dark fibrous line and the old blur reads as its copy 30-60 px inside. Firing 54's assets/tears/hi did not cause it: it is identical in 295cae4 (before) and 7db492f (after), and the finer mask brought the vertical mismatch from 3x to 1.5x.",
+   "why": "material_truth BLOCKING: every large torn card in 03_us, and the moon card in 02_chat, shows 'a dark fibrous outline plus a second, blurred, stair-stepped translucent copy of the same tear 30-60 px inside it'. MEASURED AT FIRING 58 OFF THE COMMITTED SIDECARS AND THE SOURCE: MaskedLayer composes the mask in DEVICE pixels through SlicedMasks.at with per-edge bands from bandsFor(); NinePainter draws the `_edge` render on the LOGICAL canvas with a fixed 0.4 slice on all four sides. 03_us.surfaces.json piece us.body.dates: mask (hi, 2013x1376) `fixed` [0.842, 1], slice [0.4, 0.383]; edge (512x350 at downsample 2) `fixed` [3.311, 6], slice 0.4 -- per authored pixel, 1.97 device px vertically for the mask against 3.0 for the edge. At 24277eb the same piece declared mask `fixed` y 1 against edge y 3, exactly the dpr. The glow is drawn where the cut would be if the sheet were three times larger.",
+   "measurement": "ANCHORED to the surfaces sidecar, which already declares both layers: for every piece on every still that has both a `fit: mask` and a `fit: nine` entry, the two declare the same four fixed bands as fractions and the same device pixels per AUTHORED pixel on each axis within 5% (authored = the 2048 render; an entry's src and `downsample` give the conversion). POPULATION: the number of pieces declaring both layers does not fall on any still (count them on 03_us, 02_chat and 12_search before the change). Re-break by giving NinePainter back its fixed 0.4 and logical canvas and watch us.body.dates fail. Then the eye check the critic asked for: the 03_us crop at the top of us.body.dates shows one tear line.",
+   "related": "the-tears-are-overlays-painted-on-whole-paper stays open for the treads; this is the layer disagreement, which that item never measured.",
+   "rank_before_firing_58": null,
+   "rank": 5
+  },
+  {
+   "id": "the-receipt-stock-carries-its-printout-and-three-screens-write-on-it",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "the-ui",
+   "points": 1.5,
+   "row": "material_truth + visual_design + coherence",
+   "kind_of_finding": "ALWAYS THERE (bucket 2): identical in firing 30's 03_us.png (2fbfde5). The printout was drawn into receipt_01 by blender/paper/rules.py at 0cd5309, 2026-09-03.",
+   "why": "material_truth BLOCKING, visual_design and coherence major: 'pixelated grey pseudo-text blocks -- a mosaic of mojibake show-through' on the 'the second one' card in 03_us, the '41s'/'38s' slips in 04_moments and the first result in 12_search. MEASURED AT FIRING 58: all four sightings are pieces declared on assets/paper/receipt_01.webp (03_us piece date_bridge_two_year; 04_moments pieces 01M1DXGH0RSSC9BYZCKPBZV201, 01M197GX48995E6B60FGY5VBE1, 01M03N9XV036Y22D6G753KCHHA; 12_search hit.01KZ5THC6GKTN6JK7V1X6SPKVM). The stock is a till roll whose faded thermal printout -- a header, seven to eleven item lines, a barcode -- is rendered as pixel-noise glyphs over its top half; its lower half is blank. It is not show-through: it is the receipt's own print, and the app writes over it. The app chooses it on purpose in three places: modules/dates/date_list.dart:114 (every planned date), regions/moments/moments_region.dart:396 (voice notes), material/assignment.dart:60 (the slip pool). The barcode half is very probably rank 37's comb.",
+   "measurement": "ANCHORED to both sidecars: on every still, no surfaces.json entry on assets/paper/receipt_01 (day or dusk) lies under a piece that carries a declared text run of text.json, unless the entry's framing places only the unprinted tail of the source under that piece (framing read from the entry's src/rect, the printed band measured off the stock once and written into the test). POPULATION: the count of text-carrying pieces on 03_us, 04_moments and 12_search does not fall. App-side only: a stock choice or a framing. The receipt is NOT re-rendered -- day paper is unauthorised.",
+   "rank_before_firing_58": null,
+   "rank": 6
+  },
+  {
+   "id": "the-other-persons-hand-is-a-hairline-on-grid-paper-under-the-photograph",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "the-ui",
+   "points": 1.5,
+   "row": "visual_design",
+   "kind_of_finding": "OPEN WORK (bucket 3), and the cap on visual_design.",
+   "why": "visual_design BLOCKING and the reason the row is capped at 17: the 14_media_viewer caption 'three layers. it leans...' is NoorHand at 54 px, ink ff1f2a44, ink_core 2.94 / median 2.63 against 4.5, over blue-grey graph rules that cross every letter. MEASURED AT FIRING 58: the caption sits on piece viewer_01KKP9AZEGXQ38N9BVB70W8KDR drawn from assets/paper/graph_02_dusk.webp -- a DUSK grid stock in a day viewer. The critic judged 13 of legibility.json's other 15 below-floor runs to be instrument; the second real one is dusk_pulse's header at 4.92 against 5.0 (the dusk screen, whose own item closed with that header as a marginal survivor).",
+   "measurement": "ANCHORED to legibility.json by `says`: the run 'three layers. it leans...' on 14_media_viewer reads ink_core >= 4.5 and the piece under it (surfaces.json, piece viewer_<id>) is neither a graph stock nor a dusk stock in day light. POPULATION: 14_media_viewer total_runs unchanged at 2 (firing 56's sidecar). The route is a stock choice for the caption, or the hand's weight on a ruled ground -- not a font re-cut.",
+   "rank_before_firing_58": null,
+   "rank": 7
+  },
+  {
+   "id": "a-run-of-phone-states-stacks-as-full-width-strips-and-outweighs-the-conversation",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 1.5,
+   "row": "visual_design + messenger_reliability + coherence",
+   "kind_of_finding": "OPEN WORK (bucket 3). A real day of two phones makes these runs too; the seeded year only shows it first.",
+   "why": "messenger_reliability and visual_design major, coherence minor: 02_chat, the hero, shows eight full-width grey tape strips of 'noor's phone is on normal', 'noor went out', 'you got in' and not one written message; coherence adds that the same kind of state is phrased four ways ('noor - travelling', 'noor needs a lot', 'noor is rest...', 'noor's phone is on normal') and sits left on one day and right-indented on the next.",
+   "measurement": "(a) A widget test with eight consecutive state events between two messages yields at most one state row between them, which names what changed (a folded run), and the eight events stay in the spine (thread projection count unchanged; the fold is a view). Re-break by removing the fold. (b) ANCHORED to the report: in 02_chat.report.json `visible`, no two adjacent ids are both state events unless their kinds differ and a message falls between. (c) One grammar: every state row renders `<who> <what>` from one template in chat/renderers.dart, and a partner's state row sits on the partner's side on every day (widget test over two days). The hero's anchor fraction is a capture choice and is not this item.",
+   "rank_before_firing_58": null,
+   "rank": 8
+  },
+  {
+   "id": "the-pulse-card-shows-a-stale-sensor-fact-beside-a-fresh-chosen-one",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 1,
+   "row": "coherence",
+   "kind_of_finding": "ALWAYS THERE (bucket 2): firing 30's 01_pulse.text.json has PLACE travelling and AT HOME yes too.",
+   "why": "coherence major: the Pulse partner card says PLACE 'travelling' and AT HOME 'yes' side by side. pulse_region.dart lists every signal with no age; `at_home` is a phone sensor and `place` a chosen state, set independently, and nothing orders them.",
+   "measurement": "A widget test anchored to spine timestamps: at_home=true at t0 and place=travelling at t1 > t0; the card does not show both without the older one carrying its age (or drops the older one). Re-break by removing the rule. On the next capture, 01_pulse.text.json does not carry PLACE 'travelling' and AT HOME 'yes' unless an age run follows the older. POPULATION: the card's fact count read before the change.",
+   "related": "partner-state-is-a-label-and-value-table-and-signals-md-describes-something-else",
+   "rank_before_firing_58": null,
+   "rank": 9
+  },
+  {
+   "id": "first-run-and-setup-wear-the-paired-shell",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 1,
+   "row": "coherence",
+   "kind_of_finding": "OPEN WORK (bucket 3).",
+   "why": "coherence major: 17_setup_pwa is drawn under a lit CHAT tab with the whole nav live and a header strip with NEED/ENERGY bars for a partner who does not exist yet; 10_first_run shows the same bars. A person setting the app up sees a shell for a relationship that has not been paired.",
+   "measurement": "ANCHORED to the text sidecars and the report: when the scene's report has no partner (or setup_showing is true), 10_first_run.text.json and 17_setup_pwa.text.json carry no partner-strip runs ('NEED', 'ENERGY', the partner's status line) and no tab is drawn lit. POPULATION: the setup checklist's own runs are all still present.",
+   "rank_before_firing_58": null,
+   "rank": 10
+  },
+  {
+   "id": "an-arriving-feeling-lands-on-whatever-is-under-it",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 1,
+   "row": "emotional_transmission",
+   "kind_of_finding": "OPEN WORK (bucket 3).",
+   "why": "emotional_transmission major twice: in 08 the arriving 'hold' cylinder parks over the partner card and hides HAS LEFT for 1.2-3 s, and the 'squeeze' tape lands on the 'hold' caption so it reads 'h..d'; in 07 the objects land over the sender's own picker strips. The landing target is fixed, not chosen against what is on the glass.",
+   "measurement": "A widget test anchored to declared runs: an arriving feeling's resting rect intersects no rect of a declared text run of the partner card or of a thread caption in the frame it lands on (the runs found by `says`, not by coordinates); re-break by pinning the target back. On the next capture, 08's frame report at the landing has no partner-card run occluded.",
+   "rank_before_firing_58": null,
+   "rank": 11
+  },
+  {
+   "id": "the-feelings-count-in-settings-counts-both-phones",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "using-it",
+   "points": 0.25,
+   "row": "coherence",
+   "kind_of_finding": "OPEN WORK (bucket 3), code critic minor.",
+   "why": "05_settings reads 'feelings: 36 to send, 2 made here' while its own list shows 'pigeon by noor' and 'tuesday soup by teo'; only one was made on this phone. The count reads every feeling_authored in the shared log.",
+   "measurement": "Widget test: two feeling_authored events, one per author; Settings says '1 made here' on each phone. Anchored to the event authors. Re-break by counting all.",
+   "rank_before_firing_58": null,
+   "rank": 15
+  },
+  {
+   "id": "the-tab-bar-and-the-pad-are-straight-cut-rectangles",
+   "state": "open",
+   "attempts": 0,
+   "filed_at_firing": 58,
+   "filed_by": "ADDRESS, from evidence/critics/3/*.json",
+   "owner_priority": "the-ui",
+   "points": 0.5,
+   "row": "material_truth + anti_goal",
+   "kind_of_finding": "OPEN WORK (bucket 3), property of the rendered-paper approach.",
+   "why": "material_truth major, anti_goal minor: the main pad is a hard-edged rectangle with no deckle and no contact shadow on the wood, with a one-step jog in its top edge; the five tabs are straight-edged rectangles with no shadow. Stray one-pixel light horizontal lines cross the desk in crops/02_chat_300_edge.png (probably pad rules leaking past the pad).",
+   "measurement": "ANCHORED to surfaces.json: piece pad.<region> and every tab piece carry a tear or cut mask entry and a `fit: contact` shadow entry on every room still; population: tab count 5 on every room still. The desk hairlines: no row of the desk's own declared rect outside the pad's rect differs from its neighbours by more than the desk's own row-to-row p99 (measured on the desk asset first).",
+   "rank_before_firing_58": null,
+   "rank": 17
   }
  ],
  "blocked": null,
@@ -3039,6 +3299,15 @@
    "total": 64,
    "decision": "DIAGNOSE complete; next ADDRESS.",
    "pushed": true
+  },
+  {
+   "firing": 58,
+   "stage": "ADDRESS",
+   "cycle": 3,
+   "at": "2026-09-23T22:40:00Z",
+   "what": "Read last_score, history[-1] and all eight reports in evidence/critics/3/. Pulled seven committed captures from history (firing 30 to 56) and compared the named cards crop by crop in the scratchpad; read the committed scene logs and reports; read fold.dart, paper.dart, corner.dart, settings_region.dart, sync.dart and chat_region.dart's stageStates. Split the findings three ways (address_at_firing_58). Filed 13 items, folded 2 in, split 1, re-ranked 59 contiguous, swept every measurement under 3d. No code, no capture, nothing under assets/ or evidence/ written.",
+   "decision": "ADDRESS complete; next IMPLEMENT at rank 1, a-folded-note-at-rest-is-frame-zero-of-the-fenced-render.",
+   "pushed": true
   }
  ],
  "routine": {
@@ -3187,7 +3456,7 @@
    "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
   }
  },
- "stage_change_note": "Firing 57 ran DIAGNOSE and MOVES THE STAGE TO ADDRESS, cycle 3. Score 64/120 at 0480996, no floor met; see last_score and measured_at_firing_57.convergent_findings_for_ADDRESS. ADDRESS: re-rank against those findings under the owner's steer. The blank ruled card in the thread is flagged by five critics and is the fold placeholder already in the queue; ghost pseudo-text and doubled tear edges are new filings. DESIGN is frozen until cycle 6. The steer holds: no demo-content filings to lift a score.",
+ "stage_change_note": "Firing 58 ran ADDRESS and MOVES THE STAGE TO IMPLEMENT, cycle 3. The queue is re-ranked 1..59 from cycle 3's critic reports; READ address_at_firing_58 FIRST. The split: no regression the loop caused in code; one artifact regression it did not cause (13's staged states, intermittent, rank 2); the doubled tears, the ghost text, the flat card, Settings' 'not paired yet' and Pulse's travelling/at-home were all in firing 30's capture, and roughly 8 of the 11 points lost are the sharper ruler. Rank 1 is the folded note at rest: fold.dart draws frame 0 of the fenced render as the resting face, and that face needs no render -- the fence holds for the clip. Ranks 1-11 are new; 12-29 keep firing 53's order; 30-50 are harness and are worked only when one blocks a ranked item by id; 51-57 parked; 58-59 demo content under the steer. DESIGN frozen until cycle 6. Folds re-render fenced; photos, tears and new objects refused; day paper unauthorised.",
  "measured_at_firing_12": {
   "captured_at": "e7a3a5a",
   "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
@@ -3296,7 +3565,7 @@
    "note": "unchanged from firing 12 to three decimal places, which is what no colour change should look like"
   }
  },
- "queue_note": "RE-RANKED WHOLE AT FIRING 53, ADDRESS. 52 open, CONTIGUOUS 1..52, no gaps. Every open item carries rank_before_firing_53. Closed and superseded items carry rank null: ranks 3, 5 and 7 had kept numbers after closing, and are nulled with a note. Cross-reference by id, never by rank.\n\nREAD address_at_firing_53 (a top-level key) BEFORE WORKING THE TOP OF THE QUEUE. It holds the four decisions and the convergence view.\n\nTHE SHAPE: ranks 1-4 are items with new decisions. 1 the-mask-cache-never-lets-go-of-a-mask (the lit edges on 12_search). 2 the-tears-are-overlays-painted-on-whole-paper (per-mask 2048 for five masks, after 1). 3 one-coloured-thing-per-screen (blocker refuted by COLOR.md §7.6: place the clover). 4 one-variant-per-glyph-and-zero-pressure-variance (clause 3 re-scoped to its avoidable form; every route now IMPLEMENT's). Ranks 5-22 keep firing 50's relative order: 5 is the dusk screen, which firing 52 named as IMPLEMENT's next. Ranks 23-44 are the harness tail, in firing 50's order. IMPLEMENT reaches them only when one blocks a ranked item by id (3b and 3c).\n\nRANKS 45-50 ARE THE PARKED BAND. IMPLEMENT DOES NOT WORK THEM. 45 the unfolding clip and 46 the folds library (fenced). 47 the lamp, 48 the day rig and 49 families B-C-D (DESIGN at cycle 6). 50 the beads (DESIGN). Each carries needs_stage or parked_at_firing_53 saying why. Ranks 51-52 are deprioritised demo content, per the owner's steer.\n\nTHE 3d SWEEP was run as a regex over all 52 measurements. The only hits are on rank 45 and were vetted at firing 50: `frame 0000` is an asset path and `(200,1350)` is a prohibition. The four measurements rewritten this firing are anchored to declared sidecars: surfaces.json asset ids, text.json runs, hands.py over declared runs. Each carries a population clause.",
+ "queue_note": "RE-RANKED WHOLE AT FIRING 58, ADDRESS. 59 open, CONTIGUOUS 1..59, no gaps. Every item placed this firing carries rank_before_firing_58 (null for the 13 filed now). Closed and superseded items carry rank null. Cross-reference by id, never by rank. READ address_at_firing_58 (top-level key) BEFORE WORKING THE TOP: it holds the three-way split, the fence decisions and the builder decision. Two items were folded in: the async-throw harness item into rank 2, the family-tab hug into rank 4. Rank 51, the unfolding clip, gave 3 of its 6 points to rank 1. ",
  "owner_steer": "2026-09-19, from the owner, and it outranks the rubric where the two disagree: \"I made the mistake of asking for too many demo populated items. Those aren't important because it's using it and the UI that matters more.\" So the seeded year's media is not worth a firing, and neither is evidence plumbing that exists only to let the harness score itself. What is worth a firing is what a person holding the phone would hit: a thing that does not work, a screen that looks wrong, a surface that is flat when it should be paper.",
  "measured_at_firing_23": {
   "captured_at": "2026-09-19T13:07:57Z",
@@ -3783,5 +4052,84 @@
   ],
   "rendered_paper_finding_recorded_not_acted_on": "Bearing on the owner's open decision about visual direction, stated without recommending: the critics were split. visual_design (15/20) and coherence called the paper-and-ink world warm and one system, and visual_design would open it daily. material_truth (11/25) found the larger rendered cards give themselves away as simulated (doubled tears, ghost text, straight pad edges, inconsistent shadows), and the top defects of this cycle on four rows (blank card, ghost text, doubled tears, translucent picker) are all artifacts of the rendered-paper compositing pipeline rather than of the concept.",
   "builder_critic_gap": "visual_design again: builder 10 against critic 15, the same deflation the queue item the-builder-sheet-has-no-anchor-points... names (5.5 at firings 18 and 31, 5 now). This sheet wrote its own anchors; they were set too low for this row. 5 points of score for zero points of diagnosis, a third time."
+ },
+ "address_at_firing_58": {
+  "decided_at_firing": 58,
+  "stage": "ADDRESS",
+  "cycle": 3,
+  "inputs": "last_score (64/120 at firing 57), history[-1], every report in evidence/critics/3/*.json (not the at_firing_* folders), measured_at_firing_57, and the committed artifacts of seven captures pulled from history: 2fbfde5 (firing 30, the capture firing 31 scored), 57c88d0, a9df29f, 24277eb, 295cae4 (firing 51), 7db492f (firing 54), 6eb015a (firing 56, the capture scored now). Nothing under evidence/ or assets/ was written; crops were made in the scratchpad.",
+  "the_three_way_split": {
+   "1_regressions_the_loop_caused": {
+    "verdict": "NONE IN CODE. One regression in an ARTIFACT, which the loop did not cause.",
+    "the_states_artifact": "13_messenger_states showed all four staged rows (going / waiting to send / it would not go + try again / read) in the captures of firings 30, 51 and 54, and shows none of the three emitted ones at 56. The committed logs say why it is not a code regression: events_at_open 14061 in all three runs, report `events` 14067 at 51 and 54 against 14064 at 56, and NO commit touched app/lib/regions/chat, app/lib/spine or app/lib/scope.dart between the firing-54 capture and the firing-56 build (git log 7db492f..0480996). The staging path is intermittent in two shapes -- full staging plus the unnamed pageerror at 51/54, partial staging with no error at 56. Ranked 2 as using-it until an experiment shows it is staging-only. This is the one place the score fell because the build got worse on the glass: most of messenger_reliability's 21 -> 17.",
+    "the_doubled_tears": "NOT caused by firing 54's assets/tears/hi, and not new since firing 31. The lit edge and the mask have been sliced at different scales since 2026-09-04 (4ac6461 composes the mask in device pixels, 42a7336's NinePainter draws the edge in logical pixels at a fixed 0.4). At firing 30's capture it showed as one large stair-stepped blur with no crisp outline (03_us, us.body.dates top edge). The 24277eb capture is the first in which the real cut reads as a dark fibrous line and the old blur reads as its copy 30-60 px inside -- after b73582f (the contact shadow laid around the outline). So a loop commit changed its SHAPE into the thing the critic named, from a worse shape. The hi masks left it identical (295cae4 vs 7db492f) and brought the vertical mismatch from 3x to 1.5x.",
+    "the_ghost_text": "NOT a regression. Every sighting is a piece drawn on assets/paper/receipt_01, whose rendered till-roll printout has been in the stock since 0cd5309 (2026-09-03). Firing 30's 03_us.png shows it in the same place."
+   },
+   "2_always_there_now_visible": {
+    "items": [
+     "the flat card (FoldedNote at rest = frame 0 of the fenced render; in 13 since firing 30)",
+     "the doubled tear (see above)",
+     "the receipt printout",
+     "Settings 'not paired yet / connecting / 14062 events, 1 waiting to send' (word for word in firing 30's text sidecar)",
+     "Pulse PLACE travelling beside AT HOME yes (the same in firing 30's sidecar)",
+     "the picker's gradient scrim (d9df399, 2026-09-04)"
+    ],
+    "how_much_of_the_drop_is_the_ruler": "By row, against firing 31's 75: material_truth -4 -- all three of its blocking findings were in the capture firing 31 scored, so the whole drop is the sharper ruler (full-resolution crops) and critic variance, not the build. anti_goal -2 -- the same object firing 31's critics already found; variance. coherence -1 and emotional_transmission -1 -- their blocking findings (Settings, the scrim) are both old; variance. messenger_reliability -4 -- the one row where the glass really got worse (the states still). visual_design +1. So roughly 8 of the 11 points lost are the ruler and the critics, and roughly 3-4 are the states artifact. This is an estimate from which findings are old, not a re-score."
+   },
+   "3_open_work": [
+    "runs of phone-state strips outweighing the conversation (02 hero)",
+    "the other person's hairline hand on a dusk grid stock in the viewer (visual_design's cap)",
+    "first run and setup wearing the paired shell",
+    "arriving feelings landing on the partner card and captions",
+    "the Settings feelings count",
+    "straight-cut pad and tabs, desk hairlines",
+    "Us shows one module (rank 12, already filed)",
+    "Moments' grey renders -- deprioritised-demo-content, NOT re-promoted"
+   ]
+  },
+  "the_new_top_of_the_queue": "1 the folded note at rest (using-it, anti_goal blocking, five critics). 2 the states artifact (using-it, messenger_reliability blocking; absorbs the harness item about the async throw). 3 Settings unpaired on a paired log (using-it, coherence blocking). 4 the picker scrim and empty families (the-ui, emotional_transmission blocking x2; absorbs the family-tab hug). 5 the lit edge's scale (material_truth blocking). 6 the receipt printout (material_truth blocking). 7 the viewer caption (visual_design blocking). 8-11 using-it open work. 12-29 the previous workable band in firing 53's order. 30-50 harness. 51-57 parked. 58-59 demo content.",
+  "fence_decisions": {
+   "folds_re_render": "STAYS FENCED. What was split out is the resting face of an unopened note in the thread, which is fold.dart's choice and needs no render (3e's blocker test, recorded on the item). The clip keeps 3 points and its fence.",
+   "photos_tears_new_objects": "STILL REFUSED. None of the new items needs one: the receipt and punch-hole items are app-side stock choices, the lit-edge item is a slicing fix, the folded note uses the note's own stock and tear.",
+   "day_paper": "UNAUTHORISED, unchanged. The receipt stock is explicitly not to be re-rendered.",
+   "parked_band": "Nothing newly in scope."
+  },
+  "builder_visual_design_10": {
+   "decision": "AN UNDER-READ. The score is not changed; ADDRESS does not score.",
+   "reasons": [
+    "The builder's own 17 anchor has four clauses: no real text below floor, a ground/mid/figure structure, accent doing work in every room, would open it daily. The critic found three met -- would open it daily, readable upright ink at 8-10:1, a working accent in the clover and the highlight -- and one failed, two captions. That is well above the builder's own 10 anchor, whose clauses ('several screens half empty', 'accent is a percent of area') describe a worse build.",
+    "The builder read legibility as BETTER than the critic did -- it called all 15 below-floor runs instrument, where the critic found two real -- and still scored 5 lower. The deflation was in the anchor scale, not in anything the builder saw.",
+    "The anchors jump from 10 to 17 with nothing between them, so a build between them had to be rounded down. That is the third time this row has been deflated this way (5.5 at firings 18 and 31, 5 now), and it is what the-builder-sheet-has-no-anchor-points-and-it-cost-five-and-a-half-points (rank 30, harness) is for. It stays harness and stays where it is: fixing it lifts a number, not the app, and the steer says not to chase that."
+   ]
+  },
+  "rendered_paper_vs_layout_recorded_not_acted_on": {
+   "note": "The owner is reviewing three candidate visual directions, one of which would retire the rendered-paper pipeline. NOTHING IS DECIDED; this ranking is against DIRECTION.md and docs/COLOR.md as written. Stated plainly and without recommending:",
+   "properties_of_the_rendered_paper_approach": [
+    "the doubled, stair-stepped tear edge (a three-layer composite of mask, lit edge and shadow that must agree on scale)",
+    "the receipt printout read as pixel garbage (a rendered stock with baked printed matter)",
+    "the punch-hole disc over words (a rendered stock with a baked hole)",
+    "the flat card (a fold sequence whose frame 0 is flat; the resting face is an app choice, the clip is the render)",
+    "straight-cut pad and tabs, and the shadow that only 3D objects carry",
+    "the mask-cache and texture-budget items, the lamp, the day rig, the folds"
+   ],
+   "properties_of_layout_and_state_any_direction_would_share": [
+    "the states still that does not show its states",
+    "Settings saying unpaired beside a year of log, and partner state drawn as live when the link is down",
+    "PLACE travelling beside AT HOME yes",
+    "the picker as a scrim over the page, and families that show only a name",
+    "runs of phone-state strips outweighing the conversation",
+    "first run wearing the paired shell",
+    "arriving feelings landing on content",
+    "Us showing one module",
+    "the thin second hand on a patterned ground (the ground is the paper's; the weight is the type's)"
+   ]
+  },
+  "sweep_3d": "Run as a regex over every open measurement for bracketed coordinates, x=/y= positions and frame ordinals. Hits only on rank 51 (`frame 0000` is an asset path and `(200,1350)` is a prohibition, both vetted at firing 50) and rank 22 (`at 14,061` is an event count). Every measurement written this firing is anchored to a surfaces.json piece or asset, a text.json `says`, a report id list or event count, or a spine timestamp in a widget test, and carries a population clause.",
+  "convergence": {
+   "open_items": 59,
+   "open_using_it_plus_the_ui_points": 45.25,
+   "of_which_parked": 7.0,
+   "note": "Open using-it + the-ui points: 32.0 at firing 53 -> 45.25 now. This firing filed 13 items worth 20.75, of which 3 were split from the fenced clip, so 17.75 are new points. 32.0 + 17.75 = 49.75, so the 4.5 difference is what IMPLEMENT closed at firings 54-55, by arithmetic. 7.0 sit in the parked band. The queue grew because the critics found things a person would see, which 3b says are always filed."
+  }
  }
 }

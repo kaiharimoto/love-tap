@@ -7555,3 +7555,46 @@ Then DIAGNOSE, with the builder sheet written first.
 ### Next
 
 **ADDRESS.**
+
+## Firing 58 — ADDRESS, cycle 3
+
+- Step 0 passed after a fast-forward of 46 commits. Took the lease and pushed it first.
+- Read `last_score`, `history[-1]` and all eight reports in `evidence/critics/3/`.
+- Pulled seven committed captures out of history, from firing 30's (the one firing 31 scored) to firing 56's, and compared the named cards crop by crop in the scratchpad. Nothing under `evidence/` or `assets/` was written.
+
+### The split
+
+- **No regression the loop caused in code.**
+- **One artifact got worse, but not because of loop code: 13's staged states.** They were on screen at firings 30, 51 and 54, and they are gone at 56.
+  - `events_at_open` was 14061 in all three runs. The report's `events` was 14067 at firings 51 and 54, and 14064 at 56.
+  - No commit touched chat, spine or scope in between.
+  - So staging is intermittent, and it fails two ways: full staging plus the unnamed pageerror, or partial staging with no error at all. It is ranked 2.
+- **The doubled tears are old.** The lit edge has been sliced at a different scale from its mask since 2026-09-04.
+  - At firing 30 it showed as one stair-stepped blur.
+  - After `b73582f` it reads as a dark cut plus a copy of that cut.
+  - Firing 54's hi masks did not cause it.
+- **The ghost text is old.** Every sighting is on `receipt_01`, whose printed till slip has been rendered into the stock since 2026-09-03.
+- **Also old, and all in firing 30's capture:**
+  - the flat card, which is `FoldedNote` at rest drawing frame 0 of the fenced render;
+  - Settings' `not paired yet`;
+  - Pulse showing `travelling` beside `at home: yes`.
+- About 8 of the 11 points lost are the sharper ruler and critic variance. About 3–4 are the states still.
+
+### The queue
+
+- 59 open, contiguous. 13 filed, 2 folded in, 1 split.
+- Ranks 1–7 are the blocking findings:
+  1. the folded note at rest;
+  2. the states artifact;
+  3. Settings unpaired;
+  4. the picker scrim and its empty families;
+  5. the lit-edge scale;
+  6. the receipt printout;
+  7. the viewer caption.
+- The folds fence holds for the clip. The resting face needs no render.
+
+**The builder's visual_design 10 was an under-read.** The critic found three of its own four 17-clauses met. The score was not changed.
+
+### Next
+
+**IMPLEMENT, rank 1.**
