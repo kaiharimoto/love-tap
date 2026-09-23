@@ -7195,3 +7195,48 @@ to book a failed check as something other than a missing artifact. After that, r
 experiment. Two things for ADDRESS: re-scope rank 6, and cost the mask cache before rank 1 can
 finish. The 13_messenger_states page error is the manifest item's second occurrence, and it is
 worth fixing before the next full capture books another good still missing.
+
+## Firing 52 — IMPLEMENT, cycle 3 — 2026-09-23 03:55–05:45Z
+
+Step 0 passed after a fast-forward of 10 commits. Lease taken and pushed first. Fresh container:
+apt-prereqs, distro ffmpeg, then `bootstrap.sh --profile=web`; `toolchain/.done` holds
+`playwright`.
+
+**Rank 1, which is now the mask cache.** A piece holds a clone of the mask it is drawing and gives
+it back when it stops. The cache keeps what nobody holds, least recently used first, under 48 MB,
+and never evicts a mask that some piece is drawing. SlicedMasks' count of 64 became a byte budget,
+because one composition can be 13.5 MB and a count bounded nothing. A walk of 23 screens that
+decodes 265 MB now peaks at 57 MB resident. With eviction off, the test fails at screen 10. What
+this does not fix: one screen still holds everything it draws, which is ~158 MB on search, and
+half of that is the lit edges.
+
+**Rank 2.** No new render was needed. Firing 51's probe already contains the proof: both
+conditions move one way with the stop, and they part between -0.18 and -0.30. Exhausted, and
+passed to DESIGN.
+
+**Rank 4 closed** on a capture of the media viewer. The tape is tape now. It is also hidden under
+the viewer's photograph. I checked that in the pixels before believing the sidecar, because my
+first check scaled the tape into its rect without rotating it and got the wrong answer.
+
+**Rank 6.** Agreed with firing 51 and not re-measured.
+
+**Rank 8 closed.** A failed frame check lands in `failed_checks` with the still kept, and
+`--frame-fatal` is on. The first draft failed the four clips and the dusk crop for having no
+sidecar. I caught it by running the loop over the committed reports before trusting it.
+
+**Rank 9.** Clause 3's route shipped as GSUB only: `room` on the hero has two different o's, and
+same-letter stalls fall 12 → 2 over the set. 02_chat's different-letter stalls rose 14 → 23. The
+clause itself cannot be reached with one glyph of lookback. Clause 1's knob was swept from 12 to
+28: no median reaches 15, and the fallbacks explode past 20. Both are exhausted and need DESIGN.
+
+### Gate
+
+`pack_assets --seed=year` exit 0 at start and end. `flutter analyze` clean. `flutter test` 244
+green (242 + 2 new, re-broken). Note: the test run rewrites `evidence/coldstart.json` and
+`evidence/reliability.json`. They were restored each time, not committed.
+
+### What the next firing should expect
+
+IMPLEMENT continues from rank 10. ADDRESS is overdue: three routes are exhausted and waiting on
+DESIGN (the day roll-off, hand variants by construction, and a longer calt context), rank 6 needs
+re-scoping, and the lit edges are the next residency lever.
