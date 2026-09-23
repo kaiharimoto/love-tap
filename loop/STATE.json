@@ -3,15 +3,9 @@
   "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
   "cycle": 3,
   "stage": "IMPLEMENT",
-  "firing": 53,
+  "firing": 54,
   "stage_entered_at_firing": 53,
-  "lease": {
-    "session_id": "session_016Y1khaURoJbFKbaZorvG9s",
-    "firing": 54,
-    "stage": "IMPLEMENT",
-    "started_at": "2026-09-23T09:53:13Z",
-    "expires_at": "2026-09-23T13:53:13Z"
-  },
+  "lease": null,
   "evidence_fresh_as_of": "firing 54: ONE FULL ./capture.sh, 2026-09-23T10:35-11:20Z, built from 7ceb7d5-era code (ranks 1-3: half-size lit edges, finer masks for big sheets, the pressed clover) and BEFORE the margin commit, so the strip's status line is still written across its rule in this set. 14 of 17: 09 and 16 (no /dev/kvm), and 13_messenger_states shot and then refused on a pageerror, as at firing 51 -- the file on disk is this run's. evidence/.previous was not seeded, so DIFF.json reads everything as new. ffmpeg is distro 6.1.1, not the pinned binary. palette.json and legibility.json are this run's. THEN 01_pulse and crops/dusk_pulse RE-CAPTURED ALONE (./capture.sh --only=..., 11:50-12:25Z) from the margin build; MANIFEST.json, frames.json and DIFF.json restored to the full run's. palette.json and legibility.json are recomputed over the mixed set.",
   "evidence_note": "15 of 17, the ceiling in this container. 09_two_devices.png and 16_setup_android.png are booked missing WITH the measured /dev/kvm reason this time, not 'not captured this session' -- firing 37's MANIFEST lost that text because its second leg ran --only=02_chat; this run was whole so the sentence is there. `surfaces` is booked missing on the rendered surface with nothing in it, which is rank 6 and unchanged. THE CLIPS IN THIS CAPTURE WERE ENCODED BY A DIFFERENT BINARY THAN THE ONES BEFORE THEM: the pinned johnvansickle.com ffmpeg tarball now sits behind a JS interstitial that returns 7.3 KB of HTML with a 200, tar fails on it, and bootstrap.sh is `set -e` so it dies at that line and never reaches tailscale or Playwright WebKit -- which is no capture at all, not a missing clip. The distro ffmpeg 6.1.1 is symlinked into toolchain/ffmpeg. All five clips assembled and every frame check passed. Do not read mp4 SSIM across this boundary as content movement without checking that first.",
   "degradation": 0,
@@ -2897,6 +2891,21 @@
       "open_ui_plus_using_points_workable": 22.5,
       "gate": "No code, assets or evidence changed; the toolchain is absent in this container, so flutter analyze and flutter test were not run. app/ and tools/ are byte-identical to firing 52's gated tree (244 green).",
       "pushed": true
+    },
+    {
+      "firing": 54,
+      "stage": "IMPLEMENT",
+      "cycle": 3,
+      "at": "2026-09-23T12:15:22Z",
+      "what": "IMPLEMENT ranks 1-5 and 11. (1) Lit edges packed at half, drawn at the mask's geometry: 12_search 180.7 -> 122.7 MB decoded; CLOSED. (2) Every mask has a full-resolution copy in assets/tears/hi, drawn only by a piece >1.6x its packed mask; the named five-mask route was refuted off the sidecars first; setup 13.91 -> 6.96, settings 9.19 -> 4.89 on the capture; the longest-tread clause found impossible as written. (3) A pressed clover on the partner strip (8 rooms) and the search slip: every room still 1.05-1.51% accent, family D, mean chroma 0.0455; figure-ink clause unmoved and not an object's. (4) hands.py counts avoidable repeats; calt lookback costed, not started. (5) dusk pulse 4 -> 2 -> 1 of 54; CLOSED. (11) stocks declare their margin rule and the strip and their-card are cut beside it; no failing run on a margin column; CLOSED. One full capture (14/17) plus 01_pulse and dusk_pulse alone.",
+      "closed": [
+        "the-mask-cache-never-lets-go-of-a-mask",
+        "the-dusk-screen-fails-31-of-its-54-runs",
+        "a-word-is-written-across-the-printed-margin-rule"
+      ],
+      "open_ui_plus_using_points": 31.0,
+      "gate": "pack_assets --seed=year exit 0 at start and end; flutter analyze clean; flutter test 253 green (9 new tests, each re-broken).",
+      "pushed": true
     }
   ],
   "routine": {
@@ -3045,7 +3054,7 @@
       "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
     }
   },
-  "stage_change_note": "Firing 53 ran ADDRESS in place of the IMPLEMENT that STATE.json named, on the dispatcher's instruction, as firings 29, 32, 35, 43 and 50 did. It wrote no code and touched nothing under assets/ or evidence/. It made four decisions (address_at_firing_53). The lamp is parked for DESIGN at cycle 6. The day rig is re-scoped: the lamp half is closed, the mean clause moved to accents, and the band floors are parked. The tears are sequenced behind the mask cache's lit edges. Of firing 52's three DESIGN routes, two are re-expressed as IMPLEMENT under current law and one is struck; the roll-off waits for cycle 6. It also refuted rank 12's blocker off COLOR.md §7.6, and found rank 9's clause 3 impossible by pigeonhole as written. Queue re-ranked 1..52 contiguous, with a parked band at 45-50. NEXT: IMPLEMENT from rank 1, the-mask-cache-never-lets-go-of-a-mask (the lit edges on 12_search).",
+  "stage_change_note": "Firing 54 ran IMPLEMENT from rank 1 and leaves the stage at IMPLEMENT. Closed: the-mask-cache-never-lets-go-of-a-mask (rank 1), the-dusk-screen-fails-31-of-its-54-runs (rank 5), a-word-is-written-across-the-printed-margin-rule (rank 11). Worked and measured on a capture: the-tears-are-overlays-painted-on-whole-paper (rank 2; 4 -> 2 pieces over the 4x floor, fibre floor next), one-coloured-thing-per-screen (rank 3; accent clauses met on every room still, the figure-ink clause is not an object's and should be split). Rank 4: harness half only. NEXT: rank 2's per-mask fibre floor, then rank 4's calt lookback (measure GSUB cost on a scratch build first), then rank 6 down. Ranks were not renumbered.",
   "measured_at_firing_12": {
     "captured_at": "e7a3a5a",
     "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",

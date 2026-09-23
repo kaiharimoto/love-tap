@@ -7289,3 +7289,82 @@ would be moot or re-based. They hold 13.0 of the 32.0 points (list in `address_a
 byte-identical to the tree firing 52 gated at 244 green.
 
 **Next.** IMPLEMENT from rank 1: the lit edges on 12_search.
+
+## Firing 54 — IMPLEMENT, cycle 3 — 2026-09-23
+
+Step 0 passed: fast-forwarded 21 commits, then `Everything up-to-date`. `CLAUDE.md` was re-read
+from the tree; it had gained one rule (never trust the handed copy). Lease taken and pushed first.
+The toolchain was bootstrapped by `CONTINUE.md` §5's route (distro ffmpeg); `toolchain/.done/`
+holds `playwright`.
+
+**Rank 1, the lit edges: closed.** Predicted off the committed sidecar before anything else:
+12_search held 180.7 MB decoded, 77.99 of it edges, which is firing 51's 181 exactly. The refusing
+measurement was ordered first: every one of the still's 41 declared edges drawn at its declared
+geometry from a 1x and an Nx-smaller copy. 2x moves the band 1.1/255 at worst, and 3x moves it
+2.06/255, over the item's 2/255. So the edges are packed at half and `NinePainter` scales its
+canvas so the slices land where they did. Edges 77.99 → 19.98 MB, the screen 180.7 → 122.7 MB,
+with the same 27 pieces. One clause was missed by 0.48 MB: the target was a literal quarter of
+78.0, and the edges come off 1400-px renders, so they are now a quarter of their *masks*. It was
+not chased. Re-broken three ways. `tools/check/edge_residency.py` is the ruler; it was earned at
+1x (reads 0) and at 3x (refuses).
+
+**Rank 2, the tears: worked, not closed.** The named route was refuted off committed files before
+any code was written. None of today's big pieces draws any of the five masks firing 53 named,
+because the seeded-id repair re-rolled them. Every mask now has its full-resolution crop in
+`assets/tears/hi/`. A piece more than 1.6x its packed mask holds that copy (`FinerMask`), and the
+mask and the contact shadow pick together. The sidecar names the mask that cut the paper, and the
+shutter now counts mask decodes. On the capture: setup 13.91 → 6.96, settings 9.19 → 4.89,
+us.dates 5.69 → 4.00, viewer 4.90 → 3.71, exactly as predicted. The bundle is *smaller* than when
+the firing started. **My first re-break was wrong**: `false && a || b` still evaluates b, so it
+passed. It is recorded so nobody trusts a re-break they did not read. **Clause "longest tread
+≤ 4 px" is impossible as written**: the finer masks at 1:1, with no stretch, read longest treads
+of 47-80 px against a mean of 2.2-2.4. The mean tread is the ruler that discriminates. Left:
+settings and setup are held over 4x by the 0.25 fibre floor. The next lever is a per-mask fibre
+floor.
+
+**Rank 3, one coloured thing: the accent half met; the ink half is not the clover's.** A pressed
+clover (`PressedClover`, the one family-D object) lies across the right end of the partner's
+strip, which is on 8 of the 9 rooms. 12_search has its own on the query slip. It was predicted in
+a widget test at the capture's size: 1.096% at full resolution, and 1.075% through palette.py's
+700-px sampling. The sampling loss was measured at 2%, not assumed. On the capture, every room is
+1.05-1.51% accent, from 0-0.17%, all with family D. Mean chroma 0.0448 → 0.0455. No ceiling
+breached. Runs are unchanged, and below-floor fell or held on every still. `figure.p99_chroma`
+did not move and cannot move this way: the figure band is ink. ADDRESS should split that clause
+off.
+
+**Rank 4, hands: the harness half only.** `hands.py` counts `pairs_avoidable` against each face's
+declared variant count. The longer-context calt is costed (about 12,000 chain rules a face at a
+40-glyph lookback) and not started. Measure its GSUB size and shaping time on a scratch build
+first.
+
+**Rank 5 closed; rank 11 built.** The dusk pulse reads 2 of 54 below floor, from 4 (floor ≤ 3).
+Both runs that remain sit on the partner strip's own printed margin rule. The pack now declares
+every ruled stock's margin (`paper_margin`, 20 stocks). `PaperPiece.besideTheMargin` cuts a piece
+from the paper to the right of the rule, and the strip and the pulse's their-card ask for it. In
+the rendered strip the rule's pixels inside the status line went 65 → 0. Re-broken.
+
+### Gate
+
+`pack_assets --seed=year` exit 0 at the start and at the end. `flutter analyze` clean.
+`flutter test` 253 green (244 at firing 52; 9 new, each re-broken). The test run rewrites
+`evidence/coldstart.json` and `evidence/reliability.json`; they were restored each time.
+
+Two captures: one full run (14 of 17: 09 and 16 are the hardware fact, and 13 was refused on a
+pageerror after a good shot, as at firing 51), then 01_pulse and dusk_pulse alone from the margin
+build. Distro ffmpeg 6.1.1.
+
+### What the next firing should expect
+
+IMPLEMENT continues. Four items closed: the mask cache (rank 1), the dusk screen (rank 5), the
+margin rule (rank 11). Rank 3's accent clauses are met on the capture, and only its figure-ink
+clause is left. The top of the queue is now:
+
+- rank 2's per-mask fibre floor (settings 4.89, setup 6.96);
+- rank 4's calt lookback, measured on a scratch build before anything is written;
+- the ranks from 6 down.
+
+**ADDRESS should**, when it next runs:
+
+- split rank 3's `figure.p99_chroma` clause off as an ink item;
+- restate rank 2's tread clause as the mean tread;
+- look at 12_search's tear_014 piece, which still declares the coarse mask.
