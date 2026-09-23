@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 7313
+   "ms": 11150
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1902
   },
   {
    "do": "openViewer",
-   "ms": 6425
+   "ms": 5627
   },
   {
    "do": "wait",
@@ -26,11 +26,11 @@
   },
   {
    "do": "shot",
-   "ms": 2862
+   "ms": 2568
   },
   {
    "do": "report",
-   "ms": 719
+   "ms": 714
   }
  ],
  "shots": [
@@ -97,13 +97,13 @@
  "blob_waits": [
   {
    "at": "14_media_viewer.png",
-   "waited_ms": 11,
+   "waited_ms": 12,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 12479,
- "cold_ms": 1915,
+ "install_ms": 9802,
+ "cold_ms": 1795,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

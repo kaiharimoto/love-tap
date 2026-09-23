@@ -1,0 +1,210 @@
+{
+ "text": "evidence/05_settings.text.json",
+ "calt": true,
+ "runs_read": 18,
+ "pairs": 59,
+ "pairs_repeating": 26,
+ "worst": [
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 8,
+   "distinct": 3,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 7,
+   "distinct": 4,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 5,
+   "distinct": 2,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 5,
+   "distinct": 3,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 5,
+   "distinct": 3,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 2,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 4,
+   "distinct": 2,
+   "run": "everything either of you wrote is in one log on both phones."
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 3,
+   "distinct": 1,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 4,
+   "distinct": 3,
+   "run": "36 to send, 2 made here"
+  },
+  {
+   "family": "NoorHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "connecting"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 3,
+   "distinct": 2,
+   "run": "show the address"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 3,
+   "distinct": 2,
+   "run": "14062 events, 1 waiting to send"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "14062 events, 1 waiting to send"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 3,
+   "distinct": 2,
+   "run": "14062 events, 1 waiting to send"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 3,
+   "distinct": 2,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "write the whole history out"
+  },
+  {
+   "family": "NoorHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "m",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 2,
+   "distinct": 1,
+   "run": "not paired yet."
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 2,
+   "distinct": 1,
+   "run": "the six words"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 2,
+   "distinct": 1,
+   "run": "make one"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "run": "by noor"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "run": "teo \u00b7 client \u00b7 local"
+  }
+ ],
+ "glyphs": 302,
+ "stalls": 27,
+ "stalls_same_letter": 2,
+ "stalled_words": [
+  {
+   "family": "NoorHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "by noor"
+  }
+ ],
+ "ok": false,
+ "why": "26 of 59 repeated letters inside one declared run take an outline twice, and 2 of 302 glyphs are the same letter AND the same variant as the glyph immediately before them"
+}

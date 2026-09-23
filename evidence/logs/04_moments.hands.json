@@ -1,0 +1,57 @@
+{
+ "text": "evidence/04_moments.text.json",
+ "calt": true,
+ "runs_read": 22,
+ "pairs": 15,
+ "pairs_repeating": 5,
+ "worst": [
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "m",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  }
+ ],
+ "glyphs": 150,
+ "stalls": 4,
+ "stalls_same_letter": 1,
+ "stalled_words": [
+  {
+   "family": "NoorHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "week one, and the room smells right again"
+  }
+ ],
+ "ok": false,
+ "why": "5 of 15 repeated letters inside one declared run take an outline twice, and 1 of 150 glyphs are the same letter AND the same variant as the glyph immediately before them"
+}

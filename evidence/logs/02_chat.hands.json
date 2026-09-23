@@ -1,0 +1,155 @@
+{
+ "text": "evidence/02_chat.text.json",
+ "calt": true,
+ "runs_read": 23,
+ "pairs": 53,
+ "pairs_repeating": 19,
+ "worst": [
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 3,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 5,
+   "distinct": 3,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 2,
+   "run": "noor's phone is on silent"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 2,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 4,
+   "distinct": 2,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 4,
+   "distinct": 3,
+   "run": "noor's phone is on silent"
+  },
+  {
+   "family": "NoorHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "your phone is on normal"
+  },
+  {
+   "family": "NoorHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "m",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "run": "you are heads down"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 2,
+   "distinct": 1,
+   "run": "noor's phone is on silent"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 2,
+   "distinct": 1,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "run": "you are heads down"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 2,
+   "distinct": 1,
+   "run": "your phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 2,
+   "distinct": 1,
+   "run": "noor's phone is on normal"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 2,
+   "distinct": 1,
+   "run": "write something"
+  }
+ ],
+ "glyphs": 384,
+ "stalls": 14,
+ "stalls_same_letter": 1,
+ "stalled_words": [
+  {
+   "family": "NoorHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "week one, and the room smells right again"
+  }
+ ],
+ "ok": false,
+ "why": "19 of 53 repeated letters inside one declared run take an outline twice, and 1 of 384 glyphs are the same letter AND the same variant as the glyph immediately before them"
+}

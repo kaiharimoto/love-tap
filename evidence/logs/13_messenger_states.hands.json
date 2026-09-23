@@ -1,0 +1,218 @@
+{
+ "text": "evidence/13_messenger_states.text.json",
+ "calt": true,
+ "runs_read": 21,
+ "pairs": 51,
+ "pairs_repeating": 28,
+ "worst": [
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 3,
+   "run": "left the key under the pot"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 2,
+   "run": "left the key under the pot"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 2,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 4,
+   "distinct": 3,
+   "run": "and the bread, if there is any"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 4,
+   "distinct": 3,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "NoorHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 3,
+   "distinct": 2,
+   "run": "and the bread, if there is any"
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 3,
+   "distinct": 2,
+   "run": "sending you the roster"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "it would not go"
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 3,
+   "distinct": 2,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "NoorHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "m",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "i",
+   "instances": 2,
+   "distinct": 1,
+   "run": "and the bread, if there is any"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 2,
+   "distinct": 1,
+   "run": "waiting to send"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 2,
+   "distinct": 1,
+   "run": "waiting to send"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "run": "ok \u2014 leaving now"
+  },
+  {
+   "family": "TeoHand",
+   "char": "g",
+   "instances": 2,
+   "distinct": 1,
+   "run": "going"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 2,
+   "distinct": 1,
+   "run": "sending you the roster"
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 2,
+   "distinct": 1,
+   "run": "sending you the roster"
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 2,
+   "distinct": 1,
+   "run": "sending you the roster"
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 2,
+   "distinct": 1,
+   "run": "sending you the roster"
+  },
+  {
+   "family": "TeoHand",
+   "char": "r",
+   "instances": 2,
+   "distinct": 1,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 2,
+   "distinct": 1,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "TeoHand",
+   "char": "d",
+   "instances": 2,
+   "distinct": 1,
+   "run": "the other phone couldn't read it."
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 2,
+   "distinct": 1,
+   "run": "write something"
+  }
+ ],
+ "glyphs": 332,
+ "stalls": 28,
+ "stalls_same_letter": 1,
+ "stalled_words": [
+  {
+   "family": "NoorHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "week one, and the room smells right again"
+  }
+ ],
+ "ok": false,
+ "why": "28 of 51 repeated letters inside one declared run take an outline twice, and 1 of 332 glyphs are the same letter AND the same variant as the glyph immediately before them"
+}

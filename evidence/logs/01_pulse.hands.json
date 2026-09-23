@@ -1,0 +1,112 @@
+{
+ "text": "evidence/01_pulse.text.json",
+ "calt": true,
+ "runs_read": 27,
+ "pairs": 35,
+ "pairs_repeating": 12,
+ "worst": [
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "e",
+   "instances": 5,
+   "distinct": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "o",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 3,
+   "distinct": 2,
+   "run": "restless"
+  },
+  {
+   "family": "NoorHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "m",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "h",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "char": "m",
+   "instances": 2,
+   "distinct": 1,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "l",
+   "instances": 2,
+   "distinct": 1,
+   "run": "a little"
+  }
+ ],
+ "glyphs": 194,
+ "stalls": 13,
+ "stalls_same_letter": 2,
+ "stalled_words": [
+  {
+   "family": "NoorHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "NoorHand",
+   "letter": "o",
+   "variant": 4,
+   "run": "week one, and the room smells right again"
+  }
+ ],
+ "ok": false,
+ "why": "12 of 35 repeated letters inside one declared run take an outline twice, and 2 of 194 glyphs are the same letter AND the same variant as the glyph immediately before them"
+}
