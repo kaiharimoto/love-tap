@@ -925,7 +925,31 @@ def variant_name(name, v):
     return name if v == 0 else f"{name}.v{v}"
 
 
-def feature_text(base_names, n):
+def calt_buckets():
+    """The rotation classes chosen against a corpus at firing 52, over the default ones.
+
+    `default_buckets` spreads the classes by a hash of the name, which knows nothing about which
+    letters follow which. `buckets.json` was searched by shaping the seeded year's messages and
+    counting the thing a reader sees: a letter printed with the same outline as the letter before
+    it, or as an earlier instance of itself in the same line."""
+    path = os.path.join(HERE, "buckets.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return json.load(f).get("buckets", {})
+
+
+def default_buckets(base_names, n):
+    """The rotation class of every base glyph, as the build chose it before firing 52: a hash of
+    the name and its place in the sorted set. Kept so the shipped fonts can be rebuilt exactly."""
+    names = [b for b in base_names if b != ".notdef"]
+    # spread by position in the sorted set as well as by name, so no bucket comes out empty
+    # on a small alphabet and the letters that actually occur together land in different ones
+    return {b: (i * 3 + sum(ord(c) * (m + 7) for m, c in enumerate(b))) % n
+            for i, b in enumerate(sorted(names))}
+
+
+def feature_text(base_names, n, buckets=None):
     """The contextual alternates, in two passes.
 
     The first pass is a cascade: each glyph takes the variant one further on than the glyph
@@ -949,16 +973,15 @@ def feature_text(base_names, n):
 
     # every glyph of a given base letter is in the same rotation class whichever variant it
     # became, so the second pass sees the letter rather than the variant
-    buckets = [[] for _ in range(n)]
-    for i, b in enumerate(sorted(names)):
-        # spread by position in the sorted set as well as by name, so no bucket comes out empty
-        # on a small alphabet and the letters that actually occur together land in different ones
-        j = (i * 3 + sum(ord(c) * (m + 7) for m, c in enumerate(b))) % n
+    of = dict(default_buckets(base_names, n))
+    of.update(buckets or {})
+    classes = [[] for _ in range(n)]
+    for b in sorted(names):
         for k in range(n):
-            buckets[j].append(variant_name(b, k))
-    filled = [j for j in range(n) if buckets[j]]
+            classes[of[b] % n].append(variant_name(b, k))
+    filled = [j for j in range(n) if classes[j]]
     for j in filled:
-        lines.append(f"@K{j} = [" + " ".join(buckets[j]) + "];")
+        lines.append(f"@K{j} = [" + " ".join(classes[j]) + "];")
     lines.append("")
 
     for k in range(1, n):
@@ -1092,7 +1115,7 @@ def build_face(face, face_index, skel, hands, seed, out_dir, log):
     gasp.version = 1
     gasp.gaspRange = {0xFFFF: 15}
     fb.font["gasp"] = gasp
-    addOpenTypeFeaturesFromString(fb.font, feature_text(order, n))
+    addOpenTypeFeaturesFromString(fb.font, feature_text(order, n, calt_buckets()))
     os2 = fb.font["OS/2"]
     os2.recalcUnicodeRanges(fb.font)
     os2.recalcAvgCharWidth(fb.font)
@@ -1210,6 +1233,30 @@ def render_sheet(face, font_path, hand, out_path, order, n, scale=2):
 
 
 # ============================================================================ main
+def features_only(args):
+    from fontTools.ttLib import TTFont
+    _, hands = load_inputs()
+    buckets = calt_buckets()
+    for face in [f.strip() for f in args.faces.split(",") if f.strip()]:
+        path = os.path.join(os.path.abspath(args.out), f"{face}.ttf")
+        if face not in hands or not os.path.exists(path):
+            print(f"{face}: no {path}, skipped", flush=True)
+            continue
+        tt = TTFont(path)
+        base = [g for g in tt.getGlyphOrder() if ".v" not in g]
+        if "GSUB" in tt:
+            del tt["GSUB"]
+        addOpenTypeFeaturesFromString(tt, feature_text(base, hands[face]["variants"], buckets))
+        tt.save(path)
+        print(f"{face}: features recompiled with {len(buckets)} rotation classes from buckets.json", flush=True)
+        if not args.no_manifest:
+            import manifest
+            old = manifest._load()["files"].get(os.path.relpath(path, ROOT).replace(os.sep, "/"), {})
+            settings = dict(old.get("settings") or {})
+            settings["calt_buckets"] = sha256(os.path.join(HERE, "buckets.json"))
+            record(path, GENERATOR, settings, kind="font")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=os.path.join(ROOT, "assets", "fonts"))
@@ -1227,7 +1274,14 @@ def main(argv=None):
                          "past twenty-four attempts a variant keeps its best try whether or not it "
                          "clears the floor, so a floor raised too far buys nothing and says "
                          "nothing. Build into a scratch --out with --no-manifest.")
+    ap.add_argument("--features-only", action="store_true",
+                    help="recompile only the OpenType features onto the fonts already in --out, "
+                         "leaving every outline as it is. The geometry build is not "
+                         "byte-reproducible (firing 48), so a change to calt alone should not "
+                         "re-roll every glyph to ship.")
     args = ap.parse_args(argv)
+    if args.features_only:
+        return features_only(args)
     _set_hausdorff_min(args.hausdorff_min)
     out_dir = os.path.abspath(args.out)
     prev_dir = os.path.abspath(args.preview or os.path.join(out_dir, "previews"))
