@@ -20,6 +20,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../capture/hooks.dart';
@@ -149,6 +150,11 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
   Arrival? _arrival;
   double _t = 0.0;
   double _seed = 0.0;
+
+  /// Where the arriving thing comes to rest, as its centre on the stage. Chosen once, when it is
+  /// let go, against the words on the glass at that moment.
+  Offset? _spot;
+  final GlobalKey _under = GlobalKey();
   Ticker? _ticker;
   StreamSubscription<Arrival>? _sub;
   StreamSubscription<Duration>? _driven;
@@ -176,10 +182,22 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
   }
 
   void _begin(Arrival a) {
+    final seed = ((hashOf(a.feeling.id) & 0xffff) / 0xffff);
+    final stage = context.findRenderObject();
+    final under = _under.currentContext?.findRenderObject();
     setState(() {
       _arrival = a;
       _t = 0.0;
-      _seed = ((hashOf(a.feeling.id) & 0xffff) / 0xffff);
+      _seed = seed;
+      _spot = stage is RenderBox && stage.hasSize && under != null
+          ? landingSpot(
+              stage: stage.size,
+              side: objectSide(a.intensity),
+              mine: a.mine,
+              seed: seed,
+              words: wordsOnTheGlass(under, stage),
+            )
+          : null;
       _startedAt = DrivenClock.enabled ? DrivenClock.now : Duration.zero;
     });
     if (!DrivenClock.enabled) {
@@ -226,31 +244,33 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
     return Stack(
       fit: StackFit.expand,
       children: [
-        Transform.translate(offset: Offset(0, -lift * 3.4), child: widget.child),
-        if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
+        Transform.translate(
+            offset: Offset(0, -lift * 3.4), child: KeyedSubtree(key: _under, child: widget.child)),
+        if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed, spot: _spot)),
       ],
     );
   }
 }
 
 class _Landing extends StatelessWidget {
-  const _Landing({required this.arrival, required this.t, required this.seed});
+  const _Landing({required this.arrival, required this.t, required this.seed, this.spot});
   final Arrival arrival;
   final double t;
   final double seed;
+  final Offset? spot;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    final s = 132.0 + 58.0 * arrival.intensity.clamp(0.0, 1.0);
+    final s = objectSide(arrival.intensity);
     final h = Fall.heightAt(t, arrival.intensity);
     final squash = Fall.squashAt(t, arrival.intensity);
     final spin = Fall.spinAt(t, arrival.intensity, seed);
     final shadow = Fall.shadowAt(t, arrival.intensity);
 
-    // where on the desk it lands: never dead centre, and never the same place twice
-    final x = size.width * (arrival.mine ? 0.66 : 0.34) + (seed - 0.5) * size.width * 0.14;
-    final y = size.height * 0.52 + (seed - 0.5) * size.height * 0.10;
+    // where on the desk it lands: chosen when it was let go, off the words (see [landingSpot])
+    final at = spot ?? preferredSpot(size, mine: arrival.mine, seed: seed);
+    final x = at.dx, y = at.dy;
 
     // it fades out once it has stopped and the row in the thread has it
     final over = math.max(Fall.totalSeconds, arrival.feeling.hapticLengthMs / 1000.0);
@@ -284,6 +304,94 @@ class _Landing extends StatelessWidget {
       ],
     );
   }
+}
+
+/// How big the arriving thing is drawn, a side of its square, in logical pixels.
+double objectSide(double intensity) => 132.0 + 58.0 * intensity.clamp(0.0, 1.0);
+
+/// Where it would land with nothing on the desk: never dead centre, and never the same place
+/// twice. Theirs comes in on the left and yours on the right.
+Offset preferredSpot(Size stage, {required bool mine, required double seed}) => Offset(
+      stage.width * (mine ? 0.66 : 0.34) + (seed - 0.5) * stage.width * 0.14,
+      stage.height * 0.52 + (seed - 0.5) * stage.height * 0.10,
+    );
+
+/// Where it comes to rest: the place nearest [preferredSpot] that covers the fewest words.
+///
+/// The target was fixed, and so it landed on whatever was under it. The cycle 3 critic watched
+/// 08's arriving `hold` park over the partner card and hide HAS LEFT for up to three seconds, and
+/// a `squeeze` land on the `hold` caption so that it read `h..d`: a feeling that arrives by
+/// covering what the other person just said is a feeling arriving badly. So the spot is chosen
+/// against [words], the rects of the writing on the glass when it is let go, over a lattice of
+/// places on the stage, and a place that covers no word always wins. Where every place covers
+/// some, the one covering least does. Ties go to the one nearest where it would have landed, so an
+/// empty desk still gets the throw it always did.
+Offset landingSpot({
+  required Size stage,
+  required double side,
+  required bool mine,
+  required double seed,
+  required List<Rect> words,
+}) {
+  final want = preferredSpot(stage, mine: mine, seed: seed);
+  final half = side / 2;
+  // Its whole square stays on the stage, so a spot is only a centre at least half a side in.
+  double inX(double x) => x.clamp(half, math.max(half, stage.width - half)).toDouble();
+  double inY(double y) => y.clamp(half, math.max(half, stage.height - half)).toDouble();
+  final candidates = <Offset>[Offset(inX(want.dx), inY(want.dy))];
+  const cols = 7, rows = 13;
+  for (var r = 0; r < rows; r++) {
+    for (var c = 0; c < cols; c++) {
+      candidates.add(Offset(
+        inX(half + (stage.width - side) * c / (cols - 1)),
+        inY(half + (stage.height - side) * r / (rows - 1)),
+      ));
+    }
+  }
+  double covered(Offset at) {
+    final square = Rect.fromCenter(center: at, width: side, height: side);
+    var sum = 0.0;
+    for (final w in words) {
+      final i = square.intersect(w);
+      if (i.width > 0 && i.height > 0) sum += i.width * i.height;
+    }
+    return sum;
+  }
+
+  Offset best = candidates.first;
+  var bestCover = covered(best);
+  var bestDist = 0.0;
+  for (final at in candidates.skip(1)) {
+    if (bestCover == 0 && bestDist == 0) break;
+    final cover = covered(at);
+    final dist = (at - want).distanceSquared;
+    if (cover < bestCover || (cover == bestCover && dist < bestDist)) {
+      best = at;
+      bestCover = cover;
+      bestDist = dist;
+    }
+  }
+  return best;
+}
+
+/// The rect, on [stage], of every paragraph of writing under [root] that is actually painted.
+///
+/// Painted-ness is [CaptureHooks.painted]'s, the same answer the capture declares its text runs
+/// by, so the five regions the shell keeps alive in an IndexedStack count once, as the one shown.
+List<Rect> wordsOnTheGlass(RenderObject root, RenderBox stage) {
+  final out = <Rect>[];
+  void walk(RenderObject node) {
+    if (node is RenderParagraph && node.attached && node.hasSize && !node.size.isEmpty &&
+        node.text.toPlainText(includePlaceholders: false).trim().isNotEmpty) {
+      out.add(MatrixUtils.transformRect(node.getTransformTo(stage), Offset.zero & node.size));
+    }
+    node.visitChildren((child) {
+      if (CaptureHooks.painted(node, child)) walk(child);
+    });
+  }
+
+  walk(root);
+  return out;
 }
 
 /// Only used to keep the capture harness honest: what the stage would be showing at [ms].

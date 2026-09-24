@@ -10,18 +10,21 @@ class FeelingRegistry {
     for (final e in events) {
       if (e.type != 'feeling_authored') continue;
       final p = e.payload;
+      final id = p['feeling_id'] as String;
+      final i = _all.indexWhere((x) => x.id == id);
       final f = Feeling(
-        id: p['feeling_id'] as String,
+        id: id,
         name: p['name'] as String,
         family: FamilyName.parse(p['family'] as String),
         object: p['object_asset'] as String,
         haptic: p['haptic'] as String,
         sound: p['sound'] as String,
         colour: p['colour'] as String,
-        authoredBy: e.author.name,
+        // Whoever made it first. A later event renames, recolours or puts it away, and either of
+        // them can write that one; it does not make the feeling theirs.
+        authoredBy: i >= 0 && _all[i].authoredBy != null ? _all[i].authoredBy : e.author.name,
         retired: p['retired'] == true,
       );
-      final i = _all.indexWhere((x) => x.id == f.id);
       if (i >= 0) {
         _all[i] = f; // a later feeling_authored (rename, recolour, retire) replaces the earlier one
       } else {

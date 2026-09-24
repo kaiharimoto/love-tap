@@ -197,12 +197,15 @@ class _ShellState extends State<Shell> {
           child: SafeArea(
           child: Column(
             children: [
-              PartnerStrip(
-                partner: scope.partner,
-                state: scope.partnerState,
-                nowMs: scope.clock.now().millisecondsSinceEpoch,
-                lastHeard: scope.partnerLastHeard,
-              ),
+              // Nobody is drawn at the top until somebody has been heard from. A strip of dials
+              // for a partner who does not exist yet is a relationship the phone made up.
+              if (scope.partnerHeardFrom)
+                PartnerStrip(
+                  partner: scope.partner,
+                  state: scope.partnerState,
+                  nowMs: scope.clock.now().millisecondsSinceEpoch,
+                  lastHeard: scope.partnerLastHeard,
+                ),
               Expanded(
                 child: Stack(
                   children: [
@@ -250,7 +253,10 @@ class _ShellState extends State<Shell> {
                   ],
                 ),
               ),
-              _Tabs(index: _index, labels: _labels, onPick: _go),
+              // While the setup list is up, no card is lit: the list is not any of the five, and
+              // lighting CHAT under it said you were somewhere you were not. Every card still
+              // leaves it -- tapping one is the only way out, so the cards cannot go.
+              _Tabs(index: setup != null ? -1 : _index, labels: _labels, onPick: _go),
             ],
             ),
           ),

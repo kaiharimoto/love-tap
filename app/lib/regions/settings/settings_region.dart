@@ -231,7 +231,10 @@ class _SettingsRegionState extends State<SettingsRegion> {
               _Fact('history',
                   '${scope.spine.length} events, ${scope.spine.pending.length} waiting to send'),
               _Fact('feelings',
-                  '${registry.active.length} to send, ${authored.length} made here'),
+                  // `made here` is this phone's: the list above is both of theirs, and counting
+                  // all of it said `2 made here` beside `pigeon by noor` and `tuesday soup by teo`.
+                  '${registry.active.length} to send, '
+                  '${authored.where((f) => f.authoredBy == scope.me.name).length} made here'),
               const SizedBox(height: 14),
               GestureDetector(
                 onTap: _export,

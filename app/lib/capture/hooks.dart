@@ -259,7 +259,7 @@ class CaptureHooks {
   /// Only what is painted. A subtree the framework does not put on the glass -- a zero opacity, an
   /// `Offstage`, the four regions of the `IndexedStack` that are built and not shown -- is not
   /// declared, because a declaration is permission to measure those pixels, and pixels where a
-  /// hidden paragraph would be are somebody else's. See [_painted].
+  /// hidden paragraph would be are somebody else's. See [painted].
   ///
   /// What is still NOT claimed is that a declared run is legible, or even that there is ink in it.
   /// A paragraph behind another sheet is painted and declared and contributes nothing, because the
@@ -302,7 +302,7 @@ class CaptureHooks {
         waiting++;
       }
       node.visitChildren((child) {
-        if (_painted(node, child)) walk(child);
+        if (painted(node, child)) walk(child);
       });
     }
     for (final view in RendererBinding.instance.renderViews) {
@@ -334,7 +334,7 @@ class CaptureHooks {
   /// `scale` is the magnification: the drawn size in device pixels over the render's own pixels,
   /// on the axis `fit` actually scales by. Above 1.0 the app is showing paper it does not have.
   ///
-  /// Painted-ness is decided by [_painted], exactly as it is for the text runs, so an offstage
+  /// Painted-ness is decided by [painted], exactly as it is for the text runs, so an offstage
   /// region's four screens of paper are not declared.
   ///
   /// **A torn piece is three layers and until firing 44 this could see one of them.** The walk is
@@ -614,7 +614,7 @@ class CaptureHooks {
       }
     }
     node.visitChildren((child) {
-      if (_painted(node, child)) _collectSurfaces(child, view, dpr, names, pieces, out);
+      if (painted(node, child)) _collectSurfaces(child, view, dpr, names, pieces, out);
     });
   }
 
@@ -662,7 +662,7 @@ class CaptureHooks {
     // Visited even for a paragraph: a RenderParagraph can carry inline widget children, and one
     // of those can be another paragraph.
     node.visitChildren((child) {
-      if (_painted(node, child)) _collectRuns(child, view, dpr, bounds, out);
+      if (painted(node, child)) _collectRuns(child, view, dpr, bounds, out);
     });
   }
 
@@ -680,7 +680,7 @@ class CaptureHooks {
   /// `Offstage`, an invisible `Visibility`, a list child kept alive but scrolled out of the
   /// viewport. `RenderIndexedStack` is the exception that does not implement it -- it paints one
   /// child and says so nowhere but in its own `paintStack` -- so it is asked directly.
-  static bool _painted(RenderObject parent, RenderObject child) {
+  static bool painted(RenderObject parent, RenderObject child) {
     if (!parent.paintsChild(child)) return false;
     if (parent is RenderIndexedStack) return identical(child, _shownChildOf(parent));
     return true;
@@ -692,7 +692,7 @@ class CaptureHooks {
   /// painted, and the `Navigator`'s overlay hands its entries over bottom first -- so everything
   /// in [out] when this runs was painted before this surface and is behind it.
   ///
-  /// `_painted` cannot reach this case. It asks the framework whether a parent paints a child,
+  /// `painted` cannot reach this case. It asks the framework whether a parent paints a child,
   /// and the answer is yes for both routes under a stacked one: the overlay lays its offstage
   /// entries out and declines to paint them without overriding `paintsChild` to say so. This is
   /// the same shape as the `RenderIndexedStack` exception and one level further out.

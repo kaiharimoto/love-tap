@@ -87,6 +87,20 @@ class AppScope extends ChangeNotifier {
     return null;
   }
 
+  /// Whether anything the other person wrote has ever reached this phone.
+  ///
+  /// Until it has, there is nobody on the other end to draw: a fresh install and the setup list
+  /// showed the partner strip anyway, NEED and ENERGY dials for a person who had not been paired
+  /// yet. Read off the log from the end, where their last event is, so on a year it stops within
+  /// a handful of events and on an empty log it does not look at all.
+  bool get partnerHeardFrom {
+    final all = spine.all;
+    for (var i = all.length - 1; i >= 0; i--) {
+      if (all[i].author == partner) return true;
+    }
+    return false;
+  }
+
   String _lastStanding = '';
   String _lastArrival = '';
 
