@@ -3,6 +3,7 @@
 // all read this.
 import '../spine/event.dart';
 import 'builtins.dart';
+import 'drawn.dart';
 
 class FeelingRegistry {
   FeelingRegistry(List<Event> events) {
@@ -44,6 +45,21 @@ class FeelingRegistry {
   List<Feeling> get all => List.unmodifiable(_all);
   List<Feeling> get active => _all.where((f) => !f.retired).toList();
   Feeling? byId(String id) => _byId[id];
+
+  /// Where a feeling sits among the vocabulary's DRAWN marks, retired ones included, so that it
+  /// keeps its place when another is put away. Only a drawn mark is laid on a scrap, so only they
+  /// are counted: a grid of the vocabulary passes this as the object's row, and every drawn mark
+  /// in it then takes a different scrap (see `scrapFor`) whichever family tab or sheet it is on,
+  /// and the same one on both phones. Counting every feeling instead spread nine marks over 35
+  /// rows, which the scrap pool then folds back onto itself.
+  Map<String, int>? _rows;
+  int rowOf(Feeling f) => (_rows ??= () {
+        final rows = <String, int>{};
+        for (final g in _all) {
+          if (DrawnFeelingMark.has(g.object)) rows[g.id] = rows.length;
+        }
+        return rows;
+      }())[f.id] ?? 0;
 
   List<Feeling> family(Family fam) => active.where((f) => f.family == fam).toList();
 }

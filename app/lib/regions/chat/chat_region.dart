@@ -470,7 +470,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                               width: 62,
                               child: Column(
                                 children: [
-                                  FeelingObject(feeling: f, size: 42, intensity: 0.7),
+                                  FeelingObject(feeling: f, size: 42, intensity: 0.7, row: registry.rowOf(f)),
                                   Text(f.name, textAlign: TextAlign.center, style: Hands.margin(size: 11)),
                                 ],
                               ),

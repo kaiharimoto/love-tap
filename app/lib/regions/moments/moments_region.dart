@@ -214,7 +214,7 @@ class _Filters extends StatelessWidget {
                                   onTap: () => Navigator.pop(ctx, f),
                                   child: Column(
                                     children: [
-                                      FeelingObject(feeling: f, size: 52, intensity: 0.6),
+                                      FeelingObject(feeling: f, size: 52, intensity: 0.6, row: registry.rowOf(f)),
                                       Text(
                                         f.name,
                                         style: Hands.margin(size: 10),
@@ -510,7 +510,7 @@ class _FeelingHistory extends StatelessWidget {
           child: Row(
             mainAxisAlignment: mine ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: [
-              if (!mine) FeelingObject(feeling: f, size: 54, intensity: 0.65),
+              if (!mine) FeelingObject(feeling: f, size: 54, intensity: 0.65, row: i),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
@@ -524,7 +524,7 @@ class _FeelingHistory extends StatelessWidget {
                   ],
                 ),
               ),
-              if (mine) FeelingObject(feeling: f, size: 54, intensity: 0.65),
+              if (mine) FeelingObject(feeling: f, size: 54, intensity: 0.65, row: i),
             ],
           ),
         );

@@ -87,6 +87,7 @@ class FeelingObject extends StatelessWidget {
     this.shadowScale = 1.0,
     this.lift = 0.0,
     this.onPaper = true,
+    this.row,
   });
 
   final Feeling feeling;
@@ -113,6 +114,11 @@ class FeelingObject extends StatelessWidget {
   /// False when the mark is already on a piece of paper: a reaction stuck to a note is drawn on
   /// that note, and a second scrap under it would be a sticker.
   final bool onPaper;
+
+  /// Where this object sits in the list it is drawn in, which picks the scrap under a drawn mark
+  /// so that no two objects on one screen are torn alike. See [scrapFor]; null for an object that
+  /// is the only one on its screen.
+  final int? row;
 
   @override
   Widget build(BuildContext context) {
@@ -149,11 +155,13 @@ class FeelingObject extends StatelessWidget {
       // a scrap, torn off something, with the mark on it — and the scrap's own contact shadow out
       // of the same render as every other piece of paper on the desk
       final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-      final tear = scrapFor(lib, feeling.id);
+      final tear = scrapFor(lib, feeling.id, row: row);
       return SizedBox(
         width: size,
         height: size,
         child: PaperPiece(
+          // named, so the sidecar and the tear test can say which object took which scrap
+          id: row == null ? 'scrap.${feeling.id}' : 'scrap.${feeling.id}.$row',
           stockId: lib == null ? 'plain_01' : _scrapStock(lib, feeling.id),
           tearId: tear,
           liftMm: 0.5,

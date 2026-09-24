@@ -261,7 +261,7 @@ class _Fan extends StatelessWidget {
     // it -- the family tabs and the scrap under every object on it.
     final tear = sheetTearFor(lib, avoid: [
       for (final f in Family.values) tearAt(lib, lane: TearLanes.tabs, row: _tabRow(f)) ?? '',
-      for (final f in registry.active) scrapFor(lib, f.id) ?? '',
+      for (final f in registry.active) scrapFor(lib, f.id, row: registry.rowOf(f)) ?? '',
     ]);
     final safe = tear == null || lib == null ? const [0.05, 0.06, 0.05, 0.06] : lib.safeOf(tear);
     const padding = EdgeInsets.fromLTRB(10, 12, 10, 12);
@@ -378,6 +378,7 @@ class _Fan extends StatelessWidget {
                                 size: under?.id == members[i].id ? w + 4 : w - 6,
                                 intensity: under?.id == members[i].id ? intensity : 0.6,
                                 tilt: math.sin(i * 1.7) * 0.09,
+                                row: registry.rowOf(members[i]),
                               ),
                             ),
                           ),

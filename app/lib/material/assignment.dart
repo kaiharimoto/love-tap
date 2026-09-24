@@ -389,18 +389,39 @@ List<String> chromeMasks(MaterialLibrary lib) => [
 /// is on every screen. Removing the six chrome masks makes that class of collision impossible for
 /// the cost of one scrap (`tear_011` is the only mask in both sets today).
 ///
-/// **The hash is still a hash, and that is the residue.** `tearAt`'s own docstring says why a hash
-/// cannot promise distinctness, and this one is picking between 27 scraps for a vocabulary of the
-/// same order — two feelings on one screen can still be torn alike. The repair is a row, which
-/// means a position in the list each object is in, at eleven call sites; it is filed rather than
-/// guessed at here.
-String? scrapFor(MaterialLibrary? lib, String feelingId) {
+/// **The tab and heading masks are taken out as well, and firing 62 measured why.** Every screen
+/// that shows a list of objects shows them under tabs: moments' three views, the feeling corner's
+/// family tabs, settings' headings. With the scraps walked by row the objects stopped sharing with
+/// each other and the first case written for it found `scrap.goodnight.5` on `tear_050`, which is
+/// row 30 of the pool and moments' `what we felt` tab. Leaving out the tabs' window (rows 28-40,
+/// which holds the headings too) keeps 19 of the 27 scraps, more than any list shows at once.
+///
+/// **[row] is where the object sits in the list it is in, and a list passes one.** A hash cannot
+/// promise distinctness -- `tearAt`'s own docstring says why -- and this one was picking between
+/// 27 scraps for a vocabulary of the same order, so two feelings on one screen could be torn
+/// alike, and two of the SAME feeling in the day's traffic always were. So the scrap pool is
+/// walked by row with a stride coprime with its size, exactly as the writable pool is: any run of
+/// consecutive rows up to the pool's size holds that many different scraps. The scrap pool is its
+/// own index space, not a window of the writable one, which has no room left (see [TearLanes]).
+///
+/// A list that shares a screen with another list of objects numbers into its own block of rows
+/// (the reactions on a note take three rows per note). An object that is the only one of its kind
+/// on the screen -- the one landing, the preview in the authoring sheet -- passes no row and keeps
+/// the hash, which is still the same scrap on both phones.
+String? scrapFor(MaterialLibrary? lib, String feelingId, {int? row}) {
   if (lib == null) return null;
-  final chrome = chromeMasks(lib).toSet();
-  final scraps = [for (final t in lib.scrapTears) if (!chrome.contains(t)) t];
+  final skip = {...chromeMasks(lib), ..._tabMasks(lib)};
+  final scraps = [for (final t in lib.scrapTears) if (!skip.contains(t)) t];
   if (scraps.isEmpty) return null;
-  return scraps[hashOf(feelingId) % scraps.length];
+  final n = scraps.length;
+  if (row == null) return scraps[hashOf(feelingId) % n];
+  return scraps[((row.abs() % n) * _coprimeStride(n)) % n];
 }
+
+/// The masks the tabs' window of the pool can take, rows 28-40, which the headings share.
+List<String> _tabMasks(MaterialLibrary lib) => [
+      for (var r = 0; r < TearLanes.tabs.span; r++) tearAt(lib, lane: TearLanes.tabs, row: r) ?? '',
+    ];
 
 /// The mask a page-sized sheet laid over a whole region is torn from: the writable mask whose
 /// tear leaves the most of the sheet to write on, which none of [avoid] and no chrome mask is.

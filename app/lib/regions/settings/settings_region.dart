@@ -198,7 +198,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
                   }),
                   child: Column(
                     children: [
-                      Opacity(opacity: f.retired ? 0.4 : 1, child: FeelingObject(feeling: f, size: 64, intensity: 0.7)),
+                      Opacity(opacity: f.retired ? 0.4 : 1, child: FeelingObject(feeling: f, size: 64, intensity: 0.7, row: registry.rowOf(f))),
                       Text(f.name, style: Hands.margin(size: 12)),
                       Text(f.retired ? 'put away' : 'by ${f.authoredBy}', style: Hands.margin(size: 10)),
                     ],

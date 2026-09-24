@@ -172,7 +172,7 @@ class Note extends StatelessWidget {
             bottom: -6,
             child: Row(
               children: [
-                for (final r in item.reactions.take(3))
+                for (final (k, r) in item.reactions.take(3).indexed)
                   Padding(
                     padding: const EdgeInsets.only(left: 2),
                     child: FeelingObject(
@@ -180,6 +180,9 @@ class Note extends StatelessWidget {
                       size: 46,
                       intensity: 0.6,
                       tilt: (hashOf(r.eventId) % 20 - 10) / 90,
+                      // three rows a note, in the thread's own order, so the reactions on
+                      // neighbouring notes do not share a scrap either
+                      row: row * 3 + k,
                     ),
                   ),
               ],

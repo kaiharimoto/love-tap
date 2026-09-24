@@ -31,6 +31,7 @@ import 'package:desk/capture/hooks.dart';
 import 'package:desk/material/assignment.dart';
 import 'package:desk/material/desk.dart';
 import 'package:desk/material/library.dart';
+import 'package:desk/material/slip.dart';
 import 'package:desk/regions/chat/chat_region.dart';
 import 'package:desk/regions/chat/search_page.dart';
 import 'package:desk/regions/moments/moments_region.dart';
@@ -150,7 +151,8 @@ void main() {
     return out;
   }
 
-  Future<void> check(WidgetTester tester, String name, Widget region, int floor) async {
+  Future<void> check(WidgetTester tester, String name, Widget region, int floor,
+      {Future<void> Function(WidgetTester tester)? then, int scraps = 0}) async {
     tester.view.physicalSize = const Size(1440, 3120);
     tester.view.devicePixelRatio = 3.0;
     addTearDown(tester.view.reset);
@@ -181,6 +183,10 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(tester.takeException(), isNull);
+    if (then != null) {
+      await then(tester);
+      expect(tester.takeException(), isNull);
+    }
 
     final drawn = await tears(tester);
     final who = takers(CaptureHooks.paperSurfaces());
@@ -197,6 +203,17 @@ void main() {
         reason: '$name tore ${pieces.length} pieces, below the $floor the committed sidecar has, '
             'so this screen is emptier than the one the item was filed against and a repeat count '
             'of zero would mean nothing. Either the screen is not built or the floor is stale.');
+
+    // The feeling objects' scraps are named `scrap.<feeling>.<row>`, so the population of them
+    // is read off the piece ids the screen declares rather than off a coordinate.
+    final scrapPieces = {
+      for (final names in who.values)
+        for (final n in names)
+          if (n.startsWith('scrap.')) n,
+    };
+    expect(scrapPieces.length, greaterThanOrEqualTo(scraps),
+        reason: '$name drew ${scrapPieces.length} feeling objects on scraps ($scrapPieces), '
+            'below the $scraps this case is about, so no repeat among them would mean nothing');
 
     // **The verdict is counted in PIECES, not in layers.** A piece draws up to three surfaces off
     // one stem, so a count of surfaces says nothing; two pieces on one stem is the failure however
@@ -250,6 +267,22 @@ void main() {
   testWidgets('no two pieces on the search page are torn along the same edge', (tester) async {
     if (absent != null) return;
     await check(tester, '12_search', const SearchPage(), 6);
+  });
+
+  // **Several feeling objects on one screen, each on a scrap, which is the case the hash lost.**
+  // `material/objects.dart` chose a drawn mark's scrap by `hashOf(feeling.id) % scraps.length`:
+  // 27 scraps for a vocabulary of the same order, so two feelings could be torn alike, and two of
+  // the SAME feeling -- which is most of what a history of feelings is -- always were. Moments'
+  // `what we felt` is a whole list of them. Each now passes its row, and the scrap pool is walked
+  // by it. Re-break by putting the hash back in `scrapFor` and this fails on the list below.
+  testWidgets('no two feeling objects on the history of feelings are torn alike', (tester) async {
+    if (absent != null) return;
+    await check(tester, '04_moments what we felt', const MomentsRegion(), 5,
+        scraps: 8, then: (tester) async {
+      await tester.tap(find.byWidgetPredicate((w) => w is Strip && w.id == 'moments-tab-feelings'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+    });
   });
 
   testWidgets('the lanes of one screen do not overlap in the pool', (tester) async {

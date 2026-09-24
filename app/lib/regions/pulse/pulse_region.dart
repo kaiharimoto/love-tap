@@ -229,6 +229,8 @@ class _Traffic extends StatelessWidget {
               size: 66,
               intensity: (e.payload['intensity'] as num).toDouble(),
               tilt: ((hashOf(e.id) % 24) - 12) / 80,
+              // its place in the day's traffic, so two of one feeling are not torn alike
+              row: i,
             ),
           );
         },
