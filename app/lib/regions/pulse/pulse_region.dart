@@ -21,6 +21,7 @@ import '../../scope.dart';
 import '../../spine/projections/state.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
+import 'signal_marks.dart';
 
 class PulseRegion extends StatelessWidget {
   const PulseRegion({super.key});
@@ -113,11 +114,14 @@ class _TheirSheet extends StatelessWidget {
     // + 11` was an index into the pool that no other call site could see or avoid.
     final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.theirs);
     final (place, atHome) = _where();
+    // the house is drawn only where `_where` kept `at home` as the newer of the two
+    final marks = signalMarks(atHome == null ? PersonState(state.person, {...state.signals}..remove('at_home')) : state);
     return PaperPiece(
       stockId: id,
       tearId: tear,
       liftMm: 1.1,
-      tilt: -0.008,
+      // SIGNALS.md: walking, the strip sits askew
+      tilt: state.moving == 'walking' ? -0.03 : -0.008,
       safe: tear == null || lib == null ? const [0.07, 0.08, 0.07, 0.08] : lib!.safeOf(tear),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
       // their state's first column sits where a legal pad's red rule does
@@ -143,16 +147,17 @@ class _TheirSheet extends StatelessWidget {
               // never a score out of anything: a dial is how much, said in words
               _Fact('needs', _dial(state.need)),
               _Fact('has left', _dial(state.energy)),
-              if (state.battery != null)
-                _Fact('battery', '${state.battery}%${state.charging ? ' on charge' : ''}'),
               if (state.lastActiveMinutes != null) _Fact('last up', _ago(state.lastActiveMinutes!)),
               if (state.localHour != null) _Fact('their clock', '${state.localHour}:00'),
-              if (state.ringer != null) _Fact('ringer', _words(state.ringer)),
-              if (state.moving != null) _Fact('moving', _words(state.moving)),
-              if (state.network != null) _Fact('signal', _words(state.network)),
-              _Fact('at home', atHome),
             ],
           ),
+          // What their phone noticed, drawn in pencil rather than tabulated: see signal_marks.dart.
+          // Battery, charging, ringer, moving, network and at home were six rows of this table.
+          if (marks.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Wrap(spacing: 12, runSpacing: 6, children: marks),
+            ),
         ],
       ),
     );
