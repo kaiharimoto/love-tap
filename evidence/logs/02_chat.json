@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3632
-  },
-  {
-   "do": "wait",
-   "ms": 1902
-  },
-  {
-   "do": "scrollTo",
-   "ms": 4486
+   "ms": 7305
   },
   {
    "do": "wait",
    "ms": 1903
   },
   {
+   "do": "scrollTo",
+   "ms": 4095
+  },
+  {
+   "do": "wait",
+   "ms": 1904
+  },
+  {
    "do": "shot",
-   "ms": 3706
+   "ms": 3615
   },
   {
    "do": "report",
-   "ms": 723
+   "ms": 710
   }
  ],
  "shots": [
@@ -117,8 +117,8 @@
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 9920,
- "cold_ms": 1574,
+ "install_ms": 8572,
+ "cold_ms": 1551,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],
