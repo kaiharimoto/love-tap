@@ -100,7 +100,9 @@ void main() {
     expect(edge['asset'], tearAsset('${tear}_edge'));
     expect((edge['src'] as List)[0], isPositive);
     expect((edge['drawn'] as List)[0], isPositive);
-    expect(edge['slice'], isA<num>(), reason: 'a nine-slice that does not say where it slices');
+    // `[left, top]` since firing 60, the mask's own bands, the way the mask's entry says them
+    expect(edge['slice'], isA<List<Object?>>(),
+        reason: 'a nine-slice that does not say where it slices');
 
     // The mask: the layer that cuts the sheet out, composed offscreen and applied as a shader,
     // and the only one of the three whose working resolution is neither the render's nor the
@@ -127,33 +129,40 @@ void main() {
       expect(fixed[1], greaterThan(0));
     }
 
-    // The edge layer is drawn straight onto the piece's own canvas, so its sliced edges land at
-    // their own size in LOGICAL pixels — and are magnified by the device pixel ratio before
-    // anybody sees them, unless the box is narrower than the two of them together and the whole
-    // lattice shrinks to fit. Re-derived here from the piece's declared geometry rather than
-    // asserted as a constant, because a constant would only say that the number did not change.
-    final edgeFixed = (edge['fixed'] as List).cast<num>();
-    final edgeSrc = (edge['src'] as List).cast<int>();
-    final edgeDrawn = (edge['drawn'] as List).cast<int>();
+    // The edge and the mask are two renders of one break, and until firing 60 they were sliced
+    // at two scales: the mask by its own bands at DEVICE pixels, the edge at a fixed 0.4 on the
+    // LOGICAL canvas, so on a 3x screen the glow landed where the cut would be on a sheet three
+    // times larger -- a second, blurred copy of the tear 30-60 px inside the real one. Now the
+    // edge says which mask it is laid out by, carries that mask's four bands, and its
+    // magnification per pixel of the RENDER (per pixel times the pixels per render width) is the
+    // mask's on both axes. Re-derived from the two declarations rather than asserted as a
+    // constant, because a constant would only say that the number did not change.
     const dpr = 3.0;
-    final slice = (edge['slice'] as num).toDouble();
-    // the edge is packed smaller than the geometry it is laid out at (kEdgeDownsample), so each
-    // decoded pixel covers that many laid-out ones, and the sidecar has to say so
     final k = (edge['downsample'] as num).toDouble();
     expect(k, kEdgeDownsample, reason: 'the lit edge does not declare the downsample it is drawn at');
+    expect(edge['lights'], mask['asset'],
+        reason: 'the lit edge does not say it is laid out by the mask that cut the piece: $edge');
+    expect(edge['composed'], mask['composed']);
+    expect(edge['slice'], mask['slice'], reason: 'the edge and the mask slice at different bands');
+    expect(edge['slice_far'], mask['slice_far']);
+    final edgeFixed = (edge['fixed'] as List).cast<num>();
+    final edgeCentre = (edge['centre'] as List).cast<num>();
+    final edgeSrc = (edge['src'] as List).cast<int>();
+    final maskFixed = (mask['fixed'] as List).cast<num>();
+    final maskCentre = (mask['centre'] as List).cast<num>();
+    final maskSrc = (mask['src'] as List).cast<int>();
     for (final axis in [0, 1]) {
-      final wanted = edgeSrc[axis] * k * 2 * slice;          // logical px the two slices want
-      final box = edgeDrawn[axis] / dpr;                     // logical px there are
-      final expected = (box < wanted ? box / wanted : 1.0) * dpr * k;
-      // `drawn` is rounded to a device pixel, and that rounding is multiplied by k with the rest
-      expect(edgeFixed[axis], closeTo(expected, 0.002 * k),
-          reason: 'the lit edge declares ${edgeFixed[axis]}x through its sliced edges on axis '
-              '$axis, and its own src/drawn/slice say ${expected.toStringAsFixed(3)}x, so the '
-              'declaration is decorative rather than arithmetic');
+      // device pixels per whole render width: the unit both layers can be compared in
+      final e = edgeFixed[axis] * edgeSrc[axis], m = maskFixed[axis] * maskSrc[axis];
+      expect(e, closeTo(m, m * 0.05),
+          reason: 'on axis $axis the lit edge is ${edgeFixed[axis]}x per pixel of a '
+              '${edgeSrc[axis]} px render and the mask ${maskFixed[axis]}x per pixel of a '
+              '${maskSrc[axis]} px one: ${(e / m).toStringAsFixed(3)} times apart, so the glow '
+              'and the cut are two copies of the tear');
+      final ce = edgeCentre[axis] * edgeSrc[axis], cm = maskCentre[axis] * maskSrc[axis];
+      expect(ce, closeTo(cm, cm * 0.05 + 0.5), reason: 'the stretched middles disagree on axis $axis');
     }
-    expect(edgeFixed[1], greaterThan(1.0),
-        reason: 'the lit edge is drawn in logical pixels on a 3x screen, so its fibres cannot be '
-            'at their own resolution unless the lattice had to shrink on this axis too');
+    expect((edge['drawn'] as List)[0], (300 * dpr).round());
 
     // ignore: avoid_print
     print('piece: mask ${(mask['src'] as List).join('x')} composed ${composed.join('x')} '

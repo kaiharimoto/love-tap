@@ -507,7 +507,10 @@ class PaperPiece extends StatelessWidget {
           // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
           // they were rendered at however tall the sheet turns out to be
           Positioned.fill(
-              child: NineSliced(asset: tearAsset('${tearId!}_edge'), downsample: kEdgeDownsample)),
+              child: NineSliced(
+                  asset: tearAsset('${tearId!}_edge'),
+                  downsample: kEdgeDownsample,
+                  mask: tearAsset(tearId!))),
         _WithinTear(
             safe: safe, padding: padding, hug: hug, child: child ?? const SizedBox.shrink()),
         ...overlays,
@@ -821,6 +824,31 @@ class SlicedMasks {
   /// `CaptureHooks.paperSurfaces` declares the mask that cut the paper, at its own size.
   static final Map<String, String> drawnWith = {};
 
+  /// How [at] cut the mask [requested] for a piece of [size] logical pixels: the asset it was
+  /// really composed from (the finer copy, on a big sheet), that asset's size, the size it was
+  /// composed at in device pixels, and the four fixed bands `[left, top, right, bottom]`.
+  ///
+  /// This is what the lit edge is laid out by, so that the glow along the break and the break
+  /// itself are one lattice. Until firing 60 [NinePainter] sliced the edge at its own fixed 0.4
+  /// on the LOGICAL canvas while the mask was sliced by [slicesFor] at DEVICE pixels, so on a big
+  /// sheet the lit band landed where the cut would be if the sheet were three times larger: a
+  /// dark fibrous outline and, 30-60 px inside it, a blurred copy of the same tear.
+  ///
+  /// Read from what [at] recorded when the mask has been composed for this box, and otherwise
+  /// worked out the way [at] would work it out from [fallback], the size of the 1024 mask, so
+  /// that a piece painted before its mask arrives draws its edge where the cut will be.
+  static ({String asset, double mw, double mh, double w, double h, List<double> bands}) geometryOf(
+      String requested, Size size, double dpr, (double, double) fallback) {
+    final asset = drawnWith[composedKey(requested, size)] ?? requested;
+    final mask = MaskCache.sizeOf(asset);
+    final mw = mask == null ? fallback.$1 : mask[0].toDouble();
+    final mh = mask == null ? fallback.$2 : mask[1].toDouble();
+    final composed = composedAt[composedKey(asset, size)];
+    final w = composed?[0].toDouble() ?? (size.width * dpr).round().clamp(1, mw).toDouble();
+    final h = composed?[1].toDouble() ?? (size.height * dpr).round().clamp(1, mh * 4).toDouble();
+    return (asset: asset, mw: mw, mh: mh, w: w, h: h, bands: slicesFor(asset, mw, mh, w, h));
+  }
+
   static ui.Image at(String asset, ui.Image mask, Size size, double dpr) {
     // rounded, so a note whose height moves by a pixel while its text lays out does not compose a
     // new mask every frame; and never larger than the mask itself, because upsampling a render is
@@ -874,9 +902,18 @@ const double kEdgeDownsample = 2;
 /// the image is decoded through the same cache the masks use and drawn straight.
 class NineSliced extends StatefulWidget {
   const NineSliced(
-      {super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0, this.downsample = 1.0});
+      {super.key,
+      required this.asset,
+      this.edge = 0.4,
+      this.opacity = 1.0,
+      this.downsample = 1.0,
+      this.mask});
 
   final String asset;
+
+  /// The tear mask this edge lights, when it lights one. Then the edge is laid out by the mask's
+  /// own lattice ([SlicedMasks.geometryOf]) and [edge] is not used: see [NinePainter.mask].
+  final String? mask;
 
   /// How many times smaller [asset] was packed than the geometry it is drawn at. The slices land
   /// where a full-size render's would; see [kEdgeDownsample].
@@ -901,7 +938,8 @@ class _NineSlicedState extends State<NineSliced> with HoldsAMask<NineSliced> {
     final image = held;
     if (image == null) return const SizedBox.shrink();
     return CustomPaint(
-        painter: NinePainter(widget.asset, image, widget.edge, widget.opacity, widget.downsample));
+        painter: NinePainter(widget.asset, image, widget.edge, widget.opacity, widget.downsample,
+            widget.mask, MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0));
   }
 }
 
@@ -914,7 +952,8 @@ class _NineSlicedState extends State<NineSliced> with HoldsAMask<NineSliced> {
 /// `CustomPaint`. So a reader asking which of the three makes a stepped boundary could see one of
 /// the three suspects. Nothing about what is drawn changes; the painter simply says what it is.
 class NinePainter extends CustomPainter {
-  NinePainter(this.asset, this.image, this.edge, this.opacity, [this.downsample = 1.0]);
+  NinePainter(this.asset, this.image, this.edge, this.opacity,
+      [this.downsample = 1.0, this.mask, this.dpr = 1.0]);
 
   /// The asset this draws, e.g. `assets/tears/tear_004_edge.webp`.
   final String asset;
@@ -925,10 +964,53 @@ class NinePainter extends CustomPainter {
   /// See [NineSliced.downsample].
   final double downsample;
 
+  /// The tear mask this edge lights, e.g. `assets/tears/tear_004.webp`, or null for a nine-slice
+  /// at the fixed [edge] on the logical canvas.
+  ///
+  /// A lit edge and its mask are two renders of one break, and they only read as one break if
+  /// they are sliced as one: the same four bands, the same composed size, the same device pixels
+  /// per pixel of the render. So with a mask the edge is laid out by [SlicedMasks.geometryOf],
+  /// in the mask's own composed pixels, one edge pixel standing for as many mask pixels as the
+  /// pack made it smaller by -- whichever of the two masks the piece was actually cut with.
+  final String? mask;
+
+  /// The device pixel ratio the mask was composed at; only read with a [mask].
+  final double dpr;
+
+  /// How this edge is laid out when it lights [mask]: the mask's lattice, and the scale from a
+  /// pixel of this image to a pixel of that mask on each axis. `CaptureHooks` declares it.
+  ({double w, double h, List<double> bands, double sx, double sy, String asset})? lattice(Size size) {
+    if (mask == null) return null;
+    final ew = image.width.toDouble(), eh = image.height.toDouble();
+    final g = SlicedMasks.geometryOf(mask!, size, dpr, (ew * downsample, eh * downsample));
+    return (w: g.w, h: g.h, bands: g.bands, sx: g.mw / ew, sy: g.mh / eh, asset: g.asset);
+  }
+
   @override
   void paint(Canvas canvas, Size size) {
     if (size.isEmpty) return;
     final w = image.width.toDouble(), h = image.height.toDouble();
+    final paint = Paint()
+      ..filterQuality = FilterQuality.medium
+      ..color = Color.fromRGBO(0, 0, 0, opacity);
+    final g = lattice(size);
+    if (g != null) {
+      // into the mask's composed pixels, the way the shader stretches the mask over the piece,
+      // and then one unit per pixel of this image: the bands, and the shrink-to-fit on an axis
+      // narrower than them, are then the mask's exactly
+      final e = g.bands;
+      canvas.save();
+      canvas.scale(size.width / g.w, size.height / g.h);
+      canvas.scale(g.sx, g.sy);
+      canvas.drawImageNine(
+        image,
+        Rect.fromLTRB(w * e[0], h * e[1], w * (1 - e[2]), h * (1 - e[3])),
+        Rect.fromLTWH(0, 0, g.w / g.sx, g.h / g.sy),
+        paint,
+      );
+      canvas.restore();
+      return;
+    }
     // drawImageNine lays the slices down at one canvas unit a source pixel, so an image packed
     // [downsample] times smaller is drawn on a canvas that many times larger: the slices, and
     // the shrink-to-fit when the box is narrower than them, land exactly where the full-size
@@ -939,9 +1021,7 @@ class NinePainter extends CustomPainter {
       image,
       Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
       Offset.zero & (size / downsample),
-      Paint()
-        ..filterQuality = FilterQuality.medium
-        ..color = Color.fromRGBO(0, 0, 0, opacity),
+      paint,
     );
     canvas.restore();
   }
@@ -951,7 +1031,9 @@ class NinePainter extends CustomPainter {
       !identical(old.image, image) ||
       old.edge != edge ||
       old.opacity != opacity ||
-      old.downsample != downsample;
+      old.downsample != downsample ||
+      old.mask != mask ||
+      old.dpr != dpr;
 }
 
 /// The contact shadow of one piece: the library's measured falloff laid around the piece's own

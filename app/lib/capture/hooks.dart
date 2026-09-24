@@ -467,11 +467,12 @@ class CaptureHooks {
         });
       }
     }
-    // The lit edge: a `CustomPaint`, drawn with `drawImageNine` straight onto the piece's canvas,
-    // so its sliced edges land at their own size in LOGICAL pixels and are magnified by the
-    // device pixel ratio before anybody sees them. `fixed` and `centre` say so in device pixels
-    // per source pixel, which is the unit the mask's entry below reports in too, so the two
-    // nine-sliced layers of one piece can be compared against each other.
+    // The lit edge: a `CustomPaint`, drawn with `drawImageNine` straight onto the piece's canvas.
+    // `fixed` and `centre` are in device pixels per source pixel, which is the unit the mask's
+    // entry below reports in too, so the two nine-sliced layers of one piece can be compared
+    // against each other -- and until firing 60 they disagreed by the device pixel ratio, because
+    // the edge was sliced in LOGICAL pixels at a fixed 0.4. `lights` names the mask it is laid
+    // out by now, and `composed` that mask's composition.
     if (node is RenderCustomPaint) {
       final painter = node.painter;
       if (painter is NinePainter && node.hasSize && !node.size.isEmpty) {
@@ -481,8 +482,24 @@ class CaptureHooks {
         // pixels then covers [NinePainter.downsample] of those: the magnification is per pixel
         // of the image actually decoded, which is what a reader comparing resolutions needs
         final k = painter.downsample;
-        final fx = _nineScale(img.width * k, box.width, painter.edge).map((f) => f * k).toList();
-        final fy = _nineScale(img.height * k, box.height, painter.edge).map((f) => f * k).toList();
+        // Since firing 60 an edge that lights a mask is laid out by the mask's own lattice (see
+        // [NinePainter.mask]): its bands, and the mask's composed pixels stretched over the box.
+        // In device pixels per pixel of this image, then, it is the mask's entry times the pack's
+        // downsample, and `tools/check/lit_edge_scale.py` holds the two to that.
+        final g = painter.lattice(box);
+        final List<double> fx, fy;
+        if (g != null) {
+          final e = g.bands;
+          fx = _nineScale(img.width.toDouble(), g.w / g.sx, e[0], e[2])
+              .map((f) => f * g.sx * box.width / g.w)
+              .toList();
+          fy = _nineScale(img.height.toDouble(), g.h / g.sy, e[1], e[3])
+              .map((f) => f * g.sy * box.height / g.h)
+              .toList();
+        } else {
+          fx = _nineScale(img.width * k, box.width, painter.edge).map((f) => f * k).toList();
+          fy = _nineScale(img.height * k, box.height, painter.edge).map((f) => f * k).toList();
+        }
         final scale = fx[0] * dpr > fy[0] * dpr ? fx[0] * dpr : fy[0] * dpr;
         final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
         out.add({
@@ -491,7 +508,10 @@ class CaptureHooks {
           'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
           'scale': double.parse(scale.toStringAsFixed(3)),
           'fit': 'nine',
-          'slice': painter.edge,
+          'slice': g == null ? painter.edge : [g.bands[0], g.bands[1]],
+          if (g != null) 'slice_far': [g.bands[2], g.bands[3]],
+          if (g != null) 'lights': g.asset,
+          if (g != null) 'composed': [g.w.round(), g.h.round()],
           'downsample': painter.downsample,
           'fixed': [
             double.parse((fx[0] * dpr).toStringAsFixed(3)),
