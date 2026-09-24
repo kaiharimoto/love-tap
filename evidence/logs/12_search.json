@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3551
+   "ms": 6628
   },
   {
    "do": "wait",
-   "ms": 1704
+   "ms": 1702
   },
   {
    "do": "search",
-   "ms": 8773
+   "ms": 3984
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1902
   },
   {
    "do": "shot",
-   "ms": 3652
+   "ms": 2631
   },
   {
    "do": "report",
-   "ms": 717
+   "ms": 709
   }
  ],
  "shots": [
@@ -38,7 +38,7 @@
    "out": "evidence/12_search.png",
    "clip": null,
    "text_runs": 25,
-   "surfaces": 166
+   "surfaces": 172
   }
  ],
  "reports": [
@@ -53,11 +53,11 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_018",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_040",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_003",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
@@ -87,13 +87,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
@@ -103,13 +97,13 @@
  "blob_waits": [
   {
    "at": "12_search.png",
-   "waited_ms": 29,
+   "waited_ms": 6,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 17268,
- "cold_ms": 2265,
+ "install_ms": 8331,
+ "cold_ms": 1673,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

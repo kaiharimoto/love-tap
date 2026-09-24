@@ -17,9 +17,15 @@
   3120
  ],
  "frame_surfaces": "evidence/12_search.surfaces.json",
- "frame_tear_draws": 81,
- "frame_distinct_tears": 81,
- "frame_repeats": {},
- "frame_ok": true,
- "ok": true
+ "frame_tear_draws": 86,
+ "frame_distinct_tears": 83,
+ "frame_repeats": {
+  "assets/tears/tear_001_shadow.webp": 2,
+  "assets/tears/tear_001.webp": 2,
+  "assets/tears/tear_001_edge.webp": 2
+ },
+ "frame_ok": false,
+ "frame_why": "a tear is used twice in the frame: assets/tears/tear_001.webp x2, assets/tears/tear_001_edge.webp x2, assets/tears/tear_001_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "ok": false,
+ "why": "a tear is used twice in the frame: assets/tears/tear_001.webp x2, assets/tears/tear_001_edge.webp x2, assets/tears/tear_001_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see."
 }

@@ -2393,8 +2393,8 @@
   },
   {
    "id": "the-lit-edge-is-sliced-at-a-different-scale-from-the-mask-it-lights",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "the-ui",
@@ -2405,7 +2405,9 @@
    "measurement": "ANCHORED to the surfaces sidecar, which already declares both layers: for every piece on every still that has both a `fit: mask` and a `fit: nine` entry, the two declare the same four fixed bands as fractions and the same device pixels per AUTHORED pixel on each axis within 5% (authored = the 2048 render; an entry's src and `downsample` give the conversion). POPULATION: the number of pieces declaring both layers does not fall on any still (count them on 03_us, 02_chat and 12_search before the change). Re-break by giving NinePainter back its fixed 0.4 and logical canvas and watch us.body.dates fail. Then the eye check the critic asked for: the 03_us crop at the top of us.body.dates shows one tear line.",
    "related": "the-tears-are-overlays-painted-on-whole-paper stays open for the treads; this is the layer disagreement, which that item never measured.",
    "rank_before_firing_58": null,
-   "rank": 5
+   "rank": null,
+   "closed_by": "firing 60",
+   "worked_at_firing_60": "CAUSE CONFIRMED FIRST, off the committed sidecars (3e): us.body.dates declared the mask 0.842/1 per pixel of a 2013x1376 render and the edge 3.311/6 per pixel of a 512x350 one, 1695 vs 1695 device px per render width and 1376 vs 2100 per render height (1.526x). FIX: NinePainter takes the mask it lights and lays the edge out by SlicedMasks.geometryOf -- the mask actually used (finer copy included), its composed size and its four bands -- in the mask's composed pixels, one edge pixel standing for mw/ew mask pixels. The sidecar's nine entry now declares `lights`, `composed`, `slice` [l,t] and `slice_far`. RULER tools/check/lit_edge_scale.py (bands equal, device px per render width within 5% per axis): committed set BEFORE 54 of 85 failing; on the three named stills 03_us 7 of 9, 02_chat 12 of 13, 12_search 11 of 24. AFTER, one-scene WebKit re-captures: 03_us 0 of 9, 02_chat 0 of 13, 12_search 0 of 27. POPULATION held (9, 13) or rose (24 -> 27). RE-BREAK: app/test/the_lit_edge_is_cut_where_the_mask_is_test.dart draws the half-size edge through the painter against the same edge laid out exactly as SlicedMasks.at lays out the mask: lit band 0.75/255 fixed, 9.16/255 with the painter made to ignore its lattice. the_three_layers_of_a_tear_each_say_so_test's last clause asserted the defect (`edge fixed > 1: drawn in logical pixels`); it now asserts the edge and mask agree per render pixel within 5% and share bands, and fails with the old call site. EYE CHECK: the top of us.body.dates in 03_us shows one tear line; the stair-stepped blurred copy 30-60 px inside it is gone. The other stills (04, 05, 10, 13, 14) still carry pre-fix sidecars, 24 failing between them, and refresh at the next full capture."
   },
   {
    "id": "the-receipt-stock-carries-its-printout-and-three-screens-write-on-it",
