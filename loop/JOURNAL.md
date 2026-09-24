@@ -7658,3 +7658,69 @@ Then DIAGNOSE, with the builder sheet written first.
 
 - **IMPLEMENT, rank 5: the lit edge's scale.**
 - Ranks 2 and 3 now carry `harness` for what is left. ADDRESS should move them into the harness band; an IMPLEMENT firing should pass over them.
+
+## Firing 60 — IMPLEMENT, cycle 3 — 2026-09-24 06:53–09:55Z
+
+- Step 0 passed. The checkout was a shallow clone at firing 49, 50 behind the tip. It had no work of its own, so it was moved to the remote tip with `git checkout -B`. Took the lease and pushed it first.
+- Bootstrap reached `playwright` via the ffmpeg route in CONTINUE §5. Packed with `--seed=year`.
+- Worked ranks 5 to 9 in order. Every fix was re-broken and watched fail, and measured on a one-scene WebKit re-capture.
+
+### Rank 5 — the lit edge: done
+
+- **Cause confirmed first, off the committed sidecars.**
+  - The mask was cut by its own bands at device pixels.
+  - The edge was sliced at a fixed 0.4 on the logical canvas.
+  - On `us.body.dates` the two agreed across (1695 device px per render width each), but down the page the edge was 1.526× the mask.
+- **Fix:** `NinePainter` takes the mask it lights and lays the edge out by `SlicedMasks.geometryOf`: the mask actually used, its composed size and its four bands.
+- **Ruler:** `tools/check/lit_edge_scale.py`.
+  - Committed set before the fix: 54 of 85 pieces failing.
+  - After, on the re-captured stills: 0 on 03 (9 pieces), 02 (13) and 12 (27). The population held or rose.
+- **Pixel test:** 0.75/255 on the lit band. Re-broken, 9.16/255.
+- **Eye check:** the top of `us.body.dates` shows one tear line. The blurred copy inside it is gone.
+
+### Rank 6 — the receipt: done
+
+- `receipt_01` is printed from row 130 to row 720 of 1500.
+- `kBlankPaper` and `PaperPiece.blankFraming` frame it by the piece's own size, so only its blank tail lies under a piece.
+- The sidecar now declares each cover's `align`, so the rows under a piece can be read off a capture.
+- **Ruler:** `tools/check/receipt_print.py`. 8 written-on receipt pieces before → 0 showing the print, on 03, 04 and 12.
+- **Eye check:** the "41s" slip is plain paper.
+
+### Rank 7 — the caption under the photograph: done
+
+- **The viewer is dusk on purpose** (COLOR.md §8). The defect was the grid, not the dusk stock.
+- The caption is on a sticky note now, the only stock family with no printed rules. Ink core went from 2.94 to 6.83–6.99.
+- **The eye check caught a second defect.** The sticky render's grey backdrop showed as a dark band down the caption's torn side.
+  - `kBlankPaper` now bounds both axes for every sticky variant, and for the receipt's sides.
+
+### Rank 8 — the phone-state strips: written, not wired
+
+- The fold is written and tested: `state_runs.dart`, plus a test that fails when re-broken.
+- **Wiring it breaks the hero.** A sweep of 02_chat's anchor from 0.30 to 0.95 finds at most 10 rows on the test rig, against a floor of 11.
+  - The 12 at 0.622 was mostly the strips this removes.
+- That is a decision for ADDRESS. The item says exactly how to wire the fold.
+
+### Rank 9 — Pulse's place and at_home: done by firing 59
+
+- Firing 59 fixed it under rank 3. Verified here by re-break, and on the committed 01_pulse text sidecar. Closed.
+
+### Rank 10 — first run and setup: not started
+
+- The route is on the item.
+- **The tabs are the only way out of setup**, so they stay, with none lit.
+- 10_first_run is not the setup sheet.
+
+### Found on the way
+
+- 12_search's first re-capture since firing 59's lane change moved the empty chair from `tear_014` to `tear_018`, as it already had in 13.
+  - Two big-sheet population tests were re-baselined 7 → 6, with the note.
+  - Their other readings are unchanged.
+- **A running `./capture.sh` re-packs `app/assets` without the seed partway through.** A `flutter test` run during a capture fails at `setUpAll` on the seed tests, or passes the ones that return early.
+  - Gate between captures, not during one.
+
+### Next
+
+- **IMPLEMENT, rank 10.**
+- Rank 8 needs ADDRESS.
+- Ranks 2 and 3 are still waiting to be re-banded as `harness`.
+- 05, 05_interrupt, 10 and 13 still carry sidecars from before the lit-edge fix: 19 failing pieces. The next full capture refreshes them.

@@ -3,15 +3,9 @@
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
  "stage": "IMPLEMENT",
- "firing": 59,
+ "firing": 60,
  "stage_entered_at_firing": 59,
- "lease": {
-  "session_id": "session_01Q2E8zGfqRbnTgNLVZiZLLe",
-  "firing": 60,
-  "stage": "IMPLEMENT",
-  "started_at": "2026-09-24T06:53:00Z",
-  "expires_at": "2026-09-24T10:53:00Z"
- },
+ "lease": null,
  "evidence_fresh_as_of": "firing 56: DIAGNOSE MAY SCORE ON WHAT IS COMMITTED. ONE FULL ./capture.sh 2026-09-23T16:05-17:45Z built from 0480996 (= firing 55's tip 856aed8 plus a STATE.json lease; no app change), 14 of 17, THEN 15_authored_feeling re-captured alone (./capture.sh --only=15_authored_feeling, 17:50-18:17Z, same code) and it passed: 15 OF 17, THE CONTAINER CEILING. `git diff --stat 0480996..HEAD -- app assets seed` is EMPTY (checked at firing 56's close), and so is the working tree against it. MANIFEST.json and frames.json are the single-scene run's: every artifact carries its own `written` time and `from_this_run`, so the 14 from the full run and the one clip from the retry are distinguishable. DIFF.json is the FULL RUN's, against a baseline seeded from firing 54's committed artifacts (15 changed, 2 absent) -- the retry's DIFF compared the capture with itself and was discarded.",
  "evidence_note": "firing 56. Missing: 09_two_devices.png and 16_setup_android.png (no /dev/kvm, measured reason in MANIFEST). `surfaces` booked missing on folds/unfold_thirds (median L_std 6.319 < 8.0), BYTE-IDENTICAL to firing 54's -- the fenced fold re-render, not a regression. 15_authored_feeling was refused in the full run on `pageerror: PlaywrightError -- at b4x (main.dart.js:6585)`; b4x is dart2js's Error.throwWithStackTrace, so a Dart error was rethrown with its message lost. It passed on one retry. Firings 51 and 54 had the same refusal on 13_messenger_states, which passed here. Three scenes, one intermittent unnamed throw: that is a using-it defect DIAGNOSE should file, not a flake. THE FULL RUN'S `handwriting` MISSING ENTRY WAS THE CONTAINER, NOT THE FONTS: uharfbuzz was not installed, hands_selftest.py died on the import, and capture.sh's `hands.py ... || true` left every *.hands.json as firing 54's. Installed, re-run by hand exactly as capture.sh runs it: hands_selftest ok, 0 failures over 202 runs, 105 avoidable; per-still hands logs regenerated from this capture's text sidecars. tools/apt-prereqs.sh now installs uharfbuzz. ffmpeg is distro 6.1.1, not the pinned binary. legibility.json and palette.json are the full run's.",
  "degradation": 0,
@@ -2428,8 +2422,8 @@
   },
   {
    "id": "the-other-persons-hand-is-a-hairline-on-grid-paper-under-the-photograph",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "the-ui",
@@ -2439,13 +2433,15 @@
    "why": "visual_design BLOCKING and the reason the row is capped at 17: the 14_media_viewer caption 'three layers. it leans...' is NoorHand at 54 px, ink ff1f2a44, ink_core 2.94 / median 2.63 against 4.5, over blue-grey graph rules that cross every letter. MEASURED AT FIRING 58: the caption sits on piece viewer_01KKP9AZEGXQ38N9BVB70W8KDR drawn from assets/paper/graph_02_dusk.webp -- a DUSK grid stock in a day viewer. The critic judged 13 of legibility.json's other 15 below-floor runs to be instrument; the second real one is dusk_pulse's header at 4.92 against 5.0 (the dusk screen, whose own item closed with that header as a marginal survivor).",
    "measurement": "ANCHORED to legibility.json by `says`: the run 'three layers. it leans...' on 14_media_viewer reads ink_core >= 4.5 and the piece under it (surfaces.json, piece viewer_<id>) is neither a graph stock nor a dusk stock in day light. POPULATION: 14_media_viewer total_runs unchanged at 2 (firing 56's sidecar). The route is a stock choice for the caption, or the hand's weight on a ruled ground -- not a font re-cut.",
    "rank_before_firing_58": null,
-   "rank": 7,
-   "worked_at_firing_60": "CAUSE REFINED before the fix (3e): the viewer is lit at dusk ON PURPOSE (ViewerPage.open wraps it in Light(dusk), COLOR.md section 8), so a dusk stock there is the design, not the defect. The defect is the grid: the caption named no stock and viewer_01KKP9AZEGXQ38N9BVB70W8KDR hashes to graph; ink_core_ring 10.52 against ink_core 2.94 says the paper beside the letters is fine and the rules through them are not. FIX: the caption is written on ViewerPage.captionStock = sticky_yellow, the one family with no printed rules (row-mean std over the sheet's middle: 0.76-2.33 on every sticky_yellow variant day and dusk, 4.7-6.3 on every ruled stock). TEST app/test/the_words_under_a_photograph_are_on_unruled_paper_test.dart measures the renders; re-broken with the caption put back on graph it fails. The capture half of the measurement (ink_core >= 4.5 on 14_media_viewer, total_runs 2) is taken on the re-capture below."
+   "rank": null,
+   "worked_at_firing_60": "CAUSE REFINED before the fix (3e): the viewer is lit at dusk ON PURPOSE (ViewerPage.open wraps it in Light(dusk), COLOR.md section 8), so a dusk stock there is the design, not the defect. The defect is the grid: the caption named no stock and viewer_01KKP9AZEGXQ38N9BVB70W8KDR hashes to graph; ink_core_ring 10.52 against ink_core 2.94 says the paper beside the letters is fine and the rules through them are not. FIX: the caption is written on ViewerPage.captionStock = sticky_yellow, the one family with no printed rules (row-mean std over the sheet's middle: 0.76-2.33 on every sticky_yellow variant day and dusk, 4.7-6.3 on every ruled stock). TEST app/test/the_words_under_a_photograph_are_on_unruled_paper_test.dart measures the renders; re-broken with the caption put back on graph it fails. The capture half of the measurement (ink_core >= 4.5 on 14_media_viewer, total_runs 2) is taken on the re-capture below.",
+   "closed_by": "firing 60",
+   "captured_at_firing_60": "14_media_viewer re-captured twice. First on the sticky caption alone: ink core 6.57-6.76 on all three caption lines (was 2.94 on graph), 0 below floor -- and a NEW DEFECT the eye check caught: a dark vertical band down the note's left torn side. CAUSE: every sticky render is the whole note on a grey backdrop with its own dark edge 5-9% in from each side, and the caption's patch is aligned hard left (x -1) at stockScale 1.12, so the backdrop showed. FIX: kBlankPaper bounds both axes now (every sticky variant 0.10-0.925 across, 0.07-0.905 down; the receipt 0.07-0.94 across), which covers every sticky piece in the app, not just the caption; the receipt test places both stocks on both axes and fails with the across-axis framing removed (column 0.000). Second capture: ink core 6.83-6.99, 0 below floor, no band. POPULATION matched by `says`: 4 legibility runs before and after (three caption lines + PUT IT BACK), text.json 2 runs before and after."
   },
   {
    "id": "a-run-of-phone-states-stacks-as-full-width-strips-and-outweighs-the-conversation",
    "state": "open",
-   "attempts": 0,
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "using-it",
@@ -2455,12 +2451,13 @@
    "why": "messenger_reliability and visual_design major, coherence minor: 02_chat, the hero, shows eight full-width grey tape strips of 'noor's phone is on normal', 'noor went out', 'you got in' and not one written message; coherence adds that the same kind of state is phrased four ways ('noor - travelling', 'noor needs a lot', 'noor is rest...', 'noor's phone is on normal') and sits left on one day and right-indented on the next.",
    "measurement": "(a) A widget test with eight consecutive state events between two messages yields at most one state row between them, which names what changed (a folded run), and the eight events stay in the spine (thread projection count unchanged; the fold is a view). Re-break by removing the fold. (b) ANCHORED to the report: in 02_chat.report.json `visible`, no two adjacent ids are both state events unless their kinds differ and a message falls between. (c) One grammar: every state row renders `<who> <what>` from one template in chat/renderers.dart, and a partner's state row sits on the partner's side on every day (widget test over two days). The hero's anchor fraction is a capture choice and is not this item.",
    "rank_before_firing_58": null,
-   "rank": 8
+   "rank": 8,
+   "worked_at_firing_60": "THE FOLD IS WRITTEN AND NOT WIRED, because wiring it collides with the brief's floor for the hero. app/lib/regions/chat/state_runs.dart: StateRuns marks runs of consecutive state_declared/state_passive rows (folded = every row but the newest; closing(i) = the run the newest row speaks for); runSentence says the run once -- the newest of each (person, signal), the name once per turn of speaker, e.g. 'noor went out · is restless · phone is on normal · you got in · noor needs a lot · travelling · you have a little left'. Test app/test/a_run_of_phone_states_is_one_line_in_the_margin_test.dart is clause (a): eight states between two messages -> one row, all eight in the projection (10 items); re-broken to fold nothing it fails ('drew as rows [1..8]'). THE WIRING (tried, gate-tested, reverted): in chat_region build `final runs = StateRuns(items);`, in itemBuilder `if (runs.folded.contains(i)) return SizedBox.shrink(key: ValueKey(it.id));` and `run: runs.closing(i)` on Note; Note passes `run` to _MarginLine, which says runSentence(run) at maxLines 2 when run.length > 1; chatReport's `visible` leaves out runs.folded and a new `folded` list names them. Indices are untouched, so scrolling, search anchors and the read marker are unaffected. WHY IT WAS REVERTED: the_hero_of_the_set_fits_eight_notes_test then fails -- 6 rows at the scene's 0.622 against a floor of 11 on the test rig (8 in WebKit + a headroom of 3). A sweep of the anchor 0.300-0.950 at 0.004 with the fold wired found at most 10 anywhere (0.512: 10 rows, 4 of them run lines, 5 messages); 13 anchors give 9. So the 12 that 0.622 was chosen for at firing 37 was mostly the phone-state strips this item removes. DECISION FOR ADDRESS, not for an IMPLEMENT firing: either the hero's floor counts a folded run line as one row and moves to about 10 on this rig (7 in WebKit, below the brief's eight), or the brief's eight is met some other way (denser notes, a taller region), or the fold ships and the hero clause is recorded as traded for it. The owner's steer weighs toward the fold: the critics' complaint was eight strips and no message. (c)'s one-grammar clause is untouched: 'place' says `noor · the canal` because place values include 'the canal', so `noor is <place>` is wrong; runSentence strips the `noor · ` form."
   },
   {
    "id": "the-pulse-card-shows-a-stale-sensor-fact-beside-a-fresh-chosen-one",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "using-it",
@@ -2471,7 +2468,9 @@
    "measurement": "A widget test anchored to spine timestamps: at_home=true at t0 and place=travelling at t1 > t0; the card does not show both without the older one carrying its age (or drops the older one). Re-break by removing the rule. On the next capture, 01_pulse.text.json does not carry PLACE 'travelling' and AT HOME 'yes' unless an age run follows the older. POPULATION: the card's fact count read before the change.",
    "related": "partner-state-is-a-label-and-value-table-and-signals-md-describes-something-else",
    "rank_before_firing_58": null,
-   "rank": 9
+   "rank": null,
+   "closed_by": "firing 60 (the fix is firing 59's, made under rank 3)",
+   "worked_at_firing_60": "ALREADY FIXED by firing 59 under settings-says-not-paired-yet (rank 3): PartnerCard._where() in pulse_region.dart draws only the newer of place and at_home when they disagree. VERIFIED here rather than trusted: app/test/partner_state_says_how_old_it_is_test.dart 'their sheet says where they are once' passes on the seeded year, and with the disagreement branch removed it fails with `place \"travelling\" and at home \"true\" contradict, and both are drawn`. The capture clause holds on firing 59's committed 01_pulse.text.json: the partner card carries PLACE 'travelling' and no AT HOME run beside it. The population clause (the card's fact count before the change) was not read before firing 59's change and cannot be now."
   },
   {
    "id": "first-run-and-setup-wear-the-paired-shell",
@@ -2486,7 +2485,8 @@
    "why": "coherence major: 17_setup_pwa is drawn under a lit CHAT tab with the whole nav live and a header strip with NEED/ENERGY bars for a partner who does not exist yet; 10_first_run shows the same bars. A person setting the app up sees a shell for a relationship that has not been paired.",
    "measurement": "ANCHORED to the text sidecars and the report: when the scene's report has no partner (or setup_showing is true), 10_first_run.text.json and 17_setup_pwa.text.json carry no partner-strip runs ('NEED', 'ENERGY', the partner's status line) and no tab is drawn lit. POPULATION: the setup checklist's own runs are all still present.",
    "rank_before_firing_58": null,
-   "rank": 10
+   "rank": 10,
+   "looked_at_firing_60": "NOT STARTED; the route, read off app.dart, so the next firing need not rediscover it. The PartnerStrip is drawn unconditionally in _ShellState.build, and _Tabs lights `_index`. THE TABS CANNOT SIMPLY GO: tapping one is the ONLY way out of the setup sheet (_go sets _showSetup = false), so hiding them during setup traps a person in it. Route: (1) draw PartnerStrip only when `setup == null` and the partner has ever been heard from (a reverse scan of scope.spine.all for author == partner, breaking early; scope.partnerLastHeard is null while the link is connected, so it cannot be the test); (2) pass `_Tabs(index: setup != null ? -1 : _index)` so no card is lit while setup is up and every card still leaves it. 10_first_run is NOT the setup sheet (its report has setup_showing false): it is the chat region on a fresh spine, and a lit CHAT tab there says where you are, which is true -- the item's 'no tab lit' clause is questionable for 10 and should be read as 17's. No test in the suite pumps Shell; one will be needed, which is most of the cost."
   },
   {
    "id": "an-arriving-feeling-lands-on-whatever-is-under-it",
@@ -3355,6 +3355,15 @@
    "what": "Worked ranks 1-4 in order. Rank 1: the folded note's resting face is its own torn sheet (FoldedNote.resting), and the thread lane is widened to a 28-row window shared with the margins; CLOSED, measured on a 13 re-capture. Rank 2: the named experiment confirmed the id collision (a second seeded factory minted teo's read marker's id again, and applyFromHost replaced it silently). Fixed with Spine.mintId and a loud refusal. 10 of 10 WebKit runs identical, all states, zero pageerrors. The item is re-tagged harness for (b) and (c). Rank 3: last-known partner state says 'last heard ...' when the link is down, and Pulse draws only the newer of place and at_home. (a) is re-tagged harness, because a committed pairing key is forbidden. Rank 4: an opaque torn vocabulary sheet with every family's objects replaces the scrim; sheetTearFor picks the mask by usable area, and the objects are sized to the sheet. The test runs at 480x1040 and 360x780. It stays open only for a sliver of 'YOURS' under the torn bottom edge in 07. Re-captured 01, 02, 05, 06, 07, 08 and 13 (scene files only). Filed the-partner-strip-overflows-at-360-wide (using-it, unranked).",
    "decision": "IMPLEMENT continues at rank 5, the lit edge's scale. Ranks 2 and 3 are left for ADDRESS to re-band.",
    "pushed": true
+  },
+  {
+   "firing": 60,
+   "stage": "IMPLEMENT",
+   "cycle": 3,
+   "at": "2026-09-24T09:50:00Z",
+   "what": "Ranks 5-9. Rank 5: NinePainter lays the lit edge out by the mask's own lattice (SlicedMasks.geometryOf); tools/check/lit_edge_scale.py 54/85 failing -> 0 on every re-captured still (03 9, 02 13, 12 27); pixel test 0.75 vs 9.16/255 re-broken; one tear line on us.body.dates. CLOSED. Rank 6: kBlankPaper + PaperPiece.blankFraming frame receipt_01 inside its blank tail; tools/check/receipt_print.py 8 written-on receipt pieces unplaceable -> 0 showing the print on 03, 04, 12; CLOSED. Rank 7: the caption is on a sticky note (no printed rules), ink core 2.94 -> 6.83-6.99; the eye check found the sticky backdrop showing and kBlankPaper now bounds both axes for every sticky variant; CLOSED. Rank 8: fold written and tested, wiring reverted because the hero's floor cannot be met with it (max 10 of 11 over a full anchor sweep); ADDRESS decision recorded on the item. Rank 9: already fixed by firing 59, verified by re-break; CLOSED. Rank 10: route recorded. Re-baselined the big-sheet population 7 -> 6 for 12_search's first re-capture since firing 59's lane change.",
+   "decision": "IMPLEMENT continues at rank 10. Rank 8 needs ADDRESS.",
+   "pushed": true
   }
  ],
  "routine": {
@@ -3503,7 +3512,7 @@
    "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
   }
  },
- "stage_change_note": "Firing 59 worked ranks 1-4 of firing 58's queue. Rank 1 is CLOSED. Rank 4 is open only for a sliver of 'YOURS' under the sheet's torn bottom edge in 07. Ranks 2 and 3 fixed what a person hits and are RE-TAGGED harness for what is left: rank 2's (b) and (c) are staging, and rank 3's (a) is pairing the capture build. An IMPLEMENT firing passes over them, and ADDRESS re-bands them. NEXT: rank 5, the-lit-edge-is-sliced-at-a-different-scale-from-the-mask-it-lights. Read the worked_at_firing_59 notes on ranks 1-4 before you touch the thread's tear lanes, the feeling corner, or Spine.applyFromHost, which now throws on an id collision. The fences are unchanged: the folds re-render stays fenced; photos, tears and new objects stay refused; day paper is unauthorised.",
+ "stage_change_note": "Firing 60 worked ranks 5-9 of firing 58's queue. CLOSED: 5 (the lit edge), 6 (the receipt), 7 (the caption under the photograph), 9 (Pulse's place/at_home, fixed by firing 59 and verified here). Rank 8 is WRITTEN BUT NOT WIRED: the fold collides with the hero's eight-notes floor and needs an ADDRESS decision (the item says exactly what). NEXT for an IMPLEMENT firing: rank 10 (its looked_at_firing_60 has the route), then 11, 12. Ranks 2 and 3 are still tagged harness for an ADDRESS re-band. The fences are unchanged.",
  "measured_at_firing_12": {
   "captured_at": "e7a3a5a",
   "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
@@ -4179,5 +4188,6 @@
    "note": "Open using-it + the-ui points: 32.0 at firing 53 -> 45.25 now. This firing filed 13 items worth 20.75, of which 3 were split from the fenced clip, so 17.75 are new points. 32.0 + 17.75 = 49.75, so the 4.5 difference is what IMPLEMENT closed at firings 54-55, by arithmetic. 7.0 sit in the parked band. The queue grew because the critics found things a person would see, which 3b says are always filed."
   }
  },
- "evidence_note_firing_59": "One-scene re-captures committed at firing 59: 13 (twelve runs in all), 01, 02, 05, 06, 08 (from a build carrying ranks 1-3), and 07 (from a later build carrying rank 4's fitted sheet). Aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill) were NOT committed from these runs, because a one-scene DIFF declares itself a baseline. They still describe firing 56's full capture, and the next OBSERVE's full ./capture.sh refreshes them. The ffmpeg is distro 6.1.1, per CONTINUE §5."
+ "evidence_note_firing_59": "One-scene re-captures committed at firing 59: 13 (twelve runs in all), 01, 02, 05, 06, 08 (from a build carrying ranks 1-3), and 07 (from a later build carrying rank 4's fitted sheet). Aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill) were NOT committed from these runs, because a one-scene DIFF declares itself a baseline. They still describe firing 56's full capture, and the next OBSERVE's full ./capture.sh refreshes them. The ffmpeg is distro 6.1.1, per CONTINUE §5.",
+ "evidence_note_firing_60": "One-scene WebKit re-captures committed at firing 60, scene files only: 03_us (twice; the second carries both fixes), 02_chat (+ its three 300% crops), 12_search (twice), 04_moments, 14_media_viewer (twice; the second carries the sticky framing). The aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill, frames) were NOT committed: they still describe firing 56's full capture. Four stills' surfaces sidecars predate the lit-edge fix, and tools/check/lit_edge_scale.py reads 19 of 90 pieces failing, all on them: 05_settings 5 of 7, 05_settings_interrupt 1 of 1, 10_first_run 2 of 3, 13_messenger_states 11 of 12. The next full ./capture.sh refreshes them. ffmpeg distro 6.1.1 per CONTINUE section 5."
 }
