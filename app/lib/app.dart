@@ -201,6 +201,7 @@ class _ShellState extends State<Shell> {
                 partner: scope.partner,
                 state: scope.partnerState,
                 nowMs: scope.clock.now().millisecondsSinceEpoch,
+                lastHeard: scope.partnerLastHeard,
               ),
               Expanded(
                 child: Stack(

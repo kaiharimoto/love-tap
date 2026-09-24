@@ -55,7 +55,13 @@ class PulseRegion extends StatelessWidget {
       key: const ValueKey('pulse.theirs'),
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 96),
       children: [
-        _TheirSheet(partner: scope.partner, state: them, lib: lib),
+        _TheirSheet(
+          partner: scope.partner,
+          state: them,
+          lib: lib,
+          nowMs: scope.clock.now().millisecondsSinceEpoch,
+          lastHeard: scope.partnerLastHeard,
+        ),
         const SizedBox(height: 14),
         _Traffic(events: today, registry: registry, me: scope.me),
         const SizedBox(height: 14),
@@ -68,10 +74,35 @@ class PulseRegion extends StatelessWidget {
 
 /// Their state, whole, on one sheet.
 class _TheirSheet extends StatelessWidget {
-  const _TheirSheet({required this.partner, required this.state, required this.lib});
+  const _TheirSheet({
+    required this.partner,
+    required this.state,
+    required this.lib,
+    required this.nowMs,
+    this.lastHeard,
+  });
   final Person partner;
   final PersonState state;
   final MaterialLibrary? lib;
+  final int nowMs;
+
+  /// See `AppScope.partnerLastHeard`: null while the link is up.
+  final int? lastHeard;
+
+  /// Where they are, said once. `place` is what they declared and `at home` is what their phone
+  /// sensed, and each is only the LAST thing said about it -- so a place declared on the way to
+  /// the airport and a phone that has since come home read `travelling` beside `at home: yes`,
+  /// which the cycle 3 coherence critic found on this sheet. Where the two disagree, the older one
+  /// is not news any more, and only the newer one is drawn.
+  (String?, String?) _where() {
+    final place = state['place'], home = state['at_home'];
+    final placeWords = _words(state.place);
+    final homeWords = state.atHome == null ? null : (state.atHome! ? 'yes' : 'no');
+    if (place == null || home == null) return (placeWords, homeWords);
+    final agree = (state.place == 'home') == state.atHome;
+    if (agree) return (placeWords, homeWords);
+    return home.at >= place.at ? (null, homeWords) : (placeWords, null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +112,7 @@ class _TheirSheet extends StatelessWidget {
     // One card per person, so it is a two-row lane and the row is who it is. `partner.index * 7
     // + 11` was an index into the pool that no other call site could see or avoid.
     final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.theirs);
+    final (place, atHome) = _where();
     return PaperPiece(
       stockId: id,
       tearId: tear,
@@ -95,6 +127,11 @@ class _TheirSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(state.statusLine ?? state.mood ?? '', style: Hands.of(partner, size: 24)),
+          if (lastHeard != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Text(S.lastHeard(nowMs, lastHeard!), style: Hands.margin(size: 14)),
+            ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 18,
@@ -102,7 +139,7 @@ class _TheirSheet extends StatelessWidget {
             children: [
               _Fact('mood', state.mood),
               _Fact('here', _words(state.availability)),
-              _Fact('place', _words(state.place)),
+              _Fact('place', place),
               // never a score out of anything: a dial is how much, said in words
               _Fact('needs', _dial(state.need)),
               _Fact('has left', _dial(state.energy)),
@@ -113,7 +150,7 @@ class _TheirSheet extends StatelessWidget {
               if (state.ringer != null) _Fact('ringer', _words(state.ringer)),
               if (state.moving != null) _Fact('moving', _words(state.moving)),
               if (state.network != null) _Fact('signal', _words(state.network)),
-              if (state.atHome != null) _Fact('at home', state.atHome! ? 'yes' : 'no'),
+              _Fact('at home', atHome),
             ],
           ),
         ],

@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 
 import '../spine/projections/state.dart';
 import '../spine/spine.dart';
+import '../voice/strings.dart';
 import 'assignment.dart';
 import 'hands.dart';
 import 'library.dart';
@@ -78,11 +79,22 @@ class RenderOpaqueSurface extends RenderProxyBox {}
 /// The partner's state, on a torn strip of the paper their mood picks, in their hand, at the top
 /// of every region. docs/SIGNALS.md says what each signal does to it.
 class PartnerStrip extends StatelessWidget {
-  const PartnerStrip({super.key, required this.partner, required this.state, required this.nowMs, this.onTap});
+  const PartnerStrip({
+    super.key,
+    required this.partner,
+    required this.state,
+    required this.nowMs,
+    this.lastHeard,
+    this.onTap,
+  });
 
   final Person partner;
   final PersonState state;
   final int nowMs;
+
+  /// When their phone was last heard from, while the link is down; null while it is up. Given,
+  /// the strip says how old its news is. See `AppScope.partnerLastHeard`.
+  final int? lastHeard;
   final VoidCallback? onTap;
 
   @override
@@ -146,12 +158,23 @@ class PartnerStrip extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          state.statusLine ?? _fallbackLine(state, asleep, headsDown),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Hands.of(partner, size: 17, colour: ink.withValues(alpha: weight)),
-                        ),
+                        // The age goes on this line and not with the dials, which fill theirs:
+                        // the status line is what it is the age OF, and it ellipsizes to make room.
+                        Row(children: [
+                          Flexible(
+                            child: Text(
+                              state.statusLine ?? _fallbackLine(state, asleep, headsDown),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Hands.of(partner, size: 17, colour: ink.withValues(alpha: weight)),
+                            ),
+                          ),
+                          if (lastHeard != null) ...[
+                            const SizedBox(width: 8),
+                            Text(S.lastHeard(nowMs, lastHeard!),
+                                maxLines: 1, softWrap: false, style: Hands.margin(size: 12)),
+                          ],
+                        ]),
                         const SizedBox(height: 2),
                         Row(children: [
                           if (state.place != null) Stamped(state.place!, size: 10),

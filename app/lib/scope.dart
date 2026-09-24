@@ -69,6 +69,24 @@ class AppScope extends ChangeNotifier {
   PersonState get partnerState => state[partner]!;
   PersonState get myState => state[me]!;
 
+  /// When the other phone was last heard from, or null while the link is up and what the screen
+  /// shows of them is live.
+  ///
+  /// The partner strip and their sheet on Pulse draw the last state the log holds, and with the
+  /// link down that is last-known, not current -- a mood from this morning, a place from last
+  /// week -- drawn exactly as if it had arrived a second ago. The cycle 3 critics read `travelling`
+  /// and `needs a lot` as news on a build whose link said `connecting`. So when the link is not up
+  /// the header says how old its news is, and it is read off the log: the time of the last event
+  /// they wrote, which is the last time anything of theirs reached this phone.
+  int? get partnerLastHeard {
+    if (link.state == LinkState.connected) return null;
+    final all = spine.all;
+    for (var i = all.length - 1; i >= 0; i--) {
+      if (all[i].author == partner) return all[i].ts;
+    }
+    return null;
+  }
+
   String _lastStanding = '';
   String _lastArrival = '';
 

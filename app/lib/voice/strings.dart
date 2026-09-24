@@ -86,5 +86,17 @@ class S {
   static const itNeedsAName = 'it needs a name first.';
 
   static String feelingFrom(String feelingName, String person) => '$feelingName from $person';
+
+  /// How long ago the other phone was last heard from, for a link that is not up. See
+  /// `AppScope.partnerLastHeard`.
+  static String lastHeard(int nowMs, int atMs) {
+    final minutes = (nowMs - atMs) ~/ 60000;
+    if (minutes < 2) return 'last heard just now';
+    if (minutes < 60) return 'last heard $minutes minutes ago';
+    final hours = minutes ~/ 60;
+    if (hours < 24) return hours == 1 ? 'last heard an hour ago' : 'last heard $hours hours ago';
+    final days = hours ~/ 24;
+    return days == 1 ? 'last heard yesterday' : 'last heard $days days ago';
+  }
   static String aPhotoFrom(String person) => '$person, a photo';
 }
