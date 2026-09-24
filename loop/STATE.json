@@ -785,7 +785,7 @@
    "why": "FILED AT FIRING 31. The coherence critic reported that Us presents one module where the brief requires four; the observation is right and ITS ROOT CAUSE IS WRONG, so the item is filed with the corrected cause. All four modules exist -- app/lib/modules/ holds dates, todos, calendar and rituals plus shelf, with registry.dart and module.dart -- and us_region.dart iterates kModules rendering every one of them with a row budget of dates 2, todos 3, calendar 2, rest 2. Nothing is missing. WHAT IS WRONG IS THAT ONE MODULE FILLS THE PHONE. 03_us.text.json holds 23 runs and the only module stamp among them is DATES, with AHEAD and BEEN; there are two blank stretches of ruled paper inside the frame, y375-958 and y2392-3015, about 1200 px of nothing, while the to-do list, the calendar and the rituals sit below the fold. AND THE SCENE NEVER SCROLLS: evidence/scenes/03_us.json is goTo 2, wait, shot, report -- four steps, no scrollTo. TWO HALVES, AND BOTH ARE REAL. The brief's deliverable requires 03_us.png to show all four modules populated, and 09 makes 'one module standing in for four' a failure condition, so the artifact is non-compliant as captured. And a person opening Us to check the shared list should not have to scroll past 1200 px of empty paper to reach it.",
    "measurement": "03_us.text.json carries a module stamp for all four modules -- the dates, the list, the calendar and the rituals -- with at least one populated row under each, in a single frame. Re-break by restoring the DATES-only top of the region and watching three stamps leave the file.",
    "state": "open",
-   "attempts": 0,
+   "attempts": 1,
    "rank": 12,
    "filed_at_firing": 31,
    "rank_before_firing_33": 33,
@@ -793,7 +793,8 @@
    "rank_before_firing_43": 29,
    "rank_before_firing_50": 21,
    "rank_before_firing_53": 23,
-   "rank_before_firing_58": 16
+   "rank_before_firing_58": 16,
+   "worked_at_firing_61": "3e FIRST, and the item's cause is REFINED, not refuted: nothing is missing and one module does fill the phone, but WHY is that a torn piece's writing was inset by a SHARE OF THE PIECE'S HEIGHT (the mask's safe fractions, fT+fB median 0.25, max 0.58 over 224 masks) while the mask is nine-sliced and its break sits a fixed depth in. A slip was C/(1-fT-fB) tall. The same cause shows in 17_setup_pwa, whose sheet opens on ~40% empty paper above its first line. FIXED THAT (SlicedMasks.safeInsets, _RenderWithinTear._layoutBySlice; commit 'A torn piece's writing is inset by the depth of its break'). MEASURED in a widget test at 03_us's frame (480x1040@3, seeded year, Shell on Us): us.body.dates 900 -> 742 points, stubs 253 -> 225 and 329 -> 297, TO DO stamp arrives at y934-946 of 978 open (before: not built). STILL SHORT: to-do's first row (y1102), CALENDAR and RITUALS. WHAT REMAINS, measured off the piece list: each torn piece's box carries its mask's transparent border around the paper (firing 45: median 8.73 mm on the worst side), and Us nests a torn STUB inside a torn BODY, so every date pays that border twice -- 742 points for two stubs whose writing is ~250. Routes, uncosted: (a) the stubs on the desk go untorn or become one line each, their full stubs staying in the opened module; (b) the desk shows one row per module; (c) pieces in a stack overlap by their transparent border. (a) and (b) change what the desk shows and are ADDRESS's call against the brief's 'populated'; (c) is a layout change in Slip. test/a_tall_piece_is_inset_by_its_break_test.dart holds what was gained (dates with a row, and the list's stamp, on one screen)."
   },
   {
    "id": "an-event-kind-reaches-the-glass-as-its-own-registry-id",
@@ -2480,8 +2481,8 @@
   },
   {
    "id": "first-run-and-setup-wear-the-paired-shell",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "using-it",
@@ -2491,13 +2492,15 @@
    "why": "coherence major: 17_setup_pwa is drawn under a lit CHAT tab with the whole nav live and a header strip with NEED/ENERGY bars for a partner who does not exist yet; 10_first_run shows the same bars. A person setting the app up sees a shell for a relationship that has not been paired.",
    "measurement": "ANCHORED to the text sidecars and the report: when the scene's report has no partner (or setup_showing is true), 10_first_run.text.json and 17_setup_pwa.text.json carry no partner-strip runs ('NEED', 'ENERGY', the partner's status line) and no tab is drawn lit. POPULATION: the setup checklist's own runs are all still present.",
    "rank_before_firing_58": null,
-   "rank": 10,
-   "looked_at_firing_60": "NOT STARTED; the route, read off app.dart, so the next firing need not rediscover it. The PartnerStrip is drawn unconditionally in _ShellState.build, and _Tabs lights `_index`. THE TABS CANNOT SIMPLY GO: tapping one is the ONLY way out of the setup sheet (_go sets _showSetup = false), so hiding them during setup traps a person in it. Route: (1) draw PartnerStrip only when `setup == null` and the partner has ever been heard from (a reverse scan of scope.spine.all for author == partner, breaking early; scope.partnerLastHeard is null while the link is connected, so it cannot be the test); (2) pass `_Tabs(index: setup != null ? -1 : _index)` so no card is lit while setup is up and every card still leaves it. 10_first_run is NOT the setup sheet (its report has setup_showing false): it is the chat region on a fresh spine, and a lit CHAT tab there says where you are, which is true -- the item's 'no tab lit' clause is questionable for 10 and should be read as 17's. No test in the suite pumps Shell; one will be needed, which is most of the cost."
+   "rank": null,
+   "looked_at_firing_60": "NOT STARTED; the route, read off app.dart, so the next firing need not rediscover it. The PartnerStrip is drawn unconditionally in _ShellState.build, and _Tabs lights `_index`. THE TABS CANNOT SIMPLY GO: tapping one is the ONLY way out of the setup sheet (_go sets _showSetup = false), so hiding them during setup traps a person in it. Route: (1) draw PartnerStrip only when `setup == null` and the partner has ever been heard from (a reverse scan of scope.spine.all for author == partner, breaking early; scope.partnerLastHeard is null while the link is connected, so it cannot be the test); (2) pass `_Tabs(index: setup != null ? -1 : _index)` so no card is lit while setup is up and every card still leaves it. 10_first_run is NOT the setup sheet (its report has setup_showing false): it is the chat region on a fresh spine, and a lit CHAT tab there says where you are, which is true -- the item's 'no tab lit' clause is questionable for 10 and should be read as 17's. No test in the suite pumps Shell; one will be needed, which is most of the cost.",
+   "closed_by": "firing 61",
+   "worked_at_firing_61": "3e FIRST: the item's cause held off the committed reports -- 10_first_run and 17_setup_pwa both report events 0, so there is no partner to draw, and 17 reports setup_showing true under a lit CHAT (12 points against the others' 11 in 17_setup_pwa.text.json). FIX (app.dart, scope.dart): the strip is drawn only when AppScope.partnerHeardFrom (a reverse scan of the log for any event of theirs); _Tabs gets -1 while the setup sheet is up. The strip is NOT hidden during setup on a log that has them in it -- partner_state_says_how_old_it_is_test pumps the seeded year with the setup list up and still wants the strip, and that is right: a pair re-opening the list from Settings still has each other. MEASURED on one-scene re-captures committed at firing 61: 17 went 17 -> 18 runs, left exactly NEED and ENERGY, three checklist lines arrived in the room the strip gave back, tabs all 11 points; 10 went 12 -> 10, left exactly NEED and ENERGY, CHAT stays lit (on chat that is true, as firing 60's note said). Widget test test/nobody_is_drawn_before_they_are_heard_from_test.dart, re-broken both ways. NOTE: Pen.margin and Pen.stamp are the same ink now, so 'lit' is the label's stamp size, 12 vs 11."
   },
   {
    "id": "an-arriving-feeling-lands-on-whatever-is-under-it",
    "state": "open",
-   "attempts": 0,
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "using-it",
@@ -2507,12 +2510,14 @@
    "why": "emotional_transmission major twice: in 08 the arriving 'hold' cylinder parks over the partner card and hides HAS LEFT for 1.2-3 s, and the 'squeeze' tape lands on the 'hold' caption so it reads 'h..d'; in 07 the objects land over the sender's own picker strips. The landing target is fixed, not chosen against what is on the glass.",
    "measurement": "A widget test anchored to declared runs: an arriving feeling's resting rect intersects no rect of a declared text run of the partner card or of a thread caption in the frame it lands on (the runs found by `says`, not by coordinates); re-break by pinning the target back. On the next capture, 08's frame report at the landing has no partner-card run occluded.",
    "rank_before_firing_58": null,
-   "rank": 11
+   "rank": 11,
+   "worked_at_firing_61": "FIX (feelings/landing.dart): the spot is chosen when the feeling is let go, over a 7x13 lattice of the stage, against wordsOnTheGlass -- every painted RenderParagraph under the stage, painted-ness being CaptureHooks.painted (made public from _painted), so the IndexedStack's hidden regions do not count. A spot covering no word wins; ties go nearest the old throw, and an empty desk lands exactly where it always did (asserted). test/a_feeling_lands_beside_the_words_test.dart puts a card and a caption exactly where the old target was and asserts the resting FeelingObject overlaps neither; re-broken by returning the old target. NOT MEASURED: the 08 clip's frame-level clause. No full capture was run this firing; the next OBSERVE's 08_state_propagating is where to look, reading the text sidecar runs of the partner card against the object's rect at rest if the clip reports it.",
+   "next_step": "The widget clause is met (firing 61). Only the capture clause is left: on the next full capture, 08_state_propagating at the landing occludes no partner-card run. If it does not, close this; no code is expected."
   },
   {
    "id": "the-feelings-count-in-settings-counts-both-phones",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "using-it",
@@ -2522,7 +2527,9 @@
    "why": "05_settings reads 'feelings: 36 to send, 2 made here' while its own list shows 'pigeon by noor' and 'tuesday soup by teo'; only one was made on this phone. The count reads every feeling_authored in the shared log.",
    "measurement": "Widget test: two feeling_authored events, one per author; Settings says '1 made here' on each phone. Anchored to the event authors. Re-break by counting all.",
    "rank_before_firing_58": null,
-   "rank": 15
+   "rank": null,
+   "closed_by": "firing 61",
+   "worked_at_firing_61": "FIX: settings_region counts authored feelings whose authoredBy is this phone's person. A SECOND defect found writing the test: FeelingRegistry took the LATEST feeling_authored's author as the feeling's, so the other person retiring (long-press, settings_region) or renaming your feeling made it theirs -- 'by noor' under teo's feeling, and a count that moved between phones. The first author now stays. test/made_here_counts_this_phone_test.dart: both phones over one two-author log say '1 made here'; noor retiring teo's feeling leaves it teo's and retired. Re-broken both ways."
   },
   {
    "id": "the-tab-bar-and-the-pad-are-straight-cut-rectangles",
