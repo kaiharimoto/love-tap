@@ -5,7 +5,13 @@
  "stage": "IMPLEMENT",
  "firing": 59,
  "stage_entered_at_firing": 59,
- "lease": null,
+ "lease": {
+  "session_id": "session_01Q2E8zGfqRbnTgNLVZiZLLe",
+  "firing": 60,
+  "stage": "IMPLEMENT",
+  "started_at": "2026-09-24T06:53:00Z",
+  "expires_at": "2026-09-24T10:53:00Z"
+ },
  "evidence_fresh_as_of": "firing 56: DIAGNOSE MAY SCORE ON WHAT IS COMMITTED. ONE FULL ./capture.sh 2026-09-23T16:05-17:45Z built from 0480996 (= firing 55's tip 856aed8 plus a STATE.json lease; no app change), 14 of 17, THEN 15_authored_feeling re-captured alone (./capture.sh --only=15_authored_feeling, 17:50-18:17Z, same code) and it passed: 15 OF 17, THE CONTAINER CEILING. `git diff --stat 0480996..HEAD -- app assets seed` is EMPTY (checked at firing 56's close), and so is the working tree against it. MANIFEST.json and frames.json are the single-scene run's: every artifact carries its own `written` time and `from_this_run`, so the 14 from the full run and the one clip from the retry are distinguishable. DIFF.json is the FULL RUN's, against a baseline seeded from firing 54's committed artifacts (15 changed, 2 absent) -- the retry's DIFF compared the capture with itself and was discarded.",
  "evidence_note": "firing 56. Missing: 09_two_devices.png and 16_setup_android.png (no /dev/kvm, measured reason in MANIFEST). `surfaces` booked missing on folds/unfold_thirds (median L_std 6.319 < 8.0), BYTE-IDENTICAL to firing 54's -- the fenced fold re-render, not a regression. 15_authored_feeling was refused in the full run on `pageerror: PlaywrightError -- at b4x (main.dart.js:6585)`; b4x is dart2js's Error.throwWithStackTrace, so a Dart error was rethrown with its message lost. It passed on one retry. Firings 51 and 54 had the same refusal on 13_messenger_states, which passed here. Three scenes, one intermittent unnamed throw: that is a using-it defect DIAGNOSE should file, not a flake. THE FULL RUN'S `handwriting` MISSING ENTRY WAS THE CONTAINER, NOT THE FONTS: uharfbuzz was not installed, hands_selftest.py died on the import, and capture.sh's `hands.py ... || true` left every *.hands.json as firing 54's. Installed, re-run by hand exactly as capture.sh runs it: hands_selftest ok, 0 failures over 202 runs, 105 avoidable; per-still hands logs regenerated from this capture's text sidecars. tools/apt-prereqs.sh now installs uharfbuzz. ffmpeg is distro 6.1.1, not the pinned binary. legibility.json and palette.json are the full run's.",
  "degradation": 0,
