@@ -7598,3 +7598,63 @@ Then DIAGNOSE, with the builder sheet written first.
 ### Next
 
 **IMPLEMENT, rank 1.**
+
+## Firing 59 — IMPLEMENT, cycle 3 — 2026-09-24 00:53–04:10Z
+
+- Step 0 passed after a fast-forward of 3 commits. Took the lease and pushed it first.
+- Gate at the start: `tools/pack_assets.py --seed=year` (4m58s). Bootstrap reached `playwright` via the ffmpeg route in CONTINUE §5.
+- Worked ranks 1–4 in order. Nine code, test and evidence commits, each pushed and confirmed.
+
+### Rank 1 — the folded note at rest: done
+
+- `FoldedNote` takes a `resting` face now. `Note` passes the note's own sheet: its stock, patch, tear, lift and tilt.
+  - It is folded to the sequence's declared proportions, 540×147.
+  - It shows the time in pencil. The writing stays inside.
+  - The fold plays only on a tap. No render; the fence holds.
+- Measured on a 13 re-capture: 7 of 7 visible ids declare a paper stock and a tear. The blank card is a torn `graph_02` sheet.
+- The widget test fails with `Unfolding` put back as the resting face.
+- **Found on the way:** once the folded note was a real torn piece, 02_chat showed 15 torn thread rows. The thread lane wraps at 14, so items 8372 and 8386 both drew `tear_001`.
+  - Fix: notes and margins now share one 28-row window, phased so the hero rows keep their masks.
+- 06 re-captured: the clip opens from its first frame, so the resting face is not in it.
+
+### Rank 2 — the states artifact: cause found; the rest re-tagged harness
+
+- **The experiment first.** The staged partner read marker minted its id from a *second* factory seeded like the spine's.
+  - So its id was always the spine's first mint at the frozen instant: teo's own pending read marker, `…FKG`.
+  - `applyFromHost` took noor's marker as the host assigning teo's, and replaced it silently.
+- **Fix:** the id now comes from `Spine.mintId`, and a host event under someone else's id is refused out loud.
+- **Result: 10 of 10 WebKit runs identical.** Every run: +6 events, all four states plus `try again` on the glass, zero pageerrors.
+- The VM did not reproduce 56's lost outbox rows. That is stated on the item, not guessed at.
+- Clauses (b) and (c) are staging work, so the item is re-tagged `harness`, as it asked:
+  - (b) the far host should send the read marker and the refusal;
+  - (c) an edited row and a taken-back row should be staged.
+
+### Rank 3 — Settings unpaired, and Pulse's place: the part a person hits is done
+
+- With the link not `connected`, the partner strip and their Pulse sheet say "last heard 2 hours ago". It is read off the partner's last event in the spine.
+- Where `place` and `at_home` disagree, Pulse draws only the newer one. The seeded year really holds `travelling` beside a later `at_home: true`.
+- Both are re-broken and watched fail. 01 and 05 are re-captured.
+- **(a) is re-tagged harness.** The seeded capture build really is unpaired.
+  - A pairing in the seed needs a key, and a committed key is a failure condition.
+  - The honest route is to pair 05 through the far host daemon.
+
+### Rank 4 — the picker: done at both frames
+
+- The scrim is gone. The vocabulary now sits on an opaque torn sheet.
+  - Each family is a row: its tab, then every feeling in it.
+  - All 36 are one tap away.
+- **The first version was measured only at 480 wide, and the WebKit 07 capture caught it.** At 360×780, Warmth, Ache and Shelter were scrolled off the top.
+  - Cause: the overlay row's mask is `tear_001`, a strip whose safe insets eat 46% of a region-high sheet.
+  - `sheetTearFor` now picks by usable area (`tear_026`, 81%), and the objects size themselves to the sheet.
+  - The test runs at both frames inside the shell's strip and tab bar.
+- 07 re-captured on the fitted sheet: all six rows and every object are on the sheet at 360×780.
+  - Open only for a sliver of Pulse's `YOURS` under the torn bottom edge.
+
+### Filed
+
+- `the-partner-strip-overflows-at-360-wide`, `using-it`, 0.5 points, unranked. The dials row overflows by 107 pt at 360, and the pencil is cut off in 07. Firing 59 did not touch that Row.
+
+### Next
+
+- **IMPLEMENT, rank 5: the lit edge's scale.**
+- Ranks 2 and 3 now carry `harness` for what is left. ADDRESS should move them into the harness band; an IMPLEMENT firing should pass over them.
