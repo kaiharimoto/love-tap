@@ -211,6 +211,28 @@ class MaterialLibrary {
     return ok.isEmpty ? tearMasks : ok;
   }
 
+  /// The masks nothing else draws: too torn to carry a note (`usable < 0.5`) and not square
+  /// enough to be a scrap, best writing area first. Their edge and shadow renders are baked like
+  /// every other mask's, and until firing 62 nothing used them at all. A piece of furniture that
+  /// carries one short line can: see `TearLanes.spare`.
+  List<String> get spareTears {
+    final scraps = scrapTears.toSet();
+    final writable = writableTears.toSet();
+    final ok = [
+      for (final t in tearMasks)
+        if (!writable.contains(t) && !scraps.contains(t)) t,
+    ];
+    double inside(String t) {
+      final s = safeOf(t);
+      return (1 - s[0] - s[2]) * (1 - s[1] - s[3]);
+    }
+    ok.sort((a, b) {
+      final d = inside(b).compareTo(inside(a));
+      return d != 0 ? d : a.compareTo(b);
+    });
+    return ok;
+  }
+
   bool hasTearRender(String id, String suffix) => tears.any((e) => e.id == '$id$suffix');
 
   /// Masks that are roughly as tall as they are wide: a scrap rather than a strip. A feeling that

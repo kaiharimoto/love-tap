@@ -35,7 +35,7 @@ void main() {
     // `[` after the getter is the whole of it: reading `.length`, `.isEmpty` or the list itself is
     // fine and happens in the capture hooks and in the tests. Taking an element by a computed
     // index is the thing that cannot be namespaced.
-    final index = RegExp(r'(writableTears|tearMasks|scrapTears)\s*\[');
+    final index = RegExp(r'(writableTears|tearMasks|scrapTears|spareTears)\s*\[');
     // **And the same getter bound to a local, which is how the seventh site survived.**
     // `material/objects.dart` read `final scraps = lib?.scrapTears ?? const <String>[];` and then
     // indexed `scraps` on the next line, so the regex above — which needs the getter's own name
@@ -45,7 +45,7 @@ void main() {
     // it. A source test that reads one spelling of a thing is a source test that can be renamed
     // past, so this follows the name the pool was bound to and flags indexing THAT.
     final bind = RegExp(r'\b(?:final|var|const)\s+(\w+)\s*=[^;]*'
-        r'(?:writableTears|tearMasks|scrapTears)');
+        r'(?:writableTears|tearMasks|scrapTears|spareTears)');
     for (final f in Directory('lib').listSync(recursive: true).whereType<File>()) {
       if (!f.path.endsWith('.dart')) continue;
       if (f.path.endsWith('material/assignment.dart')) continue;

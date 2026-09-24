@@ -598,8 +598,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
               alignment: Alignment.centerLeft,
               child: Strip(
                 id: 'typing-${scope.partner.name}',
-                row: ChromeRows.notice,
-                lane: TearLanes.chrome,
+                row: SpareRows.notice,
+                lane: TearLanes.spare,
                 padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
                 child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
               ),

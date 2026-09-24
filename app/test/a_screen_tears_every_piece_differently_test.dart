@@ -269,6 +269,24 @@ void main() {
     await check(tester, '12_search', const SearchPage(), 6);
   });
 
+  // **The search page pushed over chat in the second the other person is typing**, which is the
+  // pairing ChromeRows used to hold on a judgement: the typing line and the query slip shared
+  // chrome row 3 because no artifact had been captured with both up. A pushed route leaves its
+  // parent in the tree, so this is the chat with the page over it, as the navigator draws them.
+  // Re-break by putting the typing strip back on `ChromeRows.leaf` of the chrome lane.
+  testWidgets('search opened over chat while somebody types tears nothing twice', (tester) async {
+    if (absent != null) return;
+    scope.partnerTyping = true;
+    addTearDown(() => scope.partnerTyping = false);
+    await check(tester, '12_search over 02_chat, typing',
+        const Stack(children: [ChatRegion(), SearchPage()]), 30);
+    expect(
+        CaptureHooks.paperSurfaces()
+            .any((s) => (s['piece'] as String? ?? '').startsWith('typing-')),
+        isTrue,
+        reason: 'the typing strip is not on the glass, so this case is not the one it names');
+  });
+
   // **Several feeling objects on one screen, each on a scrap, which is the case the hash lost.**
   // `material/objects.dart` chose a drawn mark's scrap by `hashOf(feeling.id) % scraps.length`:
   // 27 scraps for a vocabulary of the same order, so two feelings could be torn alike, and two of
@@ -298,6 +316,14 @@ void main() {
           reason: '${lane.name} runs from ${lane.base} to ${lane.base + lane.span - 1}, past the '
               '$n writable masks in the pool, so it wraps onto lanes at the start of the table '
               'and the layout comment on TearLanes is not true of it');
+      if (lane.spare) {
+        // the spare lane walks masks no other lane or scrap can take, so it collides with nothing
+        final m = tearAt(MaterialLibrary.instance, lane: lane, row: 0);
+        expect(MaterialLibrary.instance.writableTears.contains(m), isFalse,
+            reason: '${lane.name} took $m, which is in the writable pool every list walks');
+        expect(MaterialLibrary.instance.scrapTears.contains(m), isFalse,
+            reason: '${lane.name} took $m, which a feeling object can be drawn on');
+      }
       // a lane's rows are distinct within it, which is what the coprime stride is for
       final seen = <String>{};
       for (var r = 0; r < lane.span; r++) {

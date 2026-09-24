@@ -126,7 +126,8 @@ String? tearFor(Event e, MaterialLibrary lib,
 /// 47 masks and `12_search` draws 41 pieces into one frame, so there is not room to give every
 /// lane in the app a window of its own.
 class TearLane {
-  const TearLane(this.name, this.base, this.span, {this.wraps = true, this.phase = 0});
+  const TearLane(this.name, this.base, this.span,
+      {this.wraps = true, this.phase = 0, this.spare = false});
 
   final String name;
 
@@ -159,6 +160,11 @@ class TearLane {
 
   /// Where in its window a list's row 0 falls. Zero for every lane but the thread's; see there.
   final int phase;
+
+  /// Whether this lane walks the spare masks rather than the writable pool; see
+  /// [TearLanes.spare]. Its rows are then indices into `MaterialLibrary.spareTears`, which no
+  /// other lane touches, so nothing in the writable pool's row budget is spent on it.
+  final bool spare;
 
   int rowAt(int row) {
     assert(wraps || (row >= 0 && row < span),
@@ -273,9 +279,21 @@ class TearLanes {
   /// that draws no mask at all, because [RegionPad] passes `torn: false`.
   static const chrome = TearLane('chrome', 41, 6, wraps: false);
 
+  /// **Furniture torn from the masks nothing else uses, which is how the chrome lane got its
+  /// seventh row without taking one from anybody.** The writable pool's row budget is exactly
+  /// full (0-27, 28-40, 41-46), and `notice` and `leaf` shared chrome row 3 on a judgement that
+  /// the typing line is never up while a page is pushed over chat -- which a capture taken in the
+  /// second somebody typed would have broken. Nine masks were outside every pool, their renders
+  /// baked and unused; `MaterialLibrary.spareTears` is the ones that are not also scraps, best
+  /// writing area first, and a piece that carries one short line fits the first of them:
+  /// `tear_017` leaves 92% of the width and 53% of the height inside its safe insets.
+  ///
+  /// One row today, named in [SpareRows], and it does not wrap.
+  static const spare = TearLane('spare', 0, 1, wraps: false, spare: true);
+
   static const all = [
     thread, hits, moments, setup, panels, dates, todos, shelf, rituals, calendar,
-    margins, sections, headings, tabs, chrome,
+    margins, sections, headings, tabs, chrome, spare,
   ];
 }
 
@@ -299,22 +317,18 @@ class TearLanes {
 ///     0  partner    the shell's strip, above every region — on every screen, so nobody else's
 ///     1  composer   chat's composer          | theirs   the pulse's their-sheet
 ///     2  affordance the search affordance    | mine     the pulse's my-sheet
-///     3  notice     chat's typing line       | leaf     a pushed page's own sheet: search's
-///                                                       query, the viewer's caption
+///     3  leaf       a pushed page's own sheet: search's query, the viewer's caption
 ///     4  empty      the note an empty region leaves in place of its list
 ///     5  overlay    what comes up over a screen: a desk sheet, an ask, the way out of the viewer
 ///
-/// **[notice] and [leaf] are the one pairing here that is a judgement rather than a fact**, and it
-/// is written down so a successor can overturn it with a measurement rather than by reading it
-/// twice. Every other pair on a line above is impossible by construction: `Turning` keeps one
-/// region in the tree, so chat's chrome and the pulse's are never both drawn. The typing line
-/// belongs to chat and the leaf to a route pushed OVER chat, and a pushed route does not take its
-/// parent out of the tree — `14_media_viewer.surfaces.json` carries chat's composer and its search
-/// affordance behind the viewer, which is the proof that the parent is still drawn. What it does
-/// not carry, and neither does `12_search.surfaces.json`, is a typing strip: the line is drawn
-/// only while the other person is typing. So the pairing holds on every artifact in the set and
-/// would break on a capture taken in the second somebody typed. Six rows is one short of not
-/// having to choose, and the row budget above has nothing spare — see [TearLanes].
+/// **Chat's typing line is not here any more, and that was the one pairing that was a judgement
+/// rather than a fact.** It shared row 3 with [leaf] on the reasoning that the line is drawn only
+/// while the other person is typing, and no artifact had been taken in that second. But a pushed
+/// route does not take its parent out of the tree -- `14_media_viewer.surfaces.json` carries
+/// chat's composer behind the viewer -- so search opened while somebody typed would have drawn
+/// the query and the typing line on one mask. It is torn from [TearLanes.spare] now, as
+/// [SpareRows.notice], and every pair on a line above is impossible by construction: `Turning`
+/// keeps one region in the tree, so chat's chrome and the pulse's are never both drawn.
 class ChromeRows {
   /// The partner strip in the shell, above every region. It is the only piece of chrome that is
   /// on every screen, so it holds a row of its own and nothing else may take it.
@@ -332,9 +346,6 @@ class ChromeRows {
   /// The pulse's sheet for you. Never on a screen with the affordance.
   static const mine = 2;
 
-  /// The typing line under the thread. See the note above on why it shares with [leaf].
-  static const notice = 3;
-
   /// The sheet a pushed page puts up on its own account: what you typed into search, the words
   /// under a photograph in the viewer. A pushed page has at most one.
   static const leaf = 3;
@@ -350,6 +361,12 @@ class ChromeRows {
   static const overlay = 5;
 }
 
+/// The rows of [TearLanes.spare], named for the same reason [ChromeRows] are.
+class SpareRows {
+  /// Chat's typing line under the thread: `Noor is writing`, one line on a strip.
+  static const notice = 0;
+}
+
 /// **The one place the mask pool is indexed.** It was six: `tearFor` here, the walk copied into
 /// `Slip.build` and `Strip.build`, `stockForMood`'s neighbour in `desk.dart` keying off a hash of
 /// the mood, `pulse_region.dart`'s `(partner.index * 7 + 11)`, and `setup_region.dart`'s constant
@@ -359,6 +376,10 @@ class ChromeRows {
 /// is what keeps it at one.
 String? tearAt(MaterialLibrary? lib, {required TearLane lane, int row = 0, bool writable = true}) {
   if (lib == null) return null;
+  if (lane.spare) {
+    final spare = lib.spareTears;
+    return spare.isEmpty ? null : spare[lane.rowAt(row) % spare.length];
+  }
   final masks = writable ? lib.writableTears : lib.tearMasks;
   if (masks.isEmpty) return null;
   final n = masks.length;
