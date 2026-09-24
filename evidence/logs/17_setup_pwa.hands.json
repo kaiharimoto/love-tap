@@ -1,10 +1,10 @@
 {
  "text": "evidence/17_setup_pwa.text.json",
  "calt": true,
- "runs_read": 10,
- "pairs": 89,
- "pairs_repeating": 40,
- "pairs_avoidable": 32,
+ "runs_read": 13,
+ "pairs": 119,
+ "pairs_repeating": 52,
+ "pairs_avoidable": 40,
  "worst": [
   {
    "family": "TeoHand",
@@ -32,11 +32,35 @@
   },
   {
    "family": "TeoHand",
+   "char": "o",
+   "instances": 8,
+   "distinct": 5,
+   "avoidable": false,
+   "run": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 8,
+   "distinct": 5,
+   "avoidable": false,
+   "run": "an iPhone only offers this once the app is on the home scree"
+  },
+  {
+   "family": "TeoHand",
    "char": "t",
    "instances": 7,
    "distinct": 4,
    "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 6,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "an iPhone only offers this once the app is on the home scree"
   },
   {
    "family": "TeoHand",
@@ -96,6 +120,14 @@
   },
   {
    "family": "TeoHand",
+   "char": "h",
+   "instances": 5,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "an iPhone only offers this once the app is on the home scree"
+  },
+  {
+   "family": "TeoHand",
    "char": "n",
    "instances": 4,
    "distinct": 2,
@@ -117,6 +149,14 @@
    "distinct": 2,
    "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "h",
+   "instances": 3,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "say them out loud in the same room. they are only good once."
   },
   {
    "family": "TeoHand",
@@ -157,6 +197,22 @@
    "distinct": 5,
    "avoidable": false,
    "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 6,
+   "distinct": 5,
+   "avoidable": false,
+   "run": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "family": "TeoHand",
+   "char": "o",
+   "instances": 6,
+   "distinct": 5,
+   "avoidable": false,
+   "run": "an iPhone only offers this once the app is on the home scree"
   },
   {
    "family": "TeoHand",
@@ -256,6 +312,22 @@
   },
   {
    "family": "TeoHand",
+   "char": "t",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "an iPhone only offers this once the app is on the home scree"
+  },
+  {
+   "family": "TeoHand",
    "char": "w",
    "instances": 3,
    "distinct": 2,
@@ -296,6 +368,30 @@
   },
   {
    "family": "TeoHand",
+   "char": "y",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "family": "TeoHand",
+   "char": "n",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "family": "TeoHand",
+   "char": "t",
+   "instances": 3,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "an iPhone only offers this once the app is on the home scree"
+  },
+  {
+   "family": "TeoHand",
    "char": "h",
    "instances": 2,
    "distinct": 1,
@@ -327,10 +423,10 @@
    "run": "the same private network as the other phone, and nothing els"
   }
  ],
- "glyphs": 457,
- "stalls": 60,
+ "glyphs": 596,
+ "stalls": 70,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "32 of 89 repeated letters inside one declared run take fewer outlines than they could (40 repeat one at all), and 0 of 457 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "40 of 119 repeated letters inside one declared run take fewer outlines than they could (52 repeat one at all), and 0 of 596 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }
