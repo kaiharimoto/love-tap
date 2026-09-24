@@ -1,19 +1,11 @@
 {
  "text": "evidence/13_messenger_states.text.json",
  "calt": true,
- "runs_read": 15,
- "pairs": 37,
- "pairs_repeating": 8,
+ "runs_read": 22,
+ "pairs": 51,
+ "pairs_repeating": 6,
  "pairs_avoidable": 6,
  "worst": [
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 7,
-   "distinct": 5,
-   "avoidable": false,
-   "run": "It was the good end. I left you the better one, which is a d"
-  },
   {
    "family": "TeoHand",
    "char": "t",
@@ -25,10 +17,10 @@
   {
    "family": "TeoHand",
    "char": "t",
-   "instances": 6,
-   "distinct": 5,
-   "avoidable": false,
-   "run": "It was the good end. I left you the better one, which is a d"
+   "instances": 4,
+   "distinct": 2,
+   "avoidable": true,
+   "run": "the other phone couldn't read it."
   },
   {
    "family": "NoorHand",
@@ -40,11 +32,11 @@
   },
   {
    "family": "TeoHand",
-   "char": "d",
+   "char": "e",
    "instances": 3,
    "distinct": 2,
    "avoidable": true,
-   "run": "It was the good end. I left you the better one, which is a d"
+   "run": "sending you the roster"
   },
   {
    "family": "NoorHand",
@@ -56,25 +48,17 @@
   },
   {
    "family": "TeoHand",
-   "char": "n",
+   "char": "t",
    "instances": 2,
    "distinct": 1,
    "avoidable": true,
-   "run": "noor \u00b7 travelling"
-  },
-  {
-   "family": "TeoHand",
-   "char": "I",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "It was the good end. I left you the better one, which is a d"
+   "run": "and the bread, if there is any"
   }
  ],
- "glyphs": 261,
+ "glyphs": 348,
  "stalls": 22,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "6 of 37 repeated letters inside one declared run take fewer outlines than they could (8 repeat one at all), and 0 of 261 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 51 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 348 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

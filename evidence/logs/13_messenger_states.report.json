@@ -1,41 +1,41 @@
 {
  "region": 1,
  "visible": [
-  "01M1M3AY8G83A3FBSRB1Y7W78Q",
-  "01M1M3F41R2APQC59QKBMZK4XF",
-  "01M1M3Y4GR5ZE8WDQ00S3NX0KF",
   "01M1M4GW48FEW3M67XKAZT5051",
   "01M1M4ZQQ0H0PPVTKMMQEE268D",
   "01M1M59VY0YA13H9M86HTA6XNP",
-  "01M1MCJ1M02CDNKZD17AYTKFKH"
+  "01M1MCJ1M02CDNKZD17AYTKFKH",
+  "01M1MCJ1M02CDNKZD17AYTKFKJ",
+  "01M1MCJ1M02CDNKZD17AYTKFKK",
+  "01M1MCJ1M02CDNKZD17AYTKFKM"
  ],
  "tears": {
-  "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
-  "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
-  "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
-  "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-  "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+  "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+  "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
   "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
-  "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020"
+  "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
+  "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043",
+  "01M1MCJ1M02CDNKZD17AYTKFKK": "tear_005",
+  "01M1MCJ1M02CDNKZD17AYTKFKM": "tear_026"
  },
  "stocks": {
-  "01M1M3AY8G83A3FBSRB1Y7W78Q": "receipt_01",
-  "01M1M3F41R2APQC59QKBMZK4XF": "lined_01",
-  "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "graph_02",
   "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
   "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
   "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
-  "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04"
+  "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
+  "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01",
+  "01M1MCJ1M02CDNKZD17AYTKFKK": "lined_01",
+  "01M1MCJ1M02CDNKZD17AYTKFKM": "legal_02"
  },
  "scroll": {
-  "first": 8381,
-  "last": 8388,
-  "of": 8388
+  "first": 8384,
+  "last": 8391,
+  "of": 8391
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 144,
+ "driven_ms": 192,
  "seed": 20260903,
- "events": 14064,
+ "events": 14067,
  "transport": "local",
  "link": "connecting",
  "me": "teo",
@@ -46,13 +46,7 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 240,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "blobs_pending": 0,
  "pictures_pending": 0,
