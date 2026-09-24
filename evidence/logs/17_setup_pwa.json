@@ -10,11 +10,11 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2905
+   "ms": 2906
   },
   {
    "do": "shot",
-   "ms": 2585
+   "ms": 2626
   },
   {
    "do": "report",
@@ -26,7 +26,7 @@
    "out": "evidence/17_setup_pwa.png",
    "clip": null,
    "text_runs": 24,
-   "surfaces": 10
+   "surfaces": 12
   }
  ],
  "reports": [
@@ -36,7 +36,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-24T10:46:04.965Z",
+   "now": "2026-09-24T11:39:50.091Z",
    "driven_ms": 0,
    "seed": 20260903,
    "events": 0,
@@ -60,13 +60,13 @@
  "blob_waits": [
   {
    "at": "17_setup_pwa.png",
-   "waited_ms": 10,
+   "waited_ms": 14,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 1286,
- "cold_ms": 1286,
+ "install_ms": 1333,
+ "cold_ms": 1333,
  "reopened": false,
  "events_at_open": 0,
  "problems": [],
