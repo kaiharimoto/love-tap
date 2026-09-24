@@ -157,6 +157,18 @@ void main() {
     final missing = active.where((f) => !drawn.contains(f.id)).map((f) => f.name).toList();
     expect(missing, isEmpty,
         reason: '${missing.length} of ${active.length} feelings are not on the open sheet: $missing');
+    // Absorbed from the-family-tabs-in-the-feeling-corner-are-stacked-sheets-too: the tabs take
+    // the width of their word (`hug`), so they fall on more than one row and together take no
+    // more than a quarter of the frame, rather than six full-width sheets stacked down it.
+    final tabs = [
+      for (final f in Family.values)
+        tester.getRect(find.byWidgetPredicate((w) => w is PaperPiece && w.id == 'family_${f.name}'))
+    ];
+    expect(tabs.map((r) => r.top.round()).toSet().length, greaterThan(1));
+    final tabArea = tabs.fold<double>(0, (a, r) => a + r.width * r.height);
+    expect(tabArea / (screen.width * screen.height), lessThanOrEqualTo(0.25),
+        reason: 'the family tabs take ${(100 * tabArea / (screen.width * screen.height)).round()}% '
+            'of the frame');
     for (final f in Family.values) {
       final tab = find.byWidgetPredicate((w) => w is Slip && w.id == 'family_${f.name}');
       expect(tab, findsOneWidget);
