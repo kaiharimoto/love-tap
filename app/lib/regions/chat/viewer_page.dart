@@ -24,6 +24,15 @@ class ViewerPage extends StatefulWidget {
   const ViewerPage({super.key, required this.item});
   final ThreadItem item;
 
+  /// What the words under a photograph are written on: a sticky note, the one stock in the
+  /// library with no printed rules. The caption named no stock, so it took whichever its id hashed
+  /// to, and the seeded photograph's hashed to `graph`: NoorHand at 54 px over blue-grey rules
+  /// that crossed every letter, ink core 2.94 against a floor of 4.5 while the same ink read 10.52
+  /// against the paper beside it (14_media_viewer, legibility.json, firing 56). Rows of rules
+  /// under the stocks' middles, as the std of the row means over the dusk renders: 4.7-6.3 on
+  /// every ruled stock, 0.8-2.9 on the sticky ones.
+  static const captionStock = 'sticky_yellow';
+
   static Future<void> open(BuildContext context, ThreadItem item) =>
       Navigator.of(context).push(PageRouteBuilder<void>(
         opaque: false,
@@ -171,6 +180,7 @@ class _ViewerPageState extends State<ViewerPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 26),
                 child: Slip(
                   id: 'viewer_${widget.item.id}',
+                  stock: ViewerPage.captionStock,
                   // The words under the photograph: this named no row at all, so it took the
                   // chrome lane's row 0 — the shell's partner strip — and `14_media_viewer` drew
                   // one mask three times.
