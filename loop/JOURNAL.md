@@ -7860,3 +7860,110 @@ work. Toolchain: `tools/apt-prereqs.sh`, distro ffmpeg per CONTINUE §5, `bootst
 - **The aggregate rulers are stale.** DIFF, MANIFEST, legibility, palette and flat_fill still
   describe firing 56's full run, and eleven stills have been re-captured since. The next OBSERVE's
   full `./capture.sh` is due.
+
+## Firing 62 — IMPLEMENT, cycle 3, 2026-09-24 12:54–15:15Z
+
+The container arrived 50 commits behind again (a checkout at firing 49, 50 ahead and 50 behind),
+the graft shape §0 describes, with no local commit. `git reset --hard origin/<branch>` was
+**allowed**; the dry run then read `Everything up-to-date`. Lease taken and pushed before any
+work. Toolchain: `tools/apt-prereqs.sh`, distro ffmpeg per CONTINUE §5, `bootstrap.sh
+--profile=web`; `toolchain/.done` held `playwright`. Assets packed with `--seed=year`. The suite
+went 286 → 294, green at every commit.
+
+### Rank 18 — the mid band on 10_first_run: skipped, still a design question
+
+- Its one open clause needs an AREA at mid lightness on a screen that is a plank and one sheet.
+  `what_would_unblock` names that as COLOR.md's and DIRECTION.md's decision, and firing 55 measured
+  that the 700 px mid band is 30-60% ink and edge blur. Nothing here changes either.
+
+### Rank 19 — feeling objects picked their scrap by a hash: closed
+
+- `scrapFor` takes a row and walks the scrap pool with a coprime stride. `FeelingObject` takes a
+  row, and nine call sites pass one:
+  - the pulse's traffic and moments' history pass their index;
+  - vocabulary grids pass `FeelingRegistry.rowOf`, a feeling's place among the drawn marks;
+  - a note's reactions take `row * 3 + k`.
+- **Test:** a new case pumps moments' `what we felt`. Eight scraps, eight masks.
+- **Re-break:** the hash put back puts `ugh.1` and three `goodnight`s on `tear_045`.
+- **Found by the new case and fixed with it:** a scrap on `tear_050`, which is the `what we felt`
+  tab's own mask. Scraps now also skip the tabs' window (rows 28-40), which leaves 19 of 27.
+
+### Rank 20 — the chrome lane was a row short: closed, and then a regression it caused, fixed
+
+- **Route (b).** `MaterialLibrary.spareTears` holds the masks that are neither writable nor
+  scraps. `TearLanes.spare` walks them. The typing line is `SpareRows.notice` on `tear_017`, and
+  `leaf` has chrome row 3 to itself.
+- **Test:** search over chat while somebody types.
+- **Re-break:** `typing-noor` and `search_query` both land on `tear_053`.
+- **The regression.** `tear_017` keeps 53% of its height inside its safe insets, where the old mask
+  kept 70%. The strip grew from 39 to 52 points and cut `try again` in half at the foot of the list
+  on 13_messenger_states, where the sidecar went clipped 0 → 1.
+- **Fixed:** padding 1+0, and the test now holds the strip at 40 points or under (re-broken at
+  51.18). Re-captured: clipped 0.
+
+### Rank 17 — torn tabs: tried, rejected by eye, not committed
+
+- The five tabs were torn from spare rows 1-5 and 02_chat was captured. The shadows landed.
+- But the spare masks tear 38-55% off one side. MOMENTS and SETTINGS became wedges, and the
+  SETTINGS stamp shrank to about 60%. That is legibility traded for material, so it was reverted.
+- The pad has no spare mask it could survive. Every route left needs a render.
+
+### Rank 21 — thinned inks at the permitted alpha: closed as a ratchet
+
+- Every ink is swept at 1.0 and at `kMinInkAlpha`, composited in sRGB over the dusk ruling.
+- It reproduces firing 47's table exactly: ballpoint 4.177, graphite 3.773, stamp and margin 3.542.
+- **Re-break:** sweeping at 1.0 names the entries as stale.
+- *Where* a thinned ink may be used is left for ADDRESS.
+
+### Rank 24 — their state as a table: closed
+
+- `regions/pulse/signal_marks.dart` draws the six passive signals in pencil in the margin:
+  - battery is a pencil worn to a stub, ringed in red under 15%;
+  - charging is a plug on a cord;
+  - vibrate is a squiggle, and silent is the squiggle struck through;
+  - walking is footprints and a tilted sheet, and riding is an arrow;
+  - cellular is a mast, and home is a house.
+- The ordinary value of each draws nothing. Declared signals stay words.
+- **The measurement moved to the test.** The item asked for an asset per signal in the sidecar,
+  and a pencil mark has no asset. The test anchors to the signal id on each mark instead.
+- **Re-break:** with `_Fact('battery')` back, the test names it.
+- **01_pulse:** runs 53 → 45, and exactly the four label-value pairs left.
+- The first 01_pulse attempt timed out in `waitForFunction`. It passed on one retry against the
+  same build.
+
+### Rank 25 — `passed on` on the glass: closed
+
+- `EventTypeSpec.said` is required, and settings reads it.
+- **05_settings_interrupt:** 70 runs before and after. `passed on` is now
+  `something handed on to you`.
+- **Re-break:** setting `said` to `passed on` fails the registry test.
+- Moments' and search's lists are curation. They are left for ADDRESS, not forced.
+
+### Rank 26 — the red pen: closed by route 3
+
+- Red is a marking ink and writes no word. `refused` and `try again` are in biro beside their red
+  marks, and COLOR.md §2 is amended to say so.
+- The sweeps still walk red and count it. A source test fails on any word set in red; re-broken,
+  it names `note.dart:509`.
+
+### Rank 27 — the re-rolled stocks: read, not closed
+
+- One instrument against the committed still. Below the floor went 5 → 2, and `try again` went
+  from unmeasured to 9.56.
+- **Left open:** 2 is above the item's ≤ 1. The population also moved: 27 → 39 runs, and the
+  declared set gained `noor writing…`.
+- The worst timestamp moved between two captures of the same code (3.85, then 2.60).
+
+### Next
+
+- IMPLEMENT continues at rank 28. That is the ambient presence surfaces, and its measurement needs
+  a PWA standing notification captured in WebKit. Then rank 29, then the harness ranks.
+- **Still waiting on ADDRESS:**
+  - rank 18's design question;
+  - rank 17, where every route left needs a render;
+  - rank 12's routes;
+  - rank 8;
+  - where a thinned ink may be used (rank 21's residue);
+  - whether `ping` and `passed_on` belong in a Moments view.
+- **The aggregate rulers are staler still.** Fifteen stills are now newer than firing 56's full
+  run, and a full `./capture.sh` is overdue.

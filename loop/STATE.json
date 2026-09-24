@@ -3,15 +3,9 @@
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
  "stage": "IMPLEMENT",
- "firing": 61,
+ "firing": 62,
  "stage_entered_at_firing": 59,
- "lease": {
-  "session_id": "session_01AsazgVJXLzuDHiYcYU8JRP",
-  "started_at": "2026-09-24T12:54:14Z",
-  "expires_at": "2026-09-24T16:54:14Z",
-  "stage": "IMPLEMENT",
-  "firing": 62
- },
+ "lease": null,
  "evidence_fresh_as_of": "firing 56: DIAGNOSE MAY SCORE ON WHAT IS COMMITTED. ONE FULL ./capture.sh 2026-09-23T16:05-17:45Z built from 0480996 (= firing 55's tip 856aed8 plus a STATE.json lease; no app change), 14 of 17, THEN 15_authored_feeling re-captured alone (./capture.sh --only=15_authored_feeling, 17:50-18:17Z, same code) and it passed: 15 OF 17, THE CONTAINER CEILING. `git diff --stat 0480996..HEAD -- app assets seed` is EMPTY (checked at firing 56's close), and so is the working tree against it. MANIFEST.json and frames.json are the single-scene run's: every artifact carries its own `written` time and `from_this_run`, so the 14 from the full run and the one clip from the retry are distinguishable. DIFF.json is the FULL RUN's, against a baseline seeded from firing 54's committed artifacts (15 changed, 2 absent) -- the retry's DIFF compared the capture with itself and was discarded.",
  "evidence_note": "firing 56. Missing: 09_two_devices.png and 16_setup_android.png (no /dev/kvm, measured reason in MANIFEST). `surfaces` booked missing on folds/unfold_thirds (median L_std 6.319 < 8.0), BYTE-IDENTICAL to firing 54's -- the fenced fold re-render, not a regression. 15_authored_feeling was refused in the full run on `pageerror: PlaywrightError -- at b4x (main.dart.js:6585)`; b4x is dart2js's Error.throwWithStackTrace, so a Dart error was rethrown with its message lost. It passed on one retry. Firings 51 and 54 had the same refusal on 13_messenger_states, which passed here. Three scenes, one intermittent unnamed throw: that is a using-it defect DIAGNOSE should file, not a flake. THE FULL RUN'S `handwriting` MISSING ENTRY WAS THE CONTAINER, NOT THE FONTS: uharfbuzz was not installed, hands_selftest.py died on the import, and capture.sh's `hands.py ... || true` left every *.hands.json as firing 54's. Installed, re-run by hand exactly as capture.sh runs it: hands_selftest ok, 0 failures over 202 runs, 105 avoidable; per-still hands logs regenerated from this capture's text sidecars. tools/apt-prereqs.sh now installs uharfbuzz. ffmpeg is distro 6.1.1, not the pinned binary. legibility.json and palette.json are the full run's.",
  "degradation": 0,
@@ -3430,6 +3424,15 @@
    "what": "Ranks 10-23 in order, where workable. CLOSED with measurements: 10 (strip only once the partner is heard from, no tab lit under setup; re-captured 10 and 17), 15 (made here counts this phone; and the registry no longer hands a feeling to whoever retired it), 16 (loose-leaf cut from right of its painted punch holes; re-captured 05 and 05_interrupt), 22 (cold_ms 1,343-1,980 on all 13 seeded scene logs), and the unranked 360-wide strip overflow (39 px -> 0). Rank 11: widget clause met, capture clause left open. Rank 12: cause refined -- a torn piece's writing was inset by a share of its height -- and that fixed library-wide (SlicedMasks.safeInsets): the setup list fits one sheet, TO DO comes on screen in Us; CALENDAR and RITUALS still below the fold, open for ADDRESS. Rank 13 clause (b) now holds. Rank 23 floored over loopback (1.94 s for the year) and blocked on no TS_AUTHKEY. Rank 17's blocker checked. A regression this firing caused -- rank 10 took the clover and the §7 accent off 10 and 17 -- found by palette.py and fixed and re-captured (0.0116, 0.0104). Filed: a tear used twice on 12_search.",
    "decision": "IMPLEMENT continues at rank 18 (10_first_run mid band). Rank 12's remaining routes and rank 8 need ADDRESS. A full capture is due.",
    "pushed": true
+  },
+  {
+   "firing": 62,
+   "stage": "IMPLEMENT",
+   "cycle": 3,
+   "at": "2026-09-24T15:10:49Z",
+   "what": "Ranks 18-27 in order where workable. CLOSED with measurements and re-breaks: 19 (scraps by row; 8 objects on 8 masks on moments' history), 20 (spare lane of the nine unused masks; typing line on tear_017) plus a regression it caused (typing strip 39->52 pt clipped `try again`; fixed, held <= 40 by test, re-captured clipped 0), 21 (min-alpha ratchet reproduces firing 47's table), 24 (six passive signals drawn in pencil in the margin; 01_pulse 53->45 runs, exactly the tabulated pairs), 25 (EventTypeSpec.said required; `passed on` -> `something handed on to you` on 05_settings_interrupt), 26 (route 3: red is a marking ink, COLOR.md section 2 amended). Rank 17 torn tabs tried, captured, rejected by eye (spare masks make wedges). Rank 18 skipped (design). Rank 27 read: 5 -> 2 below, not closed (<=1 asked; population moved). Suite 286 -> 294.",
+   "decision": "IMPLEMENT continues at rank 28 (ambient presence surfaces), then 29 and the harness ranks. ADDRESS owes decisions on ranks 18, 17, 12, 8 and two residues. A full capture is overdue.",
+   "pushed": true
   }
  ],
  "routine": {
@@ -3578,7 +3581,7 @@
    "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
   }
  },
- "stage_change_note": "Firing 61 worked ranks 10-23. CLOSED: 10, 15, 16, 22 and the unranked 360-wide strip overflow. Rank 11 waits on the next full capture's 08. Rank 12 half-fixed (the insets), open with routes for ADDRESS. Rank 23 blocked on a key, floored over loopback. NEXT for an IMPLEMENT firing: rank 18 (only 10_first_run's value_bands.mid 0.0268 < 0.04 is left), then 19, 20 (before 17), 21. Ranks 2 and 3 are still tagged harness for an ADDRESS re-band; rank 8 still needs ADDRESS. The fences are unchanged.",
+ "stage_change_note": "Firing 62 worked ranks 18-27. CLOSED: 19, 20, 21, 24, 25, 26. Rank 17's torn-tab route tried and rejected by eye (needs a render). Rank 18 needs a design decision. Rank 27 read at 2 below (asks <= 1). NEXT for an IMPLEMENT firing: rank 28 (ambient presence surfaces; the PWA standing notification in WebKit), then 29, then the harness ranks. Ranks 18, 17, 12 and 8 wait on ADDRESS. The aggregate rulers describe firing 56's full run and fifteen stills are newer: a full ./capture.sh is overdue.",
  "measured_at_firing_12": {
   "captured_at": "e7a3a5a",
   "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
