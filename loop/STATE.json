@@ -2411,8 +2411,8 @@
   },
   {
    "id": "the-receipt-stock-carries-its-printout-and-three-screens-write-on-it",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "filed_at_firing": 58,
    "filed_by": "ADDRESS, from evidence/critics/3/*.json",
    "owner_priority": "the-ui",
@@ -2422,7 +2422,9 @@
    "why": "material_truth BLOCKING, visual_design and coherence major: 'pixelated grey pseudo-text blocks -- a mosaic of mojibake show-through' on the 'the second one' card in 03_us, the '41s'/'38s' slips in 04_moments and the first result in 12_search. MEASURED AT FIRING 58: all four sightings are pieces declared on assets/paper/receipt_01.webp (03_us piece date_bridge_two_year; 04_moments pieces 01M1DXGH0RSSC9BYZCKPBZV201, 01M197GX48995E6B60FGY5VBE1, 01M03N9XV036Y22D6G753KCHHA; 12_search hit.01KZ5THC6GKTN6JK7V1X6SPKVM). The stock is a till roll whose faded thermal printout -- a header, seven to eleven item lines, a barcode -- is rendered as pixel-noise glyphs over its top half; its lower half is blank. It is not show-through: it is the receipt's own print, and the app writes over it. The app chooses it on purpose in three places: modules/dates/date_list.dart:114 (every planned date), regions/moments/moments_region.dart:396 (voice notes), material/assignment.dart:60 (the slip pool). The barcode half is very probably rank 37's comb.",
    "measurement": "ANCHORED to both sidecars: on every still, no surfaces.json entry on assets/paper/receipt_01 (day or dusk) lies under a piece that carries a declared text run of text.json, unless the entry's framing places only the unprinted tail of the source under that piece (framing read from the entry's src/rect, the printed band measured off the stock once and written into the test). POPULATION: the count of text-carrying pieces on 03_us, 04_moments and 12_search does not fall. App-side only: a stock choice or a framing. The receipt is NOT re-rendered -- day paper is unauthorised.",
    "rank_before_firing_58": null,
-   "rank": 6
+   "rank": null,
+   "closed_by": "firing 60",
+   "worked_at_firing_60": "CAUSE CONFIRMED off the render: receipt_01 is printed (10-row bands past 2.5x the blank paper's std 1.12) from row 130 to 720 of 1500, blank to row 1460 where the roll's edge begins. ROUTE: a framing, no re-render, no stock change. kBlankPaper declares receipt_01's blank rows (0.51-0.96); PaperPiece.blankFraming frames a printed stock by the piece's laid-out size so only those rows lie under it -- as little enlarged as stockScale allows, more for a piece too tall for the blank, slid along it by the piece's own patch. Dusk shares the table. The surfaces sidecar now declares every cover's `align`, which is what makes the rows under a piece readable off a capture. RULER tools/check/receipt_print.py. BEFORE (committed sidecars): 8 written-on receipt pieces (03_us 1, 04_moments 6, 12_search 1), none placeable. AFTER (one-scene WebKit re-captures): 03_us 1 written-on, rows 0.516-0.752; 04_moments 6 written-on, rows 0.574-0.925; 12_search 2 written-on, rows 0.51-0.83; 0 show the printout. POPULATION: text-carrying pieces 03_us 5 -> 5, 04_moments 9 -> 9, 12_search 20 -> 24. TEST app/test/a_slip_is_torn_from_the_blank_end_of_the_receipt_test.dart: four shapes x three patches, day and dusk, placed through the sidecar; framed like any other stock, the first slip shows rows 0.000-0.152 and fails. EYE: the '41s' slip in 04_moments shows plain paper where the mojibake was. The barcode half (rank 37's comb) is off every piece by the same framing."
   },
   {
    "id": "the-other-persons-hand-is-a-hairline-on-grid-paper-under-the-photograph",
@@ -2437,7 +2439,8 @@
    "why": "visual_design BLOCKING and the reason the row is capped at 17: the 14_media_viewer caption 'three layers. it leans...' is NoorHand at 54 px, ink ff1f2a44, ink_core 2.94 / median 2.63 against 4.5, over blue-grey graph rules that cross every letter. MEASURED AT FIRING 58: the caption sits on piece viewer_01KKP9AZEGXQ38N9BVB70W8KDR drawn from assets/paper/graph_02_dusk.webp -- a DUSK grid stock in a day viewer. The critic judged 13 of legibility.json's other 15 below-floor runs to be instrument; the second real one is dusk_pulse's header at 4.92 against 5.0 (the dusk screen, whose own item closed with that header as a marginal survivor).",
    "measurement": "ANCHORED to legibility.json by `says`: the run 'three layers. it leans...' on 14_media_viewer reads ink_core >= 4.5 and the piece under it (surfaces.json, piece viewer_<id>) is neither a graph stock nor a dusk stock in day light. POPULATION: 14_media_viewer total_runs unchanged at 2 (firing 56's sidecar). The route is a stock choice for the caption, or the hand's weight on a ruled ground -- not a font re-cut.",
    "rank_before_firing_58": null,
-   "rank": 7
+   "rank": 7,
+   "worked_at_firing_60": "CAUSE REFINED before the fix (3e): the viewer is lit at dusk ON PURPOSE (ViewerPage.open wraps it in Light(dusk), COLOR.md section 8), so a dusk stock there is the design, not the defect. The defect is the grid: the caption named no stock and viewer_01KKP9AZEGXQ38N9BVB70W8KDR hashes to graph; ink_core_ring 10.52 against ink_core 2.94 says the paper beside the letters is fine and the rules through them are not. FIX: the caption is written on ViewerPage.captionStock = sticky_yellow, the one family with no printed rules (row-mean std over the sheet's middle: 0.76-2.33 on every sticky_yellow variant day and dusk, 4.7-6.3 on every ruled stock). TEST app/test/the_words_under_a_photograph_are_on_unruled_paper_test.dart measures the renders; re-broken with the caption put back on graph it fails. The capture half of the measurement (ink_core >= 4.5 on 14_media_viewer, total_runs 2) is taken on the re-capture below."
   },
   {
    "id": "a-run-of-phone-states-stacks-as-full-width-strips-and-outweighs-the-conversation",
