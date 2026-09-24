@@ -551,7 +551,12 @@ class PaperPiece extends StatelessWidget {
                   downsample: kEdgeDownsample,
                   mask: tearAsset(tearId!))),
         _WithinTear(
-            safe: safe, padding: padding, hug: hug, child: child ?? const SizedBox.shrink()),
+            safe: safe,
+            padding: padding,
+            hug: hug,
+            tearId: tearId,
+            dpr: MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
+            child: child ?? const SizedBox.shrink()),
         ...overlays,
       ],
     );
@@ -603,32 +608,59 @@ class PaperPiece extends StatelessWidget {
 /// fraction of that height, so the two are solved together: with content height C and safe
 /// fractions fT and fB, the piece is C / (1 - fT - fB) tall and the writing starts fT down it.
 class _WithinTear extends SingleChildRenderObjectWidget {
-  const _WithinTear(
-      {required this.safe, required this.padding, required this.hug, required Widget child})
-      : super(child: child);
+  const _WithinTear({
+    required this.safe,
+    required this.padding,
+    required this.hug,
+    required this.tearId,
+    required this.dpr,
+    required Widget child,
+  }) : super(child: child);
 
   final List<double> safe;
   final EdgeInsets padding;
   final bool hug;
 
+  /// The mask the piece is cut by, or null for a whole sheet. With one, [safe] is carried through
+  /// the mask's own slice ([SlicedMasks.safeInsets]) rather than taken as a share of the piece.
+  final String? tearId;
+  final double dpr;
+
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderWithinTear(safe, padding, hug);
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderWithinTear(safe, padding, hug, tearId, dpr);
 
   @override
   void updateRenderObject(BuildContext context, _RenderWithinTear renderObject) {
     renderObject
       ..safe = safe
       ..padding = padding
-      ..hug = hug;
+      ..hug = hug
+      ..tearId = tearId
+      ..dpr = dpr;
   }
 }
 
 class _RenderWithinTear extends RenderShiftedBox {
-  _RenderWithinTear(this._safe, this._padding, this._hug) : super(null);
+  _RenderWithinTear(this._safe, this._padding, this._hug, this._tearId, this._dpr) : super(null);
 
   List<double> _safe;
   EdgeInsets _padding;
   bool _hug;
+  String? _tearId;
+  double _dpr;
+
+  set tearId(String? v) {
+    if (_tearId == v) return;
+    _tearId = v;
+    markNeedsLayout();
+  }
+
+  set dpr(double v) {
+    if (_dpr == v) return;
+    _dpr = v;
+    markNeedsLayout();
+  }
 
   set hug(bool v) {
     if (_hug == v) return;
@@ -650,8 +682,13 @@ class _RenderWithinTear extends RenderShiftedBox {
 
   @override
   void performLayout() {
-    final fL = _safe[0], fT = _safe[1], fR = _safe[2], fB = _safe[3];
     final child = this.child;
+    final tear = _tearId;
+    if (child != null && tear != null && MaterialLibrary.loaded) {
+      _layoutBySlice(child, tear);
+      return;
+    }
+    final fL = _safe[0], fT = _safe[1], fR = _safe[2], fB = _safe[3];
     if (child == null) {
       size = constraints.constrain(Size(constraints.hasBoundedWidth ? constraints.maxWidth : 0, 0));
       return;
@@ -682,6 +719,49 @@ class _RenderWithinTear extends RenderShiftedBox {
     (child.parentData! as BoxParentData).offset = Offset(
       width * fL + _padding.left,
       size.height * fT + _padding.top,
+    );
+  }
+
+  /// [performLayout] for a torn piece: the insets are where the mask's break actually falls on a
+  /// piece of this size ([SlicedMasks.safeInsets]), and since that depends on the size and the
+  /// size on the writing, the two are solved by a few rounds of fixed point, starting from the
+  /// fractional answer, which is never smaller.
+  void _layoutBySlice(RenderBox child, String tear) {
+    final bounded = constraints.hasBoundedWidth && !_hug;
+    final vertical = (1 - _safe[1] - _safe[3]).clamp(0.35, 1.0);
+    final horizontal = (1 - _safe[0] - _safe[2]).clamp(0.35, 1.0);
+    double width;
+    if (bounded) {
+      width = constraints.maxWidth;
+      child.layout(
+          BoxConstraints(
+              maxWidth: (width * horizontal - _padding.horizontal).clamp(24.0, width).toDouble()),
+          parentUsesSize: true);
+    } else {
+      child.layout(const BoxConstraints(), parentUsesSize: true);
+      width = (child.size.width + _padding.horizontal) / horizontal;
+    }
+    var height = (child.size.height + _padding.vertical) / vertical;
+    var ins = SlicedMasks.safeInsets(tear, _safe, Size(width, height), _dpr);
+    for (var round = 0; round < 4; round++) {
+      if (bounded) {
+        final inner = (width - ins[0] - ins[2] - _padding.horizontal).clamp(24.0, width).toDouble();
+        child.layout(BoxConstraints(maxWidth: inner), parentUsesSize: true);
+      } else {
+        width = child.size.width + _padding.horizontal + ins[0] + ins[2];
+      }
+      final next = child.size.height + _padding.vertical + ins[1] + ins[3];
+      final settled = (next - height).abs() < 0.5;
+      height = next;
+      ins = SlicedMasks.safeInsets(tear, _safe, Size(width, height), _dpr);
+      if (settled) break;
+    }
+    // whatever the rounds settled on, the writing and its insets fit inside the piece
+    height = math.max(height, child.size.height + _padding.vertical + ins[1] + ins[3]);
+    size = constraints.constrain(Size(width, height));
+    (child.parentData! as BoxParentData).offset = Offset(
+      ins[0] + _padding.left,
+      ins[1] + _padding.top,
     );
   }
 }
@@ -886,6 +966,69 @@ class SlicedMasks {
     final w = composed?[0].toDouble() ?? (size.width * dpr).round().clamp(1, mw).toDouble();
     final h = composed?[1].toDouble() ?? (size.height * dpr).round().clamp(1, mh * 4).toDouble();
     return (asset: asset, mw: mw, mh: mh, w: w, h: h, bands: slicesFor(asset, mw, mh, w, h));
+  }
+
+  /// Where [safe]'s four fractions of a mask come to on a piece [size] logical pixels big, in
+  /// logical pixels: `[left, top, right, bottom]`.
+  ///
+  /// `safe` is measured as fractions of the MASK, and was applied as fractions of the PIECE. The
+  /// two agree only while a piece is its mask's size. The mask is nine-sliced ([at]): its torn
+  /// bands keep the scale they were rendered at and only the solid middle stretches, so on a
+  /// piece taller than its mask the break sits a fixed depth in from the edge, while a quarter of
+  /// the piece's height grows with the piece. Solved together with the writing, that made a slip
+  /// C / (1 - fT - fB) tall -- up to 2.9 times its writing, with fT + fB reaching 0.58 -- and a
+  /// module with two dates on it filled the phone (`03_us`, firing 31's item, firing 61's cause).
+  ///
+  /// So a fraction is carried through the same slice the mask is: into the composed image by the
+  /// bands [slicesFor] gives for this box, and out of it by the stretch from composed pixels to
+  /// the piece. Below the mask's size that is the fraction it always was; above it, it is the
+  /// break's own depth, and it is never more than the share. [asset] is the mask the piece will be composed from at this size -- the
+  /// finer copy on a big sheet, whose bands are deeper in pixels, so text never lands in them.
+  static List<double> safeInsets(String tearId, List<double> safe, Size size, double dpr) {
+    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
+    final base = lib?.entry(lib.tears, tearId);
+    if (base == null || size.width <= 0 || size.height <= 0) {
+      return [safe[0] * size.width, safe[1] * size.height, safe[2] * size.width, safe[3] * size.height];
+    }
+    var asset = tearAsset(tearId);
+    var mw = base.w.toDouble(), mh = base.h.toDouble();
+    final hi = lib!.entry(lib.tearsHi, tearId);
+    if (hi != null && wantsFinerFor(mw, mh, size.width * dpr, size.height * dpr)) {
+      asset = finerTearAsset(tearId);
+      mw = hi.w.toDouble();
+      mh = hi.h.toDouble();
+    }
+    final w = (size.width * dpr).round().clamp(1, mw).toDouble();
+    final h = (size.height * dpr).round().clamp(1, mh * 4).toDouble();
+    final b = slicesFor(asset, mw, mh, w, h);
+    // one axis: mask length [src] sliced at bands [n] and [f] into [dst] composed pixels, then
+    // stretched to [out] logical; where a point [s] of the way in from the near edge lands
+    double near(double s, double src, double dst, double n, double f, double out) {
+      final y = s * src, fixed = src * (n + f);
+      final double d;
+      if (dst >= fixed) {
+        // At the mask's own scale, including past the band: the band is where the fibres reach,
+        // and past it the mask is solid paper, so the rest of the safe margin is a margin, not
+        // more break. Carried through the stretched middle it was magnified with it, five and
+        // six times on a tall slip, and put back most of what this function takes out.
+        d = math.min(y, dst / 2);
+      } else {
+        // too small for its bands: the canvas scales the fixed parts down together
+        final k = dst / fixed;
+        d = y <= src * n ? y * k : src * n * k;
+      }
+      // never deeper than the share it always was: under the mask's own size the slice scales
+      // its bands down together and would put the break further in than the fraction did, and
+      // what this changes is the tall piece, not every note on the screen
+      return math.min(d * out / dst, s * out);
+    }
+
+    return [
+      near(safe[0], mw, w, b[0], b[2], size.width),
+      near(safe[1], mh, h, b[1], b[3], size.height),
+      near(safe[2], mw, w, b[2], b[0], size.width),
+      near(safe[3], mh, h, b[3], b[1], size.height),
+    ];
   }
 
   static ui.Image at(String asset, ui.Image mask, Size size, double dpr) {

@@ -29,7 +29,11 @@ class LibraryEntry {
 class MaterialLibrary {
   MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds,
       this.foldSize, this.objectInk, this.fonts, this.sounds, this.shadowFrame,
-      [this.paperMargin = const {}]);
+      [this.paperMargin = const {}, this.tearsHi = const []]);
+
+  /// The finer copy of every mask, `assets/tears/hi/`, at the size it was rendered at: what a big
+  /// sheet is composed from ([FinerMask]), and so what its torn bands measure in pixels.
+  final List<LibraryEntry> tearsHi;
 
   /// stock id -> where its printed red margin rule is, `[left, right]` as fractions of its width.
   /// Only the stocks that carry one (legal, lined, spiral); `tools/pack_assets.py` finds it.
@@ -153,6 +157,7 @@ class MaterialLibrary {
       ((j['sound'] as List?) ?? const []).cast<String>(),
       ((j['relief'] as Map?)?['shadow_frame'] as num?)?.toDouble() ?? 1.0,
       paperMargin,
+      family('tears_hi'),
     );
   }
 
