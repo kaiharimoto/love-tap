@@ -600,7 +600,12 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                 id: 'typing-${scope.partner.name}',
                 row: SpareRows.notice,
                 lane: TearLanes.spare,
-                padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+                // Less padding than a strip usually takes, because its mask does. tear_017 keeps
+                // 53% of the height inside its safe insets where the chrome mask it had kept 70%,
+                // so at the old 4+4 the strip came out 52 points tall against 39 and took the
+                // difference off the thread above it: on 13_messenger_states that cut `try again`
+                // in half at the bottom of the list, and the sidecar counted it clipped.
+                padding: const EdgeInsets.fromLTRB(9, 1, 9, 0),
                 child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
               ),
             ),

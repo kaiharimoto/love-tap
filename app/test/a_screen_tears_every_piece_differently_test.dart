@@ -285,6 +285,12 @@ void main() {
             .any((s) => (s['piece'] as String? ?? '').startsWith('typing-')),
         isTrue,
         reason: 'the typing strip is not on the glass, so this case is not the one it names');
+    // And it is no taller than the strip it replaced. Its spare mask keeps less of its height
+    // inside the safe insets, and at the old padding the strip grew from 39 to 52 points and took
+    // them off the thread: on 13_messenger_states `try again` was cut in half at the list's foot.
+    final strip = find.byWidgetPredicate((w) => w is Strip && w.id.startsWith('typing-'));
+    expect(tester.getSize(strip).height, lessThanOrEqualTo(40),
+        reason: 'the typing strip is ${tester.getSize(strip).height} points tall');
   });
 
   // **Several feeling objects on one screen, each on a scrap, which is the case the hash lost.**
