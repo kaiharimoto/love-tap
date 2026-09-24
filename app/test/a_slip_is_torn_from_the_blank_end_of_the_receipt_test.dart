@@ -16,16 +16,17 @@ import 'package:desk/material/paper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// The rows of the render under [piece], as fractions: the ruler's arithmetic, in Dart.
-(double, double) _rowsUnder(Map<String, dynamic> e, List<num> piece) {
+/// The part of the render under [piece] on [axis] (0 across, 1 down), as fractions: the ruler's
+/// arithmetic, in Dart.
+(double, double) _spanUnder(Map<String, dynamic> e, List<num> piece, int axis) {
   final src = (e['src'] as List).cast<num>(), drawn = (e['drawn'] as List).cast<num>();
   final rect = (e['rect'] as List).cast<num>(), align = (e['align'] as List).cast<num>();
   final k = [drawn[0] / src[0], drawn[1] / src[1]].reduce((a, b) => a > b ? a : b);
-  final t = rect[3] / drawn[1];
-  final y0 = (src[1] - drawn[1] / k) * (align[1] + 1) / 2;
-  final top = y0 + (piece[1] - rect[1]) / t / k;
-  final bottom = y0 + (piece[1] + piece[3] - rect[1]) / t / k;
-  return (top / src[1], bottom / src[1]);
+  final t = rect[2 + axis] / drawn[axis];
+  final o = (src[axis] - drawn[axis] / k) * (align[axis] + 1) / 2;
+  final lo = o + (piece[axis] - rect[axis]) / t / k;
+  final hi = o + (piece[axis] + piece[2 + axis] - rect[axis]) / t / k;
+  return (lo / src[axis], hi / src[axis]);
 }
 
 void main() {
@@ -43,12 +44,19 @@ void main() {
       await MaskCache.load(tearAsset(tear));
       await MaskCache.load(tearAsset('${tear}_edge'));
     });
-    final blank = kBlankPaper['receipt_01']!;
 
     // a voice-note slip, a planned date, a square and a tall one; three patches of each
     const shapes = [Size(340, 90), Size(380, 216), Size(220, 220), Size(150, 420)];
     const patches = [Alignment(-1, -1), Alignment(0.3, 0), Alignment(1, 1)];
-    for (final stock in ['receipt_01', 'receipt_01_dusk']) {
+    // the receipt, and the sticky note the caption under a photograph is written on
+    for (final stock in [
+      'receipt_01',
+      'receipt_01_dusk',
+      'sticky_yellow_02',
+      'sticky_yellow_02_dusk',
+    ]) {
+      final (_, _, left, top0, right, bottom0) =
+          kBlankPaper[stock.replaceFirst(RegExp(r'_dusk$'), '')]!;
       for (final shape in shapes) {
         await tester.pumpWidget(
           MaterialApp(
@@ -84,8 +92,8 @@ void main() {
         for (var i = 0; i < patches.length; i++) {
           final mine = surfaces.where((s) => s['piece'] == 'slip$i').toList();
           final paper = mine.firstWhere(
-            (s) => '${s['asset']}'.contains('paper/receipt_01'),
-            orElse: () => fail('slip$i declared no receipt stock: $mine'),
+            (s) => '${s['asset']}'.contains('paper/$stock'),
+            orElse: () => fail('slip$i declared no $stock: $mine'),
           );
           final mask = mine.firstWhere(
             (s) => s['fit'] == 'mask',
@@ -98,24 +106,36 @@ void main() {
                 'the stock does not declare where its cover is aligned, so nobody can say '
                 'which rows of it are under the piece',
           );
-          final (top, bottom) = _rowsUnder(paper, (mask['rect'] as List).cast<num>());
+          final piece = (mask['rect'] as List).cast<num>();
+          final (top, bottom) = _spanUnder(paper, piece, 1);
+          final (l, r) = _spanUnder(paper, piece, 0);
           // ignore: avoid_print
           print(
             '$stock ${shape.width.toInt()}x${shape.height.toInt()} patch ${patches[i]}: '
             'rows ${top.toStringAsFixed(3)}-${bottom.toStringAsFixed(3)}, '
-            'scale ${paper['scale']}',
+            'columns ${l.toStringAsFixed(3)}-${r.toStringAsFixed(3)}',
           );
           expect(
             top,
-            greaterThanOrEqualTo(blank.$3 - 0.005),
+            greaterThanOrEqualTo(top0 - 0.005),
             reason:
-                'a ${shape.width.toInt()}x${shape.height.toInt()} slip shows the receipt '
-                'from row ${top.toStringAsFixed(3)}, and its print runs to 0.48',
+                'a ${shape.width.toInt()}x${shape.height.toInt()} slip shows $stock from row '
+                '${top.toStringAsFixed(3)}, and its blank paper starts at $top0',
           );
           expect(
             bottom,
-            lessThanOrEqualTo(blank.$4 + 0.005),
-            reason: 'the slip runs past the end of the roll',
+            lessThanOrEqualTo(bottom0 + 0.005),
+            reason: 'the slip runs past the bottom of $stock\'s paper',
+          );
+          expect(
+            l,
+            greaterThanOrEqualTo(left - 0.005),
+            reason: 'the slip shows what is left of $stock\'s paper, from ${l.toStringAsFixed(3)}',
+          );
+          expect(
+            r,
+            lessThanOrEqualTo(right + 0.005),
+            reason: 'the slip shows what is right of $stock\'s paper, to ${r.toStringAsFixed(3)}',
           );
         }
       }
