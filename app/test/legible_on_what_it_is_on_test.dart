@@ -58,6 +58,8 @@ import 'package:desk/material/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'no_word_is_written_in_a_faded_ink_test.dart' show kMinInkAlpha;
+
 /// WCAG relative luminance, and the ratio between two of them.
 double _lum(Color c) {
   double channel(double v) => v <= 0.03928 ? v / 12.92 : math.pow((v + 0.055) / 1.055, 2.4) as double;
@@ -404,6 +406,19 @@ const _knownBelowFloorAtDusk = <String, _KnownBelowFloor>{
   'red': _KnownBelowFloor(2.83, 0.1086, 'spiral_04_dusk ruling at Y 0.3963'),
 };
 
+/// The (ink, alpha) pairs below the dusk body floor when composited at the faintest alpha
+/// docs/COLOR.md §6 permits, on the darkest printed ruling, with what each reads. Measured at
+/// firing 62 against spiral_04_dusk's ruling at Y 0.3963. It may only shrink.
+const _knownBelowFloorAtMinAlpha = <String, double>{
+  'ballpoint at 0.80': 4.177,
+  'graphite at 0.80': 3.773,
+  'stamp at 0.80': 3.542,
+  'margin at 0.80': 3.542,
+  // red is below the floor at full strength too, and _knownBelowFloorAtDusk holds that
+  'red at 1.00': 2.828,
+  'red at 0.80': 2.395,
+};
+
 /// Read once, so a missing or malformed report fails loudly rather than skipping the test.
 Map<String, dynamic> _duskGround() {
   // The test runs with `app/` as its working directory.
@@ -487,6 +502,69 @@ void _theDarkestGroundThatShips() {
             '${below.entries.map((e) => '${e.key} at ${e.value.toStringAsFixed(3)}:1').join(', ')}'
             '. docs/COLOR.md §2 derives the ink ceiling from exactly this stock, so an ink that '
             'misses here is an ink the law does not actually permit.');
+  });
+
+  // **docs/COLOR.md §6 lets a word's ink composite at alpha 0.80 and §2 derives every ink to clear
+  // the dusk floor at FULL strength, and the two were never multiplied together.** This is the
+  // same sweep at the minimum alpha the law permits (`kMinInkAlpha`, which
+  // `no_word_is_written_in_a_faded_ink_test` enforces), composited the way Flutter composites an
+  // ordinary surface -- in sRGB, per channel, over the grey of the darkest printed rule. Firing
+  // 47 checked the compositing space against a run on the glass: `week one` in crops/dusk_pulse
+  // is ballpoint at 0.851 and its measured ink core, Y 0.0481, is on the sRGB side (0.0536)
+  // rather than the linear one (0.031).
+  //
+  // It is a ratchet and not a floor, because what closes it is a rule about WHERE a thinned ink
+  // may be used, which is a design decision. Raising kMinInkAlpha to 1.0 would close it by
+  // forbidding every thinned ink; deriving the inks at 0.80 takes `stamp` below Y 0, which is no
+  // ink. So the pairs below the floor are written down with what they read, a new one fails, and
+  // one that clears has to be taken out. Re-break by sweeping at alpha 1.0 instead: every entry
+  // below then clears and the test names each one as stale.
+  test('every ink at the faintest alpha the law permits, on the darkest line a word is written on',
+      () {
+    final report = _duskGround();
+    final written = report['written_ground'] as Map<String, dynamic>;
+    final stock = written['stock'] as String;
+    final groundY = (written['y'] as num).toDouble();
+    // the grey whose luminance is the ground's, in sRGB, which is where the blend happens
+    final g = groundY <= 0.0031308 ? groundY * 12.92 : 1.055 * math.pow(groundY, 1 / 2.4) - 0.055;
+    final ground = Color.from(alpha: 1, red: g, green: g, blue: g);
+    const alpha = kMinInkAlpha / 255;
+
+    var walked = 0;
+    final below = <String, double>{};
+    for (final e in _inks.entries) {
+      for (final a in const [1.0, alpha]) {
+        walked++;
+        final c = e.value;
+        final over = Color.from(
+          alpha: 1,
+          red: a * c.r + (1 - a) * ground.r,
+          green: a * c.g + (1 - a) * ground.g,
+          blue: a * c.b + (1 - a) * ground.b,
+        );
+        final r = contrast(over, ground);
+        if (r < _duskBody) below['${e.key} at ${a.toStringAsFixed(2)}'] = r;
+      }
+    }
+    // the population clause: every ink at both strengths, so the list cannot shrink by an ink
+    // leaving the sweep
+    expect(walked, 2 * _inks.length, reason: 'the sweep walked $walked (ink, alpha) pairs');
+    expect(_inks.length, greaterThanOrEqualTo(6), reason: 'an ink left the table');
+
+    final unexpected = below.keys.where((k) => !_knownBelowFloorAtMinAlpha.containsKey(k)).toList()
+      ..sort();
+    expect(unexpected, isEmpty,
+        reason: 'these (ink, alpha) pairs are below $_duskBody:1 on $stock at Y $groundY and are '
+            'not written down: ${unexpected.map((k) => '$k ${below[k]!.toStringAsFixed(3)}:1').join(', ')}');
+    for (final e in _knownBelowFloorAtMinAlpha.entries) {
+      final r = below[e.key];
+      expect(r, isNotNull,
+          reason: '${e.key} clears $_duskBody:1 on $stock now -- take it out of '
+              '_knownBelowFloorAtMinAlpha, because the list may only shrink');
+      expect(r!, closeTo(e.value, 0.02),
+          reason: '${e.key} is written down at ${e.value}:1 and reads ${r.toStringAsFixed(3)}:1 '
+              'on $stock at Y $groundY. Re-measure it and say in the commit which ground moved.');
+    }
   });
 
   test('the law quotes a stock that is on disk', () {
