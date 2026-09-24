@@ -38,6 +38,7 @@ class SearchSpec {
 class EventTypeSpec {
   const EventTypeSpec({
     required this.id,
+    required this.said,
     required this.required,
     required this.optional,
     required this.notify,
@@ -49,6 +50,17 @@ class EventTypeSpec {
   });
 
   final String id;
+
+  /// What this kind of event is, said the way one of the two of them would say it: `a picture`,
+  /// `their voice`, `a day that matters`. The id is for the log; this is what reaches the glass
+  /// wherever a kind of event is named to a person -- the interrupt matrix in settings first.
+  ///
+  /// It is REQUIRED, and it lives here rather than in a switch next to the screen that shows it,
+  /// because that switch had eighteen types to know about and knew seventeen: `passed_on` fell
+  /// through to `type.replaceAll('_', ' ')` and `05_settings_interrupt` carried the run `passed
+  /// on`, a registry id with its underscore swapped for a space. A type cannot be added now
+  /// without saying what it is.
+  final String said;
 
   /// Required payload keys.
   final List<String> required;
@@ -85,6 +97,8 @@ class EventTypeSpec {
 const List<EventTypeSpec> kEventTypes = [
   EventTypeSpec(
     id: 'message',
+
+    said: 'something written',
     required: ['text'],
     optional: ['reply_to', 'written_earlier'],
     notify: Notify.interruptive,
@@ -94,6 +108,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'photo',
+
+    said: 'a picture',
     required: ['blob', 'w', 'h'],
     optional: ['caption', 'reply_to', 'mime'],
     notify: Notify.interruptive,
@@ -104,6 +120,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'video',
+
+    said: 'something to watch',
     required: ['blob', 'poster_blob', 'duration_ms', 'w', 'h'],
     optional: ['caption', 'mime'],
     notify: Notify.interruptive,
@@ -113,6 +131,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'voice_note',
+
+    said: 'their voice',
     required: ['blob', 'duration_ms', 'waveform'],
     optional: ['mime'],
     notify: Notify.interruptive,
@@ -122,6 +142,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'reaction',
+
+    said: 'an answer to something of yours',
     required: ['target', 'feeling_id'],
     optional: [],
     notify: Notify.quiet,
@@ -132,6 +154,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'message_edit',
+
+    said: 'a change to something already said',
     required: ['target', 'text'],
     optional: [],
     notify: Notify.none,
@@ -142,6 +166,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'message_delete',
+
+    said: 'something taken back',
     required: ['target'],
     optional: [],
     notify: Notify.none,
@@ -152,6 +178,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'read_marker',
+
+    said: 'them catching up',
     required: ['upto_seq'],
     optional: [],
     notify: Notify.none,
@@ -161,6 +189,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'feeling',
+
+    said: 'a feeling',
     required: ['feeling_id', 'intensity'],
     optional: ['hold_ms'],
     notify: Notify.interruptive,
@@ -169,6 +199,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'state_declared',
+
+    said: 'something they say about themselves',
     required: ['signal', 'value'],
     optional: [],
     notify: Notify.quiet,
@@ -177,6 +209,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'state_passive',
+
+    said: 'something their phone notices',
     required: ['signal', 'value'],
     optional: [],
     notify: Notify.quiet,
@@ -185,6 +219,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'date_event',
+
+    said: 'a date moving',
     required: ['date_id', 'action', 'title'],
     optional: ['when', 'place', 'verdict', 'note'],
     notify: Notify.quiet,
@@ -193,6 +229,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'todo_event',
+
+    said: 'the list moving',
     required: ['todo_id', 'action', 'text'],
     optional: ['assignee'],
     notify: Notify.quiet,
@@ -201,6 +239,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'milestone',
+
+    said: 'a day that matters',
     required: ['milestone_id', 'kind', 'title', 'date', 'yearly'],
     optional: [],
     notify: Notify.quiet,
@@ -209,6 +249,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'ritual_kept',
+
+    said: 'one of the things you keep',
     required: ['ritual_id', 'title', 'kept_at'],
     optional: ['note'],
     notify: Notify.none,
@@ -217,6 +259,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'passed_on',
+
+    said: 'something handed on to you',
     required: ['item_id', 'action', 'title', 'kind'],
     optional: ['note'],
     notify: Notify.quiet,
@@ -225,6 +269,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'ping',
+
+    said: 'a note set to arrive later',
     required: ['schedule_id', 'text', 'fires_at'],
     optional: ['feeling_id', 'repeat'],
     notify: Notify.interruptive,
@@ -233,6 +279,8 @@ const List<EventTypeSpec> kEventTypes = [
   ),
   EventTypeSpec(
     id: 'feeling_authored',
+
+    said: 'a feeling one of you made',
     required: ['feeling_id', 'name', 'family', 'colour', 'object_asset', 'haptic', 'sound', 'retired'],
     optional: [],
     notify: Notify.quiet,

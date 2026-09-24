@@ -82,29 +82,6 @@ class NotificationPrefs {
   }
 }
 
-/// What each kind of event is, said the way one of them would say it. The registry's ids are for
-/// the log; this list is a person deciding what may wake them up.
-String _said(String type) => switch (type) {
-      'message' => 'something written',
-      'photo' => 'a picture',
-      'video' => 'something to watch',
-      'voice_note' => 'their voice',
-      'reaction' => 'an answer to something of yours',
-      'message_edit' => 'a change to something already said',
-      'message_delete' => 'something taken back',
-      'read_marker' => 'them catching up',
-      'feeling' => 'a feeling',
-      'state_declared' => 'something they say about themselves',
-      'state_passive' => 'something their phone notices',
-      'date_event' => 'a date moving',
-      'todo_event' => 'the list moving',
-      'milestone' => 'a day that matters',
-      'ritual_kept' => 'one of the things you keep',
-      'ping' => 'a note set to arrive later',
-      'feeling_authored' => 'a feeling one of you made',
-      _ => type.replaceAll('_', ' '),
-    };
-
 class NotificationSettings extends StatelessWidget {
   const NotificationSettings({super.key, required this.prefs, required this.onChanged});
   final NotificationPrefs prefs;
@@ -153,7 +130,8 @@ class NotificationSettings extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(_said(t.id), style: Hands.margin(size: 14)),
+                    // what the kind is, in the registry's own words for it (EventTypeSpec.said)
+                    Text(t.said, style: Hands.margin(size: 14)),
                     const SizedBox(height: 3),
                     Wrap(
                       spacing: 18,

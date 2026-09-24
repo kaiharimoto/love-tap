@@ -21,6 +21,27 @@ void main() {
     }
   });
 
+  // `an-event-kind-reaches-the-glass-as-its-own-registry-id`: settings' interrupt matrix named each
+  // kind through a switch of its own that knew seventeen of eighteen, and `passed_on` reached
+  // 05_settings_interrupt as the run `passed on`. The phrase is a required field of the registry
+  // now, so this asserts what the field holds rather than that a switch has a case. Re-break by
+  // setting a type's `said` to its id with the underscore swapped for a space.
+  test('every event type is named to a person in words, not by its id', () {
+    expect(kEventTypes.length, greaterThanOrEqualTo(18), reason: 'a type left the registry');
+    final seen = <String, String>{};
+    for (final spec in kEventTypes) {
+      final said = spec.said.trim();
+      expect(said, isNotEmpty, reason: '${spec.id} says nothing');
+      expect(said.toLowerCase(), isNot(spec.id.replaceAll('_', ' ')),
+          reason: '${spec.id} is named by its own registry id');
+      expect(said.contains('_'), isFalse, reason: '${spec.id} is named "$said", which is an id');
+      expect(seen[said], isNull,
+          reason: '${spec.id} and ${seen[said]} are both "$said", so a person cannot tell them '
+              'apart in the interrupt matrix');
+      seen[said] = spec.id;
+    }
+  });
+
   test('every renderer is named by at least one event type', () {
     final named = {for (final s in kEventTypes) s.renderer};
     for (final id in kThreadRenderers.keys) {
