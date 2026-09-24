@@ -10,31 +10,31 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3266
+   "ms": 3375
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1706
   },
   {
    "do": "scrollTo",
-   "ms": 3704
+   "ms": 2453
   },
   {
    "do": "wait",
-   "ms": 1301
+   "ms": 1302
   },
   {
    "do": "stage",
-   "ms": 3039
+   "ms": 2906
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1604
   },
   {
    "do": "partnerTyping",
-   "ms": 1461
+   "ms": 1498
   },
   {
    "do": "wait",
@@ -42,19 +42,19 @@
   },
   {
    "do": "shot",
-   "ms": 4274
+   "ms": 3373
   },
   {
    "do": "report",
-   "ms": 731
+   "ms": 709
   }
  ],
  "shots": [
   {
    "out": "evidence/13_messenger_states.png",
    "clip": null,
-   "text_runs": 31,
-   "surfaces": 91
+   "text_runs": 32,
+   "surfaces": 92
   }
  ],
  "reports": [
@@ -89,7 +89,7 @@
    },
    "scroll": {
     "first": 8384,
-    "last": 8391,
+    "last": 8390,
     "of": 8391
    },
    "now": "2026-09-03T19:40:00.000Z",
@@ -121,8 +121,8 @@
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 9652,
- "cold_ms": 1640,
+ "install_ms": 9107,
+ "cold_ms": 1474,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

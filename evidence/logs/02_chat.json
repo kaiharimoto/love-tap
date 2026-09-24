@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3303
+   "ms": 3527
   },
   {
    "do": "wait",
@@ -18,19 +18,19 @@
   },
   {
    "do": "scrollTo",
-   "ms": 5356
+   "ms": 3879
   },
   {
    "do": "wait",
-   "ms": 1905
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 3851
+   "ms": 3503
   },
   {
    "do": "report",
-   "ms": 712
+   "ms": 711
   }
  ],
  "shots": [
@@ -112,13 +112,13 @@
  "blob_waits": [
   {
    "at": "02_chat.png",
-   "waited_ms": 12,
+   "waited_ms": 11,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 10757,
- "cold_ms": 1654,
+ "install_ms": 9571,
+ "cold_ms": 1827,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],
