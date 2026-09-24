@@ -155,6 +155,7 @@ class Note extends StatelessWidget {
     final folded = noteLiesFolded(item, me: scope.me, unreadFrom: unreadFrom);
 
     final piece = PaperPiece(
+      id: e.id,
       stockId: stock,
       tearId: tear,
       liftMm: lift,
@@ -220,11 +221,68 @@ class Note extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.fromLTRB(mine ? 40 : 14, 4, mine ? 14 : 40, 4),
           child: folded
-              ? FoldedNote(width: width, onOpened: onOpened, child: piece)
+              ? FoldedNote(
+                  width: width,
+                  onOpened: onOpened,
+                  resting: _restingFace(stock, tear, lift, tilt, width, lib),
+                  child: piece,
+                )
               : piece,
         ),
       ),
     );
+  }
+
+  /// The note lying folded in the thread, before anyone has touched it.
+  ///
+  /// The same sheet the writing is on -- its stock, its patch of that stock, its tear, its lift and
+  /// its tilt -- folded to a third, so what opens is visibly the thing that was lying there. What
+  /// is written stays inside: the outside of a folded note carries only when it came, in the
+  /// margin's pencil, because a sheet with nothing on it at all is the blank card this replaced,
+  /// and the time says nothing the reader has not been told by the note arriving. Its writing is
+  /// withheld on purpose: the read marker waits on this row until it is opened (see
+  /// [noteLiesFolded]), and a face that showed the words would make that wait a lie.
+  Widget _restingFace(
+      String stock, String? tear, double lift, double tilt, double width, MaterialLibrary? lib) {
+    final safe =
+        lib == null || tear == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear);
+    return PaperPiece(
+      id: item.event.id,
+      stockId: stock,
+      tearId: tear,
+      liftMm: lift,
+      tilt: tilt,
+      width: width,
+      stockAlignment: _patchOf(item.event),
+      stockScale: 1.15,
+      padding: const EdgeInsets.fromLTRB(14, 9, 14, 8),
+      safe: safe,
+      child: SizedBox(
+        width: double.infinity,
+        height: _foldedInside(width, safe, lib),
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: Opacity(
+            opacity: Pen.marginThinning,
+            child: Text(timeLabel(item.ts), style: Hands.margin(size: 12), maxLines: 1),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// How tall the inside of a folded note is, so the sheet lies at the proportions of the folded
+  /// sheet in the sequence it opens into -- `fold_size` in the library, measured off the frame by
+  /// tools/pack_assets.py (540 by 147 for unfold_thirds) -- and a touch does not change its shape
+  /// before it changes anything else. The piece adds its padding and its tear's safe margins
+  /// around what it is given, so those come off first.
+  static double _foldedInside(double width, List<double> safe, MaterialLibrary? lib) {
+    const fallback = 30.0;
+    final folded = lib?.foldSize['unfold_thirds'];
+    if (folded == null || folded.width == 0) return fallback;
+    final outer = width * folded.height / folded.width;
+    final inside = outer * (1 - safe[1] - safe[3]) - 17;
+    return inside < 18 ? 18 : inside;
   }
 
   /// Whether this row gets the pencil line under it: the time it was written, whether it was

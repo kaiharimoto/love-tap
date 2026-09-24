@@ -126,7 +126,7 @@ String? tearFor(Event e, MaterialLibrary lib,
 /// 47 masks and `12_search` draws 41 pieces into one frame, so there is not room to give every
 /// lane in the app a window of its own.
 class TearLane {
-  const TearLane(this.name, this.base, this.span, {this.wraps = true});
+  const TearLane(this.name, this.base, this.span, {this.wraps = true, this.phase = 0});
 
   final String name;
 
@@ -157,12 +157,15 @@ class TearLane {
   /// INSIDE the chrome lane to be chosen next to its call site. [ChromeRows] is the other half.
   final bool wraps;
 
+  /// Where in its window a list's row 0 falls. Zero for every lane but the thread's; see there.
+  final int phase;
+
   int rowAt(int row) {
     assert(wraps || (row >= 0 && row < span),
         'row $row is outside the $name lane (0..${span - 1}). A furniture lane has one row per '
         'named piece: give it a row in ChromeRows rather than letting the modulus fold it onto '
         'somebody else\'s.');
-    return base + (row.abs() % span);
+    return base + ((row.abs() + phase) % span);
   }
 
   @override
@@ -195,8 +198,21 @@ class TearLane {
 ///                                           rows are named in `ChromeRows`
 ///     0-9    panels                        settings' sheets, on a screen with no long list
 class TearLanes {
-  /// The chat thread's notes.
-  static const thread = TearLane('thread', 0, 14);
+  /// The chat thread's notes -- and its margin lines, which are rows of the same list.
+  ///
+  /// **One window for both, twenty-eight wide, because a row is either a note or a margin and
+  /// never both.** The thread had fourteen rows and the margins the fourteen after them, which
+  /// held only while an unread note of theirs drew no mask: firing 59 made the folded note a torn
+  /// sheet, and `02_chat` then showed fifteen torn thread rows, 8372 and 8386 fourteen apart and
+  /// both on `tear_001`. Indexing both kinds by the item's own position in one window of 28 means
+  /// no two rows closer than 28 apart can share a mask, whichever of the two each one is.
+  ///
+  /// The phase of fourteen keeps a note in an odd block of fourteen rows on the mask it had under
+  /// the old table, which includes the run `02_chat` is framed on (items 5195-5203 at the scene's
+  /// 0.62): the most-measured artifact in the build keeps its notes on the paper it was measured
+  /// on, and `the_hero_of_the_set_fits_eight_notes_test` keeps measuring what it was written
+  /// against rather than a new set of heights.
+  static const thread = TearLane('thread', 0, 28, phase: 14);
 
   /// The search results. Never on screen with the thread — the search page is its own page.
   static const hits = TearLane('hits', 0, 14);
@@ -226,7 +242,9 @@ class TearLanes {
   /// where a row goes, which [tearAt]'s own docstring says cannot work: with 47 masks and a dozen
   /// margins on screen two ids collide about a third of the time, and `02_chat` had nine repeats
   /// in one frame with three margins sharing one mask.
-  static const margins = TearLane('margins', 14, 14);
+  ///
+  /// They share [thread]'s window: see there.
+  static const margins = TearLane('margins', 0, 28, phase: 14);
 
   /// Us's section sheets: five sections on one scroller, each of them two sheets, so six rows.
   /// They took the section index straight into the pool alongside every other list on the screen.

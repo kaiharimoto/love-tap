@@ -284,10 +284,29 @@ class _FramePainter extends CustomPainter {
 /// This is the only place a fold sequence appears in the thread, and it is why the sequences exist:
 /// their notes arrive folded because that is what a note passed across a table is.
 class FoldedNote extends StatefulWidget {
-  const FoldedNote({super.key, required this.width, required this.child, this.onOpened, this.seq = 'unfold_thirds'});
+  const FoldedNote({
+    super.key,
+    required this.width,
+    required this.child,
+    required this.resting,
+    this.onOpened,
+    this.seq = 'unfold_thirds',
+  });
 
   final double width;
   final Widget child;
+
+  /// What lies in the thread until it is touched: the note's own sheet -- its stock, its tear, its
+  /// shadow -- folded to a third, with the writing inside it.
+  ///
+  /// It used to be frame zero of the sequence, and frame zero of the sequence is a square-cornered
+  /// cream slab with nothing on it: no tear, no stock, a flat uniform shadow, and no entry in the
+  /// surfaces sidecar because `_FramePainter` is not a piece of paper. Every unread note of theirs
+  /// looked like that for as long as it lay there, which in 13_messenger_states was for ever, and
+  /// five critics at cycle 3 found it and called it the brief's anti-goal by name. How a note lies
+  /// in the thread is this widget's choice and not a property of the render; the sequence starts
+  /// when it is touched, and the cut from this face to its first frame happens under a finger.
+  final Widget resting;
 
   /// Called once the sequence has finished and the writing is on the screen -- not when the
   /// person taps. The thread uses it to let the read marker past this row, and a receipt may
@@ -355,8 +374,7 @@ class _FoldedNoteState extends State<FoldedNote> {
         // by any frame identical to the one before it -- so under capture this held twelve frames
         // of the sheet and put them in 06_unfolding.mp4. It was also the app behaving one way for
         // the camera and another way in a hand, which is the thing the artifacts exist to rule
-        // out. The first frame of the sequence IS the note lying folded; the beat, if it is ever
-        // wanted, belongs in the render and not in a timer.
+        // out. The beat, if it is ever wanted, belongs in the render and not in a timer.
         onOpen: () {
           setState(() => _open = true);
           widget.onOpened?.call();
@@ -367,7 +385,7 @@ class _FoldedNoteState extends State<FoldedNote> {
       onTap: () => setState(() => _opening = true),
       child: Settling(
         builder: (_, t, child) => Transform.scale(scale: 0.98 + 0.02 * t, child: child),
-        child: Unfolding(seq: widget.seq, width: widget.width, autoplay: false),
+        child: widget.resting,
       ),
     );
   }
