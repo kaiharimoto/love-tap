@@ -293,10 +293,10 @@
    "points": 1,
    "why": "RE-TAGGED using-it AT FIRING 31, ON THE MEASUREMENT WORKER_PROMPT 3c ASKED FOR. This item was demoted at firing 20 as a seeded-scene artifact with an explicit caveat: establish whether the cost is O(n) in the event log before dismissing it again, because if it is, it will bite two real people. IT CAME BACK. Firing 30 measured cold_ms at 10884-12327 ms on the thirteen scenes served the seeded build and 1259-1321 ms on the three served the fresh build -- same commit, same browser, one flag apart, against 14,067 events. That is 8.7x, about 0.7 ms per event, and it scales with the log rather than with the seed's existence. The owner deprioritised PRODUCING demo content; they did not deprioritise a load-scaling defect that producing it revealed. A person opening this app after a year of using it waits twelve seconds, and nothing about that is demo data.\nHONEST LIMIT, carried from firing 30: the seeded build also ships the seed's media, so this pair cannot separate spine-open cost from bundle weight. A third point at half a seed is the first thing to measure and it is cheap.",
    "measurement": "RE-EXPRESSED AT FIRING 43. THE `THIRD POINT AT HALF A SEED` PREAMBLE IS STRUCK -- firing 40 discharged it by a better route than the one this item asked for, a control rather than an interpolation: the same build and the same 85.6 MB bundle loaded three times in ONE browser context, 8,686 ms then 1,301 then 1,101 against a fresh context's 8,306, all at 14,061 events. Bundle weight contributes nothing measurable and the 8.7x is the seed import, paid once.\nTHE CLAUSE: cold_ms in every evidence/logs/<scene>.json for a seeded scene is <= 3,000, with install_ms and events_at_open written beside it in the same log -- events_at_open must still read the count the host declares, 14,061 today, so the number cannot be met by shrinking the seed. Firing 42's one measured leg has 01_pulse at install_ms 12,708 / cold_ms 1,698 / 14,061 events; the other thirteen seeded scenes are unread.\nANCHORED (WORKER_PROMPT 3d): the event count is the one the app declares at open and writes into its own scene log; the scenes are the ones evidence/MANIFEST.json names. No absolute coordinate, no frame ordinal.\nRE-BREAK: move cold_ms back onto the first open and watch app/test/a_year_is_imported_once_and_opened_ever_after_test.dart go red naming the install; firing 42 did this and watched it fail.",
-   "state": "open",
-   "attempts": 1,
-   "closed_by": null,
-   "rank": 22,
+   "state": "closed",
+   "attempts": 2,
+   "closed_by": "firing 61, on a reading",
+   "rank": null,
    "owner_priority": "using-it",
    "owner_priority_before_firing_31": "deprioritised-demo-content",
    "firing_notes": {
@@ -312,7 +312,8 @@
    "rank_before_firing_43": 10,
    "rank_before_firing_50": 17,
    "rank_before_firing_53": 20,
-   "rank_before_firing_58": 13
+   "rank_before_firing_58": 13,
+   "worked_at_firing_61": "THE CLAUSE IS MET, READ OFF THE COMMITTED SCENE LOGS: cold_ms <= 3,000 on every seeded scene, with install_ms and events_at_open written beside it, events_at_open 14,061 on all thirteen (the host's declared count, so the seed was not shrunk). cold_ms: 01 1543, 02 1654, 03 1660, 04 1343, 05 1598, 06 1603, 07 1524, 11 1980, 12 1433, 13 1640, 14 1501, 15 1966, dusk_pulse 1880; install_ms 8,142-16,828 is the one-time seed import, which firing 40 separated and firing 42 moved off the open. Logs dated 2026-09-23..24 (firings 56-61). 05_settings_interrupt is a step of the 05_settings scene and shares its log. The seedless scenes (08, 10, 17) read 923-1286 with 0 events. RE-BREAK: a_year_is_imported_once_and_opened_ever_after_test is in the green suite; firing 42 re-broke it."
   },
   {
    "id": "unselected-is-drawn-as-alpha-and-that-is-two-thirds-of-the-vocabulary",
@@ -2049,7 +2050,7 @@
    "why": "Firing 40 settled that opening a year costs what opening nothing costs and that the twelve seconds is the seed IMPORT, paid once. It named the one scenario where a year really is laid down on a device a person is holding, and it is not seed import: a SECOND PHONE pulling a year down over the tailnet after pairing. That is sync, it has never been timed, and it is the only remaining reading of `twelve seconds` that a person could actually wait through. evidence/coldstart.json times four events across two nodes; nothing times fourteen thousand.",
    "measurement": "A tailnet leg that pairs an empty spine against the seeded one and records, in evidence/coldstart.json or beside it, the wall time to reach the same event count the host declares, with both counts written down. No floor is proposed until the first number exists -- this item is to MEASURE it, and a floor belongs to whatever it turns out to be.",
    "state": "open",
-   "attempts": 0,
+   "attempts": 1,
    "closed_by": null,
    "rank": 23,
    "filed_at_firing": 42,
@@ -2057,7 +2058,8 @@
    "rank_before_firing_43": null,
    "rank_before_firing_50": 18,
    "rank_before_firing_53": 21,
-   "rank_before_firing_58": 14
+   "rank_before_firing_58": 14,
+   "worked_at_firing_61": "NOT MEASURABLE HERE, AND WHY: TS_AUTHKEY is absent from this container and toolchain/ts/{a,b} are empty (fresh container, AUTHKEY_STATUS 'pending'), so there are no nodes to pair; coldstart_test.dart books 'pending' in that case. WHAT WAS MEASURED INSTEAD, as a floor and a model, not as the item's number: the same protocol over loopback HTTP (LocalTransport, native sqlite on the VM), an empty client paired to a host holding the seeded year: all 14,061 events in 1,944 ms over 29 rounds of kMaxPullBatch 500, and the 197 blobs fetched within the same window (blobs_fetched 197). So the tailnet's cost is per REQUEST, and there are ~226 of them: 29 pulls plus one GET per blob, sequentially (SyncEngine._fetchMissingBlobs). At a direct-path RTT of ~5 ms that adds ~1 s; through a DERP relay at ~50 ms, ~11 s, most of it the blobs one at a time. And on the PWA the store, not the wire, dominates: the browser took 8.3 s to import the same 14,061 events as a seed (firing 40). Two routes for whoever holds a key: time the leg on the tailnet as written; and, independent of the key, fetch blobs concurrently or batch them, which is the one part of the ~226 that does not have to be serial. GOTCHA for the next firing: TestWidgetsFlutterBinding stubs HttpClient to answer 400, which reads as `no pairing open 400`; a transport timing must run without the binding and read the seed through a disk AssetBundle."
   },
   {
    "id": "the-texture-budget-does-not-look-at-the-largest-texture-family",
@@ -2548,7 +2550,8 @@
    "why": "material_truth major, anti_goal minor: the main pad is a hard-edged rectangle with no deckle and no contact shadow on the wood, with a one-step jog in its top edge; the five tabs are straight-edged rectangles with no shadow. Stray one-pixel light horizontal lines cross the desk in crops/02_chat_300_edge.png (probably pad rules leaking past the pad).",
    "measurement": "ANCHORED to surfaces.json: piece pad.<region> and every tab piece carry a tear or cut mask entry and a `fit: contact` shadow entry on every room still; population: tab count 5 on every room still. The desk hairlines: no row of the desk's own declared rect outside the pad's rect differs from its neighbours by more than the desk's own row-to-row p99 (measured on the desk asset first).",
    "rank_before_firing_58": null,
-   "rank": 17
+   "rank": 17,
+   "looked_at_firing_61": "NOT WORKED; THE BLOCKER, CHECKED (3e): a contact shadow in this app is uncovered from the TEAR's own baked shadow render (PaperPiece._contactShadow, ContactShadow(tearId)), so every piece with tearId null -- the pad, every `torn: false` Slip, and the tabs, which are not PaperPieces at all -- has no shadow. The library has no shadow render for a straight cut (assets/tears holds only tear_NNN and hi/; INDEX relief is one tear_relief model), and a procedural one is the drop shadow DIRECTION.md 2026-09-04 forbids. So the 'cut + contact' route is EXHAUSTED WITHOUT A RENDER (fenced at firing 58), not impossible. The other route the measurement allows, a TEAR mask on the pad and the five tabs, is app-side but puts six more pieces into the chrome lane, which rank 20 says is already a row short; do rank 20 first or together."
   },
   {
    "id": "the-partner-strip-overflows-at-360-wide",
