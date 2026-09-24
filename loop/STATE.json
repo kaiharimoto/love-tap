@@ -1964,9 +1964,9 @@
    "owner_priority": "the-ui",
    "why": "FOUND AT FIRING 38 WHILE CLOSING THE INK CEILING, AND NOT FIXED THERE BECAUSE FIXING IT IS A DESIGN CALL THE LAW ALREADY ARGUED ONCE. `Pen.red` is #A8322B, Y 0.1078, OKLab L 0.4943. Against the darkest ground a word can land on -- sticky_pink_02_dusk at Y p50 0.4506, which docs/COLOR.md 2 now names as the premise of the whole ink ladder -- it reads 3.172:1 against a dusk body floor of 5.0 and a day body floor of 4.5. It is the only ink in the palette that misses both. IT IS NOT AN OVERSIGHT AND IT IS NOT NEW: 2's amendment of 2026-09-16 deliberately exempts a CHROMATIC ink from the L <= 0.40 ceiling, because forcing red to 0.40 takes it to #7C2520 and its chroma from 0.1553 to 0.1215 -- and 5 anchors the entire figure chroma ceiling on that 0.1553, so the rule as first written would have destroyed the number the next rule depends on. The exemption is from the LIGHTNESS ceiling. The amendment says in terms that a chromatic ink 'may not skip the contrast floors', and on the darkest stock it does. WHAT CARRIES IT: `S.refused` and `S.tryAgain` at Hands.margin size 12 and 12.5 in regions/chat/note.dart, and `Hands.of` gives Noor's second hand red. Those are words on a refused message -- the one row in the app whose whole job is to be read when something has gone wrong. It is already written down for the day case as `red on stickyPink: 4.17` in _knownBelowFloor and now for the dusk case at 3.17 in _knownBelowFloorAtDusk, so nothing is hidden; what is missing is a decision about which of three things gives.",
    "measurement": "app/test/legible_on_what_it_is_on_test.dart's `_knownBelowFloorAtDusk` loses its `red` entry, and `_knownBelowFloor` loses `red on stickyPink`, with the achromatic sweep and the pair count unchanged. ANCHORED (3d): the inks are the named constants in app/lib/material/palette.dart read by the test, the grounds are the dusk renders in assets/paper measured by tools/check/dusk_ground.py, and the floors are 6's. No capture, no pixel box, no frame ordinal -- it closes on `cd app && flutter test`. POPULATION: the number of (ink, ground) pairs walked must not fall, so the ratchet cannot be emptied by an ink leaving the sweep. THREE ROUTES AND THE ARITHMETIC FOR EACH, so whoever takes it is not starting cold. (1) DARKEN RED: 5.0:1 against 0.4506 needs Y <= 0.0501, which is about #6E2119 -- and that is the move 2's amendment already refused, so taking it means re-deriving 5's chroma ceiling and the item must say what that costs. (2) LIGHTEN THE DARKEST STOCK: sticky_pink_02_dusk is 0.4506 and the yellows are 0.4923; a re-render of the pink stickies at the yellows' level would put red at 3.46:1, which still misses, so this route does not close it alone. (3) DENY RED THE DARK STOCKS: say in 2 that a chromatic ink is a MARKING ink and not a body ink, and enforce it -- no word set in Pen.red on a sticky -- which is the only one of the three that costs no colour and needs a rule rather than a number. Route 3 is the one to price first.",
-   "state": "open",
-   "closed_by": null,
-   "attempts": 0,
+   "state": "closed",
+   "closed_by": "firing 62, ROUTE 3: red is a marking ink and carries no word. `refused` and `try again` on the refused row are in Pen.biro beside their red cross and turn-back marks; the unused Hands.second (Noor's red body hand) is gone; docs/COLOR.md section 2 amended 2026-09-24 to say so.",
+   "attempts": 1,
    "rank": 26,
    "filed_at_firing": 38,
    "filed_by": "firing 38",
@@ -1975,7 +1975,9 @@
    "rank_before_firing_43": null,
    "rank_before_firing_50": 24,
    "rank_before_firing_53": 26,
-   "rank_before_firing_58": 19
+   "rank_before_firing_58": 19,
+   "closed_at_firing": 62,
+   "worked_at_firing_62": "MEASURED as the item named it: _knownBelowFloor loses `red on stickyPink`, _knownBelowFloorAtDusk loses `red`, and firing 62's min-alpha ratchet loses its two red entries, all by `_markingInks = {'red'}`, which every sweep still WALKS and counts (day sweep asserts walked == inks x stocks, >= 60; dusk asserts walked == ink count; min-alpha asserts 2 x ink count), so the population is unchanged. The exemption is earned by a new source test, `red is a marking ink and writes no word`, which fails on any line in lib/ setting Pen.red in a TextStyle/copyWith/Text/Hands/Stamped context. RE-BROKEN by putting `.copyWith(color: Pen.red)` back on `try again`: the test names lib/regions/chat/note.dart:509. Suite 294/294. The capture half (13_messenger_states' `try again` on legal_02 read 4.38:1 at firing 39) is what rank 27 measures."
   },
   {
    "id": "a-test-that-models-the-browser-cannot-see-the-browser-change",

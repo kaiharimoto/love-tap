@@ -54,10 +54,6 @@ class Hands {
 
   static TextStyle of(Person p, {double size = 19, Color? colour}) =>
       p == Person.noor ? noor(size: size, colour: colour) : teo(size: size, colour: colour);
-
-  /// The second pen a person reaches for (Noor: red; Teo: a hard biro).
-  static TextStyle second(Person p, {double size = 19}) =>
-      of(p, size: size, colour: p == Person.noor ? Pen.red : Pen.biro);
 }
 
 /// Text written by one of the two people, in their hand.

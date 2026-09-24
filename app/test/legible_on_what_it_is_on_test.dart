@@ -205,9 +205,22 @@ Color _thinned(Color ink, double alpha, Color ground) => Color.lerp(ground, ink,
 /// What is left is a red pen on a pink sticky note, which is a real pair and a genuinely hard
 /// one: red on pink is two hues at the same lightness, and the fix is a stock or an ink rather
 /// than a nudge.
-const _knownBelowFloor = <String, double>{
-  'red on stickyPink': 4.17,
-};
+///
+/// Firing 62 took that last one out by the only route that cost no colour: red is a MARKING ink
+/// ([_markingInks]) and writes no word, which `red is a marking ink and writes no word` below holds.
+const _knownBelowFloor = <String, double>{};
+
+/// Inks that mark and never spell: the cross on a refused note, the turn-back beside `try again`,
+/// the ring round a pencil worn to a stub. **Red, and only red.** It is the one chromatic ink, and
+/// docs/COLOR.md §2's amendment exempts it from the achromatic lightness ceiling because forcing it
+/// down to L 0.40 takes its chroma from 0.1553 to 0.1215 and §5 anchors the figure chroma ceiling
+/// on that 0.1553. The exemption was from the ceiling, never from the floors -- and red on the
+/// darkest dusk ruling is 2.8:1, on the pink sticky by day 4.17:1. Of the three routes the item
+/// priced (darken red and re-derive §5; lighten the darkest stock, which does not close it alone;
+/// deny red the words) the third is the one that costs no colour. A marking ink is walked by every
+/// sweep below and counted in its population, and its pairs are not held to a body floor, because
+/// it carries no body.
+const _markingInks = {'red'};
 
 void main() {
   _theDarkestGroundThatShips();
@@ -285,14 +298,41 @@ void main() {
     }
   });
 
+  test('red is a marking ink and writes no word', () {
+    // What lets the sweeps pass over [_markingInks]: nothing in lib/ sets a word in one. A red
+    // TextStyle is how `refused` and `try again` were written on the refused row, the one row in
+    // the app whose whole job is to be read when something has gone wrong -- at 4.38:1 on the
+    // legal stock 13_messenger_states drew it on. Re-break by putting
+    // `.copyWith(color: Pen.red)` back on either and this names the line.
+    final wordish = RegExp(r'TextStyle|copyWith\(\s*color|style:|Text\(|Written\(|Stamped\(|Hands\.');
+    final offenders = <String>[];
+    for (final f in Directory('lib').listSync(recursive: true).whereType<File>()) {
+      if (!f.path.endsWith('.dart')) continue;
+      for (final (i, line) in f.readAsLinesSync().indexed) {
+        final code = line.trimLeft();
+        if (code.startsWith('//')) continue;
+        if (code.contains('Pen.red') && wordish.hasMatch(code)) offenders.add('${f.path}:${i + 1}: $code');
+      }
+    }
+    expect(offenders, isEmpty,
+        reason: 'a word is set in a marking ink, which the legibility sweeps do not hold to a body '
+            'floor:\n${offenders.join('\n')}');
+    expect(_markingInks, {'red'}, reason: 'a marking ink is a claim this test has to check');
+  });
+
   test('every ink on every stock, and the list of what is not right yet only shrinks', () {
     final below = <String, double>{};
+    var walked = 0;
     for (final ink in _inks.entries) {
       for (final stock in _stocks.entries) {
+        walked++;
+        if (_markingInks.contains(ink.key)) continue;
         final r = contrast(ink.value, stock.value);
         if (r < _body) below['${ink.key} on ${stock.key}'] = r;
       }
     }
+    expect(walked, _inks.length * _stocks.length);
+    expect(walked, greaterThanOrEqualTo(60), reason: 'an ink or a stock left the sweep');
 
     final unexpected = below.keys.where((k) => !_knownBelowFloor.containsKey(k)).toList()..sort();
     expect(unexpected, isEmpty,
@@ -401,9 +441,9 @@ class _KnownBelowFloor {
 }
 
 const _knownBelowFloorAtDusk = <String, _KnownBelowFloor>{
-  // Re-measured at firing 47 against the printed ruling, which is 0.0543 darker than the sheet
-  // p50 it used to be taken against. Red did not move: 0.1553 chroma, L 0.494, Y 0.1086.
-  'red': _KnownBelowFloor(2.83, 0.1086, 'spiral_04_dusk ruling at Y 0.3963'),
+  // `red` was here at 2.83:1 against spiral_04_dusk's ruling at Y 0.3963, Y 0.1086. Firing 62
+  // made red a marking ink (_markingInks), which writes no word, so it left the list by leaving
+  // the body, not by the ratio moving.
 };
 
 /// The (ink, alpha) pairs below the dusk body floor when composited at the faintest alpha
@@ -414,9 +454,7 @@ const _knownBelowFloorAtMinAlpha = <String, double>{
   'graphite at 0.80': 3.773,
   'stamp at 0.80': 3.542,
   'margin at 0.80': 3.542,
-  // red is below the floor at full strength too, and _knownBelowFloorAtDusk holds that
-  'red at 1.00': 2.828,
-  'red at 0.80': 2.395,
+  // red is a marking ink and writes no word (_markingInks); it read 2.828 and 2.395 here
 };
 
 /// Read once, so a missing or malformed report fails loudly rather than skipping the test.
@@ -473,6 +511,7 @@ void _theDarkestGroundThatShips() {
       // by an ink leaving the sweep.
       walked++;
       final r = (groundY + 0.05) / (_lum(e.value) + 0.05);
+      if (_markingInks.contains(e.key)) continue;
       if (_oklabChroma(e.value) >= _chromatic) {
         final known = _knownBelowFloorAtDusk[e.key];
         expect(known, isNotNull,
@@ -535,6 +574,7 @@ void _theDarkestGroundThatShips() {
     for (final e in _inks.entries) {
       for (final a in const [1.0, alpha]) {
         walked++;
+        if (_markingInks.contains(e.key)) continue;
         final c = e.value;
         final over = Color.from(
           alpha: 1,

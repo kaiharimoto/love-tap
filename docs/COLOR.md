@@ -224,6 +224,17 @@ every contrast floor in §6 on every stock it can land on. Nothing is exempt fro
 and nothing is exempt from the contrast floors; what is relaxed is a proxy, in the one case where
 the proxy was destroying what it stood for.
 
+**Amended 2026-09-24 (firing 62): a chromatic ink is a MARKING ink and carries no word.** The
+sentence above asks red to clear every floor on every stock it can land on, and it cannot: 4.17:1
+on the pink sticky by day, 2.83:1 on the darkest dusk ruling. Of the three ways out that were
+priced (`the-red-pen-is-three-to-one-on-the-darkest-paper-it-can-land-on`), darkening red re-opens
+§5's chroma anchor, lightening the darkest stock does not close it alone, and denying red the words
+costs no colour at all. So red crosses out, turns back, rings and underlines; the word beside the
+mark is in an achromatic ink from the ladder. The two words that were red -- `refused` and
+`try again` on a note the host would not take -- are in biro. `app/test/legible_on_what_it_is_on_test.dart`
+holds it from both sides: `red is a marking ink and writes no word` fails on any red TextStyle in
+`app/lib`, and the sweeps walk red and count it without holding a mark to a body floor.
+
 Three rules run on the ladder.
 
 **A surface clears the surface it rests on by at least 0.18 L.** Paper on the day desk is 0.84 − 0.40

@@ -461,7 +461,10 @@ class _DeliveryMark extends StatelessWidget {
       // margin, because three things in the margin Row overflowed the note by 101 pixels and the
       // third was clipped off the edge of the paper.
       Delivery.refused => Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(S.refused, style: Hands.margin(size: 12).copyWith(color: Pen.red)),
+          // the red is the cross beside it; the word is in an ink that reads on every stock a
+          // note can be torn from, because red on the darkest of them is 2.8:1 (see
+          // red_is_a_marking_ink in legible_on_what_it_is_on_test)
+          Text(S.refused, style: Hands.margin(size: 12).copyWith(color: Pen.biro)),
           const SizedBox(width: 4),
           Mark.cross(size: 12, colour: Pen.red, seed: seed),
         ]),
@@ -503,7 +506,7 @@ class _Refused extends StatelessWidget {
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 Mark.turnback(size: 12, colour: Pen.red, seed: seed),
                 const SizedBox(width: 4),
-                Text(S.tryAgain, style: Hands.margin(size: 12.5).copyWith(color: Pen.red)),
+                Text(S.tryAgain, style: Hands.margin(size: 12.5).copyWith(color: Pen.biro)),
               ]),
             ),
           ),
