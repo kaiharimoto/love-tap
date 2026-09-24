@@ -982,8 +982,9 @@ class SlicedMasks {
   /// So a fraction is carried through the same slice the mask is: into the composed image by the
   /// bands [slicesFor] gives for this box, and out of it by the stretch from composed pixels to
   /// the piece. Below the mask's size that is the fraction it always was; above it, it is the
-  /// break's own depth, and it is never more than the share. [asset] is the mask the piece will be composed from at this size -- the
-  /// finer copy on a big sheet, whose bands are deeper in pixels, so text never lands in them.
+  /// break's own depth, and it is never more than the share. [asset] is the mask the piece will
+  /// be composed from at this size -- the finer copy on a big sheet, whose bands are deeper in
+  /// pixels, so text never lands in them.
   static List<double> safeInsets(String tearId, List<double> safe, Size size, double dpr) {
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final base = lib?.entry(lib.tears, tearId);
@@ -1093,6 +1094,13 @@ const double kEdgeDownsample = 2;
 /// down its torn side (the caption in 14_media_viewer, firing 60). Measured the same day, day and
 /// dusk, as where the row and column means leave the middle's: every sticky variant is paper from
 /// 0.089 to 0.935 across and 0.056 to 0.915 down, and the receipt from 0.056 to 0.949 across.
+///
+/// And loose-leaf is a sheet with two punch holes down its left side, PAINTED into the render in
+/// the backdrop's brown rather than cut: `settings.notify` framed looseleaf_04 so that the upper
+/// hole lay under the matrix's row label `a picture`, a word written across a dark disc (firing
+/// 55, identified at 56). Measured at firing 61 on all four day renders, as dark round blobs off
+/// a 9 px mean: both holes at 0.057-0.103 across (0.301-0.332 and 0.667-0.699 down), the paper
+/// from 0.026 to 0.968 across and 0.019 to 0.977 down. So a piece is cut from right of the holes.
 const Map<String, (double, double, double, double, double, double)> kBlankPaper = {
   'receipt_01': (702, 1500, 0.07, 0.51, 0.94, 0.96),
   'sticky_yellow_01': _sticky,
@@ -1101,8 +1109,13 @@ const Map<String, (double, double, double, double, double, double)> kBlankPaper 
   'sticky_pink_02': _sticky,
   'sticky_blue_01': _sticky,
   'sticky_blue_02': _sticky,
+  'looseleaf_01': _looseleaf,
+  'looseleaf_02': _looseleaf,
+  'looseleaf_03': _looseleaf,
+  'looseleaf_04': _looseleaf,
 };
 const _sticky = (1500.0, 1500.0, 0.10, 0.07, 0.925, 0.905);
+const _looseleaf = (1073.0, 1500.0, 0.115, 0.03, 0.96, 0.965);
 
 /// An image drawn as a nine-slice: the four corners and the four edges at the scale they were
 /// rendered at, and only the middle stretched.

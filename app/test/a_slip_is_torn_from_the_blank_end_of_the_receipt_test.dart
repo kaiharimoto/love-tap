@@ -9,7 +9,8 @@
 // Held here through the same declaration the capture reads: every piece's stock entry in
 // `CaptureHooks.paperSurfaces`, placed against its mask's rect with the arithmetic
 // `tools/check/receipt_print.py` uses. Re-break by framing the receipt the way every other stock
-// is framed and the wide slips fail on the printed rows.
+// is framed and the wide slips fail on the printed rows; take loose-leaf out of [kBlankPaper] and
+// its slips fail on the punch-hole columns.
 import 'package:desk/capture/hooks.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
@@ -54,6 +55,9 @@ void main() {
       'receipt_01_dusk',
       'sticky_yellow_02',
       'sticky_yellow_02_dusk',
+      // and loose-leaf, whose punch holes are painted into the render (firing 61)
+      'looseleaf_04',
+      'looseleaf_04_dusk',
     ]) {
       final (_, _, left, top0, right, bottom0) =
           kBlankPaper[stock.replaceFirst(RegExp(r'_dusk$'), '')]!;
