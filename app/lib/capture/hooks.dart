@@ -462,6 +462,9 @@ class CaptureHooks {
           'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
           'scale': double.parse(scale.toStringAsFixed(3)),
           'fit': node.fit?.name ?? '',
+          // which part of the render a cover shows, so a reader can work out which rows of a
+          // printed stock lie under the piece (tools/check/receipt_print.py)
+          if (node.alignment case final Alignment a) 'align': [a.x, a.y],
           'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
           if (pieces[node] != null) 'piece': pieces[node],
         });

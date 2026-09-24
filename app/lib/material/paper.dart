@@ -422,6 +422,30 @@ class PaperPiece extends StatelessWidget {
     return (scale, Alignment(1, stockAlignment.y));
   }
 
+  /// [stockFraming] for a stock that is printed on, moved and enlarged just enough that only
+  /// its blank paper lies under a piece of [box] logical pixels (see [kBlankPaper]); null for a
+  /// stock with no print.
+  ///
+  /// The stock is drawn `BoxFit.cover` and then scaled about the same alignment it is covered
+  /// at, so the rows of the render under the piece are `[p - f*p/s, p + f*(1-p)/s]` of it, where
+  /// `f` is the fraction of its height cover leaves in the box, `s` the scale and `p` the
+  /// alignment as a fraction. That window is solved for here: as small as [stockScale] allows,
+  /// larger where the piece is too tall for the blank to fill it at that scale, and slid along
+  /// the blank by the piece's own [stockAlignment] so two slips still show different paper.
+  (double, Alignment)? blankFraming(String stock, Size box) {
+    final blank = kBlankPaper[stock.replaceFirst(RegExp(r'_dusk$'), '')];
+    if (blank == null || box.isEmpty) return null;
+    final (sw, sh, top, bottom) = blank;
+    final base = stockFraming(stock);
+    final f = math.min(1.0, (box.height / box.width) / (sh / sw));
+    final scale = math.max(base.$1, f / (bottom - top));
+    final window = f / scale;
+    final along = (stockAlignment.y + 1) / 2;
+    final centre = top + window / 2 + (bottom - top - window) * along;
+    final p = window >= 1 ? along : ((centre - window / 2) / (1 - window)).clamp(0.0, 1.0);
+    return (scale, Alignment(base.$2.x, 2 * p - 1));
+  }
+
   /// Tape, staples, clips: rendered bits laid over the piece.
   final List<Widget> overlays;
 
@@ -481,7 +505,19 @@ class PaperPiece extends StatelessWidget {
   Widget build(BuildContext context) {
     final dusk = Light.of(context) == LightCondition.dusk;
     final stock = (!dusk || stockId.endsWith('_dusk')) ? stockId : '${stockId}_dusk';
-    final framing = stockFraming(stock);
+    Widget framed((double, Alignment) framing) => Transform.scale(
+          scale: framing.$1,
+          alignment: framing.$2,
+          child: Image.asset(
+            paperAsset(stock),
+            fit: BoxFit.cover,
+            alignment: framing.$2,
+            gaplessPlayback: true,
+            filterQuality: FilterQuality.medium,
+            frameBuilder: paintWhenItArrives,
+            errorBuilder: PaperPiece.none,
+          ),
+        );
     final content = Stack(
       children: [
         // Underneath everything, the colour the stock is. The render is what makes it paper, but
@@ -489,19 +525,13 @@ class PaperPiece extends StatelessWidget {
         // image is missing from the bundle, is still a sheet.
         Positioned.fill(child: ColoredBox(color: Paper.forStock(stock))),
         Positioned.fill(
-          child: Transform.scale(
-            scale: framing.$1,
-            alignment: framing.$2,
-            child: Image.asset(
-              paperAsset(stock),
-              fit: BoxFit.cover,
-              alignment: framing.$2,
-              gaplessPlayback: true,
-              filterQuality: FilterQuality.medium,
-              frameBuilder: paintWhenItArrives,
-              errorBuilder: PaperPiece.none,
-            ),
-          ),
+          // a printed stock is framed by the size the piece turned out to be, so what is written
+          // on it never lies over what was printed on it
+          child: kBlankPaper.containsKey(stock.replaceFirst(RegExp(r'_dusk$'), ''))
+              ? LayoutBuilder(
+                  builder: (context, box) =>
+                      framed(blankFraming(stock, box.biggest) ?? stockFraming(stock)))
+              : framed(stockFraming(stock)),
         ),
         if (tearId != null)
           // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
@@ -893,6 +923,20 @@ class SlicedMasks {
 /// 1.1/255 over the band itself; 3x reaches 2.1/255 on the band, which is why it is 2.
 /// `test/the_lit_edge_is_packed_at_half_test.dart` holds the pack to it.
 const double kEdgeDownsample = 2;
+
+/// The stocks that arrive printed on, and where their blank paper is: `(render width, render
+/// height, first blank row, last blank row)`, the rows as fractions of the render.
+///
+/// `receipt_01` is a till roll, and the top half of the render is the roll's own faded thermal
+/// print -- a header, eleven item lines, a barcode -- from row 130 to row 720 of 1500. Below it
+/// is blank paper to row 1460, where the roll's edge begins (measured at firing 60 in 10-row
+/// bands: std past 2.5x the blank paper's 1.12). Three screens chose the stock on purpose and
+/// wrote over the print, and three critics read the result as a mosaic of mojibake. A slip torn
+/// from a receipt is torn from its tail. `tools/check/receipt_print.py` holds the captures to it,
+/// and `test/a_slip_is_torn_from_the_blank_end_of_the_receipt_test.dart` the arithmetic.
+const Map<String, (double, double, double, double)> kBlankPaper = {
+  'receipt_01': (702, 1500, 0.51, 0.96),
+};
 
 /// An image drawn as a nine-slice: the four corners and the four edges at the scale they were
 /// rendered at, and only the middle stretched.
