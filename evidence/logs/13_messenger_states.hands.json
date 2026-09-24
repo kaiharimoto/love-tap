@@ -1,8 +1,8 @@
 {
  "text": "evidence/13_messenger_states.text.json",
  "calt": true,
- "runs_read": 22,
- "pairs": 51,
+ "runs_read": 23,
+ "pairs": 54,
  "pairs_repeating": 6,
  "pairs_avoidable": 6,
  "worst": [
@@ -55,10 +55,10 @@
    "run": "and the bread, if there is any"
   }
  ],
- "glyphs": 348,
- "stalls": 22,
+ "glyphs": 366,
+ "stalls": 23,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "6 of 51 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 348 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 54 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 366 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

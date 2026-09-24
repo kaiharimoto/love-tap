@@ -1,27 +1,30 @@
 {
  "region": 1,
  "visible": [
+  "01M1M3Y4GR5ZE8WDQ00S3NX0KF",
   "01M1M4GW48FEW3M67XKAZT5051",
   "01M1M4ZQQ0H0PPVTKMMQEE268D",
   "01M1M59VY0YA13H9M86HTA6XNP"
  ],
  "tears": {
-  "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-  "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+  "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_003",
+  "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+  "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
   "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
  },
  "stocks": {
+  "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "graph_02",
   "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
   "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
   "01M1M59VY0YA13H9M86HTA6XNP": "graph_02"
  },
  "scroll": {
-  "first": 8384,
+  "first": 8383,
   "last": 8387,
   "of": 8387
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 4394,
+ "driven_ms": 4427,
  "seed": 20260903,
  "events": 14063,
  "transport": "local",
@@ -48,11 +51,11 @@
  "fold_at_first_frame": {
   "sequence": "unfold_thirds",
   "length": 240,
-  "decoded": 25,
+  "decoded": 24,
   "decoding": 0,
-  "playhead": 1,
+  "playhead": 0,
   "held_from": 0,
-  "held_to": 24
+  "held_to": 23
  },
  "fold_at_last_frame": {
   "sequence": "unfold_thirds",

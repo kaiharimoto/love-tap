@@ -1,10 +1,10 @@
 {
  "text": "evidence/01_pulse.text.json",
  "calt": true,
- "runs_read": 27,
- "pairs": 35,
- "pairs_repeating": 4,
- "pairs_avoidable": 4,
+ "runs_read": 28,
+ "pairs": 45,
+ "pairs_repeating": 6,
+ "pairs_avoidable": 6,
  "worst": [
   {
    "family": "NoorHand",
@@ -31,18 +31,34 @@
    "run": "week one, and the room smells right again"
   },
   {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "last heard 2 hours ago"
+  },
+  {
    "family": "NoorHand",
    "char": "t",
    "instances": 2,
    "distinct": 1,
    "avoidable": true,
    "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "last heard 2 hours ago"
   }
  ],
- "glyphs": 194,
- "stalls": 13,
+ "glyphs": 234,
+ "stalls": 21,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "4 of 35 repeated letters inside one declared run take fewer outlines than they could (4 repeat one at all), and 0 of 194 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 45 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 234 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

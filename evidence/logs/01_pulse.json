@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5256
+   "ms": 3601
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2102
   },
   {
    "do": "shot",
-   "ms": 14499
+   "ms": 6079
   },
   {
    "do": "report",
-   "ms": 713
+   "ms": 710
   }
  ],
  "shots": [
@@ -45,11 +45,11 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_018",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_040",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_003",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
@@ -79,13 +79,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
@@ -95,13 +89,13 @@
  "blob_waits": [
   {
    "at": "01_pulse.png",
-   "waited_ms": 10215,
+   "waited_ms": 2418,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 17956,
- "cold_ms": 2549,
+ "install_ms": 9955,
+ "cold_ms": 1543,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

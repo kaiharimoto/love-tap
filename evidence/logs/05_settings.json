@@ -10,23 +10,23 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4881
+   "ms": 3538
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2301
   },
   {
    "do": "shot",
-   "ms": 9170
+   "ms": 4274
   },
   {
    "do": "report",
-   "ms": 717
+   "ms": 711
   },
   {
    "do": "scrollSettings",
-   "ms": 2238
+   "ms": 1879
   },
   {
    "do": "wait",
@@ -34,24 +34,24 @@
   },
   {
    "do": "shot",
-   "ms": 2914
+   "ms": 2803
   },
   {
    "do": "report",
-   "ms": 716
+   "ms": 709
   }
  ],
  "shots": [
   {
    "out": "evidence/05_settings.png",
    "clip": null,
-   "text_runs": 35,
+   "text_runs": 36,
    "surfaces": 47
   },
   {
    "out": "evidence/05_settings_interrupt.png",
    "clip": null,
-   "text_runs": 65,
+   "text_runs": 66,
    "surfaces": 18
   }
  ],
@@ -67,11 +67,11 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_018",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_040",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_003",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
@@ -101,13 +101,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
@@ -124,11 +118,11 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_018",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_040",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_003",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
@@ -158,13 +152,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
@@ -174,19 +162,19 @@
  "blob_waits": [
   {
    "at": "05_settings.png",
-   "waited_ms": 5177,
+   "waited_ms": 815,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   },
   {
    "at": "05_settings_interrupt.png",
-   "waited_ms": 8,
+   "waited_ms": 7,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 16209,
- "cold_ms": 2024,
+ "install_ms": 9846,
+ "cold_ms": 1634,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

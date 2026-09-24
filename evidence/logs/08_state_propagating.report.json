@@ -1,29 +1,29 @@
 {
  "region": 1,
  "visible": [
-  "01M37M1526HPYAHGKX1TAN1VSG",
-  "01M37M2GM2MC29DPV0DCKJH6QD",
-  "01M37MCQQWAJ5V91MYVXT7Q6SN",
-  "01M37MK52JZ6C9M8DR7G5PQTRJ"
+  "01M38NSBT4MSA5K0D00H70RQ6G",
+  "01M38NTKG5A3WX4YAR520QWNEK",
+  "01M38P3V59H6Y6FBM5R4096X0X",
+  "01M38P97CXKGMA0MF4W5AQM2C5"
  ],
  "tears": {
-  "01M37M1526HPYAHGKX1TAN1VSG": "tear_001",
-  "01M37M2GM2MC29DPV0DCKJH6QD": "tear_020",
-  "01M37MCQQWAJ5V91MYVXT7Q6SN": "tear_043",
-  "01M37MK52JZ6C9M8DR7G5PQTRJ": "tear_005"
+  "01M38NSBT4MSA5K0D00H70RQ6G": "tear_004",
+  "01M38NTKG5A3WX4YAR520QWNEK": "tear_024",
+  "01M38P3V59H6Y6FBM5R4096X0X": "tear_047",
+  "01M38P97CXKGMA0MF4W5AQM2C5": "tear_009"
  },
  "stocks": {
-  "01M37M1526HPYAHGKX1TAN1VSG": "receipt_01",
-  "01M37M2GM2MC29DPV0DCKJH6QD": "spiral_03",
-  "01M37MCQQWAJ5V91MYVXT7Q6SN": "receipt_01",
-  "01M37MK52JZ6C9M8DR7G5PQTRJ": "receipt_01"
+  "01M38NSBT4MSA5K0D00H70RQ6G": "graph_02",
+  "01M38NTKG5A3WX4YAR520QWNEK": "receipt_01",
+  "01M38P3V59H6Y6FBM5R4096X0X": "graph_01",
+  "01M38P97CXKGMA0MF4W5AQM2C5": "graph_04"
  },
  "scroll": {
   "first": 0,
   "last": 3,
   "of": 4
  },
- "now": "2026-09-23T17:24:34.746Z",
+ "now": "2026-09-24T03:13:15.825Z",
  "driven_ms": 5712,
  "seed": 20260903,
  "events": 6,
@@ -37,33 +37,15 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 240,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "blobs_pending": 0,
  "pictures_pending": 0,
  "at": "08_state_propagating",
  "fold_at_first_frame": {
-  "sequence": "unfold_thirds",
-  "length": 240,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "fold_at_last_frame": {
-  "sequence": "unfold_thirds",
-  "length": 240,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  }
 }

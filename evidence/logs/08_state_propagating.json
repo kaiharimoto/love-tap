@@ -10,27 +10,35 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2302
+   "ms": 2303
   },
   {
    "do": "pair",
-   "ms": 1506
+   "ms": 930
   },
   {
    "do": "wait",
-   "ms": 3704
+   "ms": 3703
   },
   {
    "do": "goTo",
-   "ms": 1759
+   "ms": 1629
   },
   {
    "do": "wait",
-   "ms": 1706
+   "ms": 1704
   },
   {
    "do": "frames",
-   "ms": 37451
+   "ms": 35505
+  },
+  {
+   "do": "far",
+   "ms": 500
+  },
+  {
+   "do": "frames",
+   "ms": 40056
   },
   {
    "do": "far",
@@ -38,23 +46,15 @@
   },
   {
    "do": "frames",
-   "ms": 44169
-  },
-  {
-   "do": "far",
-   "ms": 502
-  },
-  {
-   "do": "frames",
-   "ms": 264831
+   "ms": 242181
   },
   {
    "do": "goTo",
-   "ms": 2346
+   "ms": 1834
   },
   {
    "do": "frames",
-   "ms": 67327
+   "ms": 58265
   },
   {
    "do": "far",
@@ -62,7 +62,7 @@
   },
   {
    "do": "frames",
-   "ms": 209718
+   "ms": 175902
   },
   {
    "do": "far",
@@ -70,11 +70,11 @@
   },
   {
    "do": "frames",
-   "ms": 173343
+   "ms": 168121
   },
   {
    "do": "report",
-   "ms": 513
+   "ms": 515
   }
  ],
  "shots": [
@@ -154,22 +154,10 @@
    },
    "fold": {
     "first": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 0,
-     "decoding": 24,
-     "playhead": 0,
-     "held_from": null,
-     "held_to": null
+     "sequence": null
     },
     "last": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     }
    }
   },
@@ -182,22 +170,10 @@
    "drive": null,
    "fold": {
     "first": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     },
     "last": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     }
    }
   }
@@ -206,29 +182,29 @@
   {
    "region": 1,
    "visible": [
-    "01M37M1526HPYAHGKX1TAN1VSG",
-    "01M37M2GM2MC29DPV0DCKJH6QD",
-    "01M37MCQQWAJ5V91MYVXT7Q6SN",
-    "01M37MK52JZ6C9M8DR7G5PQTRJ"
+    "01M38NSBT4MSA5K0D00H70RQ6G",
+    "01M38NTKG5A3WX4YAR520QWNEK",
+    "01M38P3V59H6Y6FBM5R4096X0X",
+    "01M38P97CXKGMA0MF4W5AQM2C5"
    ],
    "tears": {
-    "01M37M1526HPYAHGKX1TAN1VSG": "tear_001",
-    "01M37M2GM2MC29DPV0DCKJH6QD": "tear_020",
-    "01M37MCQQWAJ5V91MYVXT7Q6SN": "tear_043",
-    "01M37MK52JZ6C9M8DR7G5PQTRJ": "tear_005"
+    "01M38NSBT4MSA5K0D00H70RQ6G": "tear_004",
+    "01M38NTKG5A3WX4YAR520QWNEK": "tear_024",
+    "01M38P3V59H6Y6FBM5R4096X0X": "tear_047",
+    "01M38P97CXKGMA0MF4W5AQM2C5": "tear_009"
    },
    "stocks": {
-    "01M37M1526HPYAHGKX1TAN1VSG": "receipt_01",
-    "01M37M2GM2MC29DPV0DCKJH6QD": "spiral_03",
-    "01M37MCQQWAJ5V91MYVXT7Q6SN": "receipt_01",
-    "01M37MK52JZ6C9M8DR7G5PQTRJ": "receipt_01"
+    "01M38NSBT4MSA5K0D00H70RQ6G": "graph_02",
+    "01M38NTKG5A3WX4YAR520QWNEK": "receipt_01",
+    "01M38P3V59H6Y6FBM5R4096X0X": "graph_01",
+    "01M38P97CXKGMA0MF4W5AQM2C5": "graph_04"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-23T17:24:34.746Z",
+   "now": "2026-09-24T03:13:15.825Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 6,
@@ -242,40 +218,22 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
    "at": "08_state_propagating",
    "fold_at_first_frame": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "fold_at_last_frame": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    }
   }
  ],
  "blob_waits": [],
- "install_ms": 1680,
- "cold_ms": 1289,
+ "install_ms": 1243,
+ "cold_ms": 923,
  "reopened": true,
  "events_at_open": 0,
  "problems": [],

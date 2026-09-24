@@ -10,23 +10,23 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4526
+   "ms": 3266
   },
   {
    "do": "wait",
-   "ms": 1706
+   "ms": 1703
   },
   {
    "do": "scrollTo",
-   "ms": 3521
+   "ms": 3704
   },
   {
    "do": "wait",
-   "ms": 1302
+   "ms": 1301
   },
   {
    "do": "stage",
-   "ms": 3408
+   "ms": 3039
   },
   {
    "do": "wait",
@@ -34,7 +34,7 @@
   },
   {
    "do": "partnerTyping",
-   "ms": 1469
+   "ms": 1461
   },
   {
    "do": "wait",
@@ -42,18 +42,18 @@
   },
   {
    "do": "shot",
-   "ms": 4194
+   "ms": 4274
   },
   {
    "do": "report",
-   "ms": 709
+   "ms": 731
   }
  ],
  "shots": [
   {
    "out": "evidence/13_messenger_states.png",
    "clip": null,
-   "text_runs": 30,
+   "text_runs": 31,
    "surfaces": 91
   }
  ],
@@ -65,27 +65,27 @@
     "01M1M4ZQQ0H0PPVTKMMQEE268D",
     "01M1M59VY0YA13H9M86HTA6XNP",
     "01M1MCJ1M02CDNKZD17AYTKFKH",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ",
     "01M1MCJ1M02CDNKZD17AYTKFKK",
-    "01M1MCJ1M02CDNKZD17AYTKFKM"
+    "01M1MCJ1M02CDNKZD17AYTKFKM",
+    "01M1MCJ1M02CDNKZD17AYTKFKN"
    ],
    "tears": {
     "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
     "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043",
-    "01M1MCJ1M02CDNKZD17AYTKFKK": "tear_005",
-    "01M1MCJ1M02CDNKZD17AYTKFKM": "tear_026"
+    "01M1MCJ1M02CDNKZD17AYTKFKK": "tear_043",
+    "01M1MCJ1M02CDNKZD17AYTKFKM": "tear_005",
+    "01M1MCJ1M02CDNKZD17AYTKFKN": "tear_026"
    },
    "stocks": {
     "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
     "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
     "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01",
     "01M1MCJ1M02CDNKZD17AYTKFKK": "lined_01",
-    "01M1MCJ1M02CDNKZD17AYTKFKM": "legal_02"
+    "01M1MCJ1M02CDNKZD17AYTKFKM": "legal_02",
+    "01M1MCJ1M02CDNKZD17AYTKFKN": "lined_02"
    },
    "scroll": {
     "first": 8384,
@@ -121,8 +121,8 @@
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 10951,
- "cold_ms": 3153,
+ "install_ms": 9652,
+ "cold_ms": 1640,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

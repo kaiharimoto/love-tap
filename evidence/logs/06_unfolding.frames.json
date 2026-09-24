@@ -1,22 +1,14 @@
 {
  "dir": "/tmp/lovetap-capture/06_unfolding",
- "frames": 255,
+ "frames": 257,
  "fps": 60.0,
- "seconds": 4.25,
- "mean_change_per_frame": 0.00374,
- "repeated_frames": 1,
- "repeated_fraction": 0.004,
- "longest_still_run": 1,
- "repeated_at": [
-  240
- ],
- "still_runs": [
-  {
-   "from": 240,
-   "to": 240,
-   "len": 1
-  }
- ],
+ "seconds": 4.28,
+ "mean_change_per_frame": 0.00424,
+ "repeated_frames": 0,
+ "repeated_fraction": 0.0,
+ "longest_still_run": 0,
+ "repeated_at": [],
+ "still_runs": [],
  "brightness_jumps": 0,
  "ok": true,
  "strip": "evidence/crops/06_unfolding_strip.png",
@@ -24,8 +16,8 @@
   "/tmp/lovetap-capture/06_unfolding/000000.png",
   "/tmp/lovetap-capture/06_unfolding/000051.png",
   "/tmp/lovetap-capture/06_unfolding/000102.png",
-  "/tmp/lovetap-capture/06_unfolding/000152.png",
-  "/tmp/lovetap-capture/06_unfolding/000203.png",
-  "/tmp/lovetap-capture/06_unfolding/000254.png"
+  "/tmp/lovetap-capture/06_unfolding/000154.png",
+  "/tmp/lovetap-capture/06_unfolding/000205.png",
+  "/tmp/lovetap-capture/06_unfolding/000256.png"
  ]
 }
