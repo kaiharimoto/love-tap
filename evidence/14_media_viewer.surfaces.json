@@ -11,6 +11,10 @@
   ],
   "scale": 2.102,
   "fit": "cover",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    0,
    0,
@@ -96,6 +100,10 @@
   ],
   "scale": 1.286,
   "fit": "cover",
+  "align": [
+   1,
+   -1
+  ],
   "rect": [
    -507,
    14,
@@ -113,16 +121,28 @@
    1380,
    258
   ],
-  "scale": 3.369,
+  "scale": 2.695,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_049.webp",
+  "composed": [
+   1024,
+   258
+  ],
   "downsample": 2,
   "fixed": [
-   3.369,
+   2.695,
    1.27
   ],
   "centre": [
-   0,
+   2.695,
    0
   ],
   "rect": [
@@ -144,6 +164,10 @@
   ],
   "scale": 0.8,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    620,
    -514,
@@ -163,6 +187,10 @@
   ],
   "scale": 0.8,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    620,
    -514,
@@ -182,6 +210,10 @@
   ],
   "scale": 1.939,
   "fit": "cover",
+  "align": [
+   -0.06000000000000005,
+   0.020000000000000018
+  ],
   "rect": [
    -23,
    159,
@@ -202,6 +234,10 @@
   ],
   "scale": 1.939,
   "fit": "cover",
+  "align": [
+   -0.06000000000000005,
+   0.020000000000000018
+  ],
   "rect": [
    -44,
    138,
@@ -290,6 +326,10 @@
   ],
   "scale": 0.196,
   "fit": "cover",
+  "align": [
+   -0.5800000000000001,
+   0.08000000000000007
+  ],
   "rect": [
    1185,
    284,
@@ -310,7 +350,19 @@
   ],
   "scale": 0.513,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_033.webp",
+  "composed": [
+   210,
+   96
+  ],
   "downsample": 2,
   "fixed": [
    0.513,
@@ -329,46 +381,46 @@
   "piece": "search-affordance"
  },
  {
-  "asset": "assets/tears/tear_047_shadow.webp",
+  "asset": "assets/tears/tear_043_shadow.webp",
   "src": [
    1024,
-   830
+   801
   ],
   "composed": [
    768,
-   72
+   87
   ],
   "drawn": [
    1218,
-   90
+   115
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_047_shadow",
+  "render": "tear_043_shadow",
   "rect": [
    144,
-   1109,
+   1085,
    1218,
-   90
+   115
   ],
   "piece": "margin-01KKP6X94080SW3FA6FBY8NKCB"
  },
  {
-  "asset": "assets/tears/tear_047.webp",
+  "asset": "assets/tears/tear_043.webp",
   "src": [
    1024,
-   830
+   801
   ],
   "composed": [
    1024,
-   90
+   115
   ],
   "drawn": [
    1218,
-   90
+   115
   ],
   "scale": 1.189,
   "fit": "mask",
@@ -382,7 +434,7 @@
   ],
   "fixed": [
    1.189,
-   0.135
+   0.179
   ],
   "centre": [
    1.189,
@@ -390,9 +442,9 @@
   ],
   "rect": [
    144,
-   1109,
+   1085,
    1218,
-   90
+   115
   ],
   "piece": "margin-01KKP6X94080SW3FA6FBY8NKCB"
  },
@@ -404,57 +456,73 @@
   ],
   "drawn": [
    1218,
-   90
+   115
   ],
   "scale": 1.135,
   "fit": "cover",
+  "align": [
+   0.78,
+   0.08000000000000007
+  ],
   "rect": [
    -73,
-   1100,
+   1072,
    1462,
-   108
+   138
   ],
   "piece": "margin-01KKP6X94080SW3FA6FBY8NKCB"
  },
  {
-  "asset": "assets/tears/tear_047_edge.webp",
+  "asset": "assets/tears/tear_043_edge.webp",
   "src": [
    512,
-   415
+   400
   ],
   "drawn": [
    1218,
-   90
+   115
   ],
-  "scale": 2.974,
+  "scale": 2.379,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_043.webp",
+  "composed": [
+   1024,
+   115
+  ],
   "downsample": 2,
   "fixed": [
-   2.974,
-   0.27
+   2.379,
+   0.358
   ],
   "centre": [
-   0,
+   2.379,
    0
   ],
   "rect": [
    144,
-   1109,
+   1085,
    1218,
-   90
+   115
   ],
   "piece": "margin-01KKP6X94080SW3FA6FBY8NKCB"
  },
  {
-  "asset": "assets/tears/tear_024_shadow.webp",
+  "asset": "assets/tears/tear_020_shadow.webp",
   "src": [
    1024,
-   843
+   626
   ],
   "composed": [
    768,
-   84
+   85
   ],
   "drawn": [
    1218,
@@ -465,20 +533,20 @@
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_024_shadow",
+  "render": "tear_020_shadow",
   "rect": [
    144,
-   963,
+   937,
    1218,
    113
   ],
   "piece": "margin-01KKP6AZ60EBYC9RTMBCXWKR7R"
  },
  {
-  "asset": "assets/tears/tear_024.webp",
+  "asset": "assets/tears/tear_020.webp",
   "src": [
    1024,
-   843
+   626
   ],
   "composed": [
    1024,
@@ -500,7 +568,7 @@
   ],
   "fixed": [
    1.189,
-   0.162
+   0.22
   ],
   "centre": [
    1.189,
@@ -508,7 +576,7 @@
   ],
   "rect": [
    144,
-   963,
+   937,
    1218,
    113
   ],
@@ -526,39 +594,55 @@
   ],
   "scale": 0.812,
   "fit": "cover",
+  "align": [
+   0.19999999999999996,
+   -0.14
+  ],
   "rect": [
    -2,
-   953,
+   928,
    1462,
-   135
+   136
   ],
   "piece": "margin-01KKP6AZ60EBYC9RTMBCXWKR7R"
  },
  {
-  "asset": "assets/tears/tear_024_edge.webp",
+  "asset": "assets/tears/tear_020_edge.webp",
   "src": [
    512,
-   422
+   313
   ],
   "drawn": [
    1218,
    110
   ],
-  "scale": 2.974,
+  "scale": 2.379,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_020.webp",
+  "composed": [
+   1024,
+   110
+  ],
   "downsample": 2,
   "fixed": [
-   2.974,
-   0.325
+   2.379,
+   0.44
   ],
   "centre": [
-   0,
+   2.379,
    0
   ],
   "rect": [
    144,
-   963,
+   937,
    1218,
    113
   ],
@@ -586,10 +670,11 @@
   "render": "tear_001_shadow",
   "rect": [
    132,
-   122,
+   96,
    1098,
    815
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/tears/tear_001.webp",
@@ -625,10 +710,11 @@
   ],
   "rect": [
    132,
-   122,
+   96,
    1098,
    815
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/paper/graph_01.webp",
@@ -642,12 +728,17 @@
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   -0.42000000000000004,
+   -0.76
+  ],
   "rect": [
    84,
-   107,
+   81,
    1263,
    937
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/tears/tear_001_edge.webp",
@@ -659,24 +750,37 @@
    1094,
    810
   ],
-  "scale": 3.505,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_001.webp",
+  "composed": [
+   1024,
+   810
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   3.505
+   2.138,
+   2.001
   ],
   "centre": [
-   0,
-   0
+   2.138,
+   6.016
   ],
   "rect": [
    132,
-   122,
+   96,
    1098,
    815
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/tears/tear_035_shadow.webp",
@@ -700,10 +804,11 @@
   "render": "tear_035_shadow",
   "rect": [
    1045,
-   814,
+   789,
    141,
    133
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/tears/tear_035.webp",
@@ -739,10 +844,11 @@
   ],
   "rect": [
    1045,
-   814,
+   789,
    141,
    133
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/paper/sticky_blue_02.webp",
@@ -756,12 +862,17 @@
   ],
   "scale": 0.092,
   "fit": "cover",
+  "align": [
+   0.7008571428571431,
+   0.4985849754220988
+  ],
   "rect": [
-   857,
-   652,
+   880,
+   649,
    339,
    319
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/tears/tear_035_edge.webp",
@@ -775,7 +886,19 @@
   ],
   "scale": 0.366,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_035.webp",
+  "composed": [
+   138,
+   129
+  ],
   "downsample": 2,
   "fixed": [
    0.337,
@@ -787,10 +910,11 @@
   ],
   "rect": [
    1045,
-   814,
+   789,
    141,
    133
-  ]
+  ],
+  "piece": "01KKP4A218ZAJ17AQB86SG2SEV"
  },
  {
   "asset": "assets/tears/tear_045_shadow.webp",
@@ -814,7 +938,7 @@
   "render": "tear_045_shadow",
   "rect": [
    144,
-   -9,
+   -35,
    1218,
    104
   ],
@@ -854,7 +978,7 @@
   ],
   "rect": [
    144,
-   -9,
+   -35,
    1218,
    104
   ],
@@ -872,9 +996,13 @@
   ],
   "scale": 1.135,
   "fit": "cover",
+  "align": [
+   0.3600000000000001,
+   0.8799999999999999
+  ],
   "rect": [
    -22,
-   -28,
+   -54,
    1462,
    125
   ],
@@ -890,48 +1018,61 @@
    1218,
    102
   ],
-  "scale": 2.974,
+  "scale": 2.379,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_045.webp",
+  "composed": [
+   1024,
+   102
+  ],
   "downsample": 2,
   "fixed": [
-   2.974,
+   2.379,
    0.304
   ],
   "centre": [
-   0,
+   2.379,
    0
   ],
   "rect": [
    144,
-   -9,
+   -35,
    1218,
    104
   ],
   "piece": "margin-01KKP30RR00FTNWJH8BS2E7ZZF"
  },
  {
-  "asset": "assets/tears/tear_019_shadow.webp",
+  "asset": "assets/tears/tear_023_shadow.webp",
   "src": [
    1024,
-   859
+   890
   ],
   "drawn": [
    1094,
-   236
+   214
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_019_shadow",
+  "render": "tear_023_shadow",
   "rect": [
    210,
-   -281,
+   -284,
    1097,
-   250
-  ]
+   228
+  ],
+  "piece": "01KKNYC1YR2J5DJYEWQ8BJ4SPZ"
  },
  {
   "asset": "assets/paper/legal_02.webp",
@@ -941,68 +1082,87 @@
   ],
   "drawn": [
    1094,
-   236
+   214
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   0.9199999999999999,
+   0.48
+  ],
   "rect": [
-   52,
-   -307,
+   53,
+   -308,
    1262,
-   287
-  ]
+   262
+  ],
+  "piece": "01KKNYC1YR2J5DJYEWQ8BJ4SPZ"
  },
  {
-  "asset": "assets/tears/tear_019_edge.webp",
+  "asset": "assets/tears/tear_023_edge.webp",
   "src": [
    512,
-   430
+   445
   ],
   "drawn": [
    1094,
-   236
+   214
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_023.webp",
+  "composed": [
+   1024,
+   214
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   0.685
+   2.138,
+   0.601
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
    210,
-   -281,
+   -284,
    1097,
-   250
-  ]
+   228
+  ],
+  "piece": "01KKNYC1YR2J5DJYEWQ8BJ4SPZ"
  },
  {
-  "asset": "assets/tears/tear_056_shadow.webp",
+  "asset": "assets/tears/tear_003_shadow.webp",
   "src": [
    1024,
-   882
+   766
   ],
   "drawn": [
    1094,
-   587
+   560
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_056_shadow",
+  "render": "tear_003_shadow",
   "rect": [
    133,
-   -886,
+   -862,
    1096,
-   590
-  ]
+   562
+  ],
+  "piece": "01KKNY3QBGTJ24X1RV3P87FMJV"
  },
  {
   "asset": "assets/paper/spiral_01.webp",
@@ -1012,68 +1172,87 @@
   ],
   "drawn": [
    1094,
-   587
+   560
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   0.8,
+   -0.36
+  ],
   "rect": [
    -15,
-   -914,
+   -890,
    1260,
-   678
-  ]
+   647
+  ],
+  "piece": "01KKNY3QBGTJ24X1RV3P87FMJV"
  },
  {
-  "asset": "assets/tears/tear_056_edge.webp",
+  "asset": "assets/tears/tear_003_edge.webp",
   "src": [
    512,
-   441
+   383
   ],
   "drawn": [
    1094,
-   587
+   560
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_003.webp",
+  "composed": [
+   1024,
+   560
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   1.664
+   2.138,
+   1.826
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
    133,
-   -886,
+   -862,
    1096,
-   590
-  ]
+   562
+  ],
+  "piece": "01KKNY3QBGTJ24X1RV3P87FMJV"
  },
  {
-  "asset": "assets/tears/tear_036_shadow.webp",
+  "asset": "assets/tears/tear_040_shadow.webp",
   "src": [
    1024,
-   571
+   583
   ],
   "drawn": [
    1094,
-   426
+   421
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_036_shadow",
+  "render": "tear_040_shadow",
   "rect": [
    132,
-   -1340,
+   -1311,
    1098,
-   437
-  ]
+   432
+  ],
+  "piece": "01KKNVCZZ0ZSPV0Z1SBSNZV1E6"
  },
  {
   "asset": "assets/paper/graph_01.webp",
@@ -1083,68 +1262,87 @@
   ],
   "drawn": [
    1094,
-   426
+   421
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   -0.74,
+   0.7
+  ],
   "rect": [
    110,
-   -1395,
+   -1366,
    1263,
-   502
-  ]
+   496
+  ],
+  "piece": "01KKNVCZZ0ZSPV0Z1SBSNZV1E6"
  },
  {
-  "asset": "assets/tears/tear_036_edge.webp",
+  "asset": "assets/tears/tear_040_edge.webp",
   "src": [
    512,
-   286
+   292
   ],
   "drawn": [
    1094,
-   426
+   421
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_040.webp",
+  "composed": [
+   1024,
+   421
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   1.861
+   2.138,
+   1.802
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
    132,
-   -1340,
+   -1311,
    1098,
-   437
-  ]
+   432
+  ],
+  "piece": "01KKNVCZZ0ZSPV0Z1SBSNZV1E6"
  },
  {
-  "asset": "assets/tears/tear_014_shadow.webp",
+  "asset": "assets/tears/tear_018_shadow.webp",
   "src": [
    1024,
-   407
+   700
   ],
   "drawn": [
    1094,
-   599
+   466
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_014_shadow",
+  "render": "tear_018_shadow",
   "rect": [
    210,
-   -1961,
-   1099,
-   607
-  ]
+   -1800,
+   1098,
+   474
+  ],
+  "piece": "01KKNV47P8QSDARP3A0TBJ6RCJ"
  },
  {
   "asset": "assets/paper/looseleaf_04.webp",
@@ -1154,45 +1352,63 @@
   ],
   "drawn": [
    1094,
-   599
+   466
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   0.30000000000000004,
+   0.26
+  ],
   "rect": [
-   102,
-   -2018,
-   1264,
-   698
-  ]
+   103,
+   -1845,
+   1262,
+   546
+  ],
+  "piece": "01KKNV47P8QSDARP3A0TBJ6RCJ"
  },
  {
-  "asset": "assets/tears/tear_014_edge.webp",
+  "asset": "assets/tears/tear_018_edge.webp",
   "src": [
    512,
-   203
+   350
   ],
   "drawn": [
    1094,
-   599
+   466
   ],
-  "scale": 3.685,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_018.webp",
+  "composed": [
+   1024,
+   466
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   3.685
+   2.138,
+   1.666
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
    210,
-   -1961,
-   1099,
-   607
-  ]
+   -1800,
+   1098,
+   474
+  ],
+  "piece": "01KKNV47P8QSDARP3A0TBJ6RCJ"
  },
  {
   "asset": "assets/tears/tear_055_shadow.webp",
@@ -1212,7 +1428,7 @@
   "render": "tear_055_shadow",
   "rect": [
    144,
-   -2080,
+   -1920,
    1218,
    96
   ],
@@ -1230,9 +1446,13 @@
   ],
   "scale": 1.135,
   "fit": "cover",
+  "align": [
+   0.96,
+   -0.30000000000000004
+  ],
   "rect": [
    -95,
-   -2087,
+   -1926,
    1462,
    115
   ],
@@ -1248,48 +1468,61 @@
    1218,
    91
   ],
-  "scale": 2.974,
+  "scale": 2.379,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_055.webp",
+  "composed": [
+   1024,
+   91
+  ],
   "downsample": 2,
   "fixed": [
-   2.974,
+   2.379,
    0.298
   ],
   "centre": [
-   0,
+   2.379,
    0
   ],
   "rect": [
    144,
-   -2080,
+   -1920,
    1218,
    96
   ],
   "piece": "margin-01KKNTJX0892HF8PQ9A2C2B9QH"
  },
  {
-  "asset": "assets/tears/tear_032_shadow.webp",
+  "asset": "assets/tears/tear_035_shadow.webp",
   "src": [
    1024,
-   594
+   885
   ],
   "drawn": [
    1094,
-   708
+   777
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_032_shadow",
+  "render": "tear_035_shadow",
   "rect": [
    134,
-   -2817,
+   -2725,
    1095,
-   709
-  ]
+   778
+  ],
+  "piece": "01KKNTB02GGF82AMDHX65H1C15"
  },
  {
   "asset": "assets/paper/receipt_01.webp",
@@ -1299,68 +1532,87 @@
   ],
   "drawn": [
    1094,
-   708
+   777
   ],
   "scale": 1.559,
   "fit": "cover",
+  "align": [
+   0.07753333333333123,
+   0.8240927691924622
+  ],
   "rect": [
-   30,
-   -2908,
+   45,
+   -2831,
    1259,
-   815
-  ]
+   894
+  ],
+  "piece": "01KKNTB02GGF82AMDHX65H1C15"
  },
  {
-  "asset": "assets/tears/tear_032_edge.webp",
+  "asset": "assets/tears/tear_035_edge.webp",
   "src": [
    512,
-   297
+   442
   ],
   "drawn": [
    1094,
-   708
+   777
   ],
-  "scale": 2.982,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_035.webp",
+  "composed": [
+   1024,
+   777
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   2.982
+   2.138,
+   2.003
   ],
   "centre": [
-   0,
-   0
+   2.138,
+   0.781
   ],
   "rect": [
    134,
-   -2817,
+   -2725,
    1095,
-   709
-  ]
+   778
+  ],
+  "piece": "01KKNTB02GGF82AMDHX65H1C15"
  },
  {
-  "asset": "assets/tears/tear_010_shadow.webp",
+  "asset": "assets/tears/tear_013_shadow.webp",
   "src": [
    1024,
-   830
+   749
   ],
   "drawn": [
    1094,
-   571
+   576
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_010_shadow",
+  "render": "tear_013_shadow",
   "rect": [
    131,
-   -3417,
+   -3331,
    1100,
-   582
-  ]
+   587
+  ],
+  "piece": "01KKNSX1S8V5AH4B6MSGTNMSTG"
  },
  {
   "asset": "assets/paper/graph_01.webp",
@@ -1370,45 +1622,63 @@
   ],
   "drawn": [
    1094,
-   571
+   576
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   0.8600000000000001,
+   0.7
+  ],
   "rect": [
    -22,
-   -3492,
+   -3405,
    1265,
-   669
-  ]
+   675
+  ],
+  "piece": "01KKNSX1S8V5AH4B6MSGTNMSTG"
  },
  {
-  "asset": "assets/tears/tear_010_edge.webp",
+  "asset": "assets/tears/tear_013_edge.webp",
   "src": [
    512,
-   415
+   375
   ],
   "drawn": [
    1094,
-   571
+   576
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_013.webp",
+  "composed": [
+   1024,
+   576
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   1.721
+   2.138,
+   1.921
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
    131,
-   -3417,
+   -3331,
    1100,
-   582
-  ]
+   587
+  ],
+  "piece": "01KKNSX1S8V5AH4B6MSGTNMSTG"
  },
  {
   "asset": "assets/tears/tear_051_shadow.webp",
@@ -1428,7 +1698,7 @@
   "render": "tear_051_shadow",
   "rect": [
    144,
-   -3542,
+   -3455,
    1218,
    100
   ],
@@ -1446,9 +1716,13 @@
   ],
   "scale": 1.135,
   "fit": "cover",
+  "align": [
+   -0.4,
+   0.28
+  ],
   "rect": [
    71,
-   -3555,
+   -3468,
    1462,
    120
   ],
@@ -1464,48 +1738,61 @@
    1218,
    99
   ],
-  "scale": 2.974,
+  "scale": 2.379,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_051.webp",
+  "composed": [
+   1024,
+   99
+  ],
   "downsample": 2,
   "fixed": [
-   2.974,
+   2.379,
    0.271
   ],
   "centre": [
-   0,
+   2.379,
    0
   ],
   "rect": [
    144,
-   -3542,
+   -3455,
    1218,
    100
   ],
   "piece": "margin-01KKNRYG80Y0P281PMNSA4ZDH5"
  },
  {
-  "asset": "assets/tears/tear_026_shadow.webp",
+  "asset": "assets/tears/tear_031_shadow.webp",
   "src": [
    1024,
-   931
+   929
   ],
   "drawn": [
    1094,
-   316
+   308
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_026_shadow",
+  "render": "tear_031_shadow",
   "rect": [
    212,
-   -3888,
+   -3794,
    1095,
-   317
-  ]
+   310
+  ],
+  "piece": "01KKMVAV1RAQC9ST0F5RN77DBS"
  },
  {
   "asset": "assets/paper/lined_04.webp",
@@ -1515,68 +1802,87 @@
   ],
   "drawn": [
    1094,
-   316
+   308
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   0.8400000000000001,
+   -0.86
+  ],
   "rect": [
    61,
-   -3891,
+   -3797,
    1259,
-   365
-  ]
+   356
+  ],
+  "piece": "01KKMVAV1RAQC9ST0F5RN77DBS"
  },
  {
-  "asset": "assets/tears/tear_026_edge.webp",
+  "asset": "assets/tears/tear_031_edge.webp",
   "src": [
    512,
-   466
+   465
   ],
   "drawn": [
    1094,
-   316
+   308
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_031.webp",
+  "composed": [
+   1024,
+   308
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   0.847
+   2.138,
+   0.829
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
    212,
-   -3888,
+   -3794,
    1095,
-   317
-  ]
+   310
+  ],
+  "piece": "01KKMVAV1RAQC9ST0F5RN77DBS"
  },
  {
-  "asset": "assets/tears/tear_005_shadow.webp",
+  "asset": "assets/tears/tear_009_shadow.webp",
   "src": [
    1024,
-   687
+   652
   ],
   "drawn": [
    1094,
-   685
+   848
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_005_shadow",
+  "render": "tear_009_shadow",
   "rect": [
    133,
-   -4597,
-   1096,
-   688
-  ]
+   -4667,
+   1097,
+   851
+  ],
+  "piece": "01KKMV4KTR1SN6M89VPAPBZN19"
  },
  {
   "asset": "assets/paper/graph_02.webp",
@@ -1586,45 +1892,63 @@
   ],
   "drawn": [
    1094,
-   685
+   848
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   0.3799999999999999,
+   -0.06000000000000005
+  ],
   "rect": [
    19,
-   -4646,
+   -4727,
    1261,
-   791
-  ]
+   979
+  ],
+  "piece": "01KKMV4KTR1SN6M89VPAPBZN19"
  },
  {
-  "asset": "assets/tears/tear_005_edge.webp",
+  "asset": "assets/tears/tear_009_edge.webp",
   "src": [
    512,
-   343
+   326
   ],
   "drawn": [
    1094,
-   685
+   848
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_009.webp",
+  "composed": [
+   1024,
+   848
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   2.495
+   2.138,
+   2
   ],
   "centre": [
-   0,
-   0
+   2.138,
+   5.007
   ],
   "rect": [
    133,
-   -4597,
-   1096,
-   688
-  ]
+   -4667,
+   1097,
+   851
+  ],
+  "piece": "01KKMV4KTR1SN6M89VPAPBZN19"
  },
  {
   "asset": "assets/objects/obj_clover_shadow.webp",
@@ -1638,12 +1962,17 @@
   ],
   "scale": 0.914,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
-   -244,
-   -4965,
+   -246,
+   -4950,
    1318,
    1318
-  ]
+  ],
+  "piece": "01KKMV4KTR1SN6M89VPAPBZN19"
  },
  {
   "asset": "assets/objects/obj_clover.webp",
@@ -1657,12 +1986,17 @@
   ],
   "scale": 0.914,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
-   -244,
-   -4965,
+   -246,
+   -4950,
    1318,
    1318
-  ]
+  ],
+  "piece": "01KKMV4KTR1SN6M89VPAPBZN19"
  },
  {
   "asset": "assets/tears/tear_005_shadow.webp",
@@ -1689,7 +2023,8 @@
    1228,
    1101,
    2028
-  ]
+  ],
+  "piece": "01KKP9AZEGXQ38N9BVB70W8KDR"
  },
  {
   "asset": "assets/tears/hi/tear_005.webp",
@@ -1728,7 +2063,8 @@
    1228,
    1101,
    2028
-  ]
+  ],
+  "piece": "01KKP9AZEGXQ38N9BVB70W8KDR"
  },
  {
   "asset": "assets/paper/lined_01.webp",
@@ -1742,12 +2078,17 @@
   ],
   "scale": 1.35,
   "fit": "cover",
+  "align": [
+   0.43999999999999995,
+   -0.18000000000000005
+  ],
   "rect": [
    12,
    1103,
    1266,
    2333
-  ]
+  ],
+  "piece": "01KKP9AZEGXQ38N9BVB70W8KDR"
  },
  {
   "asset": "assets/tears/tear_005_edge.webp",
@@ -1759,24 +2100,37 @@
    1094,
    2025
   ],
-  "scale": 6,
+  "scale": 3.828,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/hi/tear_005.webp",
+  "composed": [
+   1094,
+   2025
+  ],
   "downsample": 2,
   "fixed": [
    2.672,
-   6
+   3.828
   ],
   "centre": [
    0,
-   5.518
+   14.207
   ],
   "rect": [
    131,
    1228,
    1101,
    2028
-  ]
+  ],
+  "piece": "01KKP9AZEGXQ38N9BVB70W8KDR"
  },
  {
   "asset": "",
@@ -1790,6 +2144,10 @@
   ],
   "scale": 1.049,
   "fit": "cover",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    222,
    1463,
@@ -1809,12 +2167,17 @@
   ],
   "scale": 0.429,
   "fit": "",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    164,
    1407,
    244,
    244
-  ]
+  ],
+  "piece": "01KKP9AZEGXQ38N9BVB70W8KDR"
  },
  {
   "asset": "assets/tears/tear_026_shadow.webp",
@@ -1837,7 +2200,8 @@
    3278,
    1095,
    508
-  ]
+  ],
+  "piece": "01KKP9HKBRDH6SYRZGZXFQSVBW"
  },
  {
   "asset": "assets/paper/looseleaf_04.webp",
@@ -1851,12 +2215,17 @@
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   -0.76,
+   -0.24
+  ],
   "rect": [
    192,
    3249,
    1259,
    584
-  ]
+  ],
+  "piece": "01KKP9HKBRDH6SYRZGZXFQSVBW"
  },
  {
   "asset": "assets/tears/tear_026_edge.webp",
@@ -1868,16 +2237,28 @@
    1094,
    506
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_026.webp",
+  "composed": [
+   1024,
+   506
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
+   2.138,
    1.357
   ],
   "centre": [
-   0,
+   2.138,
    0
   ],
   "rect": [
@@ -1885,7 +2266,8 @@
    3278,
    1095,
    508
-  ]
+  ],
+  "piece": "01KKP9HKBRDH6SYRZGZXFQSVBW"
  },
  {
   "asset": "assets/tears/tear_048_shadow.webp",
@@ -1908,7 +2290,8 @@
    3807,
    1096,
    629
-  ]
+  ],
+  "piece": "01KKP9R5AGH6XYR4WSJZXV1P8Q"
  },
  {
   "asset": "assets/paper/receipt_01.webp",
@@ -1922,12 +2305,17 @@
   ],
   "scale": 1.559,
   "fit": "cover",
+  "align": [
+   0.07779999999999831,
+   0.5050076542565722
+  ],
   "rect": [
-   23,
-   3778,
+   44,
+   3736,
    1260,
    723
-  ]
+  ],
+  "piece": "01KKP9R5AGH6XYR4WSJZXV1P8Q"
  },
  {
   "asset": "assets/tears/tear_048_edge.webp",
@@ -1939,24 +2327,37 @@
    1094,
    626
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_048.webp",
+  "composed": [
+   1024,
+   626
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   2.081
+   2.138,
+   2
   ],
   "centre": [
-   0,
-   0
+   2.138,
+   0.324
   ],
   "rect": [
    133,
    3807,
    1096,
    629
-  ]
+  ],
+  "piece": "01KKP9R5AGH6XYR4WSJZXV1P8Q"
  },
  {
   "asset": "assets/tears/tear_010_shadow.webp",
@@ -1979,7 +2380,8 @@
    4454,
    1100,
    707
-  ]
+  ],
+  "piece": "01KKPA0KTR85FJ1EQEP7Q4BTV2"
  },
  {
   "asset": "assets/paper/graph_01.webp",
@@ -1993,12 +2395,17 @@
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   -0.98,
+   -0.84
+  ],
   "rect": [
    128,
    4445,
    1266,
    813
-  ]
+  ],
+  "piece": "01KKPA0KTR85FJ1EQEP7Q4BTV2"
  },
  {
   "asset": "assets/tears/tear_010_edge.webp",
@@ -2010,24 +2417,37 @@
    1094,
    697
   ],
-  "scale": 2.672,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_010.webp",
+  "composed": [
+   1024,
+   697
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   2.101
+   2.138,
+   2.001
   ],
   "centre": [
-   0,
-   0
+   2.138,
+   0.398
   ],
   "rect": [
    131,
    4454,
    1100,
    707
-  ]
+  ],
+  "piece": "01KKPA0KTR85FJ1EQEP7Q4BTV2"
  },
  {
   "asset": "assets/objects/obj_confetti_shadow.webp",
@@ -2041,12 +2461,17 @@
   ],
   "scale": 0.914,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    -178,
    4124,
    1189,
    1189
-  ]
+  ],
+  "piece": "01KKPA0KTR85FJ1EQEP7Q4BTV2"
  },
  {
   "asset": "assets/objects/obj_confetti.webp",
@@ -2060,12 +2485,17 @@
   ],
   "scale": 0.914,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    -178,
    4124,
    1189,
    1189
-  ]
+  ],
+  "piece": "01KKPA0KTR85FJ1EQEP7Q4BTV2"
  },
  {
   "asset": "assets/tears/tear_032_shadow.webp",
@@ -2088,7 +2518,8 @@
    5179,
    1096,
    2188
-  ]
+  ],
+  "piece": "01KKPBMYMGC4B8D0WVTA5YG2C4"
  },
  {
   "asset": "assets/paper/receipt_01.webp",
@@ -2102,12 +2533,17 @@
   ],
   "scale": 1.559,
   "fit": "cover",
+  "align": [
+   0.7537478683885765,
+   0.8545454545454545
+  ],
   "rect": [
-   -30,
-   4992,
-   1261,
-   2516
-  ]
+   -902,
+   2991,
+   2279,
+   4548
+  ],
+  "piece": "01KKPBMYMGC4B8D0WVTA5YG2C4"
  },
  {
   "asset": "assets/tears/tear_032_edge.webp",
@@ -2119,24 +2555,37 @@
    1094,
    2187
   ],
-  "scale": 6,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.186
+  ],
+  "slice_far": [
+   0.4,
+   0.066
+  ],
+  "lights": "assets/tears/tear_032.webp",
+  "composed": [
+   1024,
+   2187
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   6
+   2.138,
+   2
   ],
   "centre": [
-   0,
-   12.822
+   2.138,
+   9.172
   ],
   "rect": [
    133,
    5179,
    1096,
    2188
-  ]
+  ],
+  "piece": "01KKPBMYMGC4B8D0WVTA5YG2C4"
  },
  {
   "asset": "",
@@ -2150,6 +2599,10 @@
   ],
   "scale": 1.135,
   "fit": "cover",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    206,
    5628,
@@ -2169,12 +2622,17 @@
   ],
   "scale": 0.429,
   "fit": "",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    145,
    5572,
    244,
    244
-  ]
+  ],
+  "piece": "01KKPBMYMGC4B8D0WVTA5YG2C4"
  },
  {
   "asset": "assets/objects/obj_coffee_ring_shadow.webp",
@@ -2188,12 +2646,17 @@
   ],
   "scale": 0.329,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    979,
    7180,
    274,
    274
-  ]
+  ],
+  "piece": "01KKPBMYMGC4B8D0WVTA5YG2C4"
  },
  {
   "asset": "assets/objects/obj_coffee_ring.webp",
@@ -2207,12 +2670,17 @@
   ],
   "scale": 0.329,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    979,
    7180,
    274,
    274
-  ]
+  ],
+  "piece": "01KKPBMYMGC4B8D0WVTA5YG2C4"
  },
  {
   "asset": "assets/tears/tear_052_shadow.webp",
@@ -2235,7 +2703,8 @@
    7388,
    1099,
    760
-  ]
+  ],
+  "piece": "01KKPKGAJR00KZSDHXSCXSGMHC"
  },
  {
   "asset": "assets/paper/graph_02.webp",
@@ -2249,12 +2718,17 @@
   ],
   "scale": 1.02,
   "fit": "cover",
+  "align": [
+   -0.42000000000000004,
+   0.48
+  ],
   "rect": [
    84,
    7304,
    1263,
    874
-  ]
+  ],
+  "piece": "01KKPKGAJR00KZSDHXSCXSGMHC"
  },
  {
   "asset": "assets/tears/tear_052_edge.webp",
@@ -2266,24 +2740,37 @@
    1094,
    754
   ],
-  "scale": 2.947,
+  "scale": 2.138,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_052.webp",
+  "composed": [
+   1024,
+   754
+  ],
   "downsample": 2,
   "fixed": [
-   2.672,
-   2.947
+   2.138,
+   1.998
   ],
   "centre": [
-   0,
-   0
+   2.138,
+   3.796
   ],
   "rect": [
    132,
    7388,
    1099,
    760
-  ]
+  ],
+  "piece": "01KKPKGAJR00KZSDHXSCXSGMHC"
  },
  {
   "asset": "assets/tears/tear_011_shadow.webp",
@@ -2365,6 +2852,10 @@
   ],
   "scale": 1.264,
   "fit": "cover",
+  "align": [
+   0.6399999999999999,
+   -0.72
+  ],
   "rect": [
    -181,
    2731,
@@ -2383,16 +2874,28 @@
    1356,
    166
   ],
-  "scale": 3.311,
+  "scale": 2.648,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_011.webp",
+  "composed": [
+   1024,
+   166
+  ],
   "downsample": 2,
   "fixed": [
-   3.311,
+   2.648,
    0.416
   ],
   "centre": [
-   0,
+   2.648,
    0
   ],
   "rect": [
@@ -2415,6 +2918,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   -0.82,
+   -0.64
+  ],
   "rect": [
    30,
    2970,
@@ -2434,6 +2941,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   0.41,
+   -0.88
+  ],
   "rect": [
    308,
    2958,
@@ -2453,6 +2964,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   -0.35,
+   0.77
+  ],
   "rect": [
    587,
    2970,
@@ -2472,6 +2987,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   0.88,
+   0.22
+  ],
   "rect": [
    865,
    2970,
@@ -2491,6 +3010,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   -0.93,
+   0.09
+  ],
   "rect": [
    1144,
    2970,
@@ -2510,6 +3033,10 @@
   ],
   "scale": 2.102,
   "fit": "cover",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    0,
    0,
@@ -2529,6 +3056,10 @@
   ],
   "scale": 1.629,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    31,
    231,
@@ -2605,22 +3136,26 @@
   "piece": "viewer_01KKP9AZEGXQ38N9BVB70W8KDR"
  },
  {
-  "asset": "assets/paper/graph_02_dusk.webp",
+  "asset": "assets/paper/sticky_yellow_02_dusk.webp",
   "src": [
-   1073,
+   1500,
    1500
   ],
   "drawn": [
    1284,
    429
   ],
-  "scale": 1.197,
+  "scale": 0.856,
   "fit": "cover",
+  "align": [
+   0.14285714285714368,
+   0.30524517716371946
+  ],
   "rect": [
-   78,
-   2121,
-   1438,
-   481
+   -78,
+   2099,
+   1556,
+   520
   ],
   "piece": "viewer_01KKP9AZEGXQ38N9BVB70W8KDR"
  },
@@ -2634,16 +3169,28 @@
    1284,
    429
   ],
-  "scale": 3.135,
+  "scale": 2.508,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_053.webp",
+  "composed": [
+   1024,
+   429
+  ],
   "downsample": 2,
   "fixed": [
-   3.135,
+   2.508,
    1.47
   ],
   "centre": [
-   0,
+   2.508,
    0
   ],
   "rect": [
@@ -2734,6 +3281,10 @@
   ],
   "scale": 0.419,
   "fit": "cover",
+  "align": [
+   0.26,
+   0
+  ],
   "rect": [
    439,
    2737,
@@ -2754,7 +3305,19 @@
   ],
   "scale": 1.097,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_037.webp",
+  "composed": [
+   449,
+   129
+  ],
   "downsample": 2,
   "fixed": [
    1.097,
