@@ -118,8 +118,13 @@ void main() {
     }
     // ignore: avoid_print
     print('$big big pieces; over the ${SlicedMasks.cap}x floor: $overBefore -> $overAfter');
-    // the population firing 54 read off the same sidecars
-    expect(big, 8);
+    // the population firing 54 read off the same sidecars, less one: firing 59 re-captured
+    // 13_messenger_states after moving the thread's notes and margins into one 28-row tear window,
+    // and its one big sheet -- the empty chair, 01M1M3AY8G83A3FBSRB1Y7W78Q, drawn 1094x876 on
+    // tear_014 -- is 1094x682 on tear_018 now, below the size that asks for the finer mask. The
+    // other seven readings are unchanged to the hundredth, so the ruler has not gone blind; the
+    // still has one fewer thing for it to read.
+    expect(big, 7);
     expect(overBefore, 2);
     expect(overAfter, 1);
     expect(at['05_settings_interrupt/settings.notify'], lessThanOrEqualTo(SlicedMasks.cap + 1e-6));

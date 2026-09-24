@@ -95,7 +95,10 @@ void main() {
     print('$big big pieces, $small small; over the ${SlicedMasks.cap}x floor: $overBefore -> $overAfter');
     // the population: the big pieces firing 54 read off the committed sidecars, and the small
     // ones, which draw exactly what they drew
-    expect(big, 8);
+    // Seven since firing 59's re-capture of 13_messenger_states: its one big sheet, the empty
+    // chair on tear_014 at 1094x876, is tear_018 at 1094x682 under the one-window thread lane.
+    // See the same note in a_big_sheet_is_sliced_at_its_own_fibres_test.
+    expect(big, 7);
     expect(small, greaterThanOrEqualTo(100));
     expect(overAfter, lessThan(overBefore));
   });
