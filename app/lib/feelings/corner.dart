@@ -13,9 +13,11 @@ import '../capture/hooks.dart';
 import '../flags.dart';
 import '../material/assignment.dart';
 import '../material/hands.dart';
+import '../material/library.dart';
 import '../material/motion.dart';
 import '../material/objects.dart';
 import '../material/palette.dart';
+import '../material/paper.dart';
 import '../material/slip.dart';
 import 'builtins.dart';
 import 'registry.dart';
@@ -44,7 +46,6 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
   bool _open = false;
   DateTime? _heldSince;
   Feeling? _under;
-  Family _family = Family.warmth;
 
   double get _intensity {
     final since = _heldSince;
@@ -134,8 +135,6 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
               opacity: _curl.value.clamp(0.0, 1.0),
               child: _Fan(
                 registry: widget.registry,
-                family: _family,
-                onFamily: (f) => setState(() => _family = f),
                 onHover: (f) {
                   if (f != _under) {
                     setState(() => _under = f);
@@ -218,12 +217,20 @@ class _CornerPainter extends CustomPainter {
   bool shouldRepaint(_CornerPainter old) => old.t != t;
 }
 
-/// The vocabulary fanned across the desk, by family. Objects, never a grid of icons.
+/// The vocabulary, laid out on a sheet of paper by family. Objects, never a grid of icons.
+///
+/// **A sheet, not a scrim, and every family with its objects on it.** Until firing 59 this was a
+/// gradient of 18% to 84% black over the page, with the six family names on tabs and only the
+/// selected family's objects under them. The cycle 3 emotional_transmission critic found it
+/// blocking twice in 07_feeling_landing: the partner card -- `room smells right again`, MOOD,
+/// HERE, PLACE -- read through it, and five of the six families were empty torn tabs with a
+/// name on them. A tinted overlay is also the one thing DIRECTION.md's `nothing is drawn as
+/// alpha` rules out. So the vocabulary is written on an opaque sheet laid over the page, and
+/// each family is a row: its tab, and beside it every object in it, so every feeling is one tap
+/// from the moment the corner turns up.
 class _Fan extends StatelessWidget {
   const _Fan({
     required this.registry,
-    required this.family,
-    required this.onFamily,
     required this.onHover,
     required this.onPick,
     required this.onDismiss,
@@ -232,117 +239,121 @@ class _Fan extends StatelessWidget {
   });
 
   final FeelingRegistry registry;
-  final Family family;
-  final ValueChanged<Family> onFamily;
   final ValueChanged<Feeling?> onHover;
   final ValueChanged<Feeling> onPick;
   final VoidCallback onDismiss;
   final Feeling? under;
   final double intensity;
 
+  /// The width of a family's tab, so the objects of every family start at one line.
+  static const double _tabWidth = 76;
+
   @override
   Widget build(BuildContext context) {
-    final members = registry.family(family);
+    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
+    final variants = lib?.stockVariants('looseleaf') ?? const <String>[];
+    final stock = variants.isEmpty ? (lib?.stockVariants('lined').firstOrNull ?? '') : variants.first;
+    // What comes up over a screen is the overlay row, and this is the one thing that does.
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.overlay);
+    final safe = tear == null || lib == null ? const [0.05, 0.06, 0.05, 0.06] : lib.safeOf(tear);
+    const padding = EdgeInsets.fromLTRB(10, 12, 10, 12);
     return GestureDetector(
       onTap: onDismiss,
-      child: DecoratedBox(
-        // A scrim at eighteen per cent is not a scrim: the family names landed straight on top of
-        // whatever region was underneath and read as printing over it rather than as being held
-        // in front of it. It goes deep toward the bottom, where the fan is, and stays light at
-        // the top so you can still see where you were.
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.0, 0.38, 1.0],
-            colors: [Color(0x2E120D08), Color(0x8A120D08), Color(0xD6120D08)],
+      child: LayoutBuilder(builder: (context, c) {
+        // The piece fills what it is given and lays its writing out at the top of its safe area,
+        // so the writing is given the whole inside height and sits at the bottom of it, where the
+        // thumb that turned the corner up still is.
+        final inside = (c.maxHeight * (1 - safe[1] - safe[3]) - padding.vertical).clamp(0.0, c.maxHeight);
+        return PaperPiece(
+          id: 'feelings.sheet',
+          stockId: stock,
+          tearId: tear,
+          liftMm: 1.6,
+          tilt: 0.004,
+          padding: padding,
+          safe: safe,
+          child: SizedBox(
+            height: inside,
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final f in Family.values) _familyRow(f),
+                  // the corner itself, which is still under the thumb
+                  const SizedBox(height: 40),
+                ],
+              ),
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              // The families, on torn strips: a stamp belongs on paper, not on the wood.
-              //
-              // This was a horizontally scrolling Row, and six index-card tabs reading Warmth,
-              // Ache, Shelter, Mischief, Static and Sparkle do not fit across a phone. Four fitted
-              // and two sat off the right edge, which is why the evidence counted four families
-              // where the floor is five: nothing was clipped or thrown, they were simply past the
-              // end of a strip nobody knew could be dragged. A Wrap puts the overflow on a second
-              // line, where a row of tabs is legible rather than merely present, and it is also
-              // the truer object -- a second row of cards laid on the desk, not a filmstrip.
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    children: [
-                      for (final f in Family.values)
-                        Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: GestureDetector(
-                            onTap: () => onFamily(f),
-                            child: Slip(
-                              id: 'family_${f.name}',
-                              // Inside the vocabulary sheet, which is itself the overlay: these
-                              // named no row and took the chrome lane's row 0, the shell's
-                              // partner strip.
-                              row: ChromeRows.overlay,
-                              stock: 'index',
-                              padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
-                              child: Stamped(
-                                f.label,
-                                size: f == family ? 12 : 10.5,
-                                colour: f == family ? Pen.stamp : Pen.margin,
-                              ),
+        );
+      }),
+    );
+  }
+
+  Widget _familyRow(Family f) {
+    final members = registry.family(f);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: _tabWidth,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Slip(
+                id: 'family_${f.name}',
+                // A row each in the tabs lane, past the three moments uses for its views: the
+                // corner comes up over moments too. These all took the overlay row once, which
+                // is the sheet's now.
+                row: 7 + f.index,
+                lane: TearLanes.tabs,
+                stock: 'index',
+                hug: true,
+                padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                child: Stamped(f.label, size: 9.5, colour: Pen.stamp),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Wrap(
+              children: [
+                for (var i = 0; i < members.length; i++)
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTapDown: (_) => onHover(members[i]),
+                    onTap: () => onPick(members[i]),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FeelingObject(
+                            feeling: members[i],
+                            size: under?.id == members[i].id ? 52 : 42,
+                            intensity: under?.id == members[i].id ? intensity : 0.6,
+                            tilt: math.sin(i * 1.7) * 0.09,
+                          ),
+                          SizedBox(
+                            width: 46,
+                            child: Text(
+                              members[i].name,
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Hands.margin(size: 10.5),
                             ),
                           ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(8, 6, 8, 84),
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    for (var i = 0; i < members.length; i++)
-                      GestureDetector(
-                        onTapDown: (_) => onHover(members[i]),
-                        onTap: () => onPick(members[i]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              FeelingObject(
-                                feeling: members[i],
-                                size: under?.id == members[i].id ? 96 : 78,
-                                intensity: under?.id == members[i].id ? intensity : 0.6,
-                                tilt: math.sin(i * 1.7) * 0.09,
-                              ),
-                              SizedBox(
-                                width: 92,
-                                child: Text(
-                                  members[i].name,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Hands.margin(size: 12),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        ],
                       ),
-                  ],
-                ),
-              ),
-            ],
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
