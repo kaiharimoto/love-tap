@@ -245,6 +245,10 @@ class _Fan extends StatelessWidget {
   final Feeling? under;
   final double intensity;
 
+  /// The tabs lane row of a family's tab: past the three moments uses for its views, because the
+  /// corner comes up over moments too.
+  static int _tabRow(Family f) => 7 + f.index;
+
   /// The width of a family's tab, so the objects of every family start at one line.
   static const double _tabWidth = 76;
 
@@ -253,8 +257,12 @@ class _Fan extends StatelessWidget {
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final variants = lib?.stockVariants('looseleaf') ?? const <String>[];
     final stock = variants.isEmpty ? (lib?.stockVariants('lined').firstOrNull ?? '') : variants.first;
-    // What comes up over a screen is the overlay row, and this is the one thing that does.
-    final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.overlay);
+    // Chosen for its shape rather than by a row: see sheetTearFor. Nothing on the sheet may share
+    // it -- the family tabs and the scrap under every object on it.
+    final tear = sheetTearFor(lib, avoid: [
+      for (final f in Family.values) tearAt(lib, lane: TearLanes.tabs, row: _tabRow(f)) ?? '',
+      for (final f in registry.active) scrapFor(lib, f.id) ?? '',
+    ]);
     final safe = tear == null || lib == null ? const [0.05, 0.06, 0.05, 0.06] : lib.safeOf(tear);
     const padding = EdgeInsets.fromLTRB(10, 12, 10, 12);
     return GestureDetector(
@@ -264,6 +272,8 @@ class _Fan extends StatelessWidget {
         // so the writing is given the whole inside height and sits at the bottom of it, where the
         // thumb that turned the corner up still is.
         final inside = (c.maxHeight * (1 - safe[1] - safe[3]) - padding.vertical).clamp(0.0, c.maxHeight);
+        final across = c.maxWidth * (1 - safe[0] - safe[2]) - padding.horizontal - _tabWidth;
+        final item = _itemFor(across, inside - _cornerRoom);
         return PaperPiece(
           id: 'feelings.sheet',
           stockId: stock,
@@ -280,9 +290,9 @@ class _Fan extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (final f in Family.values) _familyRow(f),
+                  for (final f in Family.values) _familyRow(f, item),
                   // the corner itself, which is still under the thumb
-                  const SizedBox(height: 40),
+                  const SizedBox(height: _cornerRoom),
                 ],
               ),
             ),
@@ -292,7 +302,33 @@ class _Fan extends StatelessWidget {
     );
   }
 
-  Widget _familyRow(Family f) {
+  /// Room left under the rows for the turned corner, which is still under the thumb.
+  static const double _cornerRoom = 40;
+
+  /// The largest width an object and its name can take so that every family fits the sheet at
+  /// once, [across] wide beside the tabs and [tall] high. The vocabulary is one tap away only if
+  /// it is all on the sheet, and the sheet is a 360x780 phone as often as a 480x1040 one: sized
+  /// once for the bigger, the first version of this had Warmth, Ache and Shelter scrolled off the
+  /// top of the smaller in 07_feeling_landing.
+  double _itemFor(double across, double tall) {
+    for (var w = 56.0; w > 34; w -= 2) {
+      final perLine = (across / w).floor();
+      if (perLine < 1) continue;
+      var height = 0.0;
+      for (final f in Family.values) {
+        final lines = (registry.family(f).length / perLine).ceil().clamp(1, 99);
+        height += lines * _rowHeight(w) + 6;
+      }
+      if (height <= tall) return w;
+    }
+    return 34;
+  }
+
+  /// How tall one line of objects [w] wide is: the object, its name, and the gap under them.
+  static double _rowHeight(double w) => (w - 6) + _nameSize(w) * 1.35 + 4;
+  static double _nameSize(double w) => (w / 4.6).clamp(9.5, 11.5);
+
+  Widget _familyRow(Family f, double w) {
     final members = registry.family(f);
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
@@ -308,7 +344,7 @@ class _Fan extends StatelessWidget {
                 // A row each in the tabs lane, past the three moments uses for its views: the
                 // corner comes up over moments too. These all took the overlay row once, which
                 // is the sheet's now.
-                row: 7 + f.index,
+                row: _tabRow(f),
                 lane: TearLanes.tabs,
                 stock: 'index',
                 hug: true,
@@ -325,26 +361,32 @@ class _Fan extends StatelessWidget {
                     behavior: HitTestBehavior.opaque,
                     onTapDown: (_) => onHover(members[i]),
                     onTap: () => onPick(members[i]),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 2),
+                    child: SizedBox(
+                      width: w,
+                      height: _rowHeight(w),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          FeelingObject(
-                            feeling: members[i],
-                            size: under?.id == members[i].id ? 52 : 42,
-                            intensity: under?.id == members[i].id ? intensity : 0.6,
-                            tilt: math.sin(i * 1.7) * 0.09,
-                          ),
                           SizedBox(
-                            width: 46,
-                            child: Text(
-                              members[i].name,
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Hands.margin(size: 10.5),
+                            width: w - 6,
+                            height: w - 6,
+                            child: OverflowBox(
+                              maxWidth: w + 6,
+                              maxHeight: w + 6,
+                              child: FeelingObject(
+                                feeling: members[i],
+                                size: under?.id == members[i].id ? w + 4 : w - 6,
+                                intensity: under?.id == members[i].id ? intensity : 0.6,
+                                tilt: math.sin(i * 1.7) * 0.09,
+                              ),
                             ),
+                          ),
+                          Text(
+                            members[i].name,
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Hands.margin(size: _nameSize(w)),
                           ),
                         ],
                       ),

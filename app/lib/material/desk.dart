@@ -171,8 +171,13 @@ class PartnerStrip extends StatelessWidget {
                           ),
                           if (lastHeard != null) ...[
                             const SizedBox(width: 8),
-                            Text(S.lastHeard(nowMs, lastHeard!),
-                                maxLines: 1, softWrap: false, style: Hands.margin(size: 12)),
+                            Flexible(
+                              child: Text(S.lastHeard(nowMs, lastHeard!),
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Hands.margin(size: 12)),
+                            ),
                           ],
                         ]),
                         const SizedBox(height: 2),

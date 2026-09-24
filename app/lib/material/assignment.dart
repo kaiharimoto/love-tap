@@ -402,6 +402,35 @@ String? scrapFor(MaterialLibrary? lib, String feelingId) {
   return scraps[hashOf(feelingId) % scraps.length];
 }
 
+/// The mask a page-sized sheet laid over a whole region is torn from: the writable mask whose
+/// tear leaves the most of the sheet to write on, which none of [avoid] and no chrome mask is.
+///
+/// **A row cannot choose this, because a row does not know the shape of what it tears.** The
+/// feeling sheet first took [ChromeRows.overlay], which walks to `tear_001` -- a 1024x578 strip
+/// whose tear may reach 25.5% down from the top and 20.8% up from the bottom. `safe` is a
+/// fraction of the piece, and below four times the mask's own size the mask is scaled rather
+/// than sliced, so on a sheet the height of a 360x780 region 46% of it was torn band and the
+/// vocabulary did not fit in what was left: in 07_feeling_landing Warmth, Ache and Shelter were
+/// scrolled off its top. `tear_026` leaves 81% of the area inside its safe insets, `tear_001`
+/// 50%. What is under the sheet is covered by it, so the masks that could repeat on the glass
+/// are the chrome above it, whatever sits on it ([avoid]), and nothing else.
+String? sheetTearFor(MaterialLibrary? lib, {Iterable<String> avoid = const []}) {
+  if (lib == null) return null;
+  final skip = {...chromeMasks(lib), ...avoid};
+  String? best;
+  var most = -1.0;
+  for (final t in lib.writableTears) {
+    if (skip.contains(t)) continue;
+    final s = lib.safeOf(t);
+    final inside = (1 - s[0] - s[2]) * (1 - s[1] - s[3]);
+    if (inside > most) {
+      best = t;
+      most = inside;
+    }
+  }
+  return best;
+}
+
 int _coprimeStride(int n) {
   for (var s = (n * 0.37).round(); s < n; s++) {
     if (_gcd(s, n) == 1) return s;
