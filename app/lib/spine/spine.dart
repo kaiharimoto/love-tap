@@ -173,6 +173,16 @@ class Spine {
     return true;
   }
 
+  /// A fresh id off this spine's own factory, for an event built by hand rather than appended.
+  ///
+  /// The capture's staged read marker used to mint its id from a SECOND factory seeded like this
+  /// one. A seeded factory's first id at a given millisecond is always the same string, so that
+  /// marker was always a copy of whatever this spine had minted first at the frozen instant -- in
+  /// 13_messenger_states, teo's own pending read marker (`...FKG`). [applyFromHost] then took the
+  /// partner's marker for the host assigning a seq to teo's, and replaced it. Asking the spine
+  /// that already minted every other id is the only way to be sure an id is new to it.
+  String mintId(DateTime at) => _ulids.next(at);
+
   /// Events minted here that the host has not accepted yet (the outbox).
   List<Event> get pending => List.unmodifiable(_pending);
 
@@ -333,6 +343,15 @@ class Spine {
       if (e.seq == null) continue;
       final known = _byId[e.id];
       if (known != null) {
+        // The same id must be the same event. A copy coming back is ordinary -- a pull that
+        // overlaps a push -- but an event by someone else, or of another type, under an id this
+        // spine already holds is two events that collided, and taking it as an assignment
+        // replaced one person's event with the other's without a word. Refuse it out loud.
+        if (known.author != e.author || known.type != e.type) {
+          throw StateError('event id ${e.id} is already ${known.author.name}\'s ${known.type}; '
+              'the host sent ${e.author.name}\'s ${e.type} under it. Two events were minted '
+              'with one id.');
+        }
         if (known.seq == null) {
           _pending.removeWhere((p) => p.id == e.id);
           _touched();

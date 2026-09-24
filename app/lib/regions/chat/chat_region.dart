@@ -143,10 +143,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       await scope.spine.applyFromHost([
         Event(
           // a real id, because a spine row is keyed by one: 'stage_read_marker' is not a ULID and
-          // the store would not take it
-          // seeded, like the spine's own: this line only ever runs under capture, and a read
-          // marker with a fresh eighty bits in it moves the paper under the note it marks
-          id: UlidFactory.seeded(Flags.captureSeed).next(scope.clock.now()),
+          // the store would not take it. Off the spine's own factory, which is seeded under
+          // capture: a second factory seeded the same way minted the spine's FIRST id at this
+          // instant over again, which was teo's own read marker, and the partner's marker
+          // silently replaced it (firing 59, see Spine.mintId).
+          id: scope.spine.mintId(scope.clock.now()),
           seq: (seen.seq ?? 0) + 1,
           author: scope.partner,
           device: DeviceKind.android,
