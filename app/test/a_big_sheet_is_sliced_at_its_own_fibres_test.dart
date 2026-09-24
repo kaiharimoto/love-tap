@@ -123,8 +123,10 @@ void main() {
     // and its one big sheet -- the empty chair, 01M1M3AY8G83A3FBSRB1Y7W78Q, drawn 1094x876 on
     // tear_014 -- is 1094x682 on tear_018 now, below the size that asks for the finer mask. The
     // other seven readings are unchanged to the hundredth, so the ruler has not gone blind; the
-    // still has one fewer thing for it to read.
-    expect(big, 7);
+    // still has one fewer thing for it to read. And one fewer again at firing 60, for the same
+    // reason: 12_search was re-captured for the first time since that window, and the same empty
+    // chair, the thread under the search page, is tear_018 at 1094x682 there too.
+    expect(big, 6);
     expect(overBefore, 2);
     expect(overAfter, 1);
     expect(at['05_settings_interrupt/settings.notify'], lessThanOrEqualTo(SlicedMasks.cap + 1e-6));
