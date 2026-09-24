@@ -127,7 +127,7 @@ class PartnerStrip extends StatelessWidget {
     // `a_pressed_clover_is_on_the_strip_test` measures; at 360, the width of 06, 07, 08, 11 and 15
     // and a common Android phone, a clover of the same size is 1% of a screen 56% as large, and
     // its room was a quarter of a strip whose second row overflowed by 39 px.
-    final narrow = (MediaQuery.sizeOf(context).width / 480).clamp(0.7, 1.0).toDouble();
+    final narrow = narrowing(MediaQuery.sizeOf(context).width);
 
     return GestureDetector(
       onTap: onTap,
@@ -222,6 +222,10 @@ class PartnerStrip extends StatelessWidget {
   /// The pressed clover's ink, in logical pixels: enough for 1% of a 480x1040 screen at 3x to be
   /// family D over the 0.09 chroma floor. `test/a_pressed_clover_is_on_the_strip_test.dart`.
   static const double cloverSize = 112;
+
+  /// How much the clover and its room shrink on a screen [width] logical pixels wide: 1 at 480
+  /// and above, 0.75 at 360, never under 0.7.
+  static double narrowing(double width) => (width / 480).clamp(0.7, 1.0).toDouble();
 
   /// How much of the strip's right end the status line leaves to the clover.
   static const double _cloverRoom = 80;

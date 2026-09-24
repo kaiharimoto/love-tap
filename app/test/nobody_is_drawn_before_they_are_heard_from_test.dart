@@ -10,13 +10,16 @@
 // of an event in the log, and the size each tab card's label is stamped at. Not to a coordinate.
 //
 // Re-break: draw PartnerStrip unconditionally in app.dart and `a fresh install draws nobody` fails;
-// pass `_index` rather than `-1` to _Tabs while setup is up and `the setup list lights no tab` fails.
+// pass `_index` rather than `-1` to _Tabs while setup is up and `the setup list lights no tab` fails;
+// drop the desk's own clover from app.dart and the same case fails on the clover (firing 61: without
+// it 10_first_run and 17_setup_pwa read 0.1% and 0.0 accent against section 7's 1%).
 // `partner_state_says_how_old_it_is_test.dart` holds the other side: on the seeded year, with the
 // same setup list up, the strip is still drawn and still says when they were last heard from.
 import 'package:desk/app.dart';
 import 'package:desk/material/desk.dart';
 import 'package:desk/material/hands.dart';
 import 'package:desk/material/library.dart';
+import 'package:desk/material/objects.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/setup/checklist.dart';
 import 'package:desk/setup/setup_region.dart';
@@ -112,6 +115,18 @@ void main() {
     expect(find.text('NEED'), findsNothing);
     expect(find.text('ENERGY'), findsNothing);
 
+    // The clover rode on the strip and is the one coloured thing on the screen (COLOR.md section 7
+    // item 5). With no strip it lies on the desk, once, and not over a word.
+    expect(find.byType(PressedClover), findsOneWidget,
+        reason: 'taking the strip away took the only coloured thing on the screen with it');
+    final leaf = tester.getRect(find.byType(PressedClover));
+    for (final e in find.byType(Text).evaluate()) {
+      final w = e.widget as Text;
+      if ((w.data ?? '').trim().isEmpty) continue;
+      final r = tester.getRect(find.byWidget(w).first);
+      expect(leaf.overlaps(r), isFalse, reason: 'the clover at $leaf lies over "${w.data}" at $r');
+    }
+
     final lit = tabs(tester);
     expect(lit.keys.toSet(), labels.toSet(), reason: 'every card is still there to leave by');
     expect(lit.values.where((l) => l), isEmpty,
@@ -133,6 +148,15 @@ void main() {
     expect(lit.values.where((l) => l).length, 1);
     expect(find.byType(PartnerStrip), findsNothing,
         reason: 'this is 10_first_run: chat on an empty log, and still nobody to draw');
+    // and the clover is on this screen too, clear of `search`, which is written top right
+    expect(find.byType(PressedClover), findsOneWidget);
+    final leaf = tester.getRect(find.byType(PressedClover));
+    for (final e in find.byType(Text).evaluate()) {
+      final w = e.widget as Text;
+      if ((w.data ?? '').trim().isEmpty) continue;
+      final r = tester.getRect(find.byWidget(w).first);
+      expect(leaf.overlaps(r), isFalse, reason: 'the clover at $leaf lies over "${w.data}" at $r');
+    }
   });
 
   testWidgets('the strip arrives with the first thing they wrote', (tester) async {
@@ -152,5 +176,6 @@ void main() {
     expect(find.byType(PartnerStrip), findsOneWidget);
     expect(find.text('NEED'), findsOneWidget);
     expect(find.text('ENERGY'), findsOneWidget);
+    expect(find.byType(PressedClover), findsOneWidget, reason: 'one clover, the strip\'s');
   });
 }

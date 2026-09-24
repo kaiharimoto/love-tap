@@ -19,7 +19,8 @@
 // centre is at 4.00x. The population is the same six pieces; 03_us's two bodies are shorter too.
 //
 // RE-BREAK: have `SlicedMasks.fibresOf` return the uniform `[fibres, fibres, fibres, fibres]`.
-// settings.notify goes back to 4.89x and the count over the floor to 2.
+// The setup sheet goes back to 4.20x and the count over the floor to 1 (it was settings.notify at
+// 4.89x and a count of 2 until both sheets got shorter at firing 61).
 import 'dart:convert';
 import 'dart:io';
 
@@ -133,7 +134,10 @@ void main() {
     // reason: 12_search was re-captured for the first time since that window, and the same empty
     // chair, the thread under the search page, is tear_018 at 1094x682 there too.
     expect(big, 6);
-    expect(overBefore, 2);
+    // 2 until firing 61's 05 re-capture: settings.notify is 3118 -> 2559 px tall since the insets
+    // follow the break, and at the uniform floor that is 4.00x, so only the setup sheet (4.20x)
+    // is over it now without the per-edge fibres
+    expect(overBefore, 1);
     expect(overAfter, 0);
     expect(at['05_settings_interrupt/settings.notify'], lessThanOrEqualTo(SlicedMasks.cap + 1e-6));
     expect(at['17_setup_pwa/tear_001'], lessThanOrEqualTo(SlicedMasks.cap + 1e-6));

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'capture/bus.dart';
 import 'flags.dart';
 import 'material/desk.dart';
+import 'material/objects.dart';
 import 'material/hands.dart';
 import 'material/library.dart';
 import 'material/light.dart';
@@ -195,7 +196,10 @@ class _ShellState extends State<Shell> {
         child: LandingStage(
           arrivals: _arrivals.stream,
           child: SafeArea(
-          child: Column(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+          Column(
             children: [
               // Nobody is drawn at the top until somebody has been heard from. A strip of dials
               // for a partner who does not exist yet is a relationship the phone made up.
@@ -258,7 +262,26 @@ class _ShellState extends State<Shell> {
               // leaves it -- tapping one is the only way out, so the cards cannot go.
               _Tabs(index: setup != null ? -1 : _index, labels: _labels, onPick: _go),
             ],
-            ),
+          ),
+              // The pressed clover rides on the partner strip, and it is the one coloured thing on
+              // the screen (docs/COLOR.md section 7 items 5 and 6). With nobody heard from there is
+              // no strip, and taking it away took the clover with it: 10_first_run and
+              // 17_setup_pwa fell from 1.1% accent to 0.1% and 0.0 (firing 61). So until the strip
+              // arrives the clover lies on the desk at the top left -- a leaf is not a word, and the
+              // top right is where `search` is written on chat.
+              if (!scope.partnerHeardFrom)
+                Positioned(
+                  left: -14,
+                  top: -8,
+                  child: IgnorePointer(
+                    child: PressedClover(
+                      size: PartnerStrip.cloverSize *
+                          PartnerStrip.narrowing(MediaQuery.sizeOf(context).width),
+                    ),
+                  ),
+                ),
+            ],
+          ),
           ),
         ),
       ),
