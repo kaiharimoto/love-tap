@@ -123,6 +123,11 @@ class PartnerStrip extends StatelessWidget {
     // a word to composite at alpha >= 0.80.
     final energy = state.energy;
     final weight = 0.80 + 0.05 * energy;
+    // The clover and the room left for it scale with the screen's width. At 480 they are what
+    // `a_pressed_clover_is_on_the_strip_test` measures; at 360, the width of 06, 07, 08, 11 and 15
+    // and a common Android phone, a clover of the same size is 1% of a screen 56% as large, and
+    // its room was a quarter of a strip whose second row overflowed by 39 px.
+    final narrow = (MediaQuery.sizeOf(context).width / 480).clamp(0.7, 1.0).toDouble();
 
     return GestureDetector(
       onTap: onTap,
@@ -179,6 +184,13 @@ class PartnerStrip extends StatelessWidget {
                                   style: Hands.margin(size: 12)),
                             ),
                           ],
+                          // The pencil is a fact about their phone, like when it was last heard
+                          // from, so it goes on this line, which ellipsizes to make room for it.
+                          // The line below is fixed widths end to end and had none to give.
+                          if (state.battery != null) ...[
+                            const SizedBox(width: 8),
+                            _Pencil(charge: state.battery! / 100.0, charging: state.charging),
+                          ],
                         ]),
                         const SizedBox(height: 2),
                         Row(children: [
@@ -187,21 +199,19 @@ class PartnerStrip extends StatelessWidget {
                           _Dial(label: 'need', value: state.need),
                           const SizedBox(width: 10),
                           _Dial(label: 'energy', value: state.energy),
-                          const SizedBox(width: 10),
-                          if (state.battery != null) _Pencil(charge: state.battery! / 100.0, charging: state.charging),
                         ]),
                       ],
                     ),
                   ),
                   // the clover's room: the status line ellipsizes before it rather than under it
-                  const SizedBox(width: _cloverRoom),
+                  SizedBox(width: _cloverRoom * narrow),
                 ],
               ),
             ),
             // Lying across the strip's right end and off it onto the desk, pressed flat. The strip
             // is at the top of every region, so this is the one coloured thing on every screen
             // that has it -- docs/COLOR.md §7 items 5 and 6. See [PressedClover].
-            const Positioned(right: -16, top: -10, child: PressedClover(size: cloverSize)),
+            Positioned(right: -16, top: -10, child: PressedClover(size: cloverSize * narrow)),
             ],
           ),
           ),

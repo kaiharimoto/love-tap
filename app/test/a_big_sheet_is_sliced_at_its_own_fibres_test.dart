@@ -12,6 +12,12 @@
 // bands under 0.7% of the mask in total to get under 4x, and tear_001's top and bottom fibres are
 // 0.245 and 0.214. It goes 6.96 -> 6.51 and stays over, on arithmetic, not on effort.
 //
+// AND WHAT REACHED IT ANYWAY (firing 61). That arithmetic was right about the slice and wrong
+// about the sheet: the sheet was 4594 px tall because its writing was inset by a share of its
+// height rather than by the depth of its break (`SlicedMasks.safeInsets`). Inset by the break, it
+// is 3001 px -- the whole setup list on one screen, where it opened on 40% empty paper -- and its
+// centre is at 4.00x. The population is the same six pieces; 03_us's two bodies are shorter too.
+//
 // RE-BREAK: have `SlicedMasks.fibresOf` return the uniform `[fibres, fibres, fibres, fibres]`.
 // settings.notify goes back to 4.89x and the count over the floor to 2.
 import 'dart:convert';
@@ -128,8 +134,8 @@ void main() {
     // chair, the thread under the search page, is tear_018 at 1094x682 there too.
     expect(big, 6);
     expect(overBefore, 2);
-    expect(overAfter, 1);
+    expect(overAfter, 0);
     expect(at['05_settings_interrupt/settings.notify'], lessThanOrEqualTo(SlicedMasks.cap + 1e-6));
-    expect(at['17_setup_pwa/tear_001'], closeTo(6.51, 0.01));
+    expect(at['17_setup_pwa/tear_001'], lessThanOrEqualTo(SlicedMasks.cap + 1e-6));
   });
 }
