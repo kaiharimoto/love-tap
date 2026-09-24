@@ -133,7 +133,9 @@ def band(surfaces, k):
             d0 = float(s.get("downsample", 1))
             fx, fy = (f / d0 for f in s["fixed"])
             cx, cy = (c / d0 for c in s["centre"])
-            e = float(s.get("slice", 0.4))
+            # a list since firing 60, when the edge took its mask's bands: [left, top]
+            sl = s.get("slice", 0.4)
+            e = float(sl[0] if isinstance(sl, list) else sl)
             a = _nine(_premultiplied(full), dw, dh, fx, cx, fy, cy, e)
             b = _nine(_premultiplied(small), dw, dh, fx * k, cx * k, fy * k, cy * k, e)
             ca = a[..., :3] + PAPER * (1 - a[..., 3:4] / 255)
