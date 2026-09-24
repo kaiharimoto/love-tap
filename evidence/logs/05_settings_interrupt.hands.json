@@ -2,7 +2,7 @@
  "text": "evidence/05_settings_interrupt.text.json",
  "calt": true,
  "runs_read": 60,
- "pairs": 121,
+ "pairs": 126,
  "pairs_repeating": 10,
  "pairs_avoidable": 10,
  "worst": [
@@ -87,10 +87,10 @@
    "run": "something their phone notices"
   }
  ],
- "glyphs": 614,
- "stalls": 21,
+ "glyphs": 631,
+ "stalls": 26,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "10 of 121 repeated letters inside one declared run take fewer outlines than they could (10 repeat one at all), and 0 of 614 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "10 of 126 repeated letters inside one declared run take fewer outlines than they could (10 repeat one at all), and 0 of 631 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

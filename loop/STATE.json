@@ -770,8 +770,8 @@
    "owner_priority": "the-ui",
    "why": "FILED AT FIRING 31, from the emotional-transmission critic, and it is the sharpest statement yet of what this row is failing at. All twelve partner signals in 01_pulse.png are rendered as one handwritten label-value table on one stock in one ink weight -- MOOD bright, BATTERY 72%, RINGER normal, SIGNAL wifi, AT HOME yes. docs/SIGNALS.md specifies a MATERIAL rendering per signal: a pencil worn to a stub, tape over the corner, the strip askew, a house doodle, the corner folded by need, pen pressure carrying energy, the stock itself chosen by mood. None of those is present. The row's own wording is that a feeling must arrive as a sensation rather than as a message in a different colour; twelve rows of a table is a message in a different FONT, which is the same failure with the colour swapped out. This is also where the visual-design row's 'one hue, no accent' finding and this row meet: the signals are the obvious place for material and colour to carry meaning and they currently carry none.",
    "measurement": "01_pulse.png renders at least six of the twelve signals through the material treatment docs/SIGNALS.md names for them rather than as a label-value pair, verified by 01_pulse.surfaces.json carrying a distinct asset per treated signal. Re-break by returning one to a text row and watching its asset leave the sidecar.",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "rank": 24,
    "filed_at_firing": 31,
    "rank_before_firing_33": 32,
@@ -779,7 +779,11 @@
    "rank_before_firing_43": 28,
    "rank_before_firing_50": 20,
    "rank_before_firing_53": 22,
-   "rank_before_firing_58": 15
+   "rank_before_firing_58": 15,
+   "closed_at_firing": 62,
+   "closed_by": "firing 62: regions/pulse/signal_marks.dart draws the six passive signals of docs/SIGNALS.md as pencil marks in the margin of their sheet (battery a pencil worn to a stub with a red ring under 15%, charging a plug, ringer vibrate a squiggle and silent the squiggle struck through, walking footprints plus a tilted sheet, riding an arrow, cellular a mast, at home a house; the ordinary value of each draws nothing). Mood was already the stock. The declared signals stay words.",
+   "measurement_restated_at_firing_62": "The filed measurement asked for a distinct ASSET per treated signal in 01_pulse.surfaces.json. A pencil mark is drawn, not a rendered asset, so there is none for the sidecar to carry; re-anchored (3d) to the signal id each SignalMark declares, via test/their_phone_is_drawn_in_the_margin_test.dart: all six ids draw on a busy state, only battery on an ordinary one, and on the seeded pulse the marks are a subset of what the partner earns, battery among them, and no Stamped label of the six remains. Six of twelve signals treated, which is the item's floor.",
+   "worked_at_firing_62": "MEASURED. Re-broken by putting `_Fact('battery', ...)` back: the test names `[battery]` as still a label and a value. One-scene WebKit capture of 01_pulse from 886484c (committed): the pencil lies in the margin under the words at about three-quarters length (seed battery 72%); ringer normal, wifi and still draw nothing, as SIGNALS.md says; the house is withheld because the seed's `place` is newer than `at_home`, which _where already arbitrates. 01_pulse.text.json 53 runs -> 45: the eight that left are exactly BATTERY/72%, RINGER/normal, MOVING/still, SIGNAL/wifi, which is the tabulation the item is about rather than a population accident. The first 01_pulse attempt in this firing died on `page.waitForFunction: Timeout 30000ms exceeded` and passed on one retry against the same build (--no-build); recorded, not explained. NOT DONE from SIGNALS.md: need as a folded corner, energy as pen pressure, availability as the strip's orientation, last_active as ink wetness, local_hour as their light."
   },
   {
    "id": "three-of-the-four-modules-are-below-the-fold-in-the-artifact-that-must-show-four",
@@ -808,8 +812,8 @@
    "owner_priority": "the-ui",
    "why": "FILED AT FIRING 31 from the code critic, VERIFIED HERE against the artifact. app/lib/regions/settings/notifications.dart:86's _said switch turns each event type into the phrase a person would use -- 'a picture', 'their voice', 'a date moving', 'a day that matters' -- and has no case for passed_on. 05_settings_interrupt.text.json carries the result: every other row in the interrupt matrix is a sentence and one row reads 'passed on', which is the registry id with its underscore swapped for a space, sitting on a committed artifact. IT IS AN INSTANCE OF A LARGER THING and that is why it is filed with the row it is. The critic found three per-type lists still living outside the registry: this one, moments_region.dart:84 which hardcodes its type sets so passed_on and ping appear in no Moments view at all, and search_page.dart:56 which maps 8 of 18 types. The thread-versus-search drift the rubric names IS fixed and tested; the promise that adding a type is one registry entry and one renderer is still false, and this row is the proof that has already reached a picture.",
    "measurement": "A test asserts every id in the registry has a case in notifications.dart's _said, in moments_region's type sets and in search_page's map -- the same shape as the existing thread_types_test -- and 05_settings_interrupt.text.json contains no run equal to a registry id with underscores replaced. Re-break by removing one case and watching the test and the artifact go red together.",
-   "state": "open",
-   "attempts": 0,
+   "state": "closed",
+   "attempts": 1,
    "rank": 25,
    "filed_at_firing": 31,
    "rank_before_firing_33": 34,
@@ -817,7 +821,10 @@
    "rank_before_firing_43": 30,
    "rank_before_firing_50": 22,
    "rank_before_firing_53": 24,
-   "rank_before_firing_58": 17
+   "rank_before_firing_58": 17,
+   "closed_at_firing": 62,
+   "closed_by": "firing 62: EventTypeSpec.said is a REQUIRED field of the registry, every one of the 18 types carries its phrase (passed_on: 'something handed on to you'), and settings' matrix reads t.said; the private _said switch is gone. thread_types_test asserts every said is non-empty, is not its id with underscores swapped, holds no underscore, and is unique.",
+   "worked_at_firing_62": "MEASURED on the artifact, one instrument: 05_settings_interrupt.text.json 70 runs before and 70 after; the run `passed on` (before) is `something handed on to you` (after), and no run equals a registry id with underscores replaced. Re-broken by setting passed_on's said to 'passed on': `passed_on is named by its own registry id`. Captured from 886484c with --no-build after the 01_pulse build. NOT DONE, and deliberately: the item's other two lists. moments_region's type sets and search_page's facet map are CURATION -- read_marker in a Moments view, or a facet for state_passive, would be wrong -- so a test that every id has a case there would force nonsense. Whether ping and passed_on belong in a Moments view is a design question for ADDRESS; neither reaches the glass as an id today."
   },
   {
    "id": "the-tailscale-transport-binds-loopback-in-the-only-mode-that-is-ever-used",
@@ -4245,5 +4252,6 @@
  },
  "evidence_note_firing_59": "One-scene re-captures committed at firing 59: 13 (twelve runs in all), 01, 02, 05, 06, 08 (from a build carrying ranks 1-3), and 07 (from a later build carrying rank 4's fitted sheet). Aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill) were NOT committed from these runs, because a one-scene DIFF declares itself a baseline. They still describe firing 56's full capture, and the next OBSERVE's full ./capture.sh refreshes them. The ffmpeg is distro 6.1.1, per CONTINUE §5.",
  "evidence_note_firing_60": "One-scene WebKit re-captures committed at firing 60, scene files only: 03_us (twice; the second carries both fixes), 02_chat (+ its three 300% crops), 12_search (twice), 04_moments, 14_media_viewer (twice; the second carries the sticky framing). The aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill, frames) were NOT committed: they still describe firing 56's full capture. Four stills' surfaces sidecars predate the lit-edge fix, and tools/check/lit_edge_scale.py reads 19 of 90 pieces failing, all on them: 05_settings 5 of 7, 05_settings_interrupt 1 of 1, 10_first_run 2 of 3, 13_messenger_states 11 of 12. The next full ./capture.sh refreshes them. ffmpeg distro 6.1.1 per CONTINUE section 5.",
- "evidence_note_firing_61": "One-scene WebKit re-captures committed at firing 61, scene files only: 10_first_run (twice), 17_setup_pwa (three times), 03_us, 02_chat, 05_settings, 05_settings_interrupt. Now eleven stills are newer than the aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill, frames), which still describe firing 56's full capture; the next OBSERVE's full ./capture.sh refreshes them. The palette readings quoted on items this firing were taken with tools/check/palette.py --only on the new stills and not committed. Every one-scene capture reports 12_search refused by tears.py --frame-fatal against firing 60's committed still (filed). ffmpeg distro 6.1.1 per CONTINUE section 5."
+ "evidence_note_firing_61": "One-scene WebKit re-captures committed at firing 61, scene files only: 10_first_run (twice), 17_setup_pwa (three times), 03_us, 02_chat, 05_settings, 05_settings_interrupt. Now eleven stills are newer than the aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill, frames), which still describe firing 56's full capture; the next OBSERVE's full ./capture.sh refreshes them. The palette readings quoted on items this firing were taken with tools/check/palette.py --only on the new stills and not committed. Every one-scene capture reports 12_search refused by tears.py --frame-fatal against firing 60's committed still (filed). ffmpeg distro 6.1.1 per CONTINUE section 5.",
+ "evidence_note_firing_62": "One-scene WebKit re-captures committed at firing 62, scene files only, from 886484c: 01_pulse (second attempt; the first timed out in page.waitForFunction), 05_settings_interrupt (from the same build, --no-build; 05_settings.png came out byte-identical). The aggregate rulers (DIFF, MANIFEST, legibility, palette, flat_fill, frames) were NOT committed. Two further one-scene captures this firing were experiments and were discarded: 02_chat with torn tabs (rejected, see rank 17) and a first 01_pulse with a shorter pencil. Every one-scene capture still reports 12_search refused on tear_001 twice against firing 60's committed still (filed at 61). ffmpeg distro 6.1.1."
 }

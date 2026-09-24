@@ -10,26 +10,26 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3601
+   "ms": 3021
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2104
   },
   {
    "do": "shot",
-   "ms": 6079
+   "ms": 8428
   },
   {
    "do": "report",
-   "ms": 710
+   "ms": 725
   }
  ],
  "shots": [
   {
    "out": "evidence/01_pulse.png",
    "clip": null,
-   "text_runs": 53,
+   "text_runs": 45,
    "surfaces": 42
   }
  ],
@@ -89,13 +89,13 @@
  "blob_waits": [
   {
    "at": "01_pulse.png",
-   "waited_ms": 2418,
+   "waited_ms": 4022,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 9955,
- "cold_ms": 1543,
+ "install_ms": 9305,
+ "cold_ms": 1531,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

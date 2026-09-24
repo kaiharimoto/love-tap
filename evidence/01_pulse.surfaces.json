@@ -11,6 +11,10 @@
   ],
   "scale": 2.102,
   "fit": "cover",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    0,
    0,
@@ -96,6 +100,10 @@
   ],
   "scale": 1.286,
   "fit": "cover",
+  "align": [
+   1,
+   -1
+  ],
   "rect": [
    -507,
    14,
@@ -113,16 +121,28 @@
    1380,
    258
   ],
-  "scale": 3.369,
+  "scale": 2.695,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_049.webp",
+  "composed": [
+   1024,
+   258
+  ],
   "downsample": 2,
   "fixed": [
-   3.369,
+   2.695,
    1.27
   ],
   "centre": [
-   0,
+   2.695,
    0
   ],
   "rect": [
@@ -144,6 +164,10 @@
   ],
   "scale": 0.8,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    620,
    -514,
@@ -163,6 +187,10 @@
   ],
   "scale": 0.8,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    620,
    -514,
@@ -182,6 +210,10 @@
   ],
   "scale": 1.939,
   "fit": "cover",
+  "align": [
+   -0.18000000000000005,
+   -0.64
+  ],
   "rect": [
    -11,
    275,
@@ -202,6 +234,10 @@
   ],
   "scale": 1.939,
   "fit": "cover",
+  "align": [
+   -0.18000000000000005,
+   -0.64
+  ],
   "rect": [
    -32,
    254,
@@ -288,6 +324,10 @@
   ],
   "scale": 1.275,
   "fit": "cover",
+  "align": [
+   1,
+   0
+  ],
   "rect": [
    -501,
    133,
@@ -305,17 +345,29 @@
    1368,
    864
   ],
-  "scale": 3.34,
+  "scale": 2.672,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_011.webp",
+  "composed": [
+   1024,
+   864
+  ],
   "downsample": 2,
   "fixed": [
-   3.34,
-   2.164
+   2.672,
+   2.004
   ],
   "centre": [
-   0,
-   0
+   2.672,
+   0.641
   ],
   "rect": [
    33,
@@ -325,14 +377,14 @@
   ]
  },
  {
-  "asset": "assets/tears/tear_027_shadow.webp",
+  "asset": "assets/tears/tear_003_shadow.webp",
   "src": [
    1024,
-   873
+   766
   ],
   "composed": [
    225,
-   210
+   211
   ],
   "drawn": [
    198,
@@ -343,19 +395,20 @@
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_027_shadow",
+  "render": "tear_003_shadow",
   "rect": [
    35,
    1253,
    200,
-   185
-  ]
+   186
+  ],
+  "piece": "scrap.goodnight.0"
  },
  {
-  "asset": "assets/tears/tear_027.webp",
+  "asset": "assets/tears/tear_003.webp",
   "src": [
    1024,
-   873
+   766
   ],
   "composed": [
    198,
@@ -365,7 +418,7 @@
    198,
    183
   ],
-  "scale": 1,
+  "scale": 1.002,
   "fit": "mask",
   "slice": [
    0.4,
@@ -377,7 +430,7 @@
   ],
   "fixed": [
    0.242,
-   0.262
+   0.299
   ],
   "centre": [
    0,
@@ -387,8 +440,9 @@
    35,
    1253,
    200,
-   185
-  ]
+   186
+  ],
+  "piece": "scrap.goodnight.0"
  },
  {
   "asset": "assets/paper/looseleaf_02.webp",
@@ -402,30 +456,47 @@
   ],
   "scale": 0.185,
   "fit": "cover",
+  "align": [
+   0.7747428571428572,
+   -0.5712374444641906
+  ],
   "rect": [
-   -228,
-   1201,
+   -213,
+   1195,
    481,
-   444
-  ]
+   446
+  ],
+  "piece": "scrap.goodnight.0"
  },
  {
-  "asset": "assets/tears/tear_027_edge.webp",
+  "asset": "assets/tears/tear_003_edge.webp",
   "src": [
    512,
-   436
+   383
   ],
   "drawn": [
    198,
    183
   ],
-  "scale": 0.524,
+  "scale": 0.599,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_003.webp",
+  "composed": [
+   198,
+   183
+  ],
   "downsample": 2,
   "fixed": [
    0.483,
-   0.524
+   0.599
   ],
   "centre": [
    0,
@@ -435,49 +506,51 @@
    35,
    1253,
    200,
-   185
-  ]
+   186
+  ],
+  "piece": "scrap.goodnight.0"
  },
  {
-  "asset": "assets/tears/tear_035_shadow.webp",
+  "asset": "assets/tears/tear_024_shadow.webp",
   "src": [
    1024,
-   885
+   843
   ],
   "composed": [
    225,
-   213
+   220
   ],
   "drawn": [
    198,
-   186
+   193
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_035_shadow",
+  "render": "tear_024_shadow",
   "rect": [
-   241,
+   240,
    1201,
    220,
-   209
-  ]
+   216
+  ],
+  "piece": "scrap.nyeh.1"
  },
  {
-  "asset": "assets/tears/tear_035.webp",
+  "asset": "assets/tears/tear_024.webp",
   "src": [
    1024,
-   885
+   843
   ],
   "composed": [
    198,
-   186
+   193
   ],
   "drawn": [
    198,
-   186
+   193
   ],
   "scale": 1,
   "fit": "mask",
@@ -491,18 +564,19 @@
   ],
   "fixed": [
    0.242,
-   0.262
+   0.286
   ],
   "centre": [
    0,
    0
   ],
   "rect": [
-   241,
+   240,
    1201,
    220,
-   209
-  ]
+   216
+  ],
+  "piece": "scrap.nyeh.1"
  },
  {
   "asset": "assets/paper/sticky_blue_02.webp",
@@ -512,45 +586,63 @@
   ],
   "drawn": [
    198,
-   186
+   193
   ],
   "scale": 0.132,
   "fit": "cover",
+  "align": [
+   0.7008571428571431,
+   0.49242185792349713
+  ],
   "rect": [
-   -30,
-   943,
-   527,
-   501
-  ]
+   -3,
+   971,
+   529,
+   518
+  ],
+  "piece": "scrap.nyeh.1"
  },
  {
-  "asset": "assets/tears/tear_035_edge.webp",
+  "asset": "assets/tears/tear_024_edge.webp",
   "src": [
    512,
-   442
+   422
   ],
   "drawn": [
    198,
-   186
+   193
   ],
-  "scale": 0.525,
+  "scale": 0.571,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_024.webp",
+  "composed": [
+   198,
+   193
+  ],
   "downsample": 2,
   "fixed": [
    0.483,
-   0.525
+   0.571
   ],
   "centre": [
    0,
    0
   ],
   "rect": [
-   241,
+   240,
    1201,
    220,
-   209
-  ]
+   216
+  ],
+  "piece": "scrap.nyeh.1"
  },
  {
   "asset": "assets/objects/obj_candle_shadow.webp",
@@ -564,6 +656,10 @@
   ],
   "scale": 0.471,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    205,
    1000,
@@ -583,6 +679,10 @@
   ],
   "scale": 0.471,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    205,
    1000,
@@ -602,6 +702,10 @@
   ],
   "scale": 0.471,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    446,
    1031,
@@ -621,6 +725,10 @@
   ],
   "scale": 0.471,
   "fit": "contain",
+  "align": [
+   0,
+   0
+  ],
   "rect": [
    446,
    1031,
@@ -629,45 +737,46 @@
   ]
  },
  {
-  "asset": "assets/tears/tear_043_shadow.webp",
+  "asset": "assets/tears/tear_028_shadow.webp",
   "src": [
    1024,
-   801
+   835
   ],
   "composed": [
    225,
-   229
+   303
   ],
   "drawn": [
    198,
-   202
+   276
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_043_shadow",
+  "render": "tear_028_shadow",
   "rect": [
    861,
    1202,
-   219,
-   223
-  ]
+   228,
+   296
+  ],
+  "piece": "scrap.ugh.4"
  },
  {
-  "asset": "assets/tears/tear_043.webp",
+  "asset": "assets/tears/tear_028.webp",
   "src": [
    1024,
-   801
+   835
   ],
   "composed": [
    198,
-   202
+   276
   ],
   "drawn": [
    198,
-   202
+   276
   ],
   "scale": 1,
   "fit": "mask",
@@ -681,7 +790,7 @@
   ],
   "fixed": [
    0.242,
-   0.315
+   0.413
   ],
   "centre": [
    0,
@@ -690,9 +799,10 @@
   "rect": [
    861,
    1202,
-   219,
-   223
-  ]
+   228,
+   296
+  ],
+  "piece": "scrap.ugh.4"
  },
  {
   "asset": "assets/paper/sticky_yellow_01.webp",
@@ -702,34 +812,51 @@
   ],
   "drawn": [
    198,
-   202
+   276
   ],
-  "scale": 0.134,
+  "scale": 0.184,
   "fit": "cover",
+  "align": [
+   0.47088372093023256,
+   0.3013714285714282
+  ],
   "rect": [
-   620,
-   988,
-   527,
-   534
-  ]
+   630,
+   944,
+   547,
+   712
+  ],
+  "piece": "scrap.ugh.4"
  },
  {
-  "asset": "assets/tears/tear_043_edge.webp",
+  "asset": "assets/tears/tear_028_edge.webp",
   "src": [
    512,
-   400
+   417
   ],
   "drawn": [
    198,
-   202
+   276
   ],
-  "scale": 0.63,
+  "scale": 0.827,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_028.webp",
+  "composed": [
+   198,
+   276
+  ],
   "downsample": 2,
   "fixed": [
    0.483,
-   0.63
+   0.827
   ],
   "centre": [
    0,
@@ -738,50 +865,52 @@
   "rect": [
    861,
    1202,
-   219,
-   223
-  ]
+   228,
+   296
+  ],
+  "piece": "scrap.ugh.4"
  },
  {
-  "asset": "assets/tears/tear_013_shadow.webp",
+  "asset": "assets/tears/tear_051_shadow.webp",
   "src": [
    1024,
-   749
+   916
   ],
   "composed": [
    225,
-   216
+   202
   ],
   "drawn": [
    198,
-   189
+   175
   ],
   "scale": 1,
   "fit": "contact",
   "spill": 13.68,
   "profile": 13,
   "condition": "day",
-  "render": "tear_013_shadow",
+  "render": "tear_051_shadow",
   "rect": [
    1071,
    1242,
-   222,
-   214
-  ]
+   220,
+   200
+  ],
+  "piece": "scrap.empty_chair.5"
  },
  {
-  "asset": "assets/tears/tear_013.webp",
+  "asset": "assets/tears/tear_051.webp",
   "src": [
    1024,
-   749
+   916
   ],
   "composed": [
    198,
-   189
+   175
   ],
   "drawn": [
    198,
-   189
+   175
   ],
   "scale": 1,
   "fit": "mask",
@@ -795,7 +924,7 @@
   ],
   "fixed": [
    0.242,
-   0.315
+   0.239
   ],
   "centre": [
    0,
@@ -804,9 +933,10 @@
   "rect": [
    1071,
    1242,
-   222,
-   214
-  ]
+   220,
+   200
+  ],
+  "piece": "scrap.empty_chair.5"
  },
  {
   "asset": "assets/paper/graph_01.webp",
@@ -816,34 +946,51 @@
   ],
   "drawn": [
    198,
-   189
+   175
   ],
   "scale": 0.185,
   "fit": "cover",
+  "align": [
+   -0.6,
+   0.72
+  ],
   "rect": [
-   985,
-   986,
-   533,
-   514
-  ]
+   987,
+   1003,
+   528,
+   481
+  ],
+  "piece": "scrap.empty_chair.5"
  },
  {
-  "asset": "assets/tears/tear_013_edge.webp",
+  "asset": "assets/tears/tear_051_edge.webp",
   "src": [
    512,
-   375
+   458
   ],
   "drawn": [
    198,
-   189
+   175
   ],
-  "scale": 0.63,
+  "scale": 0.483,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_051.webp",
+  "composed": [
+   198,
+   175
+  ],
   "downsample": 2,
   "fixed": [
    0.483,
-   0.63
+   0.477
   ],
   "centre": [
    0,
@@ -852,9 +999,10 @@
   "rect": [
    1071,
    1242,
-   222,
-   214
-  ]
+   220,
+   200
+  ],
+  "piece": "scrap.empty_chair.5"
  },
  {
   "asset": "assets/tears/tear_033_shadow.webp",
@@ -864,11 +1012,11 @@
   ],
   "composed": [
    768,
-   610
+   579
   ],
   "drawn": [
    1368,
-   1080
+   1025
   ],
   "scale": 1,
   "fit": "contact",
@@ -880,7 +1028,7 @@
    33,
    1526,
    1374,
-   1088
+   1033
   ]
  },
  {
@@ -891,11 +1039,11 @@
   ],
   "composed": [
    1368,
-   1080
+   1025
   ],
   "drawn": [
    1368,
-   1080
+   1025
   ],
   "scale": 1,
   "fit": "mask",
@@ -913,13 +1061,13 @@
   ],
   "centre": [
    0,
-   1.896
+   1.595
   ],
   "rect": [
    33,
    1526,
    1374,
-   1088
+   1033
   ]
  },
  {
@@ -930,15 +1078,19 @@
   ],
   "drawn": [
    1368,
-   1080
+   1025
   ],
   "scale": 1.275,
   "fit": "cover",
+  "align": [
+   0.48387096774193505,
+   -0.00913979001760079
+  ],
   "rect": [
-   33,
-   1526,
-   1374,
-   1088
+   -154,
+   1432,
+   1626,
+   1223
   ]
  },
  {
@@ -949,25 +1101,37 @@
   ],
   "drawn": [
    1368,
-   1080
+   1025
   ],
-  "scale": 5.154,
+  "scale": 3.496,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/hi/tear_033.webp",
+  "composed": [
+   1368,
+   1025
+  ],
   "downsample": 2,
   "fixed": [
    3.34,
-   5.154
+   3.496
   ],
   "centre": [
    0,
-   0
+   5.577
   ],
   "rect": [
    33,
    1526,
    1374,
-   1088
+   1033
   ]
  },
  {
@@ -982,6 +1146,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   -0.82,
+   -0.64
+  ],
   "rect": [
    30,
    2958,
@@ -1001,6 +1169,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   0.41,
+   -0.88
+  ],
   "rect": [
    308,
    2970,
@@ -1020,6 +1192,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   -0.35,
+   0.77
+  ],
   "rect": [
    587,
    2970,
@@ -1039,6 +1215,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   0.88,
+   0.22
+  ],
   "rect": [
    865,
    2970,
@@ -1058,6 +1238,10 @@
   ],
   "scale": 0.178,
   "fit": "none",
+  "align": [
+   -0.93,
+   0.09
+  ],
   "rect": [
    1144,
    2970,
