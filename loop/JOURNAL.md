@@ -7724,3 +7724,139 @@ Then DIAGNOSE, with the builder sheet written first.
 - Rank 8 needs ADDRESS.
 - Ranks 2 and 3 are still waiting to be re-banded as `harness`.
 - 05, 05_interrupt, 10 and 13 still carry sidecars from before the lit-edge fix: 19 failing pieces. The next full capture refreshes them.
+
+## Firing 61 — IMPLEMENT, cycle 3, 2026-09-24
+
+The container arrived 50 commits behind (a checkout at firing 49), which is the graft shape §0
+describes. The local branch had no commit of its own, and `git reset --hard origin/<branch>` was
+**allowed** this time. Everything was up to date after it. Lease taken and pushed before any other
+work. Toolchain: `tools/apt-prereqs.sh`, distro ffmpeg per CONTINUE §5, `bootstrap.sh
+--profile=web`. `toolchain/.done` held `playwright`. Assets packed with `--seed=year`.
+
+### Rank 10 — first run and setup wear the paired shell: closed
+
+- **Cause confirmed off the committed reports.** Both scenes report `events 0`, so there is nobody
+  to draw. 17 reports `setup_showing true` under a CHAT tab at 12 points against the others' 11.
+- **Fix.** The strip is drawn only once an event of the partner's is in the log
+  (`AppScope.partnerHeardFrom`). `_Tabs` gets `-1` while the setup sheet is up, and every card
+  still leaves it.
+- **The strip is not hidden during setup on a log that has them in it.** The seeded-year test
+  pumps the setup list and still wants the strip, and a pair reopening the list from Settings
+  still has each other.
+- **Measured on re-captures.**
+  - 17: 17 → 18 runs. Exactly NEED and ENERGY left, three checklist lines arrived, all tabs at 11.
+  - 10: 12 → 10 runs. Exactly NEED and ENERGY left. CHAT stays lit, which is true on chat.
+- `Pen.margin` and `Pen.stamp` are the same ink now, so "lit" is read by stamp size.
+
+### Rank 11 — an arriving feeling lands on whatever is under it: widget clause met, capture clause open
+
+- The spot is chosen at let-go. It is picked over a 7x13 lattice of the stage, against every painted
+  paragraph under it. Painted-ness comes from `CaptureHooks.painted`, now public.
+- A spot that covers no words wins. Ties go to the old throw, and an empty desk lands where it
+  always did.
+- Test re-broken. The 08 clip's frame clause waits for the next full capture.
+
+### Rank 15 — `made here` counts both phones: closed
+
+- The count is now of this phone's feelings.
+- **A second defect turned up while writing the test.** The registry took the latest
+  `feeling_authored` event's author as the feeling's author. So the other person putting your
+  feeling away made it theirs. The first author now stays.
+
+### Rank 12 — Us shows one module of four: cause refined, half fixed, open
+
+- The item's cause, "one module fills the phone", holds. The reason underneath it is a library-wide
+  one.
+  - **A torn piece's writing was inset by a share of the piece's height.** The mask's safe
+    fractions add up to 0.25 at the median and 0.58 at most.
+  - The mask is nine-sliced, so its break sits a fixed depth in from the edge. A slip was therefore
+    C/(1-fT-fB) tall.
+- **Fix: `SlicedMasks.safeInsets`.**
+  - It carries each fraction through the slice the mask is composed with. On a big sheet that is
+    the finer copy.
+  - Past the fibres, the margin stays at the mask's own scale.
+  - The inset is never more than the old share, so a piece at or under its mask's size lays out
+    exactly as before.
+- **Measured on 17_setup_pwa.** The first line moved from y1274 to y396, and 18 → 24 runs. The
+  whole checklist is on one sheet, where it used to open on 40% empty paper. Its centre went from
+  6.51x to 4.00x. `a_big_sheet_is_sliced_at_its_own_fibres_test` had recorded that as
+  unreachable, and it was re-baselined with the reason.
+- **Measured on 03_us.** The dates body went from 900 to 742 points. The TO DO stamp moved from
+  y2928 (clipped) to y2637, whole, with "10 open" under it.
+  - CALENDAR and RITUALS are still past the fold.
+  - The rest of the cost is each mask's transparent border, paid twice by a torn stub inside a
+    torn body. The item lists three routes, and two of them are ADDRESS's call.
+- **02_chat is unchanged**, run for run.
+- **Rank 13, clause (b):** every mask entry's vertical centre is ≤ 4.0 now, with no exception
+  (17 was the named one). Clauses (a) and (c) still have no ruler.
+
+### Unranked — the partner strip overflows at 360 wide: closed
+
+- 39 px reproduced exactly. The pencil moved up beside "last heard", on the line that ellipsizes.
+- The clover and its room scale with the width (x0.75 at 360). At 480 nothing changed: the clover
+  still covers 0.01091 of the still.
+- Re-broken: 19 px.
+
+### Rank 16 — a punch hole under "a picture": closed
+
+- All four loose-leaf renders have two punch holes painted into them at 0.057–0.103 across.
+- Loose-leaf joins `kBlankPaper`, so every piece is cut from right of the holes.
+- **Measured on 05 and 05_interrupt**, using `_spanUnder` against the surfaces sidecar: every
+  loose-leaf piece starts at column ≥ 0.115. Runs went 36 → 36 and 66 → 70, with none lost.
+- **Eye check:** the disc under "pi" is gone.
+- A stock entry's `rect` is not a plain image rect once the cover is scaled. Read it with
+  `_spanUnder`.
+
+### Rank 22 — twelve seconds of cold start: closed on a reading
+
+- `cold_ms` is 1,343–1,980 on all thirteen seeded scene logs, with `events_at_open` at 14,061
+  and `install_ms` beside it.
+
+### Rank 23 — a year over the tailnet: not measurable here
+
+- There is no `TS_AUTHKEY` and there are no node states in this container.
+- **Loopback floor:** 14,061 events and 197 blobs in 1.94 s, over 29 pulls.
+- The tailnet's cost is per request, and there are about 226 requests: 29 pulls plus one GET per
+  blob, run one after another. That is about 1 s on a direct path and about 11 s through a relay.
+- **Gotcha:** `TestWidgetsFlutterBinding` stubs HTTP to answer 400, which reads as `no pairing open`.
+
+### Rank 17 — straight-cut tabs and pad: blocker checked, not worked
+
+- A contact shadow here is only ever a tear's baked render. A straight cut has none, and a new
+  render is fenced, so the "cut" route is exhausted.
+- The torn route needs rank 20's chrome row first.
+
+### A regression I caused, found and fixed in the same firing
+
+- Rank 10 took the pressed clover off 10 and 17 along with the strip. Accent fell 0.0112 → 0.0012
+  and 0.0107 → 0.0, under COLOR.md §7 item 5's 1%. That is the warmth complaint, traded away by a
+  using-it fix.
+- With nobody heard from, the clover now lies on the desk at the top left.
+- **Re-captured:** 0.01163 and 0.01038, both family D.
+- **Lesson:** a change that removes chrome needs `palette.py --floors` run on its stills, not just
+  the text sidecars.
+
+### Skipped, with reasons
+
+- **Rank 13:** see rank 12 above; clause (b) now holds.
+- **Rank 14:** its own text says its measurement is blocked by a `hands.py` count, which is a
+  harness change.
+
+### Found on the way
+
+- **Filed for ADDRESS:** 12_search (firing 60's committed still) has two pieces on `tear_001`, a
+  search hit and a thread note under the page. `tears.py --frame-fatal` refuses it on every
+  one-scene capture. A person sees two identical torn edges.
+- **One-scene captures committed this firing, scene files only:** 10, 17 (twice), 03, 02, 05,
+  05_interrupt. The aggregate rulers still describe firing 56's full run.
+
+### Next
+
+- IMPLEMENT continues at rank 18, whose one open clause is 10_first_run's `value_bands.mid`
+  (0.0268 against 0.04). 04_moments' p50 now reads 0.786, which meets that clause.
+- Then ranks 19, 20 and 21. Rank 20 before rank 17.
+- Rank 12's remaining routes need ADDRESS. Rank 11 closes on the next full capture if 08 shows no
+  occlusion.
+- **The aggregate rulers are stale.** DIFF, MANIFEST, legibility, palette and flat_fill still
+  describe firing 56's full run, and eleven stills have been re-captured since. The next OBSERVE's
+  full `./capture.sh` is due.
