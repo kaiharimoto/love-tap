@@ -1,10 +1,10 @@
 {
  "text": "evidence/03_us.text.json",
  "calt": true,
- "runs_read": 10,
- "pairs": 54,
- "pairs_repeating": 12,
- "pairs_avoidable": 8,
+ "runs_read": 11,
+ "pairs": 59,
+ "pairs_repeating": 13,
+ "pairs_avoidable": 9,
  "worst": [
   {
    "family": "TeoHand",
@@ -101,12 +101,20 @@
    "distinct": 1,
    "avoidable": true,
    "run": "week one, and the room smells right again"
+  },
+  {
+   "family": "TeoHand",
+   "char": "s",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "last heard 2 hours ago"
   }
  ],
- "glyphs": 262,
- "stalls": 38,
+ "glyphs": 283,
+ "stalls": 42,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "8 of 54 repeated letters inside one declared run take fewer outlines than they could (12 repeat one at all), and 0 of 262 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "9 of 59 repeated letters inside one declared run take fewer outlines than they could (13 repeat one at all), and 0 of 283 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

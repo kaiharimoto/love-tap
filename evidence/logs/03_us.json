@@ -10,26 +10,26 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4382
+   "ms": 6552
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2101
   },
   {
    "do": "shot",
-   "ms": 13759
+   "ms": 7928
   },
   {
    "do": "report",
-   "ms": 728
+   "ms": 707
   }
  ],
  "shots": [
   {
    "out": "evidence/03_us.png",
    "clip": null,
-   "text_runs": 24,
+   "text_runs": 25,
    "surfaces": 52
   }
  ],
@@ -45,11 +45,11 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_018",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_040",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_003",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_023",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
@@ -79,13 +79,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
@@ -95,13 +89,13 @@
  "blob_waits": [
   {
    "at": "03_us.png",
-   "waited_ms": 9397,
+   "waited_ms": 4619,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "install_ms": 16568,
- "cold_ms": 2317,
+ "install_ms": 8939,
+ "cold_ms": 1466,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],

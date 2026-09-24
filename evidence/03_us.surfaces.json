@@ -113,16 +113,28 @@
    1380,
    258
   ],
-  "scale": 3.369,
+  "scale": 2.695,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_049.webp",
+  "composed": [
+   1024,
+   258
+  ],
   "downsample": 2,
   "fixed": [
-   3.369,
+   2.695,
    1.27
   ],
   "centre": [
-   0,
+   2.695,
    0
   ],
   "rect": [
@@ -328,17 +340,29 @@
    1356,
    2342
   ],
-  "scale": 6,
+  "scale": 3.931,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.38299418604651164
+  ],
+  "slice_far": [
+   0.4,
+   0.38299418604651164
+  ],
+  "lights": "assets/tears/hi/tear_018.webp",
+  "composed": [
+   1356,
+   2342
+  ],
   "downsample": 2,
   "fixed": [
    3.311,
-   6
+   3.931
   ],
   "centre": [
    0,
-   9.457
+   15.726
   ],
   "rect": [
    40,
@@ -448,7 +472,19 @@
   ],
   "scale": 0.534,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_008.webp",
+  "composed": [
+   219,
+   75
+  ],
   "downsample": 2,
   "fixed": [
    0.534,
@@ -564,17 +600,29 @@
    1149,
    648
   ],
-  "scale": 2.806,
+  "scale": 2.245,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_001.webp",
+  "composed": [
+   1024,
+   648
+  ],
   "downsample": 2,
   "fixed": [
-   2.806,
-   2.804
+   2.245,
+   2.001
   ],
   "centre": [
-   0,
-   0
+   2.245,
+   3.212
   ],
   "rect": [
    133,
@@ -684,7 +732,19 @@
   ],
   "scale": 0.415,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_029.webp",
+  "composed": [
+   166,
+   88
+  ],
   "downsample": 2,
   "fixed": [
    0.405,
@@ -800,17 +860,29 @@
    1149,
    796
   ],
-  "scale": 3.18,
+  "scale": 2.245,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_020.webp",
+  "composed": [
+   1024,
+   796
+  ],
   "downsample": 2,
   "fixed": [
-   2.806,
-   3.18
+   2.245,
+   2.001
   ],
   "centre": [
-   0,
-   0
+   2.245,
+   4.717
   ],
   "rect": [
    133,
@@ -938,17 +1010,29 @@
    1356,
    1355
   ],
-  "scale": 5.802,
+  "scale": 3.789,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/hi/tear_040.webp",
+  "composed": [
+   1356,
+   1355
+  ],
   "downsample": 2,
   "fixed": [
    3.311,
-   5.802
+   3.789
   ],
   "centre": [
    0,
-   0
+   8.054
   ],
   "rect": [
    42,
@@ -1056,16 +1140,28 @@
    1131,
    247
   ],
-  "scale": 2.762,
+  "scale": 2.21,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_048.webp",
+  "composed": [
+   1024,
+   247
+  ],
   "downsample": 2,
   "fixed": [
-   2.762,
+   2.21,
    0.823
   ],
   "centre": [
-   0,
+   2.21,
    0
   ],
   "rect": [
@@ -1174,16 +1270,28 @@
    1131,
    166
   ],
-  "scale": 2.762,
+  "scale": 2.21,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_010.webp",
+  "composed": [
+   1024,
+   166
+  ],
   "downsample": 2,
   "fixed": [
-   2.762,
+   2.21,
    0.499
   ],
   "centre": [
-   0,
+   2.21,
    0
   ],
   "rect": [
@@ -1292,16 +1400,28 @@
    1131,
    280
   ],
-  "scale": 2.762,
+  "scale": 2.21,
   "fit": "nine",
-  "slice": 0.4,
+  "slice": [
+   0.4,
+   0.4
+  ],
+  "slice_far": [
+   0.4,
+   0.4
+  ],
+  "lights": "assets/tears/tear_032.webp",
+  "composed": [
+   1024,
+   280
+  ],
   "downsample": 2,
   "fixed": [
-   2.762,
+   2.21,
    1.179
   ],
   "centre": [
-   0,
+   2.21,
    0
   ],
   "rect": [
