@@ -10,47 +10,47 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3897
+   "ms": 3254
   },
   {
    "do": "wait",
-   "ms": 1804
+   "ms": 1805
   },
   {
    "do": "openCorner",
-   "ms": 2868
+   "ms": 3221
   },
   {
    "do": "frames",
-   "ms": 61848
+   "ms": 76457
   },
   {
    "do": "sendFeeling",
-   "ms": 1918
+   "ms": 2432
   },
   {
    "do": "frames",
-   "ms": 232069
+   "ms": 264369
   },
   {
    "do": "sendFeeling",
-   "ms": 1637
+   "ms": 1978
   },
   {
    "do": "frames",
-   "ms": 250060
+   "ms": 280176
   },
   {
    "do": "openCorner",
-   "ms": 1069
+   "ms": 1480
   },
   {
    "do": "frames",
-   "ms": 58700
+   "ms": 69733
   },
   {
    "do": "report",
-   "ms": 426
+   "ms": 424
   }
  ],
  "shots": [
@@ -63,22 +63,10 @@
    "drive": null,
    "fold": {
     "first": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     },
     "last": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     }
    }
   },
@@ -91,22 +79,10 @@
    "drive": null,
    "fold": {
     "first": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     },
     "last": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     }
    }
   },
@@ -119,22 +95,10 @@
    "drive": null,
    "fold": {
     "first": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     },
     "last": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     }
    }
   },
@@ -147,22 +111,10 @@
    "drive": null,
    "fold": {
     "first": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     },
     "last": {
-     "sequence": "unfold_thirds",
-     "length": 240,
-     "decoded": 24,
-     "decoding": 0,
-     "playhead": 0,
-     "held_from": 0,
-     "held_to": 23
+     "sequence": null
     }
    }
   }
@@ -177,7 +129,7 @@
     "01M1MCJ1M02CDNKZD17AYTKFKJ"
    ],
    "tears": {
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
     "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
     "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043"
@@ -207,40 +159,22 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "blobs_pending": 0,
    "pictures_pending": 0,
    "at": "07_feeling_landing",
    "fold_at_first_frame": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "fold_at_last_frame": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    }
   }
  ],
  "blob_waits": [],
- "install_ms": 15798,
- "cold_ms": 1900,
+ "install_ms": 9905,
+ "cold_ms": 1524,
  "reopened": true,
  "events_at_open": 14061,
  "problems": [],
