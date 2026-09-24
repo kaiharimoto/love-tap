@@ -1,10 +1,10 @@
 {
  "text": "evidence/17_setup_pwa.text.json",
  "calt": true,
- "runs_read": 13,
- "pairs": 119,
- "pairs_repeating": 52,
- "pairs_avoidable": 40,
+ "runs_read": 18,
+ "pairs": 150,
+ "pairs_repeating": 54,
+ "pairs_avoidable": 42,
  "worst": [
   {
    "family": "TeoHand",
@@ -101,6 +101,14 @@
    "distinct": 4,
    "avoidable": true,
    "run": "open its address in Safari, take the profile, then trust it "
+  },
+  {
+   "family": "TeoHand",
+   "char": "e",
+   "instances": 6,
+   "distinct": 4,
+   "avoidable": true,
+   "run": "when it lands, the two of you are done here."
   },
   {
    "family": "TeoHand",
@@ -421,12 +429,20 @@
    "distinct": 1,
    "avoidable": true,
    "run": "the same private network as the other phone, and nothing els"
+  },
+  {
+   "family": "TeoHand",
+   "char": "a",
+   "instances": 2,
+   "distinct": 1,
+   "avoidable": true,
+   "run": "when it lands, the two of you are done here."
   }
  ],
- "glyphs": 596,
- "stalls": 70,
+ "glyphs": 734,
+ "stalls": 90,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "40 of 119 repeated letters inside one declared run take fewer outlines than they could (52 repeat one at all), and 0 of 596 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "42 of 150 repeated letters inside one declared run take fewer outlines than they could (54 repeat one at all), and 0 of 734 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }
